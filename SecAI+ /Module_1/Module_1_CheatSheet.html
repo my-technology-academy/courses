@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 1 Cheat Sheet — Basic AI Concepts Related to Cybersecurity</title>
+</head>
+<body style="margin:0">
+<div style="width:1600px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:22px">
+    <h1 style="margin:0;font-size:34px;font-weight:900;letter-spacing:.3px">SecAI+ CY0-001: <span style="color:#ff6a00">Basic AI Concepts Related to Cybersecurity</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr;grid-template-rows:auto auto auto;grid-template-areas:'s1 s2 s3' 's1 s4 s4' 's5 s6 s6';gap:16px">
+
+    <div style="grid-area:s1;border:1px solid #2a2f3a;border-radius:14px;padding:20px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:16px;letter-spacing:.5px;margin-bottom:14px">1.1 TYPES OF AI</div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:13.5px;line-height:1.4;color:#dfe3ea">
+        <div>🧠 Generative AI, ML, statistical learning, transformers, deep learning, GANs</div>
+        <div>💬 NLP → LLMs (large) &amp; SLMs (small)</div>
+        <div>🎓 Training: supervised / unsupervised / reinforcement / federated</div>
+        <div>🔧 Fine-tuning: epoch, pruning, quantization</div>
+        <div>✍️ Prompting: system vs user prompt; zero/one/multi-shot; system roles &amp; templates</div>
+      </div>
+    </div>
+
+    <div style="grid-area:s2;border:1px solid #2a2f3a;border-radius:14px;padding:18px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:15px;letter-spacing:.5px;margin-bottom:12px">1.2 DATA SECURITY</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;line-height:1.4;color:#dfe3ea">
+        <div>Cleansing, verification, lineage, integrity, provenance, augmentation, balancing</div>
+        <div>Structured / semi-structured / unstructured data</div>
+        <div>Watermarking</div>
+        <div>RAG: vector storage + embeddings</div>
+      </div>
+    </div>
+
+    <div style="grid-area:s3;border:1px solid #2a2f3a;border-radius:14px;padding:18px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:15px;letter-spacing:.5px;margin-bottom:12px">1.3 LIFE CYCLE STAGES</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;line-height:1.35;color:#dfe3ea">
+        <div>1. Data collection</div>
+        <div>2. Data preparation</div>
+        <div>3. Model development/selection</div>
+        <div>4. Model evaluation</div>
+        <div>5. Deployment</div>
+        <div>6. Validation</div>
+        <div>7. Monitoring &amp; maintenance</div>
+        <div>8. Feedback &amp; iteration</div>
+      </div>
+    </div>
+
+    <div style="grid-area:s4;border:1px solid #b85100;border-radius:14px;padding:18px;background:rgba(255,106,0,.06)">
+      <div style="color:#ff6a00;font-weight:900;font-size:15px;letter-spacing:.5px;margin-bottom:12px">LEARNING PARADIGMS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr><th style="text-align:left;padding:6px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Paradigm</th><th style="text-align:left;padding:6px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Defining Trait</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:6px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;font-weight:700">Supervised</td><td style="padding:6px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Labelled input/output pairs</td></tr>
+          <tr><td style="padding:6px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;font-weight:700">Unsupervised</td><td style="padding:6px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Finds structure in unlabelled data</td></tr>
+          <tr><td style="padding:6px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;font-weight:700">Reinforcement</td><td style="padding:6px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Learns via reward signals</td></tr>
+          <tr><td style="padding:6px 8px;color:#ffd9bf;font-weight:700">Federated</td><td style="padding:6px 8px;color:#dfe3ea">Distributed training, no raw data centralised</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="grid-area:s5;border:1px solid #2a2f3a;border-radius:14px;padding:18px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:15px;letter-spacing:.5px;margin-bottom:12px">HUMAN-CENTRIC DESIGN</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:1.4;color:#dfe3ea">
+        <div>Human-in-the-loop — active participation in decisions</div>
+        <div>Human oversight — monitors without acting on every decision</div>
+        <div>Human validation — confirms outputs before reliance</div>
+      </div>
+    </div>
+
+    <div style="grid-area:s6;border:1px solid #2a2f3a;border-radius:14px;padding:18px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:15px;letter-spacing:.5px;margin-bottom:12px">KEY ACRONYMS</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;line-height:1.4;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">LLM</strong> Large Language Model</div>
+        <div><strong style="color:#ffd9bf">SLM</strong> Small Language Model</div>
+        <div><strong style="color:#ffd9bf">GAN</strong> Generative Adversarial Network</div>
+        <div><strong style="color:#ffd9bf">NLP</strong> Natural Language Processing</div>
+        <div><strong style="color:#ffd9bf">RAG</strong> Retrieval-Augmented Generation</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:14px;border-top:1px solid #2a2f3a;font-size:12.5px;color:#8891a1">
+    <div>CompTIA SecAI+ CY0-001 — Domain 1.0: Basic AI Concepts Related to Cybersecurity (17%) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">SEC</span><span style="color:#f5f7fb">AI+</span></div>
+  </div>
+</div>
+
+</body>
+</html>

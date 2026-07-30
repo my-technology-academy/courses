@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 2 Cheat Sheet — Securing AI Systems</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">SecAI+ CY0-001: <span style="color:#ff6a00">Securing AI Systems</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.1 THREAT-MODELLING RESOURCES</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;line-height:1.35;color:#dfe3ea">
+        <div>OWASP LLM / ML Top 10</div>
+        <div>MIT AI Risk Repository</div>
+        <div>MITRE ATLAS</div>
+        <div>CVE AI Working Group</div>
+        <div>Threat-modelling frameworks</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.2 SECURITY CONTROLS</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Model:</strong> evaluation, guardrails, prompt templates</div>
+        <div><strong style="color:#ffd9bf">Gateway:</strong> prompt firewalls, rate/token limits, input quotas, modality limits, endpoint access</div>
+        <div>Guardrail testing &amp; validation</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.3 ACCESS CONTROLS</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;line-height:1.35;color:#dfe3ea">
+        <div>Model access</div>
+        <div>Data access</div>
+        <div>Agent access</div>
+        <div>Network/API access</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.4 DATA SECURITY CONTROLS</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Encryption:</strong> in transit, at rest, in use</div>
+        <div><strong style="color:#ffd9bf">Data safety:</strong> anonymization, classification labels, redaction, masking, minimization</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.5 MONITORING &amp; AUDITING</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;line-height:1.35;color:#dfe3ea">
+        <div>Prompt monitoring (query &amp; response)</div>
+        <div>Log monitoring, sanitization, protection</div>
+        <div>Response confidence level, rate monitoring</div>
+        <div>AI cost monitoring (prompts/storage/response/processing)</div>
+        <div>Auditing: hallucinations, accuracy, bias/fairness, access</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.6 COMPENSATING CONTROLS</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;line-height:1.35;color:#dfe3ea">
+        <div>Prompt firewalls &middot; Model guardrails</div>
+        <div>Access controls &middot; Data integrity controls</div>
+        <div>Encryption &middot; Prompt templates</div>
+        <div>Rate limiting &middot; Least privilege</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.6 THE 22 ATTACKS, GROUPED</div>
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Category</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Attacks</th></tr></thead>
+      <tbody>
+        <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;font-weight:700">Training-time</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Backdoor, Trojan, model/data poisoning, introducing biases, model skewing, AI supply chain, transfer learning</td></tr>
+        <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;font-weight:700">Prompt/interaction-time</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Prompt injection, jailbreaking, input manipulation, circumventing guardrails, membership inference, model inversion</td></tr>
+        <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;font-weight:700">Integration/output</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Manipulating integrations, output integrity, insecure output handling, insecure plug-in design, excessive agency</td></tr>
+        <tr><td style="padding:5px 8px;color:#ffd9bf;font-weight:700">Availability/disclosure/process</td><td style="padding:5px 8px;color:#dfe3ea">Model theft, model DoS, sensitive information disclosure, overreliance</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>CompTIA SecAI+ CY0-001 — Domain 2.0: Securing AI Systems (40%) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">SEC</span><span style="color:#f5f7fb">AI+</span></div>
+  </div>
+</div>
+
+</body>
+</html>

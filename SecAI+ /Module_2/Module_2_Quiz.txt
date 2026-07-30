@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A model reveals internal pricing information it was never meant to disclose. Which attack category does this best match?
+    (A) Model denial of service
+    (B) Sensitive information disclosure
+    (C) Model skewing
+    (D) Transfer learning attack
+
+Q2. Which threat-modelling resource is modelled on the structure of MITRE ATT&CK and catalogues real-world adversary tactics against AI systems?
+    (A) OWASP LLM Top 10
+    (B) MITRE ATLAS
+    (C) CVE AI Working Group
+    (D) MIT AI Risk Repository
+
+Q3. What is the difference between data masking and data redaction?
+    (A) Masking substitutes realistic fake values; redaction removes the value entirely
+    (B) They are exactly the same technique with different names
+    (C) Redaction only applies to images; masking only applies to text
+    (D) Masking is illegal under most data protection laws
+
+Q4. An AI agent is given far more permissions than its task requires, and a manipulation causes major unintended real-world impact. Which attack category is this?
+    (A) Model theft
+    (B) Excessive agency
+    (C) Model inversion
+    (D) Data poisoning
+
+Q5. Which of these is a gateway control rather than a model control?
+    (A) Model evaluation
+    (B) Model guardrails
+    (C) Rate limits
+    (D) Prompt templates
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Sensitive information disclosure
+Q2: (B) MITRE ATLAS
+Q3: (A) Masking substitutes realistic fake values; redaction removes the value entirely
+Q4: (B) Excessive agency
+Q5: (C) Rate limits
+==================================================

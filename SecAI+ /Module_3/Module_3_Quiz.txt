@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A standardised server interface that lets a model discover and call external tools consistently is best described as which of these?
+    (A) A CLI plug-in
+    (B) A Model Context Protocol (MCP) server
+    (C) A chatbot
+    (D) A personal assistant
+
+Q2. Which of these is an example of AI enhancing reconnaissance and social engineering?
+    (A) AI automatically patches a vulnerable server
+    (B) AI drafts highly personalised, convincing phishing messages at scale
+    (C) AI encrypts a database at rest
+    (D) AI enforces rate limits on an API gateway
+
+Q3. What is the key difference between AI-assisted security (Objective 3.1) and AI-automated security tasks (Objective 3.3)?
+    (A) There is no difference between the two
+    (B) 3.1 assists a human who still makes the decision; 3.3 removes the human from the loop for that task
+    (C) 3.1 only applies to malware; 3.3 only applies to phishing
+    (D) 3.3 is illegal under most compliance frameworks
+
+Q4. Which CI/CD task automatically flags vulnerable third-party dependencies?
+    (A) Unit testing
+    (B) Software composition analysis
+    (C) Model testing
+    (D) Automated deployment
+
+Q5. Obfuscation, as an AI-enhanced attack vector, primarily undermines which defensive use case from Objective 3.1?
+    (A) Translation
+    (B) Signature matching
+    (C) Summarisation
+    (D) Fraud detection
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) A Model Context Protocol (MCP) server
+Q2: (B) AI drafts highly personalised, convincing phishing messages at scale
+Q3: (B) 3.1 assists a human who still makes the decision; 3.3 removes the human from the loop for that task
+Q4: (B) Software composition analysis
+Q5: (B) Signature matching
+==================================================

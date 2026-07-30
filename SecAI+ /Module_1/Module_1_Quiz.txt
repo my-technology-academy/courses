@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. Which training approach lets multiple organisations train a shared model without centralising their raw data?
+    (A) Supervised learning
+    (B) Reinforcement learning
+    (C) Federated learning
+    (D) Fine-tuning
+
+Q2. What is the key difference between one-shot and multi-shot prompting?
+    (A) One-shot provides exactly one worked example; multi-shot provides several
+    (B) One-shot only works with image models
+    (C) Multi-shot never includes a task description
+    (D) There is no difference between the two
+
+Q3. In retrieval-augmented generation (RAG), what is the purpose of vector storage?
+    (A) To store user passwords securely
+    (B) To index embeddings so relevant content can be retrieved via similarity search
+    (C) To render the application's user interface
+    (D) To back up the model's weights
+
+Q4. What distinguishes structured data from unstructured data?
+    (A) Structured data has a fixed schema; unstructured data does not
+    (B) Structured data is always encrypted; unstructured data never is
+    (C) Unstructured data is always more accurate
+    (D) There is no meaningful difference between them
+
+Q5. What does "human-in-the-loop" mean in human-centric AI design?
+    (A) A person actively participates in the system's decision process
+    (B) The system operates with no human involvement at all
+    (C) A person only reviews decisions once a year
+    (D) The system automatically overrides human decisions
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (C) Federated learning
+Q2: (A) One-shot provides exactly one worked example; multi-shot provides several
+Q3: (B) To index embeddings so relevant content can be retrieved via similarity search
+Q4: (A) Structured data has a fixed schema; unstructured data does not
+Q5: (A) A person actively participates in the system's decision process
+==================================================

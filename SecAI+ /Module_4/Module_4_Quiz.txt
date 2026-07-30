@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. Staff use an unapproved public chatbot to summarise confidential contracts. What is this an example of?
+    (A) Data sovereignty
+    (B) Shadow AI
+    (C) Differential privacy
+    (D) The NIST AI Risk Management Framework
+
+Q2. Which role is responsible for independently verifying that AI systems meet policy and compliance requirements?
+    (A) Data engineer
+    (B) AI auditor
+    (C) Platform engineer
+    (D) Machine learning engineer
+
+Q3. What does differential privacy achieve?
+    (A) It adds statistical noise so no individual record can be singled out from aggregate results
+    (B) It encrypts data while it is being processed in memory
+    (C) It removes all data from a training set entirely
+    (D) It is a synonym for data masking
+
+Q4. Which regulatory framework classifies AI systems by risk level and prohibits some AI uses outright?
+    (A) NIST AI Risk Management Framework
+    (B) ISO AI standards
+    (C) EU AI Act
+    (D) OECD standards
+
+Q5. What is the distinction between a sanctioned and an unsanctioned AI tool?
+    (A) Sanctioned tools have gone through formal organisational approval; unsanctioned tools have not
+    (B) Sanctioned tools are always more accurate
+    (C) Unsanctioned tools are always open source
+    (D) There is no meaningful distinction between the two
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Shadow AI
+Q2: (B) AI auditor
+Q3: (A) It adds statistical noise so no individual record can be singled out from aggregate results
+Q4: (C) EU AI Act
+Q5: (A) Sanctioned tools have gone through formal organisational approval; unsanctioned tools have not
+==================================================
