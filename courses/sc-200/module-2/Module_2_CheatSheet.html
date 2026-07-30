@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 2 Cheat Sheet — Respond to Security Incidents</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">SC-200: <span style="color:#ff6a00">Respond to Security Incidents</span></h1>
+  </div>
+
+  <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);margin-bottom:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.1 WHICH PRODUCT OWNS WHICH SIGNAL?</div>
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Product</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Detects</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Typical remediation</th></tr></thead>
+      <tbody>
+        <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;font-weight:700">Defender for Office 365</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Phishing, malicious attachments/links</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Purge messages, block sender/URL</td></tr>
+        <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;font-weight:700">Microsoft Purview</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Data-centric threats, compromised entities</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Contain entity, investigate data handling</td></tr>
+        <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;font-weight:700">Defender for Cloud</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Runtime threats to cloud/hybrid workloads</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Remediate workload, not posture rec</td></tr>
+        <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;font-weight:700">Defender for Cloud Apps</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Risky SaaS use, OAuth grants, sharing</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Revoke consent, block app, suspend session</td></tr>
+        <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;font-weight:700">Microsoft Entra ID</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Cloud identity risk (impossible travel, leaked creds)</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Reset password + <em>revoke tokens</em>, require MFA</td></tr>
+        <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;font-weight:700">Defender for Identity</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">On-prem/hybrid domain attacks (Kerberos, LSASS)</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Contain account, investigate DC infrastructure</td></tr>
+        <tr><td style="padding:5px 8px;color:#ffd9bf;font-weight:700">Microsoft Sentinel</td><td style="padding:5px 8px;color:#dfe3ea">Correlated + third-party/custom-source signals</td><td style="padding:5px 8px;color:#dfe3ea">Automation rules / playbooks</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.1 INVESTIGATION TECHNIQUES</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Agentic AI / Security Copilot:</strong> summarise incidents, explain scripts, generate KQL, recommend actions</div>
+        <div><strong style="color:#ffd9bf">Complex attacks:</strong> multi-stage (phases) · multi-domain (email+identity+endpoint+apps) · lateral movement (pivoting)</div>
+        <div><strong style="color:#ffd9bf">Case management:</strong> ownership, status, evidence, tasks, notes — auditable handovers</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.2 DEFENDER FOR ENDPOINT RESPONSE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Device timeline:</strong> processes, files, registry, network, logons — what ran &amp; what it touched</div>
+        <div><strong style="color:#ffd9bf">Containment:</strong> isolate device · restrict app execution · AV scan</div>
+        <div><strong style="color:#ffd9bf">Live response:</strong> interactive remote shell</div>
+        <div><strong style="color:#ffd9bf">Investigation package:</strong> forensic artefact bundle for offline analysis</div>
+        <div><strong style="color:#ffd9bf">Evidence/entities:</strong> files, processes, IPs, URLs, users, devices + verdicts</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.3 M365 INVESTIGATION — PICK THE RIGHT TOOL</div>
+      <table style="width:100%;border-collapse:collapse;font-size:11.5px">
+        <thead><tr><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Tool</th><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Returns</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Purview Audit</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Actions — who did what, when</td></tr>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">eDiscovery Content search</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">The actual content of items</td></tr>
+          <tr><td style="padding:4px 6px;color:#ffd9bf">Graph activity logs</td><td style="padding:4px 6px;color:#dfe3ea">API requests — app/script access</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; PRODUCT ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ Entra ID ≠ Defender for Identity — cloud identity risk vs on-prem domain attacks (keywords: DC, Kerberos, LSASS → MDI)</div>
+        <div>⚠️ Audit returns <em>actions</em>; Content search returns <em>content</em> — they answer different questions</div>
+        <div>⚠️ Defender for Cloud <em>workload protection alerts</em> = runtime threats, not posture recommendations</div>
+        <div>⚠️ Attack disruption containing an attack does NOT close the incident — persistence can survive containment</div>
+        <div>⚠️ Password reset without revoking tokens can leave the attacker's session alive</div>
+      </div>
+      <div>
+        MDO (Defender for Office 365) · MDE (Endpoint) · MDI (Identity) · MDCA (Cloud Apps) · MFA · OAuth · LSASS
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>Microsoft SC-200 — Domain 2: Respond to security incidents (35–40%) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">SC</span><span style="color:#f5f7fb">-200</span></div>
+  </div>
+</div>
+
+</body>
+</html>

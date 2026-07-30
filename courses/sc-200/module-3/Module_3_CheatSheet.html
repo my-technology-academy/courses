@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 3 Cheat Sheet — Perform Threat Hunting</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">SC-200: <span style="color:#ff6a00">Perform Threat Hunting</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:14px;margin-bottom:14px">
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">3.1 ADVANCED HUNTING TABLES — PICK THE RIGHT ONE</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Table</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Holds</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">DeviceProcessEvents</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Process creation on devices</td></tr>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">DeviceNetworkEvents</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Network connections from devices</td></tr>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">DeviceFileEvents</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">File create / modify / delete</td></tr>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">DeviceLogonEvents</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Sign-in activity on devices</td></tr>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">EmailEvents / EmailAttachmentInfo / EmailUrlInfo</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Email delivery, attachments, URLs</td></tr>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">IdentityLogonEvents / IdentityDirectoryEvents</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Identity sign-ins, directory activity</td></tr>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">CloudAppEvents</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Connected cloud app activity</td></tr>
+          <tr><td style="padding:4px 8px;color:#ffd9bf">AlertEvidence / AlertInfo</td><td style="padding:4px 8px;color:#dfe3ea">Alert metadata + entities touched</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">KQL CORE OPERATORS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <tbody>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf;width:34%">where</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Filter rows by condition</td></tr>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">project / project-away</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Choose / remove columns</td></tr>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">summarize … by</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Aggregate and group</td></tr>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">extend</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Add a calculated column</td></tr>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">join / union</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Combine side by side / stack</td></tr>
+          <tr><td style="padding:4px 8px;color:#ffd9bf">sort by / top</td><td style="padding:4px 8px;color:#dfe3ea">Order / highest-ranked rows</td></tr>
+        </tbody>
+      </table>
+      <div style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;color:#ffd9bf;background:rgba(0,0,0,.35);border:1px solid #2a2f3a;border-radius:8px;padding:10px;line-height:1.5;margin-top:10px;white-space:pre">DeviceProcessEvents
+| where Timestamp &gt; ago(7d)
+| where InitiatingProcessFileName =~ "winword.exe"
+| where FileName in~ ("powershell.exe","cmd.exe")
+| project Timestamp, DeviceName, ProcessCommandLine</div>
+    </div>
+
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">3.1 GRAPH &amp; INTELLIGENCE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Threat analytics:</strong> Microsoft reports + your tenant's exposure + recommended actions</div>
+        <div><strong style="color:#ffd9bf">Hunting graphs:</strong> visual entity exploration</div>
+        <div><strong style="color:#ffd9bf">Blast radius:</strong> if this asset is compromised, what else is exposed?</div>
+        <div><strong style="color:#ffd9bf">Sentinel Graph:</strong> traverse entity relationships across platform data</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">3.2 SENTINEL PLATFORM HUNTING</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Hunting queries:</strong> library + bookmarks (preserve result) + livestream (watch for new matches)</div>
+        <div><strong style="color:#ffd9bf">KQL jobs in Data lake:</strong> scheduled/on-demand queries over cheap long-term tier — NOT interactive</div>
+        <div><strong style="color:#ffd9bf">Summary rule tables:</strong> pre-aggregate raw data → fast, cheap repeat queries</div>
+        <div><strong style="color:#ffd9bf">Notebooks + MCP Server:</strong> ML, enrichment, multi-step analysis beyond KQL</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">CHOOSING A HUNTING SURFACE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:11.5px;line-height:1.35;color:#dfe3ea">
+        <div>Recent XDR telemetry, interactive → <strong style="color:#ffd9bf">Advanced Hunting</strong></div>
+        <div>Reusable + monitored → <strong style="color:#ffd9bf">Sentinel hunting queries</strong></div>
+        <div>Months of cheap history → <strong style="color:#ffd9bf">KQL jobs (Data lake)</strong></div>
+        <div>Repeat queries, huge tables → <strong style="color:#ffd9bf">Summary rule tables</strong></div>
+        <div>ML / external enrichment → <strong style="color:#ffd9bf">Notebooks</strong></div>
+        <div>Attack reach &amp; exposure → <strong style="color:#ffd9bf">Hunting graphs / Sentinel Graph</strong></div>
+        <div>Should be permanent → <strong style="color:#ffd9bf">promote to detection rule</strong></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; KEY TERMS</div>
+    <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ An empty result usually means the <em>wrong table</em>, not the absence of the threat</div>
+        <div>⚠️ The Data lake tier is not queried interactively — historical hunts run as KQL jobs</div>
+        <div>⚠️ A summary table only holds what was aggregated; dropped detail is unrecoverable from it</div>
+        <div>⚠️ Hunting ≠ detection — promote valuable hunts into custom detection / analytics rules</div>
+        <div>⚠️ KQL is tested in Domain 1 too, so it carries more weight than 20–25% suggests</div>
+      </div>
+      <div>
+        KQL · MCP (Model Context Protocol) · Blast radius · Bookmark · Livestream · Summary rule
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>Microsoft SC-200 — Domain 3: Perform threat hunting (20–25%) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">SC</span><span style="color:#f5f7fb">-200</span></div>
+  </div>
+</div>
+
+</body>
+</html>

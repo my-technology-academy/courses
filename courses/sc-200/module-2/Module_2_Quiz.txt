@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. You must determine which mailbox rules a compromised account created, and exactly when. Which tool should you use?
+    (A) eDiscovery Content search
+    (B) Microsoft Purview Audit
+    (C) Microsoft Graph activity logs
+    (D) A Defender for Endpoint investigation package
+
+Q2. An alert describes suspicious Kerberos activity and reconnaissance against a domain controller. Which product raised this alert?
+    (A) Microsoft Entra ID
+    (B) Microsoft Defender for Identity
+    (C) Microsoft Defender for Cloud Apps
+    (D) Microsoft Defender for Office 365
+
+Q3. After resetting a compromised user's password, what additional action is required to terminate the attacker's existing access?
+    (A) Nothing further is required
+    (B) Revoke the user's refresh tokens and active sessions
+    (C) Delete the user's mailbox
+    (D) Isolate every device in the tenant
+
+Q4. Which Microsoft Defender for Endpoint capability provides an interactive remote shell session on an onboarded device?
+    (A) Investigation package collection
+    (B) Live response
+    (C) Device timeline
+    (D) Restrict app execution
+
+Q5. You need to locate every copy of a malicious attachment stored across mailboxes, SharePoint, and OneDrive. Which tool should you use?
+    (A) Microsoft Purview Audit
+    (B) Content search in Microsoft Purview eDiscovery
+    (C) Microsoft Graph activity logs
+    (D) A Sentinel workbook
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Microsoft Purview Audit
+Q2: (B) Microsoft Defender for Identity
+Q3: (B) Revoke the user's refresh tokens and active sessions
+Q4: (B) Live response
+Q5: (B) Content search in Microsoft Purview eDiscovery
+==================================================

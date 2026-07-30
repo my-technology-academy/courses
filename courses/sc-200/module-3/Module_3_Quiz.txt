@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. You must hunt across eight months of high-volume data held in the Microsoft Sentinel data lake tier. What should you use?
+    (A) An interactive Advanced Hunting query
+    (B) A KQL job in the data lake
+    (C) A near-real time analytics rule
+    (D) A Sentinel workbook
+
+Q2. Which Advanced Hunting table would you query to find processes spawned by a specific parent application?
+    (A) DeviceNetworkEvents
+    (B) DeviceProcessEvents
+    (C) EmailAttachmentInfo
+    (D) AlertInfo
+
+Q3. What does "blast radius" describe in a hunting graph?
+    (A) The physical distance between affected offices
+    (B) The set of assets exposed if a given entity is compromised
+    (C) The number of KQL operators in a query
+    (D) The retention period of the Analytics tier
+
+Q4. What is the purpose of a summary rule table in Microsoft Sentinel?
+    (A) It pre-aggregates high-volume raw data on a schedule so repeated queries are faster and cheaper
+    (B) It stores the tenant's role assignments
+    (C) It replaces the need for data connectors
+    (D) It automatically remediates incidents
+
+Q5. In Microsoft Sentinel hunting, what does a bookmark do?
+    (A) It preserves an interesting hunting result so it can be revisited or attached to an incident
+    (B) It watches a query for new matches in near real time
+    (C) It converts a hunting query into a playbook
+    (D) It deletes the query results after review
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) A KQL job in the data lake
+Q2: (B) DeviceProcessEvents
+Q3: (B) The set of assets exposed if a given entity is compromised
+Q4: (A) It pre-aggregates high-volume raw data on a schedule so repeated queries are faster and cheaper
+Q5: (A) It preserves an interesting hunting result so it can be revisited or attached to an incident
+==================================================

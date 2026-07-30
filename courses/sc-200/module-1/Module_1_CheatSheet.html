@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 1 Cheat Sheet — Manage a Security Operations Environment</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">SC-200: <span style="color:#ff6a00">Manage a Security Operations Environment</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.1 AUTOMATION</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Email notifications:</strong> incidents, actions, threat analytics</div>
+        <div><strong style="color:#ffd9bf">Alert notifications:</strong> tuning (adjust) / suppression (block) / correlation (group)</div>
+        <div><strong style="color:#ffd9bf">MDE:</strong> advanced features, rules settings, custom data collection, ASR rules</div>
+        <div><strong style="color:#ffd9bf">AIR:</strong> auto-investigate + remediate an alert</div>
+        <div><strong style="color:#ffd9bf">Attack disruption:</strong> intervene mid-attack, break the chain</div>
+        <div><strong style="color:#ffd9bf">Device groups:</strong> scope permissions + automation levels (per group, not tenant-wide)</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.2 SENTINEL PLATFORM</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Roles:</strong> Reader (view) → Responder (+manage incidents) → Contributor (+create/edit)</div>
+        <div><strong style="color:#ffd9bf">Retention tiers:</strong> Analytics (hot) / Data lake (cheap, long-term) / XDR</div>
+        <div><strong style="color:#ffd9bf">Workbooks:</strong> KQL-driven dashboards, templates customisable</div>
+        <div><strong style="color:#ffd9bf">SOC optimization:</strong> coverage gaps + unused expensive data</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.4 DETECTIONS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">XDR custom detection:</strong> promote an Advanced Hunting KQL query to a scheduled rule</div>
+        <div><strong style="color:#ffd9bf">Analytics rules:</strong> Scheduled / NRT (~1 min) / Threat intelligence / Machine learning</div>
+        <div><strong style="color:#ffd9bf">MITRE ATT&amp;CK:</strong> maps active rules to tactics → shows coverage gaps</div>
+        <div><strong style="color:#ffd9bf">Anomalies:</strong> baseline-based, catches novel behaviour; flighting mode to evaluate</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.3 CHOOSING AN INGESTION PATH</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Source</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Path</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Windows Security events (agent OK)</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Windows Security Events via AMA + data collection rules (DCRs)</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Windows, large estate, central collection</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Windows Event Forwarding (WEF) to a collector</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Linux / network devices, plain Syslog</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Syslog via AMA → Syslog table</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Security appliances emitting CEF</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">CEF via AMA → CommonSecurityLog table</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Azure platform / resource activity</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Resource diagnostic settings, enforced by Azure Policy</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Threat intel (IPs, domains, hashes)</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Ingest threat indicators → used by TI analytics rules</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">In-house app, no connector</td><td style="padding:5px 8px;color:#dfe3ea">Custom log table in the workspace</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">AUTOMATION RULES vs PLAYBOOKS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Rule</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Playbook</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Sentinel-native engine</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Azure Logic Apps</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Assign, tag, severity, close, run playbook</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Any connector / external API</td></tr>
+          <tr><td style="padding:5px 8px;color:#dfe3ea">Inside Sentinel only</td><td style="padding:5px 8px;color:#dfe3ea">Sentinel + external systems</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ AIR ≠ attack disruption — AIR handles an alert; disruption breaks an attack in progress</div>
+        <div>⚠️ Automation level is per device group, not tenant-wide</div>
+        <div>⚠️ Only <em>suppression</em> stops an alert being raised at all</div>
+        <div>⚠️ ASR is preventive (blocks technique), not detective (alerts after)</div>
+      </div>
+      <div>
+        XDR · SIEM · AMA (Azure Monitor Agent) · DCR (Data Collection Rule) · WEF · CEF · ASR · AIR · NRT · KQL
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>Microsoft SC-200 — Domain 1: Manage a security operations environment (40–45%) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">SC</span><span style="color:#f5f7fb">-200</span></div>
+  </div>
+</div>
+
+</body>
+</html>

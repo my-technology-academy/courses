@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. You need Microsoft Sentinel to create a ticket in an external service desk whenever a high-severity incident is created. What should you configure?
+    (A) An automation rule alone
+    (B) A playbook, triggered by an automation rule
+    (C) A near-real time analytics rule
+    (D) A SOC optimization recommendation
+
+Q2. Which Microsoft Sentinel role allows an analyst to manage incidents but NOT create or edit analytics rules?
+    (A) Microsoft Sentinel Reader
+    (B) Microsoft Sentinel Responder
+    (C) Microsoft Sentinel Contributor
+    (D) Log Analytics Reader
+
+Q3. A security appliance emits Common Event Format messages that must be ingested into Microsoft Sentinel. Which collection method should you use?
+    (A) Windows Security Events via AMA
+    (B) Windows Event Forwarding
+    (C) CEF via AMA
+    (D) A custom log table
+
+Q4. Which Microsoft Sentinel analytics rule type provides the lowest detection latency, running approximately every minute?
+    (A) Scheduled
+    (B) Near-real time (NRT)
+    (C) Threat intelligence
+    (D) Machine learning
+
+Q5. In Microsoft Defender for Endpoint, at what level is the automation level for automated investigation and response configured?
+    (A) Tenant-wide, applying to all devices equally
+    (B) Per device group
+    (C) Per individual alert
+    (D) Per analytics rule
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) A playbook, triggered by an automation rule
+Q2: (B) Microsoft Sentinel Responder
+Q3: (C) CEF via AMA
+Q4: (B) Near-real time (NRT)
+Q5: (B) Per device group
+==================================================
