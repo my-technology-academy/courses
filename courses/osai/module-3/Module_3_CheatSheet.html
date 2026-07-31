@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 3 Cheat Sheet — Attacking AI Agents</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSAI: <span style="color:#ff6a00">Attacking AI Agents</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">3.1 DIRECT INJECTION &amp; BYPASS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Bypass:</strong> deliberately crosses a seam Module 2 already mapped</div>
+        <div><strong style="color:#ffd9bf">Override / ignore-instructions:</strong> claims priority over the system prompt</div>
+        <div><strong style="color:#ffd9bf">Role-play / persona-shift:</strong> fictional frame relocates the effective rules</div>
+        <div><strong style="color:#ffd9bf">Encoding / obfuscation:</strong> disguises intent from pattern-based filters</div>
+        <div><strong style="color:#ffd9bf">Multi-turn escalation:</strong> intent distributed gradually across turns</div>
+        <div><strong style="color:#ffd9bf">Payload splitting:</strong> intent distributed across separate inputs/fields</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">3.2 SYSTEM-PROMPT &amp; CONFIG EXTRACTION</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Extraction:</strong> deliberate elicitation, not incidental leakage (M2)</div>
+        <div><strong style="color:#ffd9bf">Direct ask:</strong> lowest effort, often tried first</div>
+        <div><strong style="color:#ffd9bf">"Repeat everything above":</strong> reframes extraction as formatting</div>
+        <div><strong style="color:#ffd9bf">Translation / format-conversion:</strong> bypasses direct-request filters</div>
+        <div><strong style="color:#ffd9bf">Completion / continuation:</strong> model completes a seeded fragment</div>
+        <div><strong style="color:#ffd9bf">Why it matters:</strong> reveals tool names, rules, attack-surface hints</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">3.3 TOOL &amp; FUNCTION-CALLING ABUSE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Confused deputy:</strong> agent's own privilege is misused via injection</div>
+        <div><strong style="color:#ffd9bf">Parameter injection:</strong> alters a legitimate tool call's arguments</div>
+        <div><strong style="color:#ffd9bf">Forced invocation:</strong> triggers a tool call the user never requested</div>
+        <div><strong style="color:#ffd9bf">Excessive agency:</strong> agent holds more privilege than its task needs</div>
+        <div><strong style="color:#ffd9bf">Tool output:</strong> a fetched result can itself seed a fresh injection</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">TECHNIQUE → IMPACT → MODULE / OWASP MAPPING</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Technique</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Demonstrated impact</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Objective / OWASP</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Direct injection / guardrail bypass</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Target departs from its declared instructions or policy</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">3.1 · LLM01</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">System-prompt / config extraction</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Hidden instructions, tool names, and rules disclosed</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">3.2 · LLM07</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Tool / function-calling abuse</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Confused-deputy action taken outside the user's own privilege</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">3.3 · LLM06</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">Insecure output handling</td><td style="padding:5px 8px;color:#dfe3ea">Model output reaches a sink — rendered HTML, code, API, query</td><td style="padding:5px 8px;color:#dfe3ea">3.4 · LLM05</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">KEY DISTINCTIONS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Mapping / recon (M2)</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Bypass / extraction (M3)</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Observes and documents a seam</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Deliberately crosses the seam</td></tr>
+          <tr><td style="padding:5px 8px;color:#dfe3ea">Incidental leakage, logged opportunistically</td><td style="padding:5px 8px;color:#dfe3ea">Structured, repeated elicitation technique</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea;margin-top:10px">
+        <div><strong style="color:#ffd9bf">Trusting tool input:</strong> parameter-injection risk, validate values</div>
+        <div><strong style="color:#ffd9bf">Trusting tool output:</strong> the tool result itself becomes an injection vector</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">3.4 CHAINING 3.1 → 3.4 INTO DEMONSTRATED IMPACT</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">1</strong> Establish the injection point (3.1)</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">2</strong> Extract supporting configuration (3.2)</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">3</strong> Reach a tool or privilege (3.3)</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">4</strong> Land in a sink (3.4)</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">5</strong> Document the full chain</span>
+        <span style="margin-left:auto;color:#8891a1">A finding matters only once chained to demonstrated impact</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ Guardrail bypass is a reproducible finding mapped to a Module 2 seam — not just clever phrasing</div>
+        <div>⚠️ A leaked system-prompt fragment is reconnaissance value, not the finding itself</div>
+        <div>⚠️ Tool abuse rarely means the tool is broken — the weakness is trusting an injected instruction to direct it</div>
+        <div>⚠️ Tool OUTPUT must be treated as untrusted, exactly like user input — it can itself carry an injection</div>
+        <div>⚠️ Output handling is classic appsec with a new untrusted source — the sink and the fix are unchanged</div>
+        <div>⚠️ OSAI weightings are not published — the exam is a 24-hour practical engagement</div>
+      </div>
+      <div>
+        LLM01 (Prompt Injection) · LLM05 (Improper Output Handling) · LLM06 (Excessive Agency) · LLM07 (System Prompt Leakage) · XSS · SSRF · TTP · ATLAS
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSAI (AI-300) — Module 3: Attacking AI Agents | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">AI</span></div>
+  </div>
+</div>
+
+</body>
+</html>

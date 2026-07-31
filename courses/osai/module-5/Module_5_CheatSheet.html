@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 5 Cheat Sheet — Exploiting RAG Pipelines</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSAI: <span style="color:#ff6a00">Exploiting RAG Pipelines</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">5.1 RAG ARCHITECTURE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Pipeline:</strong> ingest → chunk → embed → store → retrieve → augment</div>
+        <div><strong style="color:#ffd9bf">Chunking:</strong> splits documents into retrievable units — a deliberate lever</div>
+        <div><strong style="color:#ffd9bf">Embedding:</strong> converts a chunk to a vector; content-blind to trust</div>
+        <div><strong style="color:#ffd9bf">Retrieval:</strong> similarity search, ranked by vector closeness only</div>
+        <div><strong style="color:#ffd9bf">Augmentation:</strong> retrieved text enters context — the trust boundary</div>
+        <div><strong style="color:#ffd9bf">RAG vs fine-tuning:</strong> live editable pipeline vs training-time supply chain</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">5.2 CORPUS POISONING</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Definition:</strong> malicious content planted at the ingestion stage</div>
+        <div><strong style="color:#ffd9bf">Persistence:</strong> one poisoned doc affects every future matching query</div>
+        <div><strong style="color:#ffd9bf">Vectors:</strong> wikis, uploads, scraped web content, feedback/tickets</div>
+        <div><strong style="color:#ffd9bf">Lifecycle:</strong> find ingestion point → craft → ingest → index → persist</div>
+        <div><strong style="color:#ffd9bf">Framework:</strong> OWASP LLM04 — Data &amp; Model Poisoning</div>
+        <div><strong style="color:#ffd9bf">vs direct injection:</strong> plants data, no live interaction needed</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">5.3 INDIRECT INJECTION</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Mechanism:</strong> retrieved chunk treated as trusted instruction, not data</div>
+        <div><strong style="color:#ffd9bf">vs direct:</strong> no access to victim's own prompt required</div>
+        <div><strong style="color:#ffd9bf">Why worse:</strong> scales to every user whose query retrieves the chunk</div>
+        <div><strong style="color:#ffd9bf">Trust chain:</strong> query → retrieve → augment → trust → act</div>
+        <div><strong style="color:#ffd9bf">Framework:</strong> OWASP LLM01 — Prompt Injection (indirect sub-case)</div>
+        <div><strong style="color:#ffd9bf">Recognise it:</strong> effect tracks retrieved content, not query wording</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">PIPELINE STAGE → ATTACKED BY → MODULE</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Stage</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Attacked by</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Where taught</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Ingestion</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Corpus poisoning</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Objective 5.2</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Chunking</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Chunk-boundary tricks</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Objective 5.4</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Embedding / storage</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Embedding-space attacks, cross-tenant leakage</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Module 6 / Objective 5.4</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Retrieval</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Ranking manipulation</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Objective 5.4</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">Augmentation</td><td style="padding:5px 8px;color:#dfe3ea">Indirect prompt injection</td><td style="padding:5px 8px;color:#dfe3ea">Objective 5.3</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">KEY DISTINCTIONS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Corpus poisoning</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Direct injection</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Payload planted in source data</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Payload in the user's own prompt</td></tr>
+          <tr><td style="padding:5px 8px;color:#dfe3ea">Persists across every future query</td><td style="padding:5px 8px;color:#dfe3ea">Affects only the current session</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea;margin-top:10px">
+        <div><strong style="color:#ffd9bf">Single-tenant:</strong> poisoning applies, no cross-tenant leakage risk</div>
+        <div><strong style="color:#ffd9bf">Multi-tenant:</strong> adds cross-tenant leakage on top (LLM08)</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">5.4 RAG-SPECIFIC TECHNIQUE &amp; ASSESSMENT WORKFLOW</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea;margin-bottom:10px">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">RANK</strong> Ranking manipulation</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">CHUNK</strong> Chunk-boundary tricks</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">CITE</strong> Citation / source spoofing</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">LEAK</strong> Cross-tenant data leakage (LLM08)</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">1</strong> Confirm RAG &amp; map the pipeline</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">2</strong> Identify ingestion vectors</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">3</strong> Test corpus-to-response persistence</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">4</strong> Probe the retrieval-trust boundary</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">5</strong> Assess tenancy and scoping</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ RAG-corpus poisoning attacks the ingestion stage, not the model's weights — no training compromise required</div>
+        <div>⚠️ Indirect injection via retrieval needs no access to the victim's own prompt — that is exactly what makes it scale</div>
+        <div>⚠️ Persistence means a poisoned document affects every future matching query, not just one conversation</div>
+        <div>⚠️ Cross-tenant leakage can occur through an ordinary query — no attacker payload is required at all</div>
+        <div>⚠️ Chunk-boundary and citation-spoofing technique are separate from poisoning and injection — know all four of 5.4</div>
+        <div>⚠️ OSAI weightings are not published — the exam is a 24-hour practical engagement</div>
+      </div>
+      <div>
+        RAG · OWASP · LLM01 (Prompt Injection) · LLM04 (Data &amp; Model Poisoning) · LLM08 (Vector &amp; Embedding Weaknesses) · ATLAS (MITRE) · TTP · PII
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSAI (AI-300) — Module 5: Exploiting RAG Pipelines | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">AI</span></div>
+  </div>
+</div>
+
+</body>
+</html>

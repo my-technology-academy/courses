@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 7 Cheat Sheet — Attacking Model Context Protocol and Tool Surfaces</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSAI: <span style="color:#ff6a00">Attacking Model Context Protocol and Tool Surfaces</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">7.1 MCP FUNDAMENTALS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">MCP (conceptual):</strong> standardised interface pattern for tool discovery + invocation</div>
+        <div><strong style="color:#ffd9bf">Consumer:</strong> the model/agent side seeking tool capability</div>
+        <div><strong style="color:#ffd9bf">Provider:</strong> the tool-providing side exposing described capability</div>
+        <div><strong style="color:#ffd9bf">Discovery phase:</strong> consumer learns what tools exist and reads descriptions</div>
+        <div><strong style="color:#ffd9bf">Invocation phase:</strong> consumer requests execution; result re-enters context</div>
+        <div><strong style="color:#ffd9bf">No schema invented:</strong> conceptual level only — no version/field-name claims</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">7.2 TOOL-SURFACE ENUMERATION &amp; ABUSE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Systematic enumeration:</strong> maps every reachable tool, not just one</div>
+        <div><strong style="color:#ffd9bf">Direct enumeration:</strong> what an agent visibly can invoke</div>
+        <div><strong style="color:#ffd9bf">Transitive enumeration:</strong> tools reachable only through another tool</div>
+        <div><strong style="color:#ffd9bf">Excessive agency (LLM06):</strong> privilege exceeds task need</div>
+        <div><strong style="color:#ffd9bf">Crafted-parameter abuse:</strong> legitimate call, unintended target/effect</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">7.3 MCP-SPECIFIC TRUST WEAKNESSES</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Description injection:</strong> a tool's own description carries an instruction</div>
+        <div><strong style="color:#ffd9bf">Capability over-claiming:</strong> description asserts more than the tool does</div>
+        <div><strong style="color:#ffd9bf">Compromised provider:</strong> a third-party tool-providing side turns malicious</div>
+        <div><strong style="color:#ffd9bf">Unverified provenance:</strong> no proof a tool is who it claims to be</div>
+        <div><strong style="color:#ffd9bf">"Text is code":</strong> Module 1 principle extended to the tool-definition layer</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">FINDING → ATTACK-SURFACE LAYER → OWASP MAPPING</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Finding category</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Module 1 attack-surface layer</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">OWASP mapping</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Least-privilege / excessive-agency gap</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Agent &amp; tool layer</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">LLM06 Excessive Agency</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Crafted-parameter tool-call abuse</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Agent &amp; tool layer</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">LLM06 Excessive Agency</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Tool-description / metadata injection</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Agent &amp; tool layer</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">LLM01 Prompt Injection (indirect)</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">Unmanaged third-party provider trust</td><td style="padding:5px 8px;color:#dfe3ea">Agent &amp; tool layer / supply-chain adjacent</td><td style="padding:5px 8px;color:#dfe3ea">LLM06 Excessive Agency</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">KEY DISTINCTIONS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Trusting tool output (M3)</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Trusting tool description (M7)</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Risk sits in what a tool returns after a call</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Risk sits in what a tool claims before any call</td></tr>
+          <tr><td style="padding:5px 8px;color:#dfe3ea">Re-enters context at invocation/result phase</td><td style="padding:5px 8px;color:#dfe3ea">Re-enters context at the discovery phase</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea;margin-top:10px">
+        <div><strong style="color:#ffd9bf">Module 2 enumeration:</strong> confirms a tool surface exists (hypothesis)</div>
+        <div><strong style="color:#ffd9bf">Module 7 enumeration:</strong> maps the whole surface (confirmed, evidenced)</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">7.4 CATALOGUING A TOOL SURFACE FOR THE REPORT</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">1</strong> Consolidate the 7.2 tool inventory</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">2</strong> Consolidate the 7.3 trust findings</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">3</strong> Rank by impact and effort</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">4</strong> Map to attack-surface layer + OWASP ID</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">5</strong> Write one coherent narrative</span>
+        <span style="margin-left:auto;color:#8891a1">A tool-surface catalogue is only valuable once it is prioritised and mapped</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ MCP is a deep dive on Module 3's tool-abuse mechanism, standardised — not an unrelated new topic</div>
+        <div>⚠️ Enumerating a tool is not the same as confirming it is over-permissioned — compare privilege to task need</div>
+        <div>⚠️ A tool need not be broken for abuse to be a finding — crafted parameters or a trusted-but-untrue description suffice</div>
+        <div>⚠️ Tool descriptions are text, read during discovery — treat them as untrusted, exactly like tool output</div>
+        <div>⚠️ Every finding here belongs to Module 1's agent-and-tool layer — always map back to it in the report</div>
+        <div>⚠️ OSAI weightings are not published — the exam is a 24-hour practical engagement</div>
+      </div>
+      <div>
+        MCP (Model Context Protocol) · LLM01 (Prompt Injection) · LLM06 (Excessive Agency) · ATLAS · TTP · RoE · OSINT · A2A
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSAI (AI-300) — Module 7: Attacking Model Context Protocol and Tool Surfaces | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">AI</span></div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+
+QUESTIONS:
+
+Q1. An attacker hides an instruction inside an internal document. When a user later asks a question, a RAG-enabled agent retrieves that document and follows the hidden instruction to email data to the attacker. Which term best describes how the payload was delivered?
+    (A) Direct prompt injection
+    (B) Indirect prompt injection
+    (C) Jailbreaking
+    (D) Model extraction
+
+Q2. What most distinguishes AI red teaming from a penetration test?
+    (A) It never exploits weaknesses, only enumerates and ranks them
+    (B) It is objective-driven, emulating a real adversary and chaining weaknesses to prove a specific impact
+    (C) It is limited to eliciting harmful content from the model
+    (D) It measures success purely by how much of the attack surface is covered
+
+Q3. In an OSAI report, which framework is used to name and classify what can go wrong in an LLM application?
+    (A) MITRE ATLAS
+    (B) NIST AI Risk Management Framework
+    (C) OWASP Top 10 for LLM Applications
+    (D) The EU AI Act
+
+Q4. How does jailbreaking differ from prompt injection?
+    (A) Jailbreaking targets the model's content policy, whereas injection subverts the application's intended control flow
+    (B) Jailbreaking requires physical access, whereas injection is always remote
+    (C) Jailbreaking affects only predictive models, whereas injection affects only generative models
+    (D) They are identical terms with no meaningful distinction
+
+Q5. Why does the agent and tool layer typically carry the greatest impact in an AI system?
+    (A) Because tool outputs are always encrypted and therefore trusted
+    (B) Because autonomy and function-calling turn a language trick into real actions, such as querying databases or sending email
+    (C) Because agents cannot be monitored by defenders
+    (D) Because the model weights are exposed through every tool call
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Indirect prompt injection
+Q2: (B) It is objective-driven, emulating a real adversary and chaining weaknesses to prove a specific impact
+Q3: (C) OWASP Top 10 for LLM Applications
+Q4: (A) Jailbreaking targets the model's content policy, whereas injection subverts the application's intended control flow
+Q5: (B) Because autonomy and function-calling turn a language trick into real actions, such as querying databases or sending email
+==================================================

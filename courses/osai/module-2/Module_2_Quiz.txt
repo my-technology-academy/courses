@@ -1,0 +1,42 @@
+
+QUESTIONS:
+
+Q1. During passive reconnaissance against an AI target, which of the following is an in-scope activity?
+    (A) Sending a series of crafted prompts to the target's chatbot to test its refusal boundary
+    (B) Reviewing the target's public API documentation and client-side application code
+    (C) Sending malformed requests to the target's API to trigger verbose error messages
+    (D) Requesting the target's system prompt directly through the chat interface
+
+Q2. A tester asks a chatbot "which model are you built on?" and receives a confident, specific answer. How should this response be treated during fingerprinting?
+    (A) As definitive proof of the underlying model, requiring no further verification
+    (B) As a weak signal that must be corroborated with independent behavioural evidence
+    (C) As irrelevant, since self-reported identity is never useful during recon
+    (D) As proof that the system has no guardrails configured
+
+Q3. A tester notices that a chatbot's answers to niche, organisation-specific questions are highly accurate and include citation-like source references. What does this most strongly suggest?
+    (A) The system is using retrieval-augmented generation (RAG) over an internal corpus
+    (B) The system has no guardrails at all
+    (C) The underlying model has been fine-tuned on adversarial examples
+    (D) The system is a purely predictive, non-generative classifier
+
+Q4. Why is it important to distinguish input-only from output-only guardrail enforcement during reconnaissance?
+    (A) It determines whether the target is a managed API or self-hosted
+    (B) It has no bearing on any later phase of the engagement
+    (C) Enforcement that only applies at one stage can leave a seam that guardrail-bypass technique later exploits
+    (D) It determines the exact pricing tier of the target's inference API
+
+Q5. What is the direct output of the reconnaissance phase that feeds into Module 10 (threat modeling)?
+    (A) A fully written engagement report ready for client delivery
+    (B) A target inventory of confirmed and hypothesised components, mapped to attack-surface layers with evidence and confidence
+    (C) A list of every possible prompt-injection payload to be attempted
+    (D) A signed rules-of-engagement document
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Reviewing the target's public API documentation and client-side application code
+Q2: (B) As a weak signal that must be corroborated with independent behavioural evidence
+Q3: (A) The system is using retrieval-augmented generation (RAG) over an internal corpus
+Q4: (C) Enforcement that only applies at one stage can leave a seam that guardrail-bypass technique later exploits
+Q5: (B) A target inventory of confirmed and hypothesised components, mapped to attack-surface layers with evidence and confidence
+==================================================

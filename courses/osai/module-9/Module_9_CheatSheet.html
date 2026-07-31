@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 9 Cheat Sheet — AI Infrastructure and Deployment Exploits</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSAI: <span style="color:#ff6a00">AI Infrastructure and Deployment Exploits</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">9.1 THE INFRASTRUCTURE LAYER</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Definition:</strong> everything that hosts and serves an AI system in production</div>
+        <div><strong style="color:#ffd9bf">Components:</strong> server, framework, GPU/orchestration, APIs, cloud identity</div>
+        <div><strong style="color:#ffd9bf">Identity:</strong> cross-cutting — bounds how far any compromise can spread</div>
+        <div><strong style="color:#ffd9bf">Backlink:</strong> Module 1 Obj 1.2 layer 5; Module 8 Obj 8.3 model-loading</div>
+        <div><strong style="color:#ffd9bf">Why high-leverage:</strong> the common foundation under every earlier layer</div>
+        <div><strong style="color:#ffd9bf">vs conventional infra:</strong> same mechanisms, GPU-bound cost + model loading are new</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">9.2 EXPOSED SERVING SURFACE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Weak mgmt auth:</strong> "internal-only" assumed instead of enforced</div>
+        <div><strong style="color:#ffd9bf">Debug endpoints:</strong> same M6 6.2 exposure pattern, at the serving layer</div>
+        <div><strong style="color:#ffd9bf">Cross-request leakage:</strong> batching/KV-cache reuse blurs isolation</div>
+        <div><strong style="color:#ffd9bf">vs web API exposure:</strong> same categories, AI-specific mechanisms</div>
+        <div><strong style="color:#ffd9bf">Recognise it:</strong> inconsistent auth across endpoints around one model</div>
+        <div><strong style="color:#ffd9bf">Framework:</strong> OWASP LLM02 for disclosure/leakage outcomes</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">9.3 CLOUD IDENTITY & PRIVILEGE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Root cause:</strong> convenience provisioning, never revisited</div>
+        <div><strong style="color:#ffd9bf">Metadata service:</strong> internal-only credential source, reachable via SSRF-style forgery</div>
+        <div><strong style="color:#ffd9bf">Chain:</strong> foothold → identify identity → enumerate perms → pivot</div>
+        <div><strong style="color:#ffd9bf">Least privilege vs convenience:</strong> convenience is the default outcome</div>
+        <div><strong style="color:#ffd9bf">Framework:</strong> no dedicated OWASP LLM category — conventional cloud risk</div>
+        <div><strong style="color:#ffd9bf">Report as:</strong> excess privilege + compromise path, cite cloud-security guidance</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">INFRASTRUCTURE COMPONENT → RISK → FRAMEWORK</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Component</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Risk category</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Framework</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Inference server / framework</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Exposed serving surface — Obj 9.2</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">OWASP LLM02</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Management / metrics interfaces</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Weak auth, debug exposure — Obj 9.2</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">OWASP LLM02</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Cloud identity / credential</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Privilege escalation — Obj 9.3</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">No dedicated LLM category</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">GPU / orchestration / compute</td><td style="padding:5px 8px;color:#dfe3ea">Resource abuse, denial-of-wallet — Obj 9.4</td><td style="padding:5px 8px;color:#dfe3ea">OWASP LLM10</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">KEY DISTINCTIONS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Denial of wallet</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Conventional DoS</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Goal: inflate cost, not necessarily stop service</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Goal: degrade or stop availability</td></tr>
+          <tr><td style="padding:5px 8px;color:#dfe3ea">Exploits per-request cost asymmetry</td><td style="padding:5px 8px;color:#dfe3ea">Exploits capacity limits / volume</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea;margin-top:10px">
+        <div><strong style="color:#ffd9bf">Cost asymmetry sources:</strong> large context, long output, chained tool calls, retry amplification</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">9.4 RESOURCE ABUSE — MECHANISM &amp; MITIGATIONS</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea;margin-bottom:10px">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">1</strong> Identify a cost/resource asymmetry</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">2</strong> Send requests exploiting it</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">3</strong> Consumption accrues unchecked</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">4</strong> Cost, degradation, or both manifest</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">5</strong> No targeting or crafted payload required</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">LIMIT</strong> Per-request and per-user caps</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">RATE</strong> Cost-aware rate limiting</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">QUOTA</strong> Per-tenant compute isolation</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">MONITOR</strong> Cost/usage anomaly detection</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ Denial of wallet can succeed with zero availability impact — cost, not uptime, is the property attacked</div>
+        <div>⚠️ "Internal-only" is a network assumption, not authentication — verify management interfaces directly</div>
+        <div>⚠️ Cloud identity/privilege escalation from infra has no dedicated OWASP LLM category — report it as a conventional cloud risk</div>
+        <div>⚠️ Cross-request leakage via batching/KV-cache is the serving-layer twin of Module 6's cross-tenant vector risk</div>
+        <div>⚠️ Multi-tenant resource isolation failure is an availability risk, distinct from multi-tenant data-isolation failure</div>
+        <div>⚠️ OSAI weightings are not published — the exam is a 24-hour practical engagement</div>
+      </div>
+      <div>
+        LLM10 (Unbounded Consumption) · LLM02 (Sensitive Information Disclosure) · GPU · IAM · SSRF · KV cache · OWASP · ATLAS
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSAI (AI-300) — Module 9: AI Infrastructure and Deployment Exploits | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">AI</span></div>
+  </div>
+</div>
+
+</body>
+</html>

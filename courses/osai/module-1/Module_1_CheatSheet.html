@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 1 Cheat Sheet — Introduction to Red Teaming AI Systems</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSAI: <span style="color:#ff6a00">Introduction to Red Teaming AI Systems</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.1 FOUNDATIONS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">AI red teaming:</strong> adversarial assessment of AI systems to prove real impact before an attacker does</div>
+        <div><strong style="color:#ffd9bf">vs pentest:</strong> objective-driven &amp; chains weaknesses, not scope-coverage</div>
+        <div><strong style="color:#ffd9bf">vs vuln assessment:</strong> red teaming exploits; assessment only enumerates</div>
+        <div><strong style="color:#ffd9bf">vs safety testing:</strong> security seeks system compromise (CIA); safety seeks harmful content</div>
+        <div><strong style="color:#ffd9bf">Text is code:</strong> any text the model reads may be an instruction</div>
+        <div><strong style="color:#ffd9bf">Chain to impact:</strong> an injection is a finding only when it leads to exfiltration or action</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.2 ATTACK SURFACE — 6 LAYERS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Model:</strong> guardrail bypass, jailbreaks, fingerprinting</div>
+        <div><strong style="color:#ffd9bf">Data/retrieval:</strong> RAG &amp; training poisoning, indirect injection</div>
+        <div><strong style="color:#ffd9bf">Application/prompt:</strong> direct injection, output handling, prompt leakage</div>
+        <div><strong style="color:#ffd9bf">Agent/tool:</strong> tool abuse, confused deputy, MCP, A2A</div>
+        <div><strong style="color:#ffd9bf">Infrastructure:</strong> exposed serving, cloud identity, misconfig</div>
+        <div><strong style="color:#ffd9bf">Supply chain:</strong> malicious models, unsafe deserialization</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.3 FRAMEWORKS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">OWASP LLM Top 10:</strong> names risks — LLM01 Injection, LLM04 Poisoning, LLM06 Excessive Agency, LLM07 Prompt Leakage</div>
+        <div><strong style="color:#ffd9bf">MITRE ATLAS:</strong> ATT&amp;CK-style adversary tactics/techniques for AI → kill-chain narrative</div>
+        <div><strong style="color:#ffd9bf">NIST AI RMF:</strong> Govern · Map · Measure · Manage — Measure calls for red teaming</div>
+        <div><strong style="color:#ffd9bf">Rule of thumb:</strong> OWASP = risks · ATLAS = behaviour · NIST = governance</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">ATTACK SURFACE → WEAKNESS → MODULE</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Layer</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Primary weakness</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Attacked in</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Model</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Guardrail bypass, fingerprinting</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Modules 2, 3</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Data / retrieval</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">RAG poisoning, indirect injection</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Module 5</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Embeddings / vector store</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Inversion, manipulation</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Module 6</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Application / prompt</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Direct injection, output handling</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Module 3</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Agents &amp; tools</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Tool abuse, confused deputy, MCP</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Modules 3, 4, 7</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Infrastructure</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Exposed serving, cloud identity</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Module 9</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">Supply chain</td><td style="padding:5px 8px;color:#dfe3ea">Malicious models, deserialization</td><td style="padding:5px 8px;color:#dfe3ea">Module 8</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">KEY DISTINCTIONS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Direct injection</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Indirect injection</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Payload typed into an input you control</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Payload hidden in content the model later reads</td></tr>
+          <tr><td style="padding:5px 8px;color:#dfe3ea">Single-hop, immediate</td><td style="padding:5px 8px;color:#dfe3ea">Deferred, multi-hop — basis of RAG/agent attacks</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea;margin-top:10px">
+        <div><strong style="color:#ffd9bf">Jailbreak:</strong> subverts the model's content policy (safety lens)</div>
+        <div><strong style="color:#ffd9bf">Injection:</strong> subverts the app's control flow (security lens)</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.4 ENGAGEMENT METHODOLOGY</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">1</strong> Scoping &amp; RoE</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">2</strong> Reconnaissance</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">3</strong> Threat modeling</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">4</strong> Exploitation</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">5</strong> Post-exploitation &amp; impact</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">6</strong> Reporting</span>
+        <span style="margin-left:auto;color:#8891a1">Report each finding with: OWASP ID · ATLAS technique · evidence · impact · layered remediation</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ Jailbreak ≠ prompt injection — content policy vs application control flow</div>
+        <div>⚠️ Indirect injection needs no access to the victim's prompt — it rides in via retrieved data</div>
+        <div>⚠️ A prompt injection alone is not a finding — it must be chained to demonstrated impact</div>
+        <div>⚠️ AI weaknesses are mitigated (layered, probabilistic), not "patched" like a deterministic bug</div>
+        <div>⚠️ The model is rarely the whole target — data, agent, and infra layers carry the impact</div>
+        <div>⚠️ OSAI weightings are not published — the exam is a 24-hour practical engagement</div>
+      </div>
+      <div>
+        LLM · RAG · MCP (Model Context Protocol) · A2A (Agent-to-Agent) · ATLAS · RMF (Risk Management Framework) · RoE (Rules of Engagement) · TTP · PII · CIA (Confidentiality/Integrity/Availability)
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSAI (AI-300) — Module 1: Introduction to Red Teaming AI Systems | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">AI</span></div>
+  </div>
+</div>
+
+</body>
+</html>

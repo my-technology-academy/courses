@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 8 Cheat Sheet — AI Supply Chain Attacks</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSAI: <span style="color:#ff6a00">AI Supply Chain Attacks</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">8.1 THE AI SUPPLY CHAIN</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Definition:</strong> everything externally sourced, not built in-house</div>
+        <div><strong style="color:#ffd9bf">Four categories:</strong> model weights, datasets, plugins/tools, ML libraries</div>
+        <div><strong style="color:#ffd9bf">Backlink:</strong> Module 1 Obj 1.2 supply-chain layer; Module 2 Obj 2.1 OSINT</div>
+        <div><strong style="color:#ffd9bf">Direct vs transitive:</strong> transitive deps carry the same risk, unreviewed</div>
+        <div><strong style="color:#ffd9bf">Why high-leverage:</strong> one component, many downstream deployments</div>
+        <div><strong style="color:#ffd9bf">Core lesson:</strong> trust is inherited, not verified</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">8.2 MALICIOUS / BACKDOORED MODELS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Backdoor:</strong> normal on ordinary input, malicious on an attacker-known trigger</div>
+        <div><strong style="color:#ffd9bf">Hard to detect:</strong> indistinguishable from clean on nearly all input</div>
+        <div><strong style="color:#ffd9bf">vs ordinary flaw:</strong> deliberate + conditional vs general + reproducible</div>
+        <div><strong style="color:#ffd9bf">Myth:</strong> "popular download" measures adoption, not integrity</div>
+        <div><strong style="color:#ffd9bf">Verification gap:</strong> no practice alone catches a well-hidden trigger</div>
+        <div><strong style="color:#ffd9bf">Framework:</strong> OWASP LLM03; MITRE ATLAS supply-chain tactic</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">8.3 UNSAFE DESERIALIZATION</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Risk:</strong> loading a file — not running it — can execute code</div>
+        <div><strong style="color:#ffd9bf">Cause:</strong> format reconstructs arbitrary objects, not just numeric weights</div>
+        <div><strong style="color:#ffd9bf">Data-only format:</strong> cannot execute code on load, by design</div>
+        <div><strong style="color:#ffd9bf">General-purpose format:</strong> flexible, but code-execution-capable</div>
+        <div><strong style="color:#ffd9bf">Mitigate:</strong> prefer data-only, sandbox load, verify integrity, least privilege</div>
+        <div><strong style="color:#ffd9bf">Framework:</strong> OWASP LLM03; co-occurs with, but ≠, Objective 8.2</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">SUPPLY-CHAIN COMPONENT → RISK → FRAMEWORK</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Component</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Risk if compromised</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Framework</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Model weights</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Malicious / backdoored behaviour — Obj 8.2</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">OWASP LLM03</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Model file format</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Unsafe deserialization on load — Obj 8.3</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">OWASP LLM03</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Training / fine-tuning dataset</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Learned-behaviour poisoning — Obj 8.4</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">OWASP LLM04</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">ML library / framework</td><td style="padding:5px 8px;color:#dfe3ea">Dependency confusion / typosquatting — Obj 8.4</td><td style="padding:5px 8px;color:#dfe3ea">OWASP LLM03</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">KEY DISTINCTIONS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Dataset poisoning (M8)</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">RAG-corpus poisoning (M5)</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Alters learned weights at training time</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Alters only what is retrieved at query time</td></tr>
+          <tr><td style="padding:5px 8px;color:#dfe3ea">Persists after the dataset is removed</td><td style="padding:5px 8px;color:#dfe3ea">Effect ends when the document is removed</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea;margin-top:10px">
+        <div><strong style="color:#ffd9bf">Direct dependency:</strong> chosen explicitly, provenance known</div>
+        <div><strong style="color:#ffd9bf">Transitive dependency:</strong> pulled in indirectly, rarely reviewed</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">8.4 DATASET &amp; DEPENDENCY POISONING — LIFECYCLE &amp; ASSESSMENT</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea;margin-bottom:10px">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">1</strong> Identify a popular legitimate package</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">2</strong> Publish a similarly named malicious package</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">3</strong> Wait for accidental or automated resolution</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">4</strong> Malicious code executes on install/import</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">5</strong> Compromise reaches every install — no targeting needed</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">VET</strong> Dataset provenance before training</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">PIN</strong> Package names and versions, verified</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">MIRROR</strong> Private or mirrored package sources</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">AUDIT</strong> Training-data changes over time</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ A popular public model is not automatically safe — popularity measures adoption, not verification</div>
+        <div>⚠️ Model files "are just data" is false — some formats execute code during loading itself, before inference</div>
+        <div>⚠️ Dataset poisoning ≠ RAG-corpus poisoning — training-time weight change vs retrieval-time content change</div>
+        <div>⚠️ Dependency confusion needs no targeted victim — a typo or misconfigured source is enough</div>
+        <div>⚠️ Backdoor behaviour is deliberate and trigger-conditioned — do not confuse it with an ordinary model flaw</div>
+        <div>⚠️ OSAI weightings are not published — the exam is a 24-hour practical engagement</div>
+      </div>
+      <div>
+        LLM03 (Supply Chain) · LLM04 (Data &amp; Model Poisoning) · ATLAS (MITRE) · ML · CVE · TTP · OWASP · RAG
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSAI (AI-300) — Module 8: AI Supply Chain Attacks | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">AI</span></div>
+  </div>
+</div>
+
+</body>
+</html>

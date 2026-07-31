@@ -1,0 +1,42 @@
+
+QUESTIONS:
+
+Q1. At the conceptual level this course teaches, what is Model Context Protocol (MCP) best described as?
+    (A) A standardised interface pattern that lets a model/agent discover and invoke external tool capability
+    (B) A single vendor's proprietary chat completion format
+    (C) A guardrail-filtering mechanism applied only to user input
+    (D) A database schema used exclusively for storing chat history
+
+Q2. What distinguishes Objective 7.2's systematic tool-surface enumeration from Module 2, Objective 2.3's behavioural tool-enumeration recon?
+    (A) 2.3 requires written authorisation while 7.2 does not
+    (B) 7.2 maps every reachable tool directly and transitively, adding privilege analysis and abuse; 2.3 only confirms a tool surface exists
+    (C) 7.2 is only possible against self-hosted, open-weight models
+    (D) They are two names for exactly the same activity
+
+Q3. A model reads a tool's declared description during the discovery phase, and that description itself contains text instructing the model to forward its output to an external address. Which weakness does this best illustrate?
+    (A) Crafted-parameter abuse of a legitimate tool call
+    (B) Insecure output handling in a rendered HTML sink
+    (C) A tool-description or tool-metadata injection risk, trusted during the discovery phase
+    (D) Passive OSINT reconnaissance of a third-party provider
+
+Q4. Why must a tool's declared description be treated as untrusted, in the same way Module 3 taught learners to treat a tool's returned output?
+    (A) Descriptions are always encrypted and therefore unreadable to the model
+    (B) A description is text read during discovery, and untrusted text describing what a tool does can itself carry an instruction the model treats as authoritative
+    (C) Descriptions never influence which tool a model chooses to invoke
+    (D) Only self-hosted tool providers can write descriptions
+
+Q5. Per Objective 7.4, what should a strong tool-surface report section do that a weak one does not?
+    (A) List every enumerated tool in the order it was discovered with no further analysis
+    (B) Avoid referencing OWASP or MITRE ATLAS entirely
+    (C) Omit which specific trust assumption failed, to keep the report concise
+    (D) Prioritise findings by demonstrated impact and effort, and map each to its attack-surface layer and OWASP ID
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (A) A standardised interface pattern that lets a model/agent discover and invoke external tool capability
+Q2: (B) 7.2 maps every reachable tool directly and transitively, adding privilege analysis and abuse; 2.3 only confirms a tool surface exists
+Q3: (C) A tool-description or tool-metadata injection risk, trusted during the discovery phase
+Q4: (B) A description is text read during discovery, and untrusted text describing what a tool does can itself carry an instruction the model treats as authoritative
+Q5: (D) Prioritise findings by demonstrated impact and effort, and map each to its attack-surface layer and OWASP ID
+==================================================

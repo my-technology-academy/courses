@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 6 Cheat Sheet — Attacking Embeddings</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSAI: <span style="color:#ff6a00">Attacking Embeddings</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">6.1 EMBEDDING FUNDAMENTALS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Embedding:</strong> numeric vector capturing semantic meaning</div>
+        <div><strong style="color:#ffd9bf">Similarity search:</strong> nearest-neighbour distance, purely geometric</div>
+        <div><strong style="color:#ffd9bf">Vector database:</strong> Module 5's storage + retrieval stages, reopened</div>
+        <div><strong style="color:#ffd9bf">Flow:</strong> text → embed model → store → query embed → search</div>
+        <div><strong style="color:#ffd9bf">Metrics:</strong> cosine similarity, Euclidean distance, dot product</div>
+        <div><strong style="color:#ffd9bf">vs keyword match:</strong> retrieves meaning, not literal words — but attackable</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">6.2 EMBEDDING INVERSION</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Definition:</strong> recovers an approximation of text from its vector alone</div>
+        <div><strong style="color:#ffd9bf">Why it matters:</strong> exposed vectors ≈ exposed sensitive content</div>
+        <div><strong style="color:#ffd9bf">Exposure vectors:</strong> debug endpoints, permissive APIs, logs, exports</div>
+        <div><strong style="color:#ffd9bf">vs direct exposure:</strong> attacker never touches the raw source text</div>
+        <div><strong style="color:#ffd9bf">Framework:</strong> OWASP LLM08 (mechanism) + LLM02 (disclosure outcome)</div>
+        <div><strong style="color:#ffd9bf">Recognise it:</strong> vectors reachable under weaker auth than the docs</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">6.3 EMBEDDING MANIPULATION</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Definition:</strong> crafted text embeds near a target vector, not the text's meaning</div>
+        <div><strong style="color:#ffd9bf">vs corpus poisoning:</strong> attacks the vector, not what a human reviews</div>
+        <div><strong style="color:#ffd9bf">Origin:</strong> adversarial perturbation, carried from predictive-ML evasion (M1 1.1)</div>
+        <div><strong style="color:#ffd9bf">Mechanism:</strong> target region → craft → ingest → land near → retrieved</div>
+        <div><strong style="color:#ffd9bf">Why worse to catch:</strong> no keyword signature, review misses it</div>
+        <div><strong style="color:#ffd9bf">Framework:</strong> OWASP LLM08; ATLAS adversarial-input tactics</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">EMBEDDING-LAYER FAILURE → PROPERTY → OBJECTIVE</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Failure</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Property broken</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Where taught</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Embedding inversion</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Confidentiality of the vector</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Objective 6.2</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Embedding-space manipulation</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Integrity of retrieval ranking</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Objective 6.3</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Direct vector-store access</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Access control of the store</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Objective 6.4</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">Cross-tenant isolation (storage layer)</td><td style="padding:5px 8px;color:#dfe3ea">Access control across tenants</td><td style="padding:5px 8px;color:#dfe3ea">Objective 6.4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">KEY DISTINCTIONS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Embedding manipulation</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Corpus poisoning (M5)</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Targets the vector's position</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Targets the text a human reads</td></tr>
+          <tr><td style="padding:5px 8px;color:#dfe3ea">Text need not resemble the query</td><td style="padding:5px 8px;color:#dfe3ea">Text must pass human review</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea;margin-top:10px">
+        <div><strong style="color:#ffd9bf">App-layer scoping:</strong> filters queries — bypassed if store is direct-reachable</div>
+        <div><strong style="color:#ffd9bf">DB-layer access control:</strong> must hold independent of the app</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">6.4 VECTOR-STORE-SPECIFIC EXPLOITATION &amp; ASSESSMENT WORKFLOW</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea;margin-bottom:10px">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">ACCESS</strong> Direct, unauthenticated query/dump access</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">META</strong> Metadata leakage alongside vectors</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">TENANT</strong> Cross-tenant isolation at the storage layer</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">ADMIN</strong> Exposed administrative interfaces</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">1</strong> Identify the vector-store technology &amp; exposure</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">2</strong> Test the store's own access controls</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">3</strong> Inspect the full record schema</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">4</strong> Assess tenant isolation at the storage layer</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">5</strong> Map findings to LLM08 and LLM02</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ Embedding inversion recovers an approximation, not an exact reproduction, of the source text — state it precisely</div>
+        <div>⚠️ Embedding manipulation attacks the vector's position, not the source text a human would review — do not confuse it with corpus poisoning</div>
+        <div>⚠️ Adversarial perturbation is not new to this module — it is Module 1's predictive-ML evasion concept, redirected at a vector</div>
+        <div>⚠️ Application-level query scoping provides zero protection if the vector store itself is reachable directly</div>
+        <div>⚠️ Metadata stored alongside a vector can leak sensitive detail even when the vector and source text are both secure</div>
+        <div>⚠️ OSAI weightings are not published — the exam is a 24-hour practical engagement</div>
+      </div>
+      <div>
+        RAG · OWASP · LLM02 (Sensitive Information Disclosure) · LLM08 (Vector &amp; Embedding Weaknesses) · ATLAS (MITRE) · ANN (Approximate Nearest Neighbour) · TTP · PII
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSAI (AI-300) — Module 6: Attacking Embeddings | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">AI</span></div>
+  </div>
+</div>
+
+</body>
+</html>

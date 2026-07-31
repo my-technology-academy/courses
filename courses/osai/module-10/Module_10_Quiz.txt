@@ -1,0 +1,42 @@
+
+QUESTIONS:
+
+Q1. A team confirms during reconnaissance that a target exposes a particular tool interface. Why does that confirmation alone not yet constitute a viable attack path?
+    (A) Because confirmed findings are always false positives until re-tested
+    (B) Because a viable attack path requires the confirmed weakness to be chained toward a specific, stated engagement objective
+    (C) Because tool interfaces can never be part of an attack path
+    (D) Because only hypothesised weaknesses can be used in attack paths
+
+Q2. Why does Objective 10.1 insist that threat modeling is distinct from both reconnaissance and exploitation, rather than simply an extension of either?
+    (A) Because reconnaissance and exploitation are the same phase under different names
+    (B) Because threat modeling consumes the inventory recon produces and outputs a ranked plan, without itself delivering any payload the way exploitation does
+    (C) Because threat modeling replaces the need for reconnaissance entirely
+    (D) Because exploitation always occurs before reconnaissance in the engagement lifecycle
+
+Q3. Two candidate attack paths remain with limited engagement time left: Path A is a single confirmed weakness reaching a moderately sensitive asset with minimal effort; Path B is a three-step chain, two links still hypothesised, reaching a highly sensitive asset but requiring most of the remaining time. Which reflects Objective 10.3's prioritisation discipline?
+    (A) Always attempt Path B first, since it targets the more sensitive asset regardless of effort or confidence
+    (B) Attempt Path A first, since it combines confirmed evidence and low effort, then attempt Path B only if time remains
+    (C) Attempt neither path, since any path involving a hypothesised link should be discarded entirely
+    (D) Attempt both paths simultaneously, since threat modeling does not require sequencing decisions
+
+Q4. Why are OWASP LLM Top 10 category mappings and MITRE ATLAS tactic stages treated as direct inputs to prioritisation in Objective 10.3, rather than only as report vocabulary?
+    (A) Because they carry implicit severity and kill-chain-stage signals that inform how a path's impact is judged
+    (B) Because OWASP and ATLAS assign numeric weights that are averaged to produce a priority score
+    (C) Because the OSAI exam only accepts findings that cite both frameworks
+    (D) Because framework mappings replace the need to assess impact and effort separately
+
+Q5. What distinguishes a documented kill chain from a raw findings list, per Objective 10.4?
+    (A) A kill chain only ever contains a single finding, while a findings list can contain many
+    (B) A kill chain orders weaknesses as an explicit narrative toward an objective, so a reader can follow cause and effect without inferring how findings combine
+    (C) A findings list is always more detailed than a kill chain
+    (D) A kill chain and a findings list are two names for an identical document format
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Because a viable attack path requires the confirmed weakness to be chained toward a specific, stated engagement objective
+Q2: (B) Because threat modeling consumes the inventory recon produces and outputs a ranked plan, without itself delivering any payload the way exploitation does
+Q3: (B) Attempt Path A first, since it combines confirmed evidence and low effort, then attempt Path B only if time remains
+Q4: (A) Because they carry implicit severity and kill-chain-stage signals that inform how a path's impact is judged
+Q5: (B) A kill chain orders weaknesses as an explicit narrative toward an objective, so a reader can follow cause and effect without inferring how findings combine
+==================================================

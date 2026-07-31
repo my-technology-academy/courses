@@ -1,0 +1,42 @@
+
+QUESTIONS:
+
+Q1. According to Module 6, what does similarity search actually compare when a vector store decides what to retrieve?
+    (A) The literal words shared between the query and the stored text
+    (B) The purely geometric distance between the query vector and stored vectors
+    (C) A human-reviewed relevance score assigned at ingestion time
+    (D) The semantic meaning of the text, judged independently of the vector
+
+Q2. A tester finds a debug endpoint that returns raw embedding vectors for a set of sensitive internal documents, while the documents themselves remain properly access-controlled. Why is this still a meaningful finding?
+    (A) It is not meaningful, since a vector is fully divorced from its source text
+    (B) Because embedding inversion means an exposed vector can carry enough recoverable signal to approximate the sensitive source text
+    (C) Because the endpoint necessarily grants direct access to the raw document store
+    (D) Because vector exposure always constitutes a cross-tenant isolation failure
+
+Q3. A tester crafts text that reads as entirely unrelated to a target topic under human review, yet once ingested its embedding lands near a target region and it is reliably retrieved for queries about that topic, with no injected instruction present. What technique does this describe, and how does it differ from Module 5's corpus poisoning?
+    (A) Corpus poisoning, since the content still had to be ingested into the corpus
+    (B) Embedding-space manipulation, which targets the vector's position rather than content a human reviewer would judge as legitimate
+    (C) Embedding inversion, since the attacker recovered content from a vector
+    (D) Ranking manipulation, since it targets broad relevance across many queries
+
+Q4. A vector database enforces correct per-tenant query scoping inside the application layer. Why is this insufficient on its own?
+    (A) It is sufficient, since application-level scoping always mirrors database-level access control
+    (B) Because application-level scoping provides no protection if the vector store itself is reachable directly, bypassing the application entirely
+    (C) Because tenant scoping only applies to embedding inversion, not to retrieval
+    (D) Because similarity search cannot be scoped by tenant under any circumstances
+
+Q5. Under the OWASP framework mapping used throughout Module 6, which pairing correctly reflects how an embedding-inversion finding should typically be cited in a report?
+    (A) LLM01 for the mechanism, LLM03 for the impact
+    (B) LLM04 for the mechanism only, with no impact category needed
+    (C) LLM08 for the vector-specific mechanism, paired with LLM02 for the resulting sensitive-information disclosure
+    (D) LLM02 for the mechanism, LLM08 for the impact
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) The purely geometric distance between the query vector and stored vectors
+Q2: (B) Because embedding inversion means an exposed vector can carry enough recoverable signal to approximate the sensitive source text
+Q3: (B) Embedding-space manipulation, which targets the vector's position rather than content a human reviewer would judge as legitimate
+Q4: (B) Because application-level scoping provides no protection if the vector store itself is reachable directly, bypassing the application entirely
+Q5: (C) LLM08 for the vector-specific mechanism, paired with LLM02 for the resulting sensitive-information disclosure
+==================================================

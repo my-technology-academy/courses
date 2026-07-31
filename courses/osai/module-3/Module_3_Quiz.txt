@@ -1,0 +1,42 @@
+
+QUESTIONS:
+
+Q1. Which statement best distinguishes Objective 3.1's guardrail-bypass technique from the guardrail mapping taught in Module 2?
+    (A) Bypass deliberately crafts input to cross a seam already mapped; mapping only observes and documents it
+    (B) Guardrail mapping is only possible against self-hosted, open-weight models
+    (C) Guardrail bypass and guardrail mapping are two names for exactly the same activity
+    (D) Bypass requires no authorisation, while mapping always requires a signed contract
+
+Q2. Why is a model's leaked system-prompt fragment normally treated as reconnaissance value rather than as the finding itself?
+    (A) System prompts never contain any information relevant to a later attack
+    (B) A single unverified fragment is weak evidence; its real value is what it enables in later objectives, such as tool abuse
+    (C) OWASP forbids reporting system-prompt content under any circumstances
+    (D) Extraction only works against models that have already been jailbroken
+
+Q3. An agent holds legitimate access to a ticketing tool. An attacker plants an instruction inside content the agent's tool later fetches, causing the agent to misuse its own ticketing privilege on the attacker's behalf. Which pattern does this illustrate?
+    (A) Passive OSINT reconnaissance
+    (B) The confused-deputy pattern
+    (C) Guardrail mapping
+    (D) Model extraction
+
+Q4. Why must a tool's returned output be treated as untrusted, in the same way as user input?
+    (A) Tool output is always encrypted and therefore unreadable to the model
+    (B) A tool's returned result can itself contain attacker-influenced content that acts as a fresh prompt injection once it re-enters the agent's context
+    (C) Tools never return any content that the model can read
+    (D) Only self-hosted tools are capable of returning untrusted content
+
+Q5. An application renders a model's response directly into a web page without sanitisation, allowing embedded markup to execute in the viewer's browser. Which OWASP risk and classic vulnerability class does this recreate through an AI channel?
+    (A) LLM03 Supply Chain, recreating a typosquatting attack
+    (B) LLM08 Vector and Embedding Weaknesses, recreating an embedding-inversion attack
+    (C) LLM05 Improper Output Handling, recreating a cross-site scripting (XSS) style outcome
+    (D) LLM02 Sensitive Information Disclosure, recreating a data-retention violation
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (A) Bypass deliberately crafts input to cross a seam already mapped; mapping only observes and documents it
+Q2: (B) A single unverified fragment is weak evidence; its real value is what it enables in later objectives, such as tool abuse
+Q3: (B) The confused-deputy pattern
+Q4: (B) A tool's returned result can itself contain attacker-influenced content that acts as a fresh prompt injection once it re-enters the agent's context
+Q5: (C) LLM05 Improper Output Handling, recreating a cross-site scripting (XSS) style outcome
+==================================================

@@ -1,0 +1,42 @@
+
+QUESTIONS:
+
+Q1. During the capstone, a tester spots an interesting-looking system just outside the agreed scope boundary. What does Objective 11.1's scope discipline call for?
+    (A) Pursue it immediately, since any demonstrated compromise strengthens the report
+    (B) Note it and do not pursue it, since findings outside agreed boundaries are not a successful engagement outcome
+    (C) Pursue it only if it can be exploited faster than in-scope components
+    (D) Expand the scope unilaterally without clarifying with the engagement stakeholders
+
+Q2. Why does Objective 11.2 warn that jumping straight to exploitation is the most common capstone and exam failure mode, even against a target that looks simple?
+    (A) Because exploitation techniques from Modules 3 to 9 do not work without threat modeling
+    (B) Because it feels productive in the moment but reliably underperforms a disciplined recon-then-threat-model opening that picks the highest-ranked path
+    (C) Because reconnaissance is legally required before any testing begins
+    (D) Because threat modeling always takes less time than exploitation
+
+Q3. Midway through the engagement window, a tester has confirmed ten isolated weaknesses but has not chained any toward the scoped objective, and no report content has been written. What is the most defensible next action?
+    (A) Continue enumerating additional isolated weaknesses, since more findings always strengthen the final report
+    (B) Stop enumerating, select the highest-ranked candidate chain toward the scoped objective, execute it, and begin writing the report incrementally
+    (C) Immediately write the final report using only the ten isolated findings, since reporting time is more important than chaining
+    (D) Discard all ten findings and restart reconnaissance, since none of them has yet been chained into a path
+
+Q4. Why does Objective 11.3 state that technique breadth alone does not outscore demonstrated impact?
+    (A) Because a smaller number of findings chained to the scoped objective proves the client-relevant risk, while many unchained findings do not
+    (B) Because OSAI only allows a maximum of three findings to be reported per engagement
+    (C) Because technique breadth is never relevant to an engagement's outcome
+    (D) Because chained findings always take less time to document than isolated ones
+
+Q5. Why does Objective 11.4 recommend writing the report incrementally throughout the engagement rather than after exploitation is "finished"?
+    (A) Because reports written incrementally are graded more leniently
+    (B) Because a report built from real-time notes and the living kill-chain document is both faster to finish and more accurate than one reconstructed afterward, and learners consistently underestimate reporting time
+    (C) Because the report must be submitted before exploitation begins
+    (D) Because incremental writing removes the need for evidence per step
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Note it and do not pursue it, since findings outside agreed boundaries are not a successful engagement outcome
+Q2: (B) Because it feels productive in the moment but reliably underperforms a disciplined recon-then-threat-model opening that picks the highest-ranked path
+Q3: (B) Stop enumerating, select the highest-ranked candidate chain toward the scoped objective, execute it, and begin writing the report incrementally
+Q4: (A) Because a smaller number of findings chained to the scoped objective proves the client-relevant risk, while many unchained findings do not
+Q5: (B) Because a report built from real-time notes and the living kill-chain document is both faster to finish and more accurate than one reconstructed afterward, and learners consistently underestimate reporting time
+==================================================

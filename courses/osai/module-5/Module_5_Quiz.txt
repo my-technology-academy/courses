@@ -1,0 +1,42 @@
+
+QUESTIONS:
+
+Q1. Which of the following best describes retrieval-augmented generation (RAG)?
+    (A) An architecture that retrieves relevant external content at query time and inserts it into the model's context
+    (B) A technique that retrains the model's weights on new documents every time a query is asked
+    (C) A guardrail mechanism that filters harmful output before it reaches the user
+    (D) A method for compressing a model so it runs on smaller infrastructure
+
+Q2. A tester submits a crafted entry to an internal wiki that a RAG pipeline later ingests. What property explains why that single entry can go on to affect many unrelated users' queries weeks later?
+    (A) Latency — the entry simply takes a long time to load
+    (B) Persistence — the entry remains in the vector database and is retrieved by every future matching query
+    (C) Fine-tuning — the entry retrains the underlying model
+    (D) Rate limiting — the entry is queued for delayed delivery
+
+Q3. What is the defining difference between indirect prompt injection via retrieval and direct prompt injection?
+    (A) Indirect injection requires no access to the victim's own prompt or conversation at all
+    (B) Indirect injection can only ever affect a single conversation, never future queries
+    (C) Direct injection is always delivered through a poisoned document in a corpus
+    (D) There is no meaningful difference between the two techniques
+
+Q4. Which RAG-specific technique involves crafting content so its embedding is semantically close to a wide range of likely queries, maximising the chance it is retrieved?
+    (A) Citation spoofing
+    (B) Chunk-boundary manipulation
+    (C) Retrieval ranking manipulation
+    (D) Cross-tenant data leakage
+
+Q5. What additional risk does a multi-tenant shared RAG corpus introduce beyond a single-tenant corpus?
+    (A) Multi-tenant corpora are immune to corpus poisoning entirely
+    (B) A retrieval-scoping failure can leak one tenant's content into another tenant's query results
+    (C) Multi-tenant corpora never require any retrieval filtering at all
+    (D) Single-tenant corpora carry strictly higher risk than multi-tenant ones
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (A) An architecture that retrieves relevant external content at query time and inserts it into the model's context
+Q2: (B) Persistence — the entry remains in the vector database and is retrieved by every future matching query
+Q3: (A) Indirect injection requires no access to the victim's own prompt or conversation at all
+Q4: (C) Retrieval ranking manipulation
+Q5: (B) A retrieval-scoping failure can leak one tenant's content into another tenant's query results
+==================================================

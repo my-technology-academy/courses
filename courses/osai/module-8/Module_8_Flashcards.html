@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 8 Flashcards — AI Supply Chain Attacks</title>
+<style>
+  :root{--bg:#0c0d10;--card:#111217;--stroke:#2a2f3a;--accent:#ff6a00;--text:#f5f7fb;--dim:#b8c0cf}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background-color:var(--bg);background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:var(--text);min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:36px 24px 60px}
+  header{text-align:center;margin-bottom:28px}
+  h1{margin:0;font-size:30px;font-weight:900}
+  h1 .accent{color:var(--accent)}
+  .sub{color:var(--dim);font-size:14px;margin-top:8px}
+  .toolbar{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+  .btn{border:1px solid var(--stroke);background:rgba(255,255,255,.02);color:var(--text);padding:9px 16px;border-radius:12px;cursor:pointer;font-size:14px}
+  .btn:hover{background:rgba(255,106,0,.10)}
+  .counter{color:var(--dim);font-size:14px}
+  .stage{display:flex;justify-content:center}
+  .scene{width:100%;max-width:640px;height:360px;perspective:1600px}
+  .card{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+  .card.flipped{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--stroke);border-radius:20px;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;background:var(--card)}
+  .face.front{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.15)), var(--card)}
+  .face.back{transform:rotateY(180deg);background:linear-gradient(180deg, rgba(255,106,0,.10), rgba(0,0,0,.15)), var(--card);border-color:#b85100}
+  .tag{position:absolute;top:18px;left:18px;font-size:12px;font-weight:700;letter-spacing:.5px;color:#ffd9bf;background:rgba(255,106,0,.15);border:1px solid rgba(255,106,0,.35);padding:4px 10px;border-radius:999px}
+  .term{font-size:23px;font-weight:900}
+  .def{font-size:17px;line-height:1.5;color:var(--dim)}
+  .hint{position:absolute;bottom:16px;font-size:12px;color:#8891a1}
+  .dots{display:flex;justify-content:center;gap:6px;margin-top:24px;flex-wrap:wrap;max-width:640px;margin-left:auto;margin-right:auto}
+  .dot{width:9px;height:9px;border-radius:999px;background:var(--stroke);cursor:pointer}
+  .dot.active{background:var(--accent)}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:40px;font-size:12.5px;color:#8891a1;max-width:640px;margin-left:auto;margin-right:auto}
+  .wordmark{font-weight:900;letter-spacing:2px}
+  .wordmark .c{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>OSAI <span class="accent">Flashcards</span></h1><div class="sub">Module 8 &middot; AI Supply Chain Attacks</div></header>
+  <div class="toolbar">
+    <button class="btn" id="prevBtn">⟨ Prev</button>
+    <span class="counter" id="counter">1 / 16</span>
+    <button class="btn" id="nextBtn">Next ⟩</button>
+    <button class="btn" id="shuffleBtn">Shuffle</button>
+  </div>
+  <div class="stage"><div class="scene"><div class="card" id="card">
+    <div class="face front"><div class="tag" id="tagFront">Automation</div><div class="term" id="termText">Term</div><div class="hint">Tap card to reveal definition</div></div>
+    <div class="face back"><div class="tag" id="tagBack">Automation</div><div class="def" id="defText">Definition</div><div class="hint">Tap card to flip back</div></div>
+  </div></div></div>
+  <div class="dots" id="dots"></div>
+  <div class="foot"><div>My Cyber Academy</div><div class="wordmark"><span class="c">OS</span>AI</div></div>
+</div>
+<script>
+const cards = [
+ {
+  "tag": "Supply Chain Map",
+  "term": "AI Supply Chain",
+  "def": "The set of externally-sourced components a deployment relies on but did not build itself: pre-trained model weights, third-party datasets, plugins/tools, and ML libraries pulled from public registries."
+ },
+ {
+  "tag": "Supply Chain Map",
+  "term": "Model Weights (as a component)",
+  "def": "Pre-trained or pre-fine-tuned parameters downloaded from a public model hub rather than trained in-house; an opaque artefact whose training process cannot be directly inspected."
+ },
+ {
+  "tag": "Supply Chain Map",
+  "term": "Direct vs Transitive Dependency",
+  "def": "A direct dependency is chosen explicitly by the deployer with known provenance; a transitive dependency is pulled in indirectly and often has unknown provenance."
+ },
+ {
+  "tag": "Supply Chain Map",
+  "term": "Module 1 / Module 2 Backlink",
+  "def": "Module 1, Objective 1.2 named the supply-chain layer as the sixth AI attack-surface layer; Module 2, Objective 2.1 taught the OSINT technique for discovering named third-party components."
+ },
+ {
+  "tag": "Malicious Models",
+  "term": "Backdoored Model",
+  "def": "A model that behaves normally on ordinary input but produces a specific, attacker-intended output when it receives a particular, attacker-known trigger input."
+ },
+ {
+  "tag": "Malicious Models",
+  "term": "Trigger-Conditioned Behaviour",
+  "def": "The defining property of a backdoor: malicious behaviour activates only on a specific input pattern known to the attacker, evading testing that never uses that exact trigger."
+ },
+ {
+  "tag": "Malicious Models",
+  "term": "\"Popular Download\" Fallacy",
+  "def": "The mistaken belief that a widely-downloaded model is inherently safe. Popularity reflects adoption, not independent verification, and is not itself a security control."
+ },
+ {
+  "tag": "Malicious Models",
+  "term": "Backdoor vs Ordinary Flaw",
+  "def": "A backdoor is deliberate and trigger-conditioned, behaving normally on nearly all input; an ordinary flaw is a general limitation reproducible across many similar inputs."
+ },
+ {
+  "tag": "Deserialization Risk",
+  "term": "Unsafe Deserialization (model-file risk)",
+  "def": "The risk that a model-serialisation format allows the loading process to execute arbitrary code, so simply loading an untrusted file — not running it — can compromise the host."
+ },
+ {
+  "tag": "Deserialization Risk",
+  "term": "Data-Only vs General-Purpose Format",
+  "def": "A data-only format can represent only weights and simple metadata and cannot execute code on load; a general-purpose serialisation format can reconstruct arbitrary objects and can."
+ },
+ {
+  "tag": "Deserialization Risk",
+  "term": "Safer Model-Loading Workflow",
+  "def": "Identify the format, verify source and integrity, load in an isolated least-privilege environment, convert to a safer format where possible, and restrict privilege at serve time."
+ },
+ {
+  "tag": "Data & Dependency Poisoning",
+  "term": "Upstream Dataset Poisoning",
+  "def": "Introducing manipulated content into a public dataset later used for training or fine-tuning, so the resulting model's learned behaviour is affected — the training-time subset of OWASP LLM04."
+ },
+ {
+  "tag": "Data & Dependency Poisoning",
+  "term": "Dataset Poisoning vs RAG-Corpus Poisoning",
+  "def": "Dataset poisoning changes the model's learned weights and can persist after the dataset is removed; RAG-corpus poisoning (Module 5) changes only what is retrieved and stops once the document is removed."
+ },
+ {
+  "tag": "Data & Dependency Poisoning",
+  "term": "Typosquatting (ML packages)",
+  "def": "Publishing a malicious package under a name deliberately similar to a popular ML package on a public registry, so a typo or misconfigured resolution installs it instead."
+ },
+ {
+  "tag": "Data & Dependency Poisoning",
+  "term": "Dependency Confusion",
+  "def": "An attack where a malicious lookalike package is installed in place of the intended legitimate one, executing code on install or import with no specific victim targeting required."
+ },
+ {
+  "tag": "Data & Dependency Poisoning",
+  "term": "OWASP LLM03 / LLM04 for Module 8",
+  "def": "LLM03 Supply Chain covers malicious models, model-file risk, and typosquatted dependencies; LLM04 Data & Model Poisoning covers upstream dataset poisoning as its training-time subset."
+ }
+];
+let order = cards.map((_,i)=>i); let pos = 0;
+const cardEl=document.getElementById('card'),termText=document.getElementById('termText'),defText=document.getElementById('defText'),tagFront=document.getElementById('tagFront'),tagBack=document.getElementById('tagBack'),counter=document.getElementById('counter'),dotsEl=document.getElementById('dots');
+function renderDots(){dotsEl.innerHTML='';order.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===pos?' active':'');d.onclick=()=>{pos=i;render();};dotsEl.append(d);});}
+function render(){const c=cards[order[pos]];cardEl.classList.remove('flipped');termText.textContent=c.term;defText.textContent=c.def;tagFront.textContent=c.tag;tagBack.textContent=c.tag;counter.textContent=(pos+1)+' / '+order.length;renderDots();}
+cardEl.addEventListener('click',()=>cardEl.classList.toggle('flipped'));
+document.getElementById('nextBtn').onclick=()=>{pos=(pos+1)%order.length;render();};
+document.getElementById('prevBtn').onclick=()=>{pos=(pos-1+order.length)%order.length;render();};
+document.getElementById('shuffleBtn').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}pos=0;render();};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')document.getElementById('nextBtn').click();if(e.key==='ArrowLeft')document.getElementById('prevBtn').click();if(e.key===' '){e.preventDefault();cardEl.classList.toggle('flipped');}});
+render();
+</script>
+</body>
+</html>

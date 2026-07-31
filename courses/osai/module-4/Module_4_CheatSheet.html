@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 4 Cheat Sheet — Attacking Multi-Agent Systems and A2A Protocols</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSAI: <span style="color:#ff6a00">Attacking Multi-Agent Systems and A2A Protocols</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">4.1 ARCHITECTURE FUNDAMENTALS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Multi-agent:</strong> a second agent's own reasoning step consumes the first's output</div>
+        <div><strong style="color:#ffd9bf">Topologies:</strong> orchestrator-led, peer swarm, hierarchical delegation chain</div>
+        <div><strong style="color:#ffd9bf">New trust boundary:</strong> exists at every agent-to-agent hand-off</div>
+        <div><strong style="color:#ffd9bf">Building blocks:</strong> orchestrator, specialists, shared state, message channel</div>
+        <div><strong style="color:#ffd9bf">Extends:</strong> Module 1's agent/tool layer; Module 3's single-agent findings</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">4.2 INTER-AGENT MESSAGE POISONING</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Definition:</strong> indirect injection applied at agent-to-agent scale</div>
+        <div><strong style="color:#ffd9bf">Entry points:</strong> relayed summaries, sub-agent output, shared-state writes</div>
+        <div><strong style="color:#ffd9bf">Cascade:</strong> compromise &rarr; survives to output &rarr; trusted hand-off &rarr; re-executes &rarr; propagates</div>
+        <div><strong style="color:#ffd9bf">Root cause:</strong> cooperative-by-default design, no re-validation at hand-offs</div>
+        <div><strong style="color:#ffd9bf">Maps to:</strong> OWASP LLM01, LLM06, ATLAS lateral-movement-style progression</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">4.3 A2A PROTOCOL CONCEPTS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Discovery:</strong> one agent locates another that might help</div>
+        <div><strong style="color:#ffd9bf">Capability advertisement:</strong> an agent's own declared claim of what it can do</div>
+        <div><strong style="color:#ffd9bf">Delegation:</strong> a task, with context, formally handed to another agent</div>
+        <div><strong style="color:#ffd9bf">Trust assumption:</strong> declared identity/capability accepted, rarely verified</div>
+        <div><strong style="color:#ffd9bf">Scope:</strong> general concepts only — no invented field names or versions</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">TRUST BOUNDARY → WHAT CROSSES IT → WHY IT MATTERS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Trust boundary</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">What crosses it</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Why it matters</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Agent-to-agent hand-off</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Data, instructions, and an implicit claim of prior verification</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">No independent re-check by default — Objective 4.2</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Discovery / advertisement</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">A self-reported claim of identity and capability</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Declared, not verified, by most designs — Objective 4.3</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Delegation to a privileged agent</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">A task description the receiving agent trusts at face value</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Confused deputy scaled across agents — Objective 4.4</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">Shared state / memory write</td><td style="padding:5px 8px;color:#dfe3ea">An entry treated as established fact by any later reader</td><td style="padding:5px 8px;color:#dfe3ea">A silent channel for both poisoning and drift</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">KEY DISTINCTIONS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Single-agent (Module 3)</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Multi-agent (Module 4)</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">One trust boundary: user &rarr; model</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">A boundary at every agent-to-agent hand-off</td></tr>
+          <tr><td style="padding:5px 8px;color:#dfe3ea">Blast radius = one agent's own tools</td><td style="padding:5px 8px;color:#dfe3ea">Blast radius = most privileged agent in the chain</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea;margin-top:10px">
+        <div><strong style="color:#ffd9bf">Confused deputy (Module 3, Obj 3.3):</strong> one privileged actor tricked directly</div>
+        <div><strong style="color:#ffd9bf">Confused deputy, scaled (Module 4):</strong> low-privilege Agent A persuades privileged Agent B</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">4.4 AGENT TRUST &amp; DELEGATION EXPLOITATION — ENUMERATION METHOD</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">1</strong> List every agent in the chain</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">2</strong> Record each agent's privilege</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">3</strong> Map each hand-off &amp; re-validation</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">4</strong> Locate the privilege ceiling</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">5</strong> Trace lowest-to-highest privilege path</span>
+        <span style="margin-left:auto;color:#8891a1">Principle: autonomy raises blast radius (Module 1) — multiplied by every agent and hand-off</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ Multi-agent is not "one agent with more tools" — it requires a second independent reasoning step</div>
+        <div>⚠️ Message poisoning is not a new primitive — it is Module 1's indirect injection at agent-to-agent scale</div>
+        <div>⚠️ Never invent A2A field names, message formats, or version claims — use general conceptual language</div>
+        <div>⚠️ Confused deputy across agents is a social-engineering pattern, not a technical exploit of Agent B's tools</div>
+        <div>⚠️ Blast radius is set by the most privileged agent in the chain, not the agent the attacker first touches</div>
+        <div>⚠️ OSAI weightings are not published — the exam is a 24-hour practical engagement</div>
+      </div>
+      <div>
+        A2A · LLM01 · LLM06 · ATLAS · RMF (Risk Management Framework) · MCP · RAG · TTP
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSAI (AI-300) — Module 4: Attacking Multi-Agent Systems and A2A Protocols | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">AI</span></div>
+  </div>
+</div>
+
+</body>
+</html>

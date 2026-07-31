@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 3 Flashcards — Attacking AI Agents</title>
+<style>
+  :root{--bg:#0c0d10;--card:#111217;--stroke:#2a2f3a;--accent:#ff6a00;--text:#f5f7fb;--dim:#b8c0cf}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background-color:var(--bg);background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:var(--text);min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:36px 24px 60px}
+  header{text-align:center;margin-bottom:28px}
+  h1{margin:0;font-size:30px;font-weight:900}
+  h1 .accent{color:var(--accent)}
+  .sub{color:var(--dim);font-size:14px;margin-top:8px}
+  .toolbar{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+  .btn{border:1px solid var(--stroke);background:rgba(255,255,255,.02);color:var(--text);padding:9px 16px;border-radius:12px;cursor:pointer;font-size:14px}
+  .btn:hover{background:rgba(255,106,0,.10)}
+  .counter{color:var(--dim);font-size:14px}
+  .stage{display:flex;justify-content:center}
+  .scene{width:100%;max-width:640px;height:360px;perspective:1600px}
+  .card{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+  .card.flipped{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--stroke);border-radius:20px;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;background:var(--card)}
+  .face.front{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.15)), var(--card)}
+  .face.back{transform:rotateY(180deg);background:linear-gradient(180deg, rgba(255,106,0,.10), rgba(0,0,0,.15)), var(--card);border-color:#b85100}
+  .tag{position:absolute;top:18px;left:18px;font-size:12px;font-weight:700;letter-spacing:.5px;color:#ffd9bf;background:rgba(255,106,0,.15);border:1px solid rgba(255,106,0,.35);padding:4px 10px;border-radius:999px}
+  .term{font-size:23px;font-weight:900}
+  .def{font-size:17px;line-height:1.5;color:var(--dim)}
+  .hint{position:absolute;bottom:16px;font-size:12px;color:#8891a1}
+  .dots{display:flex;justify-content:center;gap:6px;margin-top:24px;flex-wrap:wrap;max-width:640px;margin-left:auto;margin-right:auto}
+  .dot{width:9px;height:9px;border-radius:999px;background:var(--stroke);cursor:pointer}
+  .dot.active{background:var(--accent)}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:40px;font-size:12.5px;color:#8891a1;max-width:640px;margin-left:auto;margin-right:auto}
+  .wordmark{font-weight:900;letter-spacing:2px}
+  .wordmark .c{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>OSAI <span class="accent">Flashcards</span></h1><div class="sub">Module 3 &middot; Attacking AI Agents</div></header>
+  <div class="toolbar">
+    <button class="btn" id="prevBtn">⟨ Prev</button>
+    <span class="counter" id="counter">1 / 16</span>
+    <button class="btn" id="nextBtn">Next ⟩</button>
+    <button class="btn" id="shuffleBtn">Shuffle</button>
+  </div>
+  <div class="stage"><div class="scene"><div class="card" id="card">
+    <div class="face front"><div class="tag" id="tagFront">Automation</div><div class="term" id="termText">Term</div><div class="hint">Tap card to reveal definition</div></div>
+    <div class="face back"><div class="tag" id="tagBack">Automation</div><div class="def" id="defText">Definition</div><div class="hint">Tap card to flip back</div></div>
+  </div></div></div>
+  <div class="dots" id="dots"></div>
+  <div class="foot"><div>My Cyber Academy</div><div class="wordmark"><span class="c">OS</span>AI</div></div>
+</div>
+<script>
+const cards = [
+ {
+  "tag": "Direct Injection",
+  "term": "Guardrail-Bypass Technique",
+  "def": "Deliberately crafted input designed to make a model or application depart from its intended instructions or content policy — moving from observing a seam to exploiting it."
+ },
+ {
+  "tag": "Direct Injection",
+  "term": "Role-Play / Persona-Shift Framing",
+  "def": "Casting the interaction as a fictional scenario or an alternate persona whose rules are framed as superseding the model's actual constraints."
+ },
+ {
+  "tag": "Direct Injection",
+  "term": "Multi-Turn Escalation",
+  "def": "Shifting context gradually across several turns so no single message looks like an override, while the cumulative conversation state does."
+ },
+ {
+  "tag": "Direct Injection",
+  "term": "Payload Splitting",
+  "def": "Dividing a single intended instruction across multiple separate inputs, fields, or turns so no individual piece is recognisable as a policy-violating request."
+ },
+ {
+  "tag": "Extraction",
+  "term": "System-Prompt Extraction",
+  "def": "Deliberate elicitation of a model's hidden instructions and configuration through crafted requests — distinct from the incidental leakage Module 2 merely observes."
+ },
+ {
+  "tag": "Extraction",
+  "term": "'Repeat Everything Above' Framing",
+  "def": "An elicitation technique that asks the model to repeat, summarise, or output everything preceding the user's message, reframing extraction as a formatting task."
+ },
+ {
+  "tag": "Extraction",
+  "term": "Completion / Continuation Trick",
+  "def": "Feeding the model a partial fragment of a plausible system prompt and asking it to continue or complete the text, eliciting disclosure indirectly."
+ },
+ {
+  "tag": "Extraction",
+  "term": "System Prompt Leakage (LLM07)",
+  "def": "OWASP's Top 10 for LLM Applications risk covering confidential instructions and configuration disclosed to an untrusted party."
+ },
+ {
+  "tag": "Tool Abuse",
+  "term": "Confused-Deputy Pattern",
+  "def": "An agent holds privileges the attacker does not, and a prompt injection tricks the agent into misusing those privileges on the attacker's behalf."
+ },
+ {
+  "tag": "Tool Abuse",
+  "term": "Parameter Injection (Tool)",
+  "def": "Injected content changes the arguments passed to a legitimate tool call — redirecting a lookup, a recipient, or a query target — without the call itself looking unusual."
+ },
+ {
+  "tag": "Tool Abuse",
+  "term": "Excessive Agency (LLM06)",
+  "def": "OWASP's Top 10 for LLM Applications risk describing over-permissioned tools and autonomy that let a single injection reach further than a user's own access ever could."
+ },
+ {
+  "tag": "Tool Abuse",
+  "term": "Tool-Output-as-Injection-Vector",
+  "def": "When an agent feeds a tool's returned result back into its own context without treating it as untrusted, attacker-influenceable content in that result can act as a fresh injection."
+ },
+ {
+  "tag": "Output Handling",
+  "term": "Insecure Output Handling (LLM05)",
+  "def": "An application trusts the model's output and passes it, unsanitised, to a downstream sink — recreating classic injection-style impact through an AI channel."
+ },
+ {
+  "tag": "Output Handling",
+  "term": "Sink",
+  "def": "A point where model output is consumed with effect — rendered HTML/markdown, executed code, an outbound API call, or a database query — the target of insecure output handling."
+ },
+ {
+  "tag": "Output Handling",
+  "term": "AI-Channel Injection",
+  "def": "Classic injection impact (XSS/SSRF/command-injection-style outcomes) recreated because attacker-controlled input reaches a sink via the model rather than directly."
+ },
+ {
+  "tag": "Output Handling",
+  "term": "Impact Chaining",
+  "def": "Connecting an injection point, extracted configuration, an abused tool privilege, and a reached sink into one demonstrated-impact finding, rather than reporting them as isolated tricks."
+ }
+];
+let order = cards.map((_,i)=>i); let pos = 0;
+const cardEl=document.getElementById('card'),termText=document.getElementById('termText'),defText=document.getElementById('defText'),tagFront=document.getElementById('tagFront'),tagBack=document.getElementById('tagBack'),counter=document.getElementById('counter'),dotsEl=document.getElementById('dots');
+function renderDots(){dotsEl.innerHTML='';order.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===pos?' active':'');d.onclick=()=>{pos=i;render();};dotsEl.append(d);});}
+function render(){const c=cards[order[pos]];cardEl.classList.remove('flipped');termText.textContent=c.term;defText.textContent=c.def;tagFront.textContent=c.tag;tagBack.textContent=c.tag;counter.textContent=(pos+1)+' / '+order.length;renderDots();}
+cardEl.addEventListener('click',()=>cardEl.classList.toggle('flipped'));
+document.getElementById('nextBtn').onclick=()=>{pos=(pos+1)%order.length;render();};
+document.getElementById('prevBtn').onclick=()=>{pos=(pos-1+order.length)%order.length;render();};
+document.getElementById('shuffleBtn').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}pos=0;render();};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')document.getElementById('nextBtn').click();if(e.key==='ArrowLeft')document.getElementById('prevBtn').click();if(e.key===' '){e.preventDefault();cardEl.classList.toggle('flipped');}});
+render();
+</script>
+</body>
+</html>

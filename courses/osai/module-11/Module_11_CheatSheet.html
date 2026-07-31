@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 11 Cheat Sheet — Capstone Red Team Engagement</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSAI: <span style="color:#ff6a00">Capstone Red Team Engagement</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">11.1 SCOPING THE ENGAGEMENT</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">First action:</strong> restate scope and objective before any testing</div>
+        <div><strong style="color:#ffd9bf">Scope statement:</strong> objective, in-scope, out-of-scope, evidence standard</div>
+        <div><strong style="color:#ffd9bf">Scope discipline:</strong> every action maps back to an in-scope component</div>
+        <div><strong style="color:#ffd9bf">Scope creep:</strong> chasing interesting findings outside agreed boundaries</div>
+        <div><strong style="color:#ffd9bf">Backlink:</strong> M1 Obj 1.4 scoping/RoE; feeds M10 Obj 10.1's objectives input</div>
+        <div><strong style="color:#ffd9bf">Graded on:</strong> scope discipline is itself part of a successful outcome</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">11.2 RECON &amp; THREAT MODELING</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Recon:</strong> map to six layers, enumerate without exploiting, record confidence</div>
+        <div><strong style="color:#ffd9bf">Threat modeling:</strong> chain paths, score impact/effort, sort, document kill chain</div>
+        <div><strong style="color:#ffd9bf">Where they meet:</strong> M2 inventory + M11.1 scope → M10's two required inputs</div>
+        <div><strong style="color:#ffd9bf">vs jumping to exploitation:</strong> disciplined opening outperforms "just start trying"</div>
+        <div><strong style="color:#ffd9bf">Failure mode:</strong> skipping recon/TM is the most common capstone/exam mistake</div>
+        <div><strong style="color:#ffd9bf">Backlink:</strong> M2 Obj 2.4 inventory; M10 Obj 10.2–10.4 chaining/priority/kill chain</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">11.3 EXPLOITATION &amp; POST-EXPLOITATION</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Execute:</strong> run the kill chain in priority order using M3–M9 techniques</div>
+        <div><strong style="color:#ffd9bf">Post-exploitation:</strong> extend a foothold until it reaches the scoped objective</div>
+        <div><strong style="color:#ffd9bf">Feedback loop:</strong> new discoveries re-feed the kill-chain ranking</div>
+        <div><strong style="color:#ffd9bf">Breadth vs impact:</strong> chained paths to the objective outrank isolated findings</div>
+        <div><strong style="color:#ffd9bf">Time discipline:</strong> reserve reporting time; re-check priority order, not just the clock</div>
+        <div><strong style="color:#ffd9bf">Abandon criteria:</strong> a stalled path yields to the next-ranked candidate</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">CAPSTONE KILL CHAIN → TECHNIQUE ORIGIN (WORKED EXAMPLE)</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Layer</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Capstone action</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Technique origin</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Data / RAG</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Exploit a retrieval-source weakness found during threat modeling</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Module 5 — RAG Pipelines</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Agent / tool</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Trigger unintended tool invocation from the compromised path</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Module 3 / Module 7</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">Infrastructure</td><td style="padding:5px 8px;color:#dfe3ea">Pivot using any excess privilege the process holds</td><td style="padding:5px 8px;color:#dfe3ea">Module 9 — Infrastructure</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">KEY DISTINCTIONS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Narrative report</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Checklist report</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Findings chained as a story toward the objective</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Findings listed independently, in discovery order</td></tr>
+          <tr><td style="padding:5px 8px;color:#dfe3ea">Reasoning and prioritisation made explicit</td><td style="padding:5px 8px;color:#dfe3ea">Reader must infer relationships between findings</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea;margin-top:10px">
+        <div><strong style="color:#ffd9bf">Backlink:</strong> M10 Obj 10.4 kill chain vs raw findings list, applied to the report</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">11.4 REPORTING — ANATOMY &amp; DISCIPLINE</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea;margin-bottom:10px">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">1</strong> Restated scope &amp; objective</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">2</strong> Kill chain, not a raw findings list</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">3</strong> Evidence per step</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">4</strong> OWASP + ATLAS citations per step</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#dfe3ea">
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">WRITE</strong> Incrementally, throughout the engagement</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">PROTECT</strong> Reserve time for reporting no matter what</span>
+        <span style="border:1px solid #2a2f3a;border-radius:999px;padding:4px 12px"><strong style="color:#ff6a00">AVOID</strong> Reconstructing the report from memory at the end</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ More findings does not mean a better score — chained impact toward the objective outranks a long unchained list</div>
+        <div>⚠️ Reporting is not a final-hour task — build it incrementally or it reliably runs out of time</div>
+        <div>⚠️ Scope is gradable — findings outside agreed boundaries do not count as a successful outcome</div>
+        <div>⚠️ Skipping threat modeling because a target "looks simple" is the most common capstone/exam failure mode</div>
+        <div>⚠️ A stalled path should yield to the next-ranked candidate, not consume the remaining window</div>
+        <div>⚠️ OSAI weightings are not published — the exam is a 24-hour practical engagement, graded end to end</div>
+      </div>
+      <div>
+        RoE · ATLAS · OWASP · RMF · TTP · six-layer model · six-phase lifecycle
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSAI (AI-300) — Module 11: Capstone Red Team Engagement | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">AI</span></div>
+  </div>
+</div>
+
+</body>
+</html>

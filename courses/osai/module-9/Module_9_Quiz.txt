@@ -1,0 +1,42 @@
+
+QUESTIONS:
+
+Q1. Why is cloud identity treated as a cross-cutting, fifth component of the infrastructure layer rather than alongside the server, framework, and compute components?
+    (A) Because identity is a piece of hardware just like a GPU
+    (B) Because identity is the permission boundary that determines how far a compromise of any other component can spread
+    (C) Because identity is only relevant to Objective 9.2, not the rest of the module
+    (D) Because identity cannot be compromised through infrastructure at all
+
+Q2. A serving deployment's primary inference API requires authentication, but a nearby metrics endpoint does not, because it was assumed to be reachable only from a trusted internal network. What does this scenario illustrate?
+    (A) A denial-of-wallet finding, since cost was affected
+    (B) A control assumed to exist at the network-position layer was never enforced at the interface itself
+    (C) A dataset-poisoning finding, since the metrics endpoint returns training data
+    (D) A cloud-identity privilege-escalation finding, since credentials were exposed
+
+Q3. During an engagement, a tester finds that a serving process runs under a cloud identity with far more permission than inference alone requires. Why does this matter even if the tester cannot demonstrate a specific escalation chain?
+    (A) It does not matter, since excess privilege alone is never a reportable finding
+    (B) Because a future compromise of the serving process would inherit that excess privilege, extending the impact well beyond the model itself
+    (C) Because OWASP LLM10 requires this exact finding to be reported
+    (D) Because excess privilege always indicates a backdoored model is present
+
+Q4. Why does denial of wallet not require an availability impact to be considered a complete, successful finding?
+    (A) Because denial of wallet is not a real risk unless the service goes offline
+    (B) Because it exploits a per-request cost asymmetry to inflate operating cost, which is itself the targeted property, independent of uptime
+    (C) Because cost and availability are always affected together in AI infrastructure
+    (D) Because OWASP LLM10 only applies when the service becomes unavailable
+
+Q5. Why is cloud identity and privilege-escalation risk from AI infrastructure (Objective 9.3) reported without forcing it into a dedicated OWASP LLM Top 10 category?
+    (A) Because it is not a real risk in AI red teaming engagements
+    (B) Because privilege escalation from a compromised host is a general infrastructure-security concern that applies identically to non-AI workloads
+    (C) Because OWASP LLM10 already fully covers this risk
+    (D) Because MITRE ATLAS forbids infrastructure findings from being reported
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Because identity is the permission boundary that determines how far a compromise of any other component can spread
+Q2: (B) A control assumed to exist at the network-position layer was never enforced at the interface itself
+Q3: (B) Because a future compromise of the serving process would inherit that excess privilege, extending the impact well beyond the model itself
+Q4: (B) Because it exploits a per-request cost asymmetry to inflate operating cost, which is itself the targeted property, independent of uptime
+Q5: (B) Because privilege escalation from a compromised host is a general infrastructure-security concern that applies identically to non-AI workloads
+==================================================

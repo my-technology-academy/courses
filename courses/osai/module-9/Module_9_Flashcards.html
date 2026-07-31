@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 9 Flashcards — AI Infrastructure and Deployment Exploits</title>
+<style>
+  :root{--bg:#0c0d10;--card:#111217;--stroke:#2a2f3a;--accent:#ff6a00;--text:#f5f7fb;--dim:#b8c0cf}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background-color:var(--bg);background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:var(--text);min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:36px 24px 60px}
+  header{text-align:center;margin-bottom:28px}
+  h1{margin:0;font-size:30px;font-weight:900}
+  h1 .accent{color:var(--accent)}
+  .sub{color:var(--dim);font-size:14px;margin-top:8px}
+  .toolbar{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+  .btn{border:1px solid var(--stroke);background:rgba(255,255,255,.02);color:var(--text);padding:9px 16px;border-radius:12px;cursor:pointer;font-size:14px}
+  .btn:hover{background:rgba(255,106,0,.10)}
+  .counter{color:var(--dim);font-size:14px}
+  .stage{display:flex;justify-content:center}
+  .scene{width:100%;max-width:640px;height:360px;perspective:1600px}
+  .card{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+  .card.flipped{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--stroke);border-radius:20px;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;background:var(--card)}
+  .face.front{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.15)), var(--card)}
+  .face.back{transform:rotateY(180deg);background:linear-gradient(180deg, rgba(255,106,0,.10), rgba(0,0,0,.15)), var(--card);border-color:#b85100}
+  .tag{position:absolute;top:18px;left:18px;font-size:12px;font-weight:700;letter-spacing:.5px;color:#ffd9bf;background:rgba(255,106,0,.15);border:1px solid rgba(255,106,0,.35);padding:4px 10px;border-radius:999px}
+  .term{font-size:23px;font-weight:900}
+  .def{font-size:17px;line-height:1.5;color:var(--dim)}
+  .hint{position:absolute;bottom:16px;font-size:12px;color:#8891a1}
+  .dots{display:flex;justify-content:center;gap:6px;margin-top:24px;flex-wrap:wrap;max-width:640px;margin-left:auto;margin-right:auto}
+  .dot{width:9px;height:9px;border-radius:999px;background:var(--stroke);cursor:pointer}
+  .dot.active{background:var(--accent)}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:40px;font-size:12.5px;color:#8891a1;max-width:640px;margin-left:auto;margin-right:auto}
+  .wordmark{font-weight:900;letter-spacing:2px}
+  .wordmark .c{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>OSAI <span class="accent">Flashcards</span></h1><div class="sub">Module 9 &middot; AI Infrastructure and Deployment Exploits</div></header>
+  <div class="toolbar">
+    <button class="btn" id="prevBtn">⟨ Prev</button>
+    <span class="counter" id="counter">1 / 16</span>
+    <button class="btn" id="nextBtn">Next ⟩</button>
+    <button class="btn" id="shuffleBtn">Shuffle</button>
+  </div>
+  <div class="stage"><div class="scene"><div class="card" id="card">
+    <div class="face front"><div class="tag" id="tagFront">Automation</div><div class="term" id="termText">Term</div><div class="hint">Tap card to reveal definition</div></div>
+    <div class="face back"><div class="tag" id="tagBack">Automation</div><div class="def" id="defText">Definition</div><div class="hint">Tap card to flip back</div></div>
+  </div></div></div>
+  <div class="dots" id="dots"></div>
+  <div class="foot"><div>My Cyber Academy</div><div class="wordmark"><span class="c">OS</span>AI</div></div>
+</div>
+<script>
+const cards = [
+ {
+  "tag": "Infrastructure Layer",
+  "term": "AI Infrastructure and Deployment Layer",
+  "def": "Everything that hosts and serves an AI system in production: inference server, serving framework, GPUs and orchestration, APIs, and cloud identity."
+ },
+ {
+  "tag": "Infrastructure Layer",
+  "term": "Cloud Identity (as a component)",
+  "def": "The account, role, or credential the serving infrastructure runs as — a cross-cutting component that bounds how far a compromise of any other component can spread."
+ },
+ {
+  "tag": "Infrastructure Layer",
+  "term": "Module 1 / Module 8 Backlink",
+  "def": "Module 1, Objective 1.2 named infrastructure as the AI attack surface's fifth layer; Module 8, Objective 8.3 covered the model-file risk this layer's server loads."
+ },
+ {
+  "tag": "Infrastructure Layer",
+  "term": "AI Infrastructure vs Conventional Infrastructure",
+  "def": "Same underlying mechanisms as conventional infrastructure security, but with new instances: model-file loading risk, GPU-bound cost asymmetry, and often broader default privilege."
+ },
+ {
+  "tag": "Serving Surface",
+  "term": "Weak Management-Interface Authentication",
+  "def": "Management, metrics, or health-check interfaces deployed with weaker authentication than the primary inference API, often because network position was wrongly assumed sufficient."
+ },
+ {
+  "tag": "Serving Surface",
+  "term": "Debug/Diagnostic Endpoint Exposure (serving layer)",
+  "def": "Verbose error handlers or state-dumping routes left reachable in production, disclosing configuration or internal state — the same exposure pattern as Module 6's embedding endpoints."
+ },
+ {
+  "tag": "Serving Surface",
+  "term": "Cross-Request Data Leakage",
+  "def": "A serving-framework optimisation such as batching or KV-cache reuse leaking fragments of one user's prompt or response into another user's session."
+ },
+ {
+  "tag": "Cloud Identity & Privilege",
+  "term": "Convenience Provisioning",
+  "def": "Granting a serving identity broad cloud permissions during initial setup and rarely revisiting the scope once the deployment is stable — the default outcome absent deliberate least-privilege effort."
+ },
+ {
+  "tag": "Cloud Identity & Privilege",
+  "term": "Instance Metadata Service Exposure",
+  "def": "An internal-only cloud service instances query for their own temporary credentials; a serving process that can be induced to make attacker-influenced outbound requests can indirectly reach it."
+ },
+ {
+  "tag": "Cloud Identity & Privilege",
+  "term": "Serving-Foothold-to-Cloud-Compromise Chain",
+  "def": "Foothold on serving infrastructure → identify its cloud identity → enumerate that identity's permissions → pivot using excess privilege beyond what inference required."
+ },
+ {
+  "tag": "Resource Abuse",
+  "term": "Unbounded Consumption",
+  "def": "Placing no meaningful limit on the compute, time, or cost a request can consume, allowing an attacker to degrade availability or inflate cost — OWASP LLM10."
+ },
+ {
+  "tag": "Resource Abuse",
+  "term": "Denial of Wallet",
+  "def": "Inflating a target's operating cost by exploiting per-request cost asymmetry, using individually ordinary-looking requests — distinct from denial of service, since availability need not be affected."
+ },
+ {
+  "tag": "Resource Abuse",
+  "term": "Cost Asymmetry Sources",
+  "def": "Large or unbounded context windows, long or unbounded output generation, expensive chained tool/retrieval calls, and retry/fallback amplification."
+ },
+ {
+  "tag": "Resource Abuse",
+  "term": "Multi-Tenant Resource Isolation Failure",
+  "def": "One tenant's heavy usage degrading performance or availability for other tenants sharing compute — the compute-layer counterpart to Module 6's cross-tenant data-isolation risk."
+ }
+];
+let order = cards.map((_,i)=>i); let pos = 0;
+const cardEl=document.getElementById('card'),termText=document.getElementById('termText'),defText=document.getElementById('defText'),tagFront=document.getElementById('tagFront'),tagBack=document.getElementById('tagBack'),counter=document.getElementById('counter'),dotsEl=document.getElementById('dots');
+function renderDots(){dotsEl.innerHTML='';order.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===pos?' active':'');d.onclick=()=>{pos=i;render();};dotsEl.append(d);});}
+function render(){const c=cards[order[pos]];cardEl.classList.remove('flipped');termText.textContent=c.term;defText.textContent=c.def;tagFront.textContent=c.tag;tagBack.textContent=c.tag;counter.textContent=(pos+1)+' / '+order.length;renderDots();}
+cardEl.addEventListener('click',()=>cardEl.classList.toggle('flipped'));
+document.getElementById('nextBtn').onclick=()=>{pos=(pos+1)%order.length;render();};
+document.getElementById('prevBtn').onclick=()=>{pos=(pos-1+order.length)%order.length;render();};
+document.getElementById('shuffleBtn').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}pos=0;render();};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')document.getElementById('nextBtn').click();if(e.key==='ArrowLeft')document.getElementById('prevBtn').click();if(e.key===' '){e.preventDefault();cardEl.classList.toggle('flipped');}});
+render();
+</script>
+</body>
+</html>

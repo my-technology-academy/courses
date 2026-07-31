@@ -1,0 +1,42 @@
+
+QUESTIONS:
+
+Q1. Why is "the model has a very high download count on a public hub" not, by itself, a security control?
+    (A) Because download counts are always fabricated by publishers
+    (B) Because popularity reflects adoption, not independent verification of the model's behaviour
+    (C) Because popular models are never affected by dependency confusion
+    (D) Because download counts only apply to datasets, not models
+
+Q2. A deployed model behaves normally on nearly all input, but produces a specific, consistent, attacker-favourable output whenever one particular, unusual input pattern occurs — a pattern ordinary functional testing never included. What does this describe?
+    (A) Dataset poisoning affecting the model's training data
+    (B) A malicious or backdoored model with trigger-conditioned behaviour
+    (C) Dependency confusion via a typosquatted ML package
+    (D) Unsafe deserialization triggered during model loading
+
+Q3. Why can simply loading an untrusted model file compromise the host, even before the model produces a single inference?
+    (A) Because all model files are executable programs by design
+    (B) Because some serialisation formats can reconstruct arbitrary objects during deserialization, triggering code execution at load time
+    (C) Because model files always contain embedded network credentials
+    (D) Because loading a model requires disabling the host's firewall
+
+Q4. How does dataset poisoning (upstream, at training or fine-tuning time) differ from Module 5's RAG-corpus poisoning?
+    (A) They are identical, since both introduce manipulated content into the pipeline
+    (B) Dataset poisoning affects only retrieval, while RAG-corpus poisoning affects the model's learned weights
+    (C) Dataset poisoning changes the model's learned weights and can persist after the poisoned dataset is removed, while RAG poisoning affects only what is retrieved and disappears when the poisoned document is removed
+    (D) Dataset poisoning requires no training run, while RAG-corpus poisoning requires retraining the model
+
+Q5. A developer accidentally installs a malicious package after mistyping the name of a popular ML library, and the malicious package executes code during its own installation. What best describes this scenario, and what is required for it to succeed?
+    (A) A backdoored model; it requires the attacker to have trained the victim's model
+    (B) Dependency confusion via typosquatting; it requires no specific targeting of the victim, only an accidental or automated resolution to the lookalike name
+    (C) Unsafe deserialization; it requires the victim to load a general-purpose serialisation format
+    (D) Dataset poisoning; it requires the package to be used as a training data source
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Because popularity reflects adoption, not independent verification of the model's behaviour
+Q2: (B) A malicious or backdoored model with trigger-conditioned behaviour
+Q3: (B) Because some serialisation formats can reconstruct arbitrary objects during deserialization, triggering code execution at load time
+Q4: (C) Dataset poisoning changes the model's learned weights and can persist after the poisoned dataset is removed, while RAG poisoning affects only what is retrieved and disappears when the poisoned document is removed
+Q5: (B) Dependency confusion via typosquatting; it requires no specific targeting of the victim, only an accidental or automated resolution to the lookalike name
+==================================================

@@ -1,0 +1,42 @@
+
+QUESTIONS:
+
+Q1. What is the key test for whether a system is genuinely "multi-agent" rather than one agent using several tools?
+    (A) Whether the system uses more than one model provider
+    (B) Whether a second, independently invoked agent consumes the first agent's output as its own input
+    (C) Whether the system has a public-facing web interface
+    (D) Whether the system is deployed on more than one physical server
+
+Q2. A specialist agent summarises a retrieved document and forwards that summary to a planning agent, which then acts on an instruction embedded within it. What has occurred?
+    (A) A supply-chain compromise of the planning agent's training data
+    (B) Inter-agent message poisoning — indirect prompt injection carried across an agent-to-agent hand-off
+    (C) A guardrail-configuration error unrelated to any injected content
+    (D) An infrastructure-layer denial-of-service condition
+
+Q3. Conceptually, what does "capability advertisement" mean in agent-to-agent (A2A) coordination?
+    (A) An agent's own declared description of what it claims to be able to do
+    (B) A cryptographic certificate issued by a central authority for every agent
+    (C) A fixed, unchangeable list of tools hard-coded into the model's weights
+    (D) A billing statement showing how much an agent's API usage has cost
+
+Q4. In the multi-agent confused-deputy pattern, what is the core mechanism?
+    (A) A privileged agent voluntarily lowers its own access before acting
+    (B) A low-privilege agent persuades a higher-privilege agent to misuse its own authority on the first agent's behalf
+    (C) Two agents of equal privilege simply exchange data with no effect on either one's access
+    (D) An agent's underlying model weights are swapped for a different, malicious model
+
+Q5. Why does blast radius in a multi-agent system extend beyond the single agent an attacker directly reaches?
+    (A) Because blast radius is bounded by the most privileged agent anywhere in the delegation chain, not the entry point
+    (B) Because every agent in a multi-agent system always shares identical privilege
+    (C) Because blast radius only applies to infrastructure-layer findings, never to agents
+    (D) Because multi-agent systems cannot use tools at all, only single agents can
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Whether a second, independently invoked agent consumes the first agent's output as its own input
+Q2: (B) Inter-agent message poisoning — indirect prompt injection carried across an agent-to-agent hand-off
+Q3: (A) An agent's own declared description of what it claims to be able to do
+Q4: (B) A low-privilege agent persuades a higher-privilege agent to misuse its own authority on the first agent's behalf
+Q5: (A) Because blast radius is bounded by the most privileged agent anywhere in the delegation chain, not the entry point
+==================================================
