@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 14 Cheat Sheet — Password Attacks</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSCP: <span style="color:#ff6a00">Password Attacks</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">14.1 NETWORK SERVICE LOGINS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">SSH / RDP:</strong> direct credential submission — respect lockout &amp; rate limits</div>
+        <div><strong style="color:#ffd9bf">HTTP POST forms:</strong> each has unique field names/structure — enumerate first (Module 7)</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">14.2 CRACKING FUNDAMENTALS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Offline:</strong> no lockout/rate-limit — needs captured material first</div>
+        <div><strong style="color:#ffd9bf">Dictionary → Rule-based → Brute force:</strong> speed vs. coverage trade-off</div>
+        <div><strong style="color:#ffd9bf">Named targets:</strong> mutated wordlists, password manager key files, SSH key passphrases</div>
+      </div>
+      <div style="margin-top:8px;font-family:ui-monospace,monospace;font-size:11px;background:rgba(0,0,0,.35);border:1px solid #2a2f3a;border-radius:8px;padding:8px 10px;color:#ffd9bf">password → Password1! → P@ssw0rd</div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">14.3 PASSWORD HASHES</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Hash</th><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Obtained</th><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Options</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">NTLM</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">At rest, from a host</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Crack, or Pass directly</td></tr>
+          <tr><td style="padding:4px 6px;color:#ffd9bf">Net-NTLMv2</td><td style="padding:4px 6px;color:#dfe3ea">Over the network, live auth</td><td style="padding:4px 6px;color:#dfe3ea">Crack, or Relay live</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ NTLM (at rest) ≠ Net-NTLMv2 (over the network) — different capture methods, different techniques</div>
+        <div>⚠️ NTLM can be PASSED directly; Net-NTLMv2 is RELAYED — not interchangeable terms</div>
+        <div>⚠️ An uncracked hash is not a dead end — passing/relaying works without the plaintext</div>
+        <div>⚠️ Always respect account lockout policy during live login attacks — scope violations start here</div>
+        <div>⚠️ Time-box cracking attempts before defaulting to pass/relay — don't over-invest</div>
+      </div>
+      <div>
+        SSH &middot; RDP &middot; NTLM (NT LAN Manager) &middot; Net-NTLMv2 &middot; PtH (Pass the Hash) &middot; OSCP &middot; PEN-200 / PWK
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSCP / PEN-200 — Module 14: Password Attacks (weighting: information not defined in the official exam outline) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">CP</span></div>
+  </div>
+</div>
+
+</body>
+</html>
