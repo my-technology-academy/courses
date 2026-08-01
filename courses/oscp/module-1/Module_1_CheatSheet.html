@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 1 Cheat Sheet — Penetration Testing with Kali Linux: General Course Introduction</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSCP: <span style="color:#ff6a00">Penetration Testing with Kali Linux — General Course Introduction</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.1 WELCOME TO PWK</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Course inventory:</strong> take stock of everything PEN-200 includes before starting</div>
+        <div><strong style="color:#ffd9bf">Attacking Kali VM:</strong> the learner's own Kali machine — the platform all work is performed from</div>
+        <div><strong style="color:#ffd9bf">PWK VPN:</strong> the connection established and interacted over to reach course environments</div>
+        <div><strong style="color:#ffd9bf">Module Exercises:</strong> per-module practice items; know how they are completed</div>
+        <div><strong style="color:#ffd9bf">Course name:</strong> PEN-200 = PWK (Penetration Testing with Kali). Syllabus version: PWK v3.0</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.2 HOW TO APPROACH THE COURSE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Learning model:</strong> conceptualised around <em>increasing uncertainty</em> — each stage gives less certainty than the last</div>
+        <div><strong style="color:#ffd9bf">Learning components:</strong> understand the different components PEN-200 delivers learning through</div>
+        <div><strong style="color:#ffd9bf">Why it matters:</strong> the model mirrors a real engagement, where no answer key exists</div>
+        <div><strong style="color:#ffd9bf">Deepened later:</strong> Module 3, Effective Learning Strategies, expands the theory behind this</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.3 SUMMARY OF PWK LEARNING MODULES</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Purpose:</strong> obtain a high-level overview of what each Learning Module covers</div>
+        <div><strong style="color:#ffd9bf">Total:</strong> 24 Learning Modules in the official syllabus order</div>
+        <div><strong style="color:#ffd9bf">Shape:</strong> orientation &rarr; methodology &rarr; enumeration &rarr; exploitation &rarr; escalation &rarr; pivoting &rarr; Active Directory &rarr; consolidation</div>
+        <div><strong style="color:#ffd9bf">Use it as:</strong> the map you return to whenever you lose your bearings mid-course</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">THE 24 LEARNING MODULES — OFFICIAL ORDER</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100;width:34px">#</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Learning Module</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">1</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">General Course Introduction</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">2</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Introduction to Cybersecurity</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">3</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Effective Learning Strategies</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">4</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Report Writing for Penetration Testers</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">5</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Information Gathering</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">6</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Vulnerability Scanning</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">7</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Introduction to Web Applications</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">8</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Common Web Application Attacks</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">9</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">SQL Injection Attacks</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">10</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Client-Side Attacks</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">11</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Locating Public Exploits</td></tr>
+            <tr><td style="padding:4px 8px;color:#ffd9bf">12</td><td style="padding:4px 8px;color:#dfe3ea">Fixing Exploits</td></tr>
+          </tbody>
+        </table>
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100;width:34px">#</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Learning Module</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">13</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Antivirus Evasion</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">14</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Password Attacks</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">15</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Windows Privilege Escalation</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">16</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Linux Privilege Escalation</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">17</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Port Redirection and SSH Tunneling</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">18</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Advanced Tunneling</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">19</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">The Metasploit Framework</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">20</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Active Directory Introduction and Enumeration</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">21</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Attacking Active Directory Authentication</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">22</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Lateral Movement in Active Directory</td></tr>
+            <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">23</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Assembling the Pieces</td></tr>
+            <tr><td style="padding:4px 8px;color:#ffd9bf">24</td><td style="padding:4px 8px;color:#dfe3ea">Trying Harder: The Labs</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">SYLLABUS HIERARCHY</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Tier</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">What it defines</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Learning Module</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">A subject area — 24 in total, in fixed order</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Learning Unit</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">A theme within a module (Module 1 has three)</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">Learning Objective</td><td style="padding:5px 8px;color:#dfe3ea">A single stated capability — the scope boundary</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:10px;font-size:12px;line-height:1.4;color:#dfe3ea">
+        <strong style="color:#ffd9bf">Module 1 units:</strong> Welcome to PWK &middot; How to Approach the Course &middot; Summary of PWK Learning Modules
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ PEN-200 and PWK are the same course, not two courses — PWK is the historic short name</div>
+        <div>⚠️ PEN-200 is the course; OSCP is the certification earned from it. Do not use the names interchangeably</div>
+        <div>⚠️ The learning model is <em>increasing uncertainty</em>, not increasing difficulty — the variable is how much you are told, not how hard the target is</div>
+        <div>⚠️ Module 1 is orientation only; no offensive technique is taught until Module 5, Information Gathering</div>
+        <div>⚠️ Module order is fixed by the official syllabus — enumeration precedes exploitation, which precedes escalation</div>
+      </div>
+      <div>
+        PEN-200 &middot; PWK (Penetration Testing with Kali) &middot; OSCP (OffSec Certified Professional) &middot; VPN &middot; VM &middot; OSINT &middot; NSE (Nmap Scripting Engine) &middot; LFI / RFI &middot; SQLi &middot; AV &middot; AD (Active Directory) &middot; SPN &middot; NTLM
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSCP / PEN-200 — Module 1: Penetration Testing with Kali Linux: General Course Introduction (weighting: information not defined in the official exam outline) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">CP</span></div>
+  </div>
+</div>
+
+</body>
+</html>
