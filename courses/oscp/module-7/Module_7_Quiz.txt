@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A malicious script is saved server-side and served to every visitor of a page, with no crafted link required. Which XSS type is this?
+    (A) Reflected XSS
+    (B) Stored XSS
+    (C) DOM-based XSS
+    (D) SQL injection
+
+Q2. Which testing methodology involves the tester having no prior knowledge or credentials for the target application?
+    (A) White box
+    (B) Grey box
+    (C) Black box
+    (D) Blue box
+
+Q3. Why is client-side JavaScript validation not considered a genuine security control?
+    (A) Because a proxy can bypass it entirely by sending requests the browser interface would never construct
+    (B) Because JavaScript cannot run in modern browsers
+    (C) Because it is always disabled by default
+    (D) Because it only applies to mobile devices
+
+Q4. What is the primary purpose of a web proxy such as Burp Suite in web application testing?
+    (A) To automatically patch vulnerabilities it finds
+    (B) To intercept and allow modification of traffic between the browser and the application
+    (C) To replace the need for a web browser entirely
+    (D) To generate the final client report
+
+Q5. Why does privilege escalation via XSS matter as a Learning Objective?
+    (A) Because a script executing in a victim's session can act with that victim's privileges, including an administrator's
+    (B) Because XSS always grants direct database access
+    (C) Because it disables all server-side logging
+    (D) Because it is unrelated to the impact of the vulnerability
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Stored XSS
+Q2: (C) Black box
+Q3: (A) Because a proxy can bypass it entirely by sending requests the browser interface would never construct
+Q4: (B) To intercept and allow modification of traffic between the browser and the application
+Q5: (A) Because a script executing in a victim's session can act with that victim's privileges, including an administrator's
+==================================================
