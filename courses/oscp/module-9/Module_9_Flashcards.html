@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 9 Flashcards — SQL Injection Attacks</title>
+<style>
+  :root{--bg:#0c0d10;--card:#111217;--stroke:#2a2f3a;--accent:#ff6a00;--text:#f5f7fb;--dim:#b8c0cf}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background-color:var(--bg);background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:var(--text);min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:36px 24px 60px}
+  header{text-align:center;margin-bottom:28px}
+  h1{margin:0;font-size:30px;font-weight:900}
+  h1 .accent{color:var(--accent)}
+  .sub{color:var(--dim);font-size:14px;margin-top:8px}
+  .toolbar{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+  .btn{border:1px solid var(--stroke);background:rgba(255,255,255,.02);color:var(--text);padding:9px 16px;border-radius:12px;cursor:pointer;font-size:14px}
+  .btn:hover{background:rgba(255,106,0,.10)}
+  .counter{color:var(--dim);font-size:14px}
+  .stage{display:flex;justify-content:center}
+  .scene{width:100%;max-width:640px;height:360px;perspective:1600px}
+  .card{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+  .card.flipped{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--stroke);border-radius:20px;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;background:var(--card)}
+  .face.front{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.15)), var(--card)}
+  .face.back{transform:rotateY(180deg);background:linear-gradient(180deg, rgba(255,106,0,.10), rgba(0,0,0,.15)), var(--card);border-color:#b85100}
+  .tag{position:absolute;top:18px;left:18px;font-size:12px;font-weight:700;letter-spacing:.5px;color:#ffd9bf;background:rgba(255,106,0,.15);border:1px solid rgba(255,106,0,.35);padding:4px 10px;border-radius:999px}
+  .term{font-size:23px;font-weight:900}
+  .def{font-size:17px;line-height:1.5;color:var(--dim)}
+  .hint{position:absolute;bottom:16px;font-size:12px;color:#8891a1}
+  .dots{display:flex;justify-content:center;gap:6px;margin-top:24px;flex-wrap:wrap;max-width:640px;margin-left:auto;margin-right:auto}
+  .dot{width:9px;height:9px;border-radius:999px;background:var(--stroke);cursor:pointer}
+  .dot.active{background:var(--accent)}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:40px;font-size:12.5px;color:#8891a1;max-width:640px;margin-left:auto;margin-right:auto}
+  .wordmark{font-weight:900;letter-spacing:2px}
+  .wordmark .c{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>OSCP <span class="accent">Flashcards</span></h1><div class="sub">Module 9 &middot; SQL Injection Attacks</div></header>
+  <div class="toolbar">
+    <button class="btn" id="prevBtn">⟨ Prev</button>
+    <span class="counter" id="counter">1 / 16</span>
+    <button class="btn" id="nextBtn">Next ⟩</button>
+    <button class="btn" id="shuffleBtn">Shuffle</button>
+  </div>
+  <div class="stage"><div class="scene"><div class="card" id="card">
+    <div class="face front"><div class="tag" id="tagFront">SQL Theory</div><div class="term" id="termText">Term</div><div class="hint">Tap card to reveal definition</div></div>
+    <div class="face back"><div class="tag" id="tagBack">SQL Theory</div><div class="def" id="defText">Definition</div><div class="hint">Tap card to flip back</div></div>
+  </div></div></div>
+  <div class="dots" id="dots"></div>
+  <div class="foot"><div>My Cyber Academy</div><div class="wordmark"><span class="c">OS</span>CP</div></div>
+</div>
+<script>
+const cards = [
+  {tag:"SQL Theory", term:"SQL Injection", def:"A vulnerability where user input is assembled into a SQL statement without proper validation, letting an attacker alter the query's logic or structure."},
+  {tag:"SQL Theory", term:"Engine-Specific Syntax", def:"Comment syntax, string concatenation, and available procedures differ between MySQL, MSSQL and other engines. Fingerprint the engine before committing to payload syntax."},
+  {tag:"SQL Theory", term:"Injection Points", def:"Any parameter reaching a query is a candidate — not just search or login fields. Headers, cookies, and sorting/pagination parameters are frequently overlooked."},
+  {tag:"Manual Exploitation", term:"Identifying SQLi", def:"A single unexpected character, typically a quote, sent into a parameter and observed carefully. An error, blank page, or unexpected change are all signals worth pursuing."},
+  {tag:"Manual Exploitation", term:"UNION SQLi", def:"Appends an attacker-chosen SELECT to the application's own query using UNION, printing extra data directly into the response. Requires matching column count and compatible types."},
+  {tag:"Manual Exploitation", term:"Error-Based SQLi", def:"Deliberately provokes a database error that embeds query results inside its own error message, using the error channel as unintended data disclosure."},
+  {tag:"Manual Exploitation", term:"Blind SQLi (Boolean)", def:"No errors or direct output exist, but true/false conditions produce subtly different responses — different length, wording, or a missing element."},
+  {tag:"Manual Exploitation", term:"Blind SQLi (Time)", def:"A conditional sleep function only fires when the injected condition is true, making response time itself the signal. Slower to extract but works when responses are otherwise identical."},
+  {tag:"Code Execution", term:"xp_cmdshell", def:"An MSSQL extended stored procedure that runs operating system commands with the database service's privileges — converts confirmed injection into command execution, where enabled."},
+  {tag:"Code Execution", term:"SQLmap", def:"Automates detection and exploitation of UNION, error-based and blind SQL injection across many database engines. Earns its place only after manual confirmation of the vulnerability."},
+  {tag:"Code Execution", term:"Manual-First Discipline", def:"Confirm and understand a vulnerability manually before automating against it — automation can misreport or miss entirely against unusual input handling if run blind."},
+  {tag:"Databases", term:"MySQL", def:"Common on Linux-hosted web applications. Uses CONCAT() for string concatenation and -- or # for comments."},
+  {tag:"Databases", term:"MSSQL", def:"Common on Windows-hosted applications. Uses + for concatenation and -- for comments; the only engine named for xp_cmdshell."},
+  {tag:"Technique Choice", term:"Choosing a Technique", def:"UNION when output prints directly; Error-based when database errors surface; Blind (boolean or time) when neither channel exists."},
+  {tag:"Reporting", term:"Verifying Automated Findings", def:"Reproduce a SQLmap result manually before it reaches a report — confirms the finding is genuine and produces the evidence a report requires."},
+  {tag:"Reporting", term:"SQLi Impact", def:"Reaches the data store directly rather than just the application layer, and can both read (UNION/Error/Blind) and write or execute (xp_cmdshell)."}
+];
+let order = cards.map((_,i)=>i); let pos = 0;
+const cardEl=document.getElementById('card'),termText=document.getElementById('termText'),defText=document.getElementById('defText'),tagFront=document.getElementById('tagFront'),tagBack=document.getElementById('tagBack'),counter=document.getElementById('counter'),dotsEl=document.getElementById('dots');
+function renderDots(){dotsEl.innerHTML='';order.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===pos?' active':'');d.onclick=()=>{pos=i;render();};dotsEl.append(d);});}
+function render(){const c=cards[order[pos]];cardEl.classList.remove('flipped');termText.textContent=c.term;defText.textContent=c.def;tagFront.textContent=c.tag;tagBack.textContent=c.tag;counter.textContent=(pos+1)+' / '+order.length;renderDots();}
+cardEl.addEventListener('click',()=>cardEl.classList.toggle('flipped'));
+document.getElementById('nextBtn').onclick=()=>{pos=(pos+1)%order.length;render();};
+document.getElementById('prevBtn').onclick=()=>{pos=(pos-1+order.length)%order.length;render();};
+document.getElementById('shuffleBtn').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}pos=0;render();};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')document.getElementById('nextBtn').click();if(e.key==='ArrowLeft')document.getElementById('prevBtn').click();if(e.key===' '){e.preventDefault();cardEl.classList.toggle('flipped');}});
+render();
+</script>
+</body>
+</html>
