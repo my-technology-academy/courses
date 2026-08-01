@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A learner reads a technique, recognises it later in a write-up, but cannot reproduce it unaided. Which technique addresses this gap most directly?
+    (A) Retrieval Practice
+    (B) Re-reading the original module a second time
+    (C) Increasing the number of hours studied per day
+    (D) Switching to a visual-only learning style
+
+Q2. Which pair of failures is correctly matched to its remedy?
+    (A) Cognitive load is remedied by spaced practice; forgetting is remedied by breaking material into smaller parts
+    (B) Forgetting is remedied by spaced retrieval; cognitive load is remedied by breaking material down and building fluency in parts
+    (C) Both forgetting and cognitive load are remedied by re-reading the source material
+    (D) Neither forgetting nor cognitive load can be remedied once they occur
+
+Q3. What does the syllabus mean by a "Demonstrative Methodology"?
+    (A) Material that supplies a correct procedure for the learner to follow exactly
+    (B) Material that shows the reasoning behind an approach and requires the learner to extend it
+    (C) A method of demonstrating tools to an audience during a live presentation
+    (D) A grading method based on demonstrated exam scores
+
+Q4. In the chmod -x chmod case study, what is the primary skill being exercised?
+    (A) Memorising the exact sequence of commands that restores the permission
+    (B) Expanding beyond the initial information set to find an approach the material never stated
+    (C) Reading the official manual page for chmod in full
+    (D) Reinstalling the operating system to reset default permissions
+
+Q5. Which combination correctly matches a named technique to its mechanism?
+    (A) The Leitner System schedules review using boxes, promoting cards on correct recall and demoting them on failure
+    (B) The Feynman Technique requires flashcards organised into daily, weekly and monthly boxes
+    (C) SQ3R is a six-step method that adds a Reflect step to PQ4R
+    (D) Spaced Practice means concentrating all study of a topic into a single long session
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (A) Retrieval Practice
+Q2: (B) Forgetting is remedied by spaced retrieval; cognitive load is remedied by breaking material down and building fluency in parts
+Q3: (B) Material that shows the reasoning behind an approach and requires the learner to extend it
+Q4: (B) Expanding beyond the initial information set to find an approach the material never stated
+Q5: (A) The Leitner System schedules review using boxes, promoting cards on correct recall and demoting them on failure
+==================================================
