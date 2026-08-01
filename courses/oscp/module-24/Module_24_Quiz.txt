@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. What does the ordering of target IP addresses in a Challenge Lab scenario indicate?
+    (A) The intended order to attack the machines
+    (B) Nothing — IP address ordering carries no inherent meaning
+    (C) Which machine is a decoy
+    (D) Which machine sits behind a NAT boundary
+
+Q2. What is the purpose of a "decoy" machine in a Challenge Lab scenario?
+    (A) It is present to consume time and attention without contributing to the intended objective
+    (B) It always holds the domain controller credentials
+    (C) It is guaranteed to be the easiest machine in the scenario
+    (D) It must be compromised before any other machine can be attempted
+
+Q3. Why should credentials found on one machine in a Challenge Lab scenario be tracked and retried against other machines?
+    (A) Credentials are frequently reused or shared across machines within the same scenario
+    (B) A credential can only ever be used once across an entire scenario
+    (C) Password attacks are prohibited after the first successful login
+    (D) Credentials expire immediately after being recovered
+
+Q4. What might explain a target host that appears completely unreachable within a scenario?
+    (A) It may require the correct pivot through a router or NAT boundary rather than being genuinely out of scope
+    (B) Unreachable hosts are always decoys and should be ignored entirely
+    (C) It indicates the scenario has a configuration error requiring a restart
+    (D) Unreachable hosts can never become reachable under any circumstances
+
+Q5. What is the concept of "dependency" as covered in Objective 24.2?
+    (A) Access to one machine or piece of information may be required before another becomes reachable
+    (B) Every machine in a scenario must be attacked in strict numerical order
+    (C) Only the final machine in a scenario depends on anything earlier
+    (D) Dependency refers exclusively to software package installation requirements
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Nothing — IP address ordering carries no inherent meaning
+Q2: (A) It is present to consume time and attention without contributing to the intended objective
+Q3: (A) Credentials are frequently reused or shared across machines within the same scenario
+Q4: (A) It may require the correct pivot through a router or NAT boundary rather than being genuinely out of scope
+Q5: (A) Access to one machine or piece of information may be required before another becomes reachable
+==================================================
