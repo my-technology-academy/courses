@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 1 Flashcards — Penetration Testing with Kali Linux: General Course Introduction</title>
+<style>
+  :root{--bg:#0c0d10;--card:#111217;--stroke:#2a2f3a;--accent:#ff6a00;--text:#f5f7fb;--dim:#b8c0cf}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background-color:var(--bg);background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:var(--text);min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:36px 24px 60px}
+  header{text-align:center;margin-bottom:28px}
+  h1{margin:0;font-size:30px;font-weight:900}
+  h1 .accent{color:var(--accent)}
+  .sub{color:var(--dim);font-size:14px;margin-top:8px}
+  .toolbar{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+  .btn{border:1px solid var(--stroke);background:rgba(255,255,255,.02);color:var(--text);padding:9px 16px;border-radius:12px;cursor:pointer;font-size:14px}
+  .btn:hover{background:rgba(255,106,0,.10)}
+  .counter{color:var(--dim);font-size:14px}
+  .stage{display:flex;justify-content:center}
+  .scene{width:100%;max-width:640px;height:360px;perspective:1600px}
+  .card{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+  .card.flipped{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--stroke);border-radius:20px;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;background:var(--card)}
+  .face.front{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.15)), var(--card)}
+  .face.back{transform:rotateY(180deg);background:linear-gradient(180deg, rgba(255,106,0,.10), rgba(0,0,0,.15)), var(--card);border-color:#b85100}
+  .tag{position:absolute;top:18px;left:18px;font-size:12px;font-weight:700;letter-spacing:.5px;color:#ffd9bf;background:rgba(255,106,0,.15);border:1px solid rgba(255,106,0,.35);padding:4px 10px;border-radius:999px}
+  .term{font-size:23px;font-weight:900}
+  .def{font-size:17px;line-height:1.5;color:var(--dim)}
+  .hint{position:absolute;bottom:16px;font-size:12px;color:#8891a1}
+  .dots{display:flex;justify-content:center;gap:6px;margin-top:24px;flex-wrap:wrap;max-width:640px;margin-left:auto;margin-right:auto}
+  .dot{width:9px;height:9px;border-radius:999px;background:var(--stroke);cursor:pointer}
+  .dot.active{background:var(--accent)}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:40px;font-size:12.5px;color:#8891a1;max-width:640px;margin-left:auto;margin-right:auto}
+  .wordmark{font-weight:900;letter-spacing:2px}
+  .wordmark .c{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>OSCP <span class="accent">Flashcards</span></h1><div class="sub">Module 1 &middot; Penetration Testing with Kali Linux: General Course Introduction</div></header>
+  <div class="toolbar">
+    <button class="btn" id="prevBtn">⟨ Prev</button>
+    <span class="counter" id="counter">1 / 16</span>
+    <button class="btn" id="nextBtn">Next ⟩</button>
+    <button class="btn" id="shuffleBtn">Shuffle</button>
+  </div>
+  <div class="stage"><div class="scene"><div class="card" id="card">
+    <div class="face front"><div class="tag" id="tagFront">Course Setup</div><div class="term" id="termText">Term</div><div class="hint">Tap card to reveal definition</div></div>
+    <div class="face back"><div class="tag" id="tagBack">Course Setup</div><div class="def" id="defText">Definition</div><div class="hint">Tap card to flip back</div></div>
+  </div></div></div>
+  <div class="dots" id="dots"></div>
+  <div class="foot"><div>My Cyber Academy</div><div class="wordmark"><span class="c">OS</span>CP</div></div>
+</div>
+<script>
+const cards = [
+  {tag:"Course Setup", term:"PEN-200", def:"OffSec's Penetration Testing with Kali Linux course. Its official syllabus defines 24 Learning Modules and is the specification behind the OSCP certification."},
+  {tag:"Course Setup", term:"PWK", def:"Penetration Testing with Kali — the long-standing short name for PEN-200, used throughout the official syllabus (PWK v3.0)."},
+  {tag:"Course Setup", term:"Attacking Kali VM", def:"The learner's own Kali Linux virtual machine, set up in the Welcome to PWK unit as the platform from which course activity is performed."},
+  {tag:"Course Setup", term:"PWK VPN", def:"The connection the learner establishes and interacts over to reach course environments. Connecting to it is a stated Welcome to PWK objective."},
+  {tag:"Course Setup", term:"Module Exercises", def:"The per-module practice items the syllabus expects a learner to complete; understanding how to complete them is a stated Welcome to PWK objective."},
+  {tag:"Learning Model", term:"Increasing Uncertainty", def:"The learning model PEN-200 is conceptualised around: each stage deliberately gives the learner less certainty than the last, mirroring a real engagement."},
+  {tag:"Learning Model", term:"Learning Components", def:"The distinct elements PEN-200 delivers learning through. Understanding the different components is an objective of How to Approach the Course."},
+  {tag:"Learning Model", term:"Learning Unit", def:"The middle tier of the syllabus hierarchy: each Learning Module divides into Learning Units, and each unit into Learning Objectives."},
+  {tag:"Learning Model", term:"Learning Objective", def:"The smallest stated item in the official syllabus and the only legitimate basis for course content — anything beyond it is out of scope."},
+  {tag:"Module Map", term:"Report Writing for Penetration Testers", def:"Module 4. Note-taking, note portability, screenshots, and writing technical reports including the executive summary, technical summary and findings."},
+  {tag:"Module Map", term:"Information Gathering", def:"Module 5. The penetration testing lifecycle, then passive information gathering (OSINT, DNS, web server) and active gathering (Netcat, Nmap, DNS/SMB/SMTP/SNMP enumeration)."},
+  {tag:"Module Map", term:"Vulnerability Scanning", def:"Module 6. Scanning theory, scan types and considerations, Nessus including authenticated scans and plugins, and lightweight scanning with the Nmap Scripting Engine."},
+  {tag:"Module Map", term:"Web Application Modules", def:"Modules 7-9: Introduction to Web Applications (methodology, tooling, enumeration, XSS), Common Web Application Attacks (traversal, file inclusion, upload, command injection), then SQL Injection Attacks."},
+  {tag:"Module Map", term:"Privilege Escalation Modules", def:"Modules 15 and 16. Windows covers enumeration, service binary and DLL hijacking, unquoted paths; Linux covers exposed credentials, insecure permissions, SUID, sudo and kernel vulnerabilities."},
+  {tag:"Module Map", term:"Tunnelling Modules", def:"Modules 17 and 18. Port Redirection and SSH Tunneling covers Socat, the four SSH forwarding modes and Windows tooling; Advanced Tunneling covers HTTP tunnelling with Chisel and DNS tunnelling with dnscat."},
+  {tag:"Module Map", term:"Active Directory Chain", def:"Modules 20-22: Active Directory Introduction and Enumeration, Attacking Active Directory Authentication, then Lateral Movement in Active Directory — enumerate, authenticate, then move and persist."}
+];
+let order = cards.map((_,i)=>i); let pos = 0;
+const cardEl=document.getElementById('card'),termText=document.getElementById('termText'),defText=document.getElementById('defText'),tagFront=document.getElementById('tagFront'),tagBack=document.getElementById('tagBack'),counter=document.getElementById('counter'),dotsEl=document.getElementById('dots');
+function renderDots(){dotsEl.innerHTML='';order.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===pos?' active':'');d.onclick=()=>{pos=i;render();};dotsEl.append(d);});}
+function render(){const c=cards[order[pos]];cardEl.classList.remove('flipped');termText.textContent=c.term;defText.textContent=c.def;tagFront.textContent=c.tag;tagBack.textContent=c.tag;counter.textContent=(pos+1)+' / '+order.length;renderDots();}
+cardEl.addEventListener('click',()=>cardEl.classList.toggle('flipped'));
+document.getElementById('nextBtn').onclick=()=>{pos=(pos+1)%order.length;render();};
+document.getElementById('prevBtn').onclick=()=>{pos=(pos-1+order.length)%order.length;render();};
+document.getElementById('shuffleBtn').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}pos=0;render();};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')document.getElementById('nextBtn').click();if(e.key==='ArrowLeft')document.getElementById('prevBtn').click();if(e.key===' '){e.preventDefault();cardEl.classList.toggle('flipped');}});
+render();
+</script>
+</body>
+</html>
