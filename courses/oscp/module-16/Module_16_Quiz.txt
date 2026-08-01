@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A cron job runs every few minutes as root and executes a script writable by the current low-privileged user. Which technique does this describe?
+    (A) Insecure File Permissions — abusing insecure cron jobs
+    (B) Enumerating Linux — automated enumeration
+    (C) Insecure System Components — SUID abuse
+    (D) Exposed Confidential Information — system trails
+
+Q2. What does a SUID bit do when set on a Linux binary?
+    (A) It prevents the binary from ever being executed
+    (B) It runs the binary with its owner's privilege rather than the invoking user's
+    (C) It encrypts the binary's contents automatically
+    (D) It schedules the binary to run at a fixed time each day
+
+Q3. Why are system trails treated as a distinct objective from user trails in Module 16?
+    (A) System trails span logs and configuration across the whole host and can expose other accounts' credentials, unlike a single user's own activity
+    (B) System trails only exist on Windows, not Linux
+    (C) User trails cannot contain any credential material
+    (D) System trails require root access to search under any circumstance
+
+Q4. What is the key risk with a sudo rule permitting a low-privileged user to run a specific command as root without a password?
+    (A) The permitted command can often be manipulated through arguments or built-in functionality into a full root shell
+    (B) Sudo rules can never be exploited if a password is required
+    (C) It only matters if the command is a text editor specifically
+    (D) It has no security implication as long as logging is enabled
+
+Q5. Why does the module teach manually verifying automated Linux enumeration output before acting on it?
+    (A) Automated tools can flag theoretical or misreported conditions that are not actually exploitable
+    (B) Automated tools are prohibited during an authorised engagement
+    (C) Automated enumeration cannot run on Linux targets
+    (D) Manual verification always takes longer than the escalation itself
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (A) Insecure File Permissions — abusing insecure cron jobs
+Q2: (B) It runs the binary with its owner's privilege rather than the invoking user's
+Q3: (A) System trails span logs and configuration across the whole host and can expose other accounts' credentials, unlike a single user's own activity
+Q4: (A) The permitted command can often be manipulated through arguments or built-in functionality into a full root shell
+Q5: (A) Automated tools can flag theoretical or misreported conditions that are not actually exploitable
+==================================================
