@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A tester needs to explore an internal network not yet fully mapped, reaching outward through a compromised host. Which SSH mode fits best?
+    (A) Local port forwarding
+    (B) Dynamic port forwarding
+    (C) Remote port forwarding
+    (D) Netsh port forwarding
+
+Q2. What is the key difference between SSH local port forwarding and SSH remote port forwarding?
+    (A) Local reaches outward from the tester's side; remote reaches back from the far end
+    (B) They are identical in every respect except the command syntax
+    (C) Local forwarding requires no SSH connection at all
+    (D) Remote forwarding can only be used on Windows hosts
+
+Q3. Why might a tester use Socat instead of an SSH-based tunnelling technique?
+    (A) Socat is faster than SSH under every circumstance
+    (B) Socat can forward traffic through a compromised host without requiring SSH access specifically
+    (C) Socat automatically encrypts traffic more strongly than SSH
+    (D) Socat only works on Windows targets
+
+Q4. What is a key limitation of using Netsh for port forwarding compared to an SSH tunnel?
+    (A) Netsh forwarding operates at the network configuration level and is not encrypted the way an SSH tunnel is
+    (B) Netsh cannot be used on any version of Windows
+    (C) Netsh requires the PuTTY suite to be installed first
+    (D) Netsh can only forward traffic to remote networks, never locally
+
+Q5. Which SSH forwarding mode combines a reversed connection direction with flexible, per-connection destination selection?
+    (A) Local port forwarding
+    (B) Dynamic port forwarding
+    (C) Remote port forwarding
+    (D) Remote dynamic port forwarding
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Dynamic port forwarding
+Q2: (A) Local reaches outward from the tester's side; remote reaches back from the far end
+Q3: (B) Socat can forward traffic through a compromised host without requiring SSH access specifically
+Q4: (A) Netsh forwarding operates at the network configuration level and is not encrypted the way an SSH tunnel is
+Q5: (D) Remote dynamic port forwarding
+==================================================
