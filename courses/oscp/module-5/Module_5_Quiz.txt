@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A tester reads certificate transparency logs to find subdomains, without sending any request to the target. Is this passive or active information gathering?
+    (A) Active, because certificates are technical data
+    (B) Passive, because the target never observes the action
+    (C) Neither — certificate logs are not part of information gathering
+    (D) Active, because it reveals infrastructure detail
+
+Q2. Which statement best describes the role of information gathering across the penetration testing lifecycle?
+    (A) It occurs once, at the very start of the engagement, and is not repeated
+    (B) It recurs throughout the lifecycle whenever the tester's picture of the target changes
+    (C) It only applies to external, internet-facing engagements
+    (D) It is optional if the client supplies a full network diagram
+
+Q3. Why might SMTP enumeration be useful ahead of a later password attack?
+    (A) It can validate whether a given username exists on the mail server
+    (B) It automatically retrieves plaintext passwords
+    (C) It disables account lockout policies
+    (D) It reveals the mail server's disk encryption key
+
+Q4. What is the defining principle of "living off the land" as an information gathering technique?
+    (A) Using tools and binaries already present on the target rather than introducing new ones
+    (B) Only gathering information during business hours
+    (C) Refusing to use any automated tooling whatsoever
+    (D) Gathering information exclusively from social media
+
+Q5. A port scan reports a port as "filtered" rather than "closed". What is the correct interpretation?
+    (A) The port definitely has no service running behind it
+    (B) The state is undetermined — a firewall may be hiding a real service, and a different technique may reveal it
+    (C) Filtered and closed mean exactly the same thing
+    (D) The target has crashed and must be rescanned later
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Passive, because the target never observes the action
+Q2: (B) It recurs throughout the lifecycle whenever the tester's picture of the target changes
+Q3: (A) It can validate whether a given username exists on the mail server
+Q4: (A) Using tools and binaries already present on the target rather than introducing new ones
+Q5: (B) The state is undetermined — a firewall may be hiding a real service, and a different technique may reveal it
+==================================================
