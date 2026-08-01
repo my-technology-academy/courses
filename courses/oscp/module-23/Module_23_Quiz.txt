@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. Which module's content does Objective 23.6's final client-side technique draw on directly?
+    (A) Module 8, Common Web Application Attacks
+    (B) Module 10, Client-Side Attacks
+    (C) Module 16, Linux Privilege Escalation
+    (D) Module 19, The Metasploit Framework
+
+Q2. What is the primary skill exercised by Module 23, given that it introduces no new technique?
+    (A) Sequencing and combining previously taught techniques under conditions of incomplete information
+    (B) Memorising additional Kerberos ticket types not covered elsewhere
+    (C) Writing Metasploit resource scripts from scratch
+    (D) Installing a new exploit framework not covered in Module 19
+
+Q3. Why does the scenario provide two independent routes into the internal network in Objective 23.3?
+    (A) Realistic engagements rarely depend on a single path, so validated credentials and phishing are both offered
+    (B) Phishing is required by the official syllabus in every module
+    (C) Validated credentials are never usable to reach an internal network
+    (D) Only one of the two routes is ever intended to work
+
+Q4. What combines to form the relay attack in Objective 23.5 against INTERNALSRV1?
+    (A) Web application methodology from Module 8 and Net-NTLMv2 relay content from Module 14
+    (B) SQL injection from Module 9 and DNS tunnelling from Module 18
+    (C) Buffer overflow theory from Module 12 and antivirus evasion from Module 13
+    (D) SSH tunnelling from Module 17 and golden tickets from Module 22
+
+Q5. Why does the module re-run situational awareness and enumeration at the internal network stage, having already done so publicly?
+    (A) Access to a new network segment always restarts the enumeration discipline rather than assuming prior access is sufficient
+    (B) Enumeration is only ever performed once per entire engagement
+    (C) Internal networks never require any enumeration at all
+    (D) The public network enumeration automatically covers the internal network too
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Module 10, Client-Side Attacks
+Q2: (A) Sequencing and combining previously taught techniques under conditions of incomplete information
+Q3: (A) Realistic engagements rarely depend on a single path, so validated credentials and phishing are both offered
+Q4: (A) Web application methodology from Module 8 and Net-NTLMv2 relay content from Module 14
+Q5: (A) Access to a new network segment always restarts the enumeration discipline rather than assuming prior access is sufficient
+==================================================
