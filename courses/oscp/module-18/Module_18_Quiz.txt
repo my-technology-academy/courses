@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. HTTP tunnelling with Chisel has been detected and blocked, but DNS resolution still functions normally. What is the next viable option from this module?
+    (A) SSH remote dynamic port forwarding
+    (B) DNS tunnelling with dnscat
+    (C) Netsh port forwarding
+    (D) Socat relaying
+
+Q2. Why is HTTP tunnelling generally attempted before DNS tunnelling when both are viable?
+    (A) HTTP tunnelling is faster and DNS tunnelling is reserved as the deeper fallback
+    (B) DNS tunnelling is illegal to use during an authorised engagement
+    (C) HTTP tunnelling requires no network connectivity at all
+    (D) DNS tunnelling cannot carry any tunnelled data under any circumstance
+
+Q3. What problem does Module 18 solve that Module 17 does not?
+    (A) Traffic that reaches its destination but is inspected and blocked, rather than simple unreachability
+    (B) Cracking SSH private key passphrases
+    (C) Identifying SQL injection vulnerabilities
+    (D) Enumerating Windows service permissions
+
+Q4. Why is DNS traffic an effective carrier for tunnelling in heavily filtered environments?
+    (A) DNS queries are necessary for almost any network activity to function, making DNS traffic very unlikely to be blocked outright
+    (B) DNS traffic is always encrypted by default
+    (C) DNS tunnelling requires no server-side component
+    (D) DNS is faster than every other tunnelling protocol
+
+Q5. What is a genuine limitation of wrapping tunnelled traffic in HTTP with a tool like Chisel?
+    (A) Sophisticated deep packet inspection can still notice HTTP traffic that does not resemble genuine browsing behaviour
+    (B) HTTP tunnelling cannot function on any modern network
+    (C) Chisel requires a valid SSH private key to operate
+    (D) HTTP tunnelling only works over UDP
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) DNS tunnelling with dnscat
+Q2: (A) HTTP tunnelling is faster and DNS tunnelling is reserved as the deeper fallback
+Q3: (A) Traffic that reaches its destination but is inspected and blocked, rather than simple unreachability
+Q4: (A) DNS queries are necessary for almost any network activity to function, making DNS traffic very unlikely to be blocked outright
+Q5: (A) Sophisticated deep packet inspection can still notice HTTP traffic that does not resemble genuine browsing behaviour
+==================================================
