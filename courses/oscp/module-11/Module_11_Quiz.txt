@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. What is the stated purpose of analysing exploit code before executing it?
+    (A) To make the exploit run faster against the target
+    (B) To understand what the code actually does before trusting it against a target
+    (C) To convert the exploit into an NSE script automatically
+    (D) To register the exploit in a public database
+
+Q2. Why does the module teach differentiating between online exploit resources rather than treating them as equally reliable?
+    (A) Different resources carry different review standards, currency, and risk of hosting altered or non-functional code
+    (B) Only one online resource is ever mentioned in the official syllabus
+    (C) Online resources are always less reliable than offline ones
+    (D) Differentiating resources is only relevant for web application exploits
+
+Q3. What is SearchSploit, as covered in Objective 11.3?
+    (A) A cloud-only exploit database requiring a paid subscription
+    (B) A locally searchable, offline archive of exploit code
+    (C) A Metasploit payload type
+    (D) A Google search operator syntax
+
+Q4. According to the module's workflow, what must happen before searching for a public exploit?
+    (A) The target must be enumerated precisely enough to know its service, product, and version
+    (B) The exploit framework must be fully updated to its latest release
+    (C) Antivirus must already be disabled on the target
+    (D) A limited shell must already be obtained
+
+Q5. Why does Objective 11.4 end at a "limited shell" rather than full privileged access?
+    (A) Because privilege escalation is a separate objective covered in later modules
+    (B) Because limited shells cannot be escalated under any circumstances
+    (C) Because the module does not consider access a valid outcome
+    (D) Because MSSQL databases do not support privileged shells
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) To understand what the code actually does before trusting it against a target
+Q2: (A) Different resources carry different review standards, currency, and risk of hosting altered or non-functional code
+Q3: (B) A locally searchable, offline archive of exploit code
+Q4: (A) The target must be enumerated precisely enough to know its service, product, and version
+Q5: (A) Because privilege escalation is a separate objective covered in later modules
+==================================================
