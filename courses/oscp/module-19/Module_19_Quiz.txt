@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A target has limited and unreliable outbound connectivity. Which payload type carries the greater risk of failing to fully establish?
+    (A) Non-staged payload
+    (B) Staged payload
+    (C) Auxiliary module
+    (D) Resource script
+
+Q2. What is the Meterpreter payload, as covered in Objective 19.2?
+    (A) An advanced payload running entirely in memory with a rich set of built-in post-exploitation capability
+    (B) A standalone offline exploit database
+    (C) A password cracking wordlist mutation engine
+    (D) A DNS tunnelling tool
+
+Q3. Why is Metasploit introduced only after eighteen modules of manual technique?
+    (A) Understanding the manual techniques it automates is what makes its output interpretable and verifiable
+    (B) Metasploit did not exist until this point in the course timeline
+    (C) Metasploit cannot run on Kali Linux
+    (D) Manual technique is required by the OSCP exam rules specifically
+
+Q4. What does pivoting with Metasploit accomplish, and how does it relate to Module 17?
+    (A) It routes traffic through an established session to reach further hosts, solving the same reachability problem as Module 17's tunnelling
+    (B) It is unrelated to Module 17 and solves a different problem entirely
+    (C) It replaces the need for any SSH tunnelling permanently
+    (D) It only works when deep packet inspection is present
+
+Q5. What is a resource script in Metasploit?
+    (A) A recorded, replayable sequence of console commands captured as a plain text file
+    (B) A type of staged payload used only on Windows targets
+    (C) An automated antivirus evasion engine
+    (D) A built-in Meterpreter command for file transfer
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Staged payload
+Q2: (A) An advanced payload running entirely in memory with a rich set of built-in post-exploitation capability
+Q3: (A) Understanding the manual techniques it automates is what makes its output interpretable and verifiable
+Q4: (A) It routes traffic through an established session to reach further hosts, solving the same reachability problem as Module 17's tunnelling
+Q5: (A) A recorded, replayable sequence of console commands captured as a plain text file
+==================================================
