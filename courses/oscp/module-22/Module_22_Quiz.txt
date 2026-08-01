@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. Which persistence technique survives a routine domain password reset because it is forged from domain-level key material?
+    (A) Shadow copy abuse
+    (B) PsExec
+    (C) Golden ticket
+    (D) Overpass the Hash
+
+Q2. What is the key difference between Pass the Hash and Overpass the Hash?
+    (A) Pass the Hash authenticates directly with an NTLM hash; Overpass the Hash uses that hash to obtain a genuine Kerberos ticket
+    (B) They are identical techniques with two different names
+    (C) Overpass the Hash requires no domain credential of any kind
+    (D) Pass the Hash only works over DNS tunnelling
+
+Q3. Why might DCOM be preferred over PsExec for lateral movement in a detection-sensitive engagement?
+    (A) DCOM is a less commonly monitored mechanism than the well-established PsExec
+    (B) DCOM requires no valid credentials of any kind
+    (C) PsExec cannot execute any commands on a remote host
+    (D) DCOM is a newer protocol that did not exist when PsExec was created
+
+Q4. Why must persistence mechanisms established during a penetration test be removed once the engagement concludes?
+    (A) Leaving them in place is a professional and typically contractual obligation to avoid, since they are themselves a security risk
+    (B) Persistence mechanisms remove themselves automatically after 24 hours
+    (C) Clients are legally required to keep them for auditing purposes
+    (D) Removal is optional and left to the tester's discretion
+
+Q5. Why can a shadow copy undermine an otherwise-thorough remediation effort?
+    (A) A snapshot taken before cleanup can still hold recoverable credential material or access
+    (B) Shadow copies automatically re-infect a cleaned system
+    (C) Shadow copies cannot be created on Windows systems
+    (D) Shadow copies only affect Linux hosts
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (C) Golden ticket
+Q2: (A) Pass the Hash authenticates directly with an NTLM hash; Overpass the Hash uses that hash to obtain a genuine Kerberos ticket
+Q3: (A) DCOM is a less commonly monitored mechanism than the well-established PsExec
+Q4: (A) Leaving them in place is a professional and typically contractual obligation to avoid, since they are themselves a security risk
+Q5: (A) A snapshot taken before cleanup can still hold recoverable credential material or access
+==================================================
