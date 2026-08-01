@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A payload is flagged the instant it is delivered to the target, before any code has executed. Which detection engine type most likely caught it?
+    (A) Behavioural detection
+    (B) Signature-based detection
+    (C) Heuristic detection
+    (D) Nmap NSE detection
+
+Q2. Why is uploading a client's payload to a public multi-engine scanning service considered poor practice?
+    (A) It can leak the payload to vendors and threat intelligence feeds, alerting defenders before delivery
+    (B) Public scanners always mark payloads as safe regardless of content
+    (C) It is technically impossible to do so
+    (D) It automatically fixes any detection issues
+
+Q3. What distinguishes heuristic detection from signature-based detection?
+    (A) Heuristic detection judges code structure and suspicious traits without requiring an exact match
+    (B) Heuristic detection only examines network traffic, never files
+    (C) Signature-based detection is always more accurate than heuristic detection
+    (D) Heuristic detection cannot be evaded under any circumstances
+
+Q4. Why does the module teach manual AV evasion before introducing automated evasion tools?
+    (A) Automated tools cannot be installed on Kali Linux
+    (B) Manual technique confirms which engine and blind spot is in play and produces an evasion the tester can explain and adapt
+    (C) Automated tools are illegal to use during an authorised engagement
+    (D) Manual evasion is required by the OSCP exam rules specifically
+
+Q5. After modifying a payload to evade antivirus detection, what should a tester verify before considering the work complete?
+    (A) That the payload still performs its original intended function
+    (B) That the payload's file size has increased
+    (C) That the payload has been renamed to a random string
+    (D) That the payload no longer requires any target interaction
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Signature-based detection
+Q2: (A) It can leak the payload to vendors and threat intelligence feeds, alerting defenders before delivery
+Q3: (A) Heuristic detection judges code structure and suspicious traits without requiring an exact match
+Q4: (B) Manual technique confirms which engine and blind spot is in play and produces an evasion the tester can explain and adapt
+Q5: (A) That the payload still performs its original intended function
+==================================================
