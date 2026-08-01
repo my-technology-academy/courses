@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A scan configured with valid domain credentials inspects a host's local patch level directly. What type of scan is this?
+    (A) An unauthenticated scan
+    (B) A lightweight NSE scan
+    (C) An authenticated scan
+    (D) A passive information gathering technique
+
+Q2. What does a vulnerability scanner actually compare when producing a result?
+    (A) Observed fingerprints against a maintained database of known weaknesses
+    (B) The tester's notes against the client's expectations
+    (C) One host's uptime against another's
+    (D) The report's word count against a minimum threshold
+
+Q3. Why must a raw vulnerability scanner result be manually verified before being reported as a finding?
+    (A) Because scanner output can never be exported
+    (B) Because scanner results include false positives and are candidates, not confirmed findings
+    (C) Because clients never accept automated results under any circumstance
+    (D) Because manual verification is required by law in every jurisdiction
+
+Q4. What is a Nessus plugin?
+    (A) A physical hardware dongle required to run Nessus
+    (B) An individual, inspectable check within the scan engine that produced a specific result
+    (C) A licence file needed only for authenticated scans
+    (D) A category of NSE script
+
+Q5. When is Nmap's NSE vuln scanning most appropriately used relative to a full Nessus scan?
+    (A) As a complete replacement for Nessus in every engagement
+    (B) For fast, lightweight checks or custom one-off conditions, alongside rather than instead of a dedicated scanner
+    (C) Only when no ports are open on the target
+    (D) Only during the reporting stage, after the engagement has ended
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (C) An authenticated scan
+Q2: (A) Observed fingerprints against a maintained database of known weaknesses
+Q3: (B) Because scanner results include false positives and are candidates, not confirmed findings
+Q4: (B) An individual, inspectable check within the scan engine that produced a specific result
+Q5: (B) For fast, lightweight checks or custom one-off conditions, alongside rather than instead of a dedicated scanner
+==================================================
