@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A service's executable path contains spaces and no surrounding quotation marks, with a writable earlier path segment. Which technique applies?
+    (A) Service DLL hijacking
+    (B) Service binary hijacking
+    (C) Abusing an unquoted service path
+    (D) Scheduled Task abuse
+
+Q2. What distinguishes service DLL hijacking from service binary hijacking?
+    (A) DLL hijacking supplies a malicious dependency the service loads, rather than replacing the service's executable directly
+    (B) They are identical techniques with different names
+    (C) DLL hijacking only works on Linux systems
+    (D) Binary hijacking requires no write access of any kind
+
+Q3. Why does Module 15 place automated enumeration tools as its final objective within Enumerating Windows rather than its first?
+    (A) Automated tools are illegal to use during an authorised engagement
+    (B) Understanding what a tool actually checks is what allows a tester to correctly interpret and verify its output
+    (C) Automated tools cannot run on Windows targets
+    (D) Manual enumeration is always faster than automated enumeration
+
+Q4. Why are PowerShell history and transcript logs specifically called out as a Module 15 objective?
+    (A) They routinely contain credentials or sensitive commands typed by administrators during past sessions
+    (B) PowerShell cannot be used for privilege escalation under any circumstances
+    (C) They are only relevant to Linux privilege escalation
+    (D) They automatically grant SYSTEM privileges when read
+
+Q5. According to Objective 15.3, which of the following can lead to privilege escalation without exploiting any software vulnerability?
+    (A) An account holding a specific privilege that permits executing code as a more privileged account
+    (B) A kernel exploit matching the target's exact patch level
+    (C) A buffer overflow in a third-party service
+    (D) An outdated antivirus signature database
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (C) Abusing an unquoted service path
+Q2: (A) DLL hijacking supplies a malicious dependency the service loads, rather than replacing the service's executable directly
+Q3: (B) Understanding what a tool actually checks is what allows a tester to correctly interpret and verify its output
+Q4: (A) They routinely contain credentials or sensitive commands typed by administrators during past sessions
+Q5: (A) An account holding a specific privilege that permits executing code as a more privileged account
+==================================================
