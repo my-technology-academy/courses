@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 4 Cheat Sheet — Report Writing for Penetration Testers</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSCP: <span style="color:#ff6a00">Report Writing for Penetration Testers</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 1">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">4.1 UNDERSTANDING NOTE-TAKING</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Deliverables:</strong> report = primary; notes/screenshots/output = supporting</div>
+        <div><strong style="color:#ffd9bf">Portability:</strong> must survive tool/machine/time changes — non-proprietary export</div>
+        <div><strong style="color:#ffd9bf">Structure:</strong> scope &rarr; actions &rarr; results &rarr; findings extracted</div>
+        <div><strong style="color:#ffd9bf">Tool choice:</strong> portable export, code/image support, search at scale — not looks</div>
+        <div><strong style="color:#ffd9bf">Screenshots:</strong> identifier + command + unambiguous result, every time</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">4.2 THE REPORT, FRONT TO BACK</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100;width:180px">Section</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100;width:160px">Reader</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Contains</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Executive summary</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Board / non-technical</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Scope, risk posture, top findings in triad terms, priority actions — no tool names or CVEs</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Environment considerations</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">All readers</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Testing window, exclusions, constraints — prevents "scoped" being read as "unconditional"</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Technical summary</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Security manager</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Methodology, tooling, finding counts by severity, chained attack path</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">Findings + appendices</td><td style="padding:5px 8px;color:#dfe3ea">Engineer / remediator</td><td style="padding:5px 8px;color:#dfe3ea">Description &middot; Evidence &middot; Impact &middot; Recommendation, per finding; raw logs in appendix</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">SAME FINDING, TWO READERS</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Executive:</strong> "An attacker who compromises one staff laptop could read the entire payroll archive. We recommend restricting this access immediately."</div>
+        <div><strong style="color:#ffd9bf">Technical:</strong> "The FIN-SHARE SMB share grants Domain Users read access to \\fs01\payroll. Restrict the share ACL to the Payroll security group."</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">WORKFLOW — WRITE IN THIS ORDER, NOT DOCUMENT ORDER</div>
+      <div style="display:flex;gap:10px;align-items:center;font-size:12px;color:#dfe3ea;flex-wrap:wrap">
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:10px 14px;background:rgba(255,255,255,.02)">1&middot; Record live: command + output + reasoning, as you go</div>
+        <div style="color:#ff6a00;font-weight:900">&rarr;</div>
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:10px 14px;background:rgba(255,255,255,.02)">2&middot; Fill the finding template the moment each is confirmed</div>
+        <div style="color:#ff6a00;font-weight:900">&rarr;</div>
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:10px 14px;background:rgba(255,255,255,.02)">3&middot; Draft the technical summary once all findings exist</div>
+        <div style="color:#ff6a00;font-weight:900">&rarr;</div>
+        <div style="border:1px solid #b85100;border-radius:10px;padding:10px 14px;background:rgba(255,106,0,.10)">4&middot; Write the executive summary LAST, Feynman-tested</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ Writing is not separate from the technical work — an unreported compromise has no commercial value</div>
+        <div>⚠️ Notes written from memory afterwards are reconstructions, not records — detail is already lost</div>
+        <div>⚠️ A screenshot alone is not evidence — it needs a visible identifier and the command that produced it</div>
+        <div>⚠️ More technical detail is not always better — it must match the section's actual reader</div>
+        <div>⚠️ Appendices declutter strong evidence; they never substitute for it</div>
+        <div>⚠️ Write the executive summary last — summarising requires knowing what was actually found</div>
+      </div>
+      <div>
+        PBQ &middot; POC (Proof of Concept) &middot; CVE &middot; ACL &middot; OSCP &middot; PEN-200 / PWK
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSCP / PEN-200 — Module 4: Report Writing for Penetration Testers (weighting: information not defined in the official exam outline) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">CP</span></div>
+  </div>
+</div>
+
+</body>
+</html>
