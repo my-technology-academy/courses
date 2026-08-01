@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. An NTLM hash extracted from a compromised host resists cracking against a strong wordlist. What is the most direct next step?
+    (A) Discard the hash and abandon the host
+    (B) Pass the hash directly as a credential
+    (C) Relay the hash to a different target
+    (D) Convert the hash into a Net-NTLMv2 hash
+
+Q2. What is the key difference between an NTLM hash and a Net-NTLMv2 hash?
+    (A) NTLM is extracted at rest from a host; Net-NTLMv2 is captured over the network during authentication
+    (B) They are the same hash type with two different names
+    (C) NTLM only applies to Linux systems
+    (D) Net-NTLMv2 cannot be cracked under any circumstances
+
+Q3. Why does password cracking remove lockout and rate-limiting concerns that apply to attacking a live login?
+    (A) Cracking works offline against already-captured material, not against a live service
+    (B) Cracking tools automatically disable lockout policies on the target
+    (C) Lockout policies only apply to RDP, never to cracking
+    (D) Cracking requires the target's explicit permission each time
+
+Q4. What is the purpose of mutating a wordlist before using it to crack passwords?
+    (A) To generate realistic variants reflecting common human password choices, without brute-forcing everything
+    (B) To encrypt the wordlist so it cannot be intercepted
+    (C) To convert the wordlist into an NTLM hash format
+    (D) To automatically bypass antivirus detection
+
+Q5. Why can a captured Net-NTLMv2 hash not simply be "passed" the same way an NTLM hash can?
+    (A) Net-NTLMv2 hashes are captured during a live authentication attempt and are relayed rather than passed directly
+    (B) Net-NTLMv2 hashes do not exist in real Windows environments
+    (C) Net-NTLMv2 hashes can only be used with SSH
+    (D) Net-NTLMv2 hashes are always weaker than NTLM hashes
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Pass the hash directly as a credential
+Q2: (A) NTLM is extracted at rest from a host; Net-NTLMv2 is captured over the network during authentication
+Q3: (A) Cracking works offline against already-captured material, not against a live service
+Q4: (A) To generate realistic variants reflecting common human password choices, without brute-forcing everything
+Q5: (A) Net-NTLMv2 hashes are captured during a live authentication attempt and are relayed rather than passed directly
+==================================================
