@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 6 Cheat Sheet — Vulnerability Scanning</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSCP: <span style="color:#ff6a00">Vulnerability Scanning</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">6.1 SCANNING THEORY</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Process:</strong> probe &rarr; fingerprint &rarr; compare vs known-weakness database</div>
+        <div><strong style="color:#ffd9bf">Unauthenticated:</strong> outside view, no creds — realistic external simulation</div>
+        <div><strong style="color:#ffd9bf">Authenticated:</strong> valid creds — inspects patch level/config from inside</div>
+        <div><strong style="color:#ffd9bf">Considerations:</strong> impact (fragile systems) &middot; timing &middot; noise &middot; accuracy (false pos/neg)</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">6.2 NESSUS — A SCAN, START TO FINISH</div>
+      <div style="display:flex;gap:8px;align-items:center;font-size:12px;color:#dfe3ea;flex-wrap:wrap">
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:8px 12px;background:rgba(255,255,255,.02)">Configure: policy, scope, creds, timing</div>
+        <div style="color:#ff6a00;font-weight:900">&rarr;</div>
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:8px 12px;background:rgba(255,255,255,.02)">Run scan</div>
+        <div style="color:#ff6a00;font-weight:900">&rarr;</div>
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:8px 12px;background:rgba(255,255,255,.02)">Triage by severity + plausibility</div>
+        <div style="color:#ff6a00;font-weight:900">&rarr;</div>
+        <div style="border:1px solid #b85100;border-radius:10px;padding:8px 12px;background:rgba(255,106,0,.10)">Verify manually before reporting</div>
+      </div>
+      <div style="margin-top:10px;font-size:12px;line-height:1.4;color:#dfe3ea"><strong style="color:#ffd9bf">Components:</strong> scan engine (probes) &middot; plugin feed (the checks, must stay current) &middot; policy templates &middot; reporting layer. Every result traces to ONE inspectable plugin — read it before trusting it.</div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">6.3 NMAP NSE vs NESSUS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100;width:160px"></th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Nessus</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Nmap NSE</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Coverage</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Broad, regularly updated plugin database</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Narrower, but immediate</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Best for</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Estate-wide thorough coverage</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Speed, minimal footprint, custom one-off checks</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">Command</td><td style="padding:5px 8px;color:#dfe3ea;font-family:ui-monospace,monospace">(GUI-driven)</td><td style="padding:5px 8px;color:#dfe3ea;font-family:ui-monospace,monospace">nmap --script vuln &lt;target&gt;</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:8px;font-size:12px;color:#dfe3ea">Most engagements use BOTH — they complement, neither replaces the other. NSE categories: discovery &middot; vuln &middot; auth/brute &middot; safe vs intrusive.</div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ A scanner result is a CANDIDATE, not a confirmed finding — always verify manually before reporting</div>
+        <div>⚠️ Authenticated is not "always better" — unauthenticated is correct when simulating an external attacker with no access</div>
+        <div>⚠️ NSE does not replace Nessus — it covers far less ground, but is faster and already open from the port scan</div>
+        <div>⚠️ Severity rating = potential impact IF real, not the scanner's confidence it applies here</div>
+        <div>⚠️ An outdated plugin feed silently degrades every scan — installation/updates are a real objective, not busywork</div>
+      </div>
+      <div>
+        NSE (Nmap Scripting Engine) &middot; CVE &middot; OSCP &middot; PEN-200 / PWK
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSCP / PEN-200 — Module 6: Vulnerability Scanning (weighting: information not defined in the official exam outline) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">CP</span></div>
+  </div>
+</div>
+
+</body>
+</html>
