@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. An application includes and executes a file supplied entirely from attacker-controlled infrastructure. Which vulnerability is this?
+    (A) Local File Inclusion (LFI)
+    (B) Remote File Inclusion (RFI)
+    (C) Directory traversal
+    (D) Command injection
+
+Q2. What is the key difference between directory traversal and file inclusion?
+    (A) Traversal displays a file's contents; inclusion executes them as code
+    (B) They are exactly the same vulnerability with different names
+    (C) Traversal only works on Windows; inclusion only works on Linux
+    (D) Inclusion requires no user input at all
+
+Q3. Why might a tester poison a log file before exploiting a Local File Inclusion vulnerability?
+    (A) To delete evidence of the assessment
+    (B) To plant attacker-controlled content that, once included, executes as code
+    (C) To slow down the target server
+    (D) Log files cannot be included under any circumstance
+
+Q4. Why is checking only a file's extension considered weak validation against file upload vulnerabilities?
+    (A) Because extensions are frequently spoofed or bypassed while the file's true content goes unchecked
+    (B) Because file extensions do not exist in modern operating systems
+    (C) Because it is illegal to check file extensions
+    (D) Because extensions always match the true file content exactly
+
+Q5. What does OS command injection allow an attacker to do?
+    (A) Only read the contents of a single file
+    (B) Execute attacker-controlled commands as part of a system shell command
+    (C) Only modify the visual appearance of a web page
+    (D) Automatically generate a technical report
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Remote File Inclusion (RFI)
+Q2: (A) Traversal displays a file's contents; inclusion executes them as code
+Q3: (B) To plant attacker-controlled content that, once included, executes as code
+Q4: (A) Because extensions are frequently spoofed or bypassed while the file's true content goes unchecked
+Q5: (B) Execute attacker-controlled commands as part of a system shell command
+==================================================
