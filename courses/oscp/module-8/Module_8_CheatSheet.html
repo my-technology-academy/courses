@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 8 Cheat Sheet — Common Web Application Attacks</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSCP: <span style="color:#ff6a00">Common Web Application Attacks</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">8.1 DIRECTORY TRAVERSAL</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Root cause:</strong> a path parameter trusted to stay inside an intended directory</div>
+        <div><strong style="color:#ffd9bf">Absolute path:</strong> fully specified from filesystem root</div>
+        <div><strong style="color:#ffd9bf">Relative path:</strong> specified relative to the current directory — <code>../</code> walks up one level</div>
+        <div><strong style="color:#ffd9bf">Bypassing filters:</strong> encode traversal characters so a naive filter misses them before decoding</div>
+      </div>
+      <div style="margin-top:8px;font-family:ui-monospace,monospace;font-size:11px;background:rgba(0,0,0,.35);border:1px solid #2a2f3a;border-radius:8px;padding:8px 10px;color:#ffd9bf">GET /view?file=../../../../etc/passwd</div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">8.2 FILE INCLUSION — LFI vs RFI</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Type</th><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Source of included content</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">LFI</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">A file already present on the target's own filesystem</td></tr>
+          <tr><td style="padding:4px 6px;color:#ffd9bf">RFI</td><td style="padding:4px 6px;color:#dfe3ea">Content served entirely from attacker-controlled infrastructure — most severe</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:8px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <strong style="color:#ffd9bf">Key distinction from traversal:</strong> inclusion causes the referenced content to be <em>executed or rendered</em>, not merely disclosed<br>
+        <strong style="color:#ffd9bf">PHP wrappers:</strong> extend what a file inclusion vulnerability can reach or how it is interpreted (e.g. reading source instead of executing it)<br>
+        <strong style="color:#ffd9bf">LFI &rarr; code execution:</strong> a named Module 8 objective — poisoning a log or session file the application then includes
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">8.3 FILE UPLOAD VULNERABILITIES</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Root cause:</strong> trusting that an uploaded file's type and content are what they claim</div>
+        <div><strong style="color:#ffd9bf">Identify:</strong> which extensions/content-types are accepted; client-side vs server-side vs both validation</div>
+        <div><strong style="color:#ffd9bf">Exploit:</strong> upload crafted content for code execution; try alternate vectors when the first attempt is rejected</div>
+        <div><strong style="color:#ffd9bf">Why high-impact:</strong> can place executable content directly on the server</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">8.4 COMMAND INJECTION</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Root cause:</strong> application input reaches an OS shell and executes as a command</div>
+        <div><strong style="color:#ffd9bf">Progression:</strong> identify parameter &rarr; confirm with an OS command &rarr; chain into an interactive channel &rarr; leverage for system access</div>
+      </div>
+      <div style="margin-top:8px;font-family:ui-monospace,monospace;font-size:11px;background:rgba(0,0,0,.35);border:1px solid #2a2f3a;border-radius:8px;padding:8px 10px;color:#ffd9bf">host=8.8.8.8; id<br>host=8.8.8.8 &amp;&amp; whoami</div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">ONE ROOT CAUSE, FOUR ATTACKS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100;width:220px">Attack</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">What it trusts that it should not</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Directory Traversal</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">A path parameter stays within the intended directory</td></tr>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">File Inclusion</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">A parameter names only a file the application intends to run</td></tr>
+          <tr><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">File Upload</td><td style="padding:4px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">An uploaded file's declared type matches its actual content</td></tr>
+          <tr><td style="padding:4px 8px;color:#ffd9bf">Command Injection</td><td style="padding:4px 8px;color:#dfe3ea">Input reaching a shell contains no unintended commands</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ Traversal discloses a file; inclusion executes or renders it — do not conflate the two</div>
+        <div>⚠️ RFI is more severe than LFI because the attacker supplies the executed content directly</div>
+        <div>⚠️ A single filtered traversal/inclusion attempt does not prove the input is sanitised — try alternate encodings and vectors</div>
+        <div>⚠️ Test every path-like parameter, not only ones obviously named "file" or "path"</div>
+        <div>⚠️ Client-side upload validation is not a control — always verify server-side enforcement</div>
+      </div>
+      <div>
+        LFI (Local File Inclusion) &middot; RFI (Remote File Inclusion) &middot; OS (Operating System) &middot; OSCP &middot; PEN-200 / PWK
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSCP / PEN-200 — Module 8: Common Web Application Attacks (weighting: information not defined in the official exam outline) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">CP</span></div>
+  </div>
+</div>
+
+</body>
+</html>
