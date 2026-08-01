@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 5 Cheat Sheet — Information Gathering</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSCP: <span style="color:#ff6a00">Information Gathering</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">5.1 THE PENTEST LIFECYCLE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div>Pre-engagement &rarr; Information gathering &rarr; Vuln analysis/exploitation &rarr; Post-exploitation/reporting</div>
+        <div><strong style="color:#ffd9bf">Info gathering recurs</strong> — every time the picture of the target changes</div>
+        <div><strong style="color:#ffd9bf">Passive vs active:</strong> does the target observe the action? That's the only test</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">5.2 PASSIVE INFORMATION GATHERING</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Two approaches:</strong> third-party info about target / target's own public footprint via a third party</div>
+        <div><strong style="color:#ffd9bf">OSINT:</strong> organisational, people, technical, historical</div>
+        <div><strong style="color:#ffd9bf">Certificate transparency:</strong> every cert ever issued — exposes hidden subdomains</div>
+        <div><strong style="color:#ffd9bf">Passive DNS history:</strong> past IP resolutions, even post-migration</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">PORT SCANNING</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div class="code" style="font-family:ui-monospace,monospace;background:rgba(0,0,0,.35);border:1px solid #2a2f3a;border-radius:8px;padding:6px 8px;color:#ffd9bf">nc -nvz -w1 &lt;target&gt; 1-1000</div>
+        <div class="code" style="font-family:ui-monospace,monospace;background:rgba(0,0,0,.35);border:1px solid #2a2f3a;border-radius:8px;padding:6px 8px;color:#ffd9bf">nmap -sC -sV -p- &lt;target&gt;</div>
+        <div><strong style="color:#ffd9bf">Filtered ≠ closed</strong> — filtered = undetermined, try another technique</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">5.3 ACTIVE ENUMERATION BY PROTOCOL</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100;width:120px">Protocol</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100;width:420px">Reveals</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Feeds into</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">DNS</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Hosts, mail servers, naming conventions (zone transfers, brute-force)</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Target expansion, Module 7 web discovery</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">SMB</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Shares, users, groups, OS fingerprint</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Module 14 password attacks, Module 20 AD enumeration</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">SMTP</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Valid usernames via command response differences</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Module 14 password attacks</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">SNMP</td><td style="padding:5px 8px;color:#dfe3ea">Processes, software, interfaces, routing (default community strings)</td><td style="padding:5px 8px;color:#dfe3ea">Network topology, further host discovery</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 3">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">LIVING OFF THE LAND &amp; WORKFLOW</div>
+      <div style="font-size:12px;line-height:1.4;color:#dfe3ea">Using tools/binaries already on the target instead of introducing new ones — trusted by the OS, rarely flagged, nothing to upload. Recurs in Module 13 (AV evasion) and Module 15 (Windows enumeration).</div>
+      <div style="margin-top:8px;display:flex;gap:10px;align-items:center;font-size:12px;color:#dfe3ea;flex-wrap:wrap">
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:8px 12px;background:rgba(255,255,255,.02)">Exhaust passive sources</div>
+        <div style="color:#ff6a00;font-weight:900">&rarr;</div>
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:8px 12px;background:rgba(255,255,255,.02)">Port scan (Nmap primary)</div>
+        <div style="color:#ff6a00;font-weight:900">&rarr;</div>
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:8px 12px;background:rgba(255,255,255,.02)">Protocol enumeration per open port</div>
+        <div style="color:#ff6a00;font-weight:900">&rarr;</div>
+        <div style="border:1px solid #b85100;border-radius:10px;padding:8px 12px;background:rgba(255,106,0,.10)">Log into target tracker, live</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ Passive means the target never observes the action — NOT "using few tools"</div>
+        <div>⚠️ A quiet/slow Nmap scan is still ACTIVE — any packet sent to the target counts</div>
+        <div>⚠️ Information gathering is not a one-time stage — it recurs across the whole lifecycle</div>
+        <div>⚠️ Filtered ≠ closed — filtered is undetermined, not confirmed absent</div>
+        <div>⚠️ Active DNS enumeration queries the target directly; passive DNS history reads third-party records</div>
+      </div>
+      <div>
+        OSINT &middot; NSE (Nmap Scripting Engine) &middot; SMB &middot; SMTP &middot; SNMP &middot; LOTL (Living Off The Land) &middot; OSCP &middot; PEN-200 / PWK
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSCP / PEN-200 — Module 5: Information Gathering (weighting: information not defined in the official exam outline) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">CP</span></div>
+  </div>
+</div>
+
+</body>
+</html>
