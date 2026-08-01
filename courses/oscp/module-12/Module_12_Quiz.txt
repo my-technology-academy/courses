@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A web application exploit that previously worked now returns a normal response with none of the expected injected output. Which category should be checked first, per Objective 12.2?
+    (A) Buffer overflow offsets
+    (B) Cross-compilation target architecture
+    (C) Session state, encoding, or request headers
+    (D) Nmap NSE script version
+
+Q2. What is the purpose of cross-compiling a binary, as covered in Objective 12.1?
+    (A) To translate an exploit from one programming language to another automatically
+    (B) To build a binary intended to run on the target's architecture using a compiler on a different one
+    (C) To convert a web exploit into a memory corruption exploit
+    (D) To encrypt an exploit so antivirus cannot detect it
+
+Q3. Why does a memory corruption exploit often fail against a target it was not originally written for?
+    (A) The target's antivirus always blocks memory corruption exploits specifically
+    (B) Offsets, addresses, or architecture details assumed by the exploit do not match the actual target
+    (C) Memory corruption exploits only work against web applications
+    (D) The exploit's file extension does not match the target's operating system
+
+Q4. What is the recommended practice when adjusting a failing exploit's offsets, encoding, or session values?
+    (A) Change every suspected value at once to save time
+    (B) Change one variable at a time and retest, to know which change mattered
+    (C) Only ever change the exploit's file name
+    (D) Avoid retesting until the exploit is fully rewritten
+
+Q5. What underlying principle is shared between fixing memory corruption exploits and fixing web application exploits?
+    (A) Both require the exact same troubleshooting checklist
+    (B) Understanding exactly what the exploit assumes about the target before correcting the mismatch
+    (C) Both are resolved exclusively by cross-compiling a new binary
+    (D) Neither can be fixed without rewriting the exploit from scratch
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (C) Session state, encoding, or request headers
+Q2: (B) To build a binary intended to run on the target's architecture using a compiler on a different one
+Q3: (B) Offsets, addresses, or architecture details assumed by the exploit do not match the actual target
+Q4: (B) Change one variable at a time and retest, to know which change mattered
+Q5: (B) Understanding exactly what the exploit assumes about the target before correcting the mismatch
+==================================================
