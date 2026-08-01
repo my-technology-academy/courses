@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 11 Flashcards — Locating Public Exploits</title>
+<style>
+  :root{--bg:#0c0d10;--card:#111217;--stroke:#2a2f3a;--accent:#ff6a00;--text:#f5f7fb;--dim:#b8c0cf}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background-color:var(--bg);background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:var(--text);min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:36px 24px 60px}
+  header{text-align:center;margin-bottom:28px}
+  h1{margin:0;font-size:30px;font-weight:900}
+  h1 .accent{color:var(--accent)}
+  .sub{color:var(--dim);font-size:14px;margin-top:8px}
+  .toolbar{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+  .btn{border:1px solid var(--stroke);background:rgba(255,255,255,.02);color:var(--text);padding:9px 16px;border-radius:12px;cursor:pointer;font-size:14px}
+  .btn:hover{background:rgba(255,106,0,.10)}
+  .counter{color:var(--dim);font-size:14px}
+  .stage{display:flex;justify-content:center}
+  .scene{width:100%;max-width:640px;height:360px;perspective:1600px}
+  .card{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+  .card.flipped{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--stroke);border-radius:20px;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;background:var(--card)}
+  .face.front{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.15)), var(--card)}
+  .face.back{transform:rotateY(180deg);background:linear-gradient(180deg, rgba(255,106,0,.10), rgba(0,0,0,.15)), var(--card);border-color:#b85100}
+  .tag{position:absolute;top:18px;left:18px;font-size:12px;font-weight:700;letter-spacing:.5px;color:#ffd9bf;background:rgba(255,106,0,.15);border:1px solid rgba(255,106,0,.35);padding:4px 10px;border-radius:999px}
+  .term{font-size:23px;font-weight:900}
+  .def{font-size:17px;line-height:1.5;color:var(--dim)}
+  .hint{position:absolute;bottom:16px;font-size:12px;color:#8891a1}
+  .dots{display:flex;justify-content:center;gap:6px;margin-top:24px;flex-wrap:wrap;max-width:640px;margin-left:auto;margin-right:auto}
+  .dot{width:9px;height:9px;border-radius:999px;background:var(--stroke);cursor:pointer}
+  .dot.active{background:var(--accent)}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:40px;font-size:12.5px;color:#8891a1;max-width:640px;margin-left:auto;margin-right:auto}
+  .wordmark{font-weight:900;letter-spacing:2px}
+  .wordmark .c{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>OSCP <span class="accent">Flashcards</span></h1><div class="sub">Module 11 &middot; Locating Public Exploits</div></header>
+  <div class="toolbar">
+    <button class="btn" id="prevBtn">⟨ Prev</button>
+    <span class="counter" id="counter">1 / 16</span>
+    <button class="btn" id="nextBtn">Next ⟩</button>
+    <button class="btn" id="shuffleBtn">Shuffle</button>
+  </div>
+  <div class="stage"><div class="scene"><div class="card" id="card">
+    <div class="face front"><div class="tag" id="tagFront">Getting Started</div><div class="term" id="termText">Term</div><div class="hint">Tap card to reveal definition</div></div>
+    <div class="face back"><div class="tag" id="tagBack">Getting Started</div><div class="def" id="defText">Definition</div><div class="hint">Tap card to flip back</div></div>
+  </div></div></div>
+  <div class="dots" id="dots"></div>
+  <div class="foot"><div>My Cyber Academy</div><div class="wordmark"><span class="c">OS</span>CP</div></div>
+</div>
+<script>
+const cards = [
+  {tag:"Getting Started", term:"Risk of Untrusted Exploits", def:"Public exploit code was written by an unknown party for unknown purposes. Running it unexamined can exceed scope, damage a target, or compromise the tester's own machine."},
+  {tag:"Getting Started", term:"Analysing Before Executing", def:"Reading exploit code before running it — tracing connections, writes, and target assumptions — is the practical answer to the risk of untrusted code."},
+  {tag:"Online Resources", term:"Differentiating Resources", def:"Not all exploit sources carry the same trustworthiness. Judge each by its review standard, visible authorship, and currency — not by popularity alone."},
+  {tag:"Online Resources", term:"Google Search Operators", def:"Targeted operators like site: and filetype: narrow a broad search to specific sources and formats, surfacing exploit code a plain keyword search misses."},
+  {tag:"Online Resources", term:"Sourcing Risk", def:"Where exploit code comes from shapes how much scrutiny it deserves — a widely linked exploit can still be unmaintained, mismatched, or altered after publication."},
+  {tag:"Offline Resources", term:"Exploit Framework", def:"Software bundling many exploits behind a consistent interface, maintained locally rather than requiring a fresh search each time. Covered fully in Module 19."},
+  {tag:"Offline Resources", term:"SearchSploit", def:"A locally searchable, offline archive of exploit code, queried by service or product name — reduces exposure to online sourcing risk but can lag the newest exploits."},
+  {tag:"Offline Resources", term:"NSE for Exploitation", def:"Beyond scanning (Module 6), certain Nmap Scripting Engine scripts can directly test for or trigger specific known exploits against a service."},
+  {tag:"Exploiting a Target", term:"Enumerate-First Workflow", def:"Enumerate a target precisely (service, product, version) before searching for an exploit — imprecise enumeration produces a search that was never going to succeed."},
+  {tag:"Exploiting a Target", term:"Complete Exploitation", def:"Carrying a confirmed vulnerability through to a fully working result, not merely confirming it exists — stated as its own Module 11 objective."},
+  {tag:"Exploiting a Target", term:"Limited Shell", def:"Working but unprivileged command access on a target — the terminal outcome of Module 11's workflow, and the starting point for Modules 15 and 16."},
+  {tag:"Practice", term:"Isolated Testing", def:"Running an analysed exploit against a matching but isolated system before pointing it at the real target, to observe real behaviour under controlled conditions."},
+  {tag:"Practice", term:"Cross-Referencing Sources", def:"Checking a promising exploit candidate against a second, independent source before committing analysis time — agreement across sources is meaningful evidence."},
+  {tag:"Connections", term:"Online vs Offline Resources", def:"Online is broader and more current but carries sourcing risk and needs connectivity; offline is immediately available but can lag behind the newest exploits. Check both."}
+];
+let order = cards.map((_,i)=>i); let pos = 0;
+const cardEl=document.getElementById('card'),termText=document.getElementById('termText'),defText=document.getElementById('defText'),tagFront=document.getElementById('tagFront'),tagBack=document.getElementById('tagBack'),counter=document.getElementById('counter'),dotsEl=document.getElementById('dots');
+function renderDots(){dotsEl.innerHTML='';order.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===pos?' active':'');d.onclick=()=>{pos=i;render();};dotsEl.append(d);});}
+function render(){const c=cards[order[pos]];cardEl.classList.remove('flipped');termText.textContent=c.term;defText.textContent=c.def;tagFront.textContent=c.tag;tagBack.textContent=c.tag;counter.textContent=(pos+1)+' / '+order.length;renderDots();}
+cardEl.addEventListener('click',()=>cardEl.classList.toggle('flipped'));
+document.getElementById('nextBtn').onclick=()=>{pos=(pos+1)%order.length;render();};
+document.getElementById('prevBtn').onclick=()=>{pos=(pos-1+order.length)%order.length;render();};
+document.getElementById('shuffleBtn').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}pos=0;render();};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')document.getElementById('nextBtn').click();if(e.key==='ArrowLeft')document.getElementById('prevBtn').click();if(e.key===' '){e.preventDefault();cardEl.classList.toggle('flipped');}});
+render();
+</script>
+</body>
+</html>
