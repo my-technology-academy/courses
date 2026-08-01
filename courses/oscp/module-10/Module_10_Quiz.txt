@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. Reconnaissance confirms macros are disabled by policy across the target organisation. Which Module 10 mechanism remains viable regardless?
+    (A) Microsoft Word macros
+    (B) Windows library files and shortcuts
+    (C) SQL injection
+    (D) Directory traversal
+
+Q2. Why does Objective 10.1, Target Reconnaissance, precede both named delivery mechanisms in this module?
+    (A) It is a legal requirement before any client-side technique may be attempted
+    (B) The pretext and choice of mechanism both depend on information gathered about the target person, organisation, and software
+    (C) Reconnaissance replaces the need to test payloads before delivery
+    (D) It only applies when the target uses Microsoft Office
+
+Q3. What is the primary purpose of client fingerprinting in this module?
+    (A) To identify the target's software stack and version so an applicable delivery mechanism can be chosen
+    (B) To bypass antivirus software directly
+    (C) To identify open network ports on the target's workstation
+    (D) To generate a SQL injection payload automatically
+
+Q4. What distinguishes a Windows library file and shortcut attack from a Word macro attack, according to the module?
+    (A) They achieve identical results through identical warning behaviour
+    (B) The library file and shortcut approach uses an unfamiliar Windows feature and does not trigger the same security warning a macro does
+    (C) Library files can only be used against Linux targets
+    (D) Shortcuts cannot be used to execute commands under any circumstance
+
+Q5. Why should a tester install Microsoft Office locally before attempting Objective 10.2's technique against a target?
+    (A) To test the payload against a matching version and configuration before delivery
+    (B) Because Office must be installed on the attacking Kali machine to run Nmap
+    (C) Because macros cannot be written without a licensed Office installation
+    (D) To satisfy a legal requirement specific to Word document attacks
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Windows library files and shortcuts
+Q2: (B) The pretext and choice of mechanism both depend on information gathered about the target person, organisation, and software
+Q3: (A) To identify the target's software stack and version so an applicable delivery mechanism can be chosen
+Q4: (B) The library file and shortcut approach uses an unfamiliar Windows feature and does not trigger the same security warning a macro does
+Q5: (A) To test the payload against a matching version and configuration before delivery
+==================================================
