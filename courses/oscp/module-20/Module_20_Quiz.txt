@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. Which enumeration objective directly sets up Module 21's Kerberoasting attack?
+    (A) Exploring domain shares
+    (B) Enumerating through Service Principal Names
+    (C) Enumerating OS permissions and logged-on users
+    (D) Using legacy Windows applications
+
+Q2. Why does the module teach legacy Windows applications for AD enumeration rather than treating them as obsolete?
+    (A) They remain functional and are often already present, requiring no additional tooling on the target
+    (B) They are the only tools capable of enumerating Active Directory
+    (C) Legacy tools automatically bypass all logging
+    (D) PowerShell cannot be used for enumeration under any circumstance
+
+Q3. What is the relationship between SharpHound and BloodHound?
+    (A) SharpHound collects raw domain relationship data; BloodHound visualises it as attack paths
+    (B) They are two names for the exact same single tool
+    (C) BloodHound collects data and SharpHound only displays it
+    (D) Neither tool interacts with Active Directory directly
+
+Q4. Why can object-level permissions expose a path to compromise that group membership alone would not reveal?
+    (A) Active Directory grants fine-grained permissions over specific objects independently of broader group membership
+    (B) Object permissions are always identical to group membership
+    (C) Object permissions only apply to computer accounts, never users
+    (D) Group membership overrides all object-level permissions automatically
+
+Q5. Why should a path surfaced by BloodHound still be manually verified before being pursued?
+    (A) Domain state can change between data collection and action, so the underlying permission needs confirming
+    (B) BloodHound never reflects real Active Directory data
+    (C) Manual verification is only required for SharpHound collection, not BloodHound analysis
+    (D) BloodHound paths are guaranteed accurate and require no further action
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Enumerating through Service Principal Names
+Q2: (A) They remain functional and are often already present, requiring no additional tooling on the target
+Q3: (A) SharpHound collects raw domain relationship data; BloodHound visualises it as attack paths
+Q4: (A) Active Directory grants fine-grained permissions over specific objects independently of broader group membership
+Q5: (A) Domain state can change between data collection and action, so the underlying permission needs confirming
+==================================================
