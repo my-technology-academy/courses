@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 11 Cheat Sheet — Locating Public Exploits</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSCP: <span style="color:#ff6a00">Locating Public Exploits</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">11.1 GETTING STARTED</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Risk:</strong> untrusted code can exceed scope, damage a target, or compromise your own machine</div>
+        <div><strong style="color:#ffd9bf">Rule:</strong> analyse before executing — always, regardless of source reputation</div>
+        <div><strong style="color:#ffd9bf">Read for:</strong> what it connects to, what it writes, and what it assumes about the target</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">11.2 ONLINE RESOURCES</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Differentiate:</strong> review standard, visible authorship, currency — not popularity</div>
+        <div><strong style="color:#ffd9bf">Risk:</strong> altered, backdoored, or non-functional copies circulate</div>
+        <div><strong style="color:#ffd9bf">Search operators:</strong> narrow results a plain keyword search misses</div>
+      </div>
+      <div style="margin-top:8px;font-family:ui-monospace,monospace;font-size:11px;background:rgba(0,0,0,.35);border:1px solid #2a2f3a;border-radius:8px;padding:8px 10px;color:#ffd9bf">site:exploit-db.com "apache 2.4.49"<br>filetype:py "remote code execution" cve-2021</div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">11.3 OFFLINE RESOURCES</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Exploit frameworks:</strong> bundle many exploits, consistent interface (Module 19 = Metasploit in depth)</div>
+        <div><strong style="color:#ffd9bf">SearchSploit:</strong> local offline archive, searchable by service/product</div>
+        <div><strong style="color:#ffd9bf">Nmap NSE:</strong> the Module 6 engine, here testing for/triggering known exploits</div>
+      </div>
+      <div style="margin-top:8px;font-family:ui-monospace,monospace;font-size:11px;background:rgba(0,0,0,.35);border:1px solid #2a2f3a;border-radius:8px;padding:8px 10px;color:#ffd9bf">searchsploit apache 2.4.49<br>searchsploit -x 50383</div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">11.4 THE WORKFLOW</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;font-size:12px;text-align:center">
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:10px;color:#dfe3ea"><strong style="color:#ffd9bf">1. Enumerate</strong><br>Precise service, product, version</div>
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:10px;color:#dfe3ea"><strong style="color:#ffd9bf">2. Search</strong><br>Offline first, then online</div>
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:10px;color:#dfe3ea"><strong style="color:#ffd9bf">3. Analyse</strong><br>Read before running</div>
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:10px;color:#dfe3ea"><strong style="color:#ffd9bf">4. Execute</strong><br>Obtain a limited shell</div>
+      </div>
+      <div style="margin-top:8px;font-size:12px;color:#dfe3ea">A limited shell is the outcome, not the end — Modules 15/16 escalate from exactly this point. If the exploit fails, Module 12 (Fixing Exploits) is next, not abandonment.</div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ Popular ≠ safe — popularity says nothing about review standard or whether the copy matches the original</div>
+        <div>⚠️ Enumeration must be precise (exact version), not just a service name, before searching for an exploit</div>
+        <div>⚠️ A limited shell is the terminal outcome here — privilege escalation is a separate objective (Modules 15/16)</div>
+        <div>⚠️ One matching source is not enough — cross-reference against an independent second source</div>
+        <div>⚠️ Offline resources can lag the newest exploits; online resources carry sourcing risk — check both</div>
+      </div>
+      <div>
+        NSE (Nmap Scripting Engine) &middot; CVE &middot; OSCP &middot; PEN-200 / PWK
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSCP / PEN-200 — Module 11: Locating Public Exploits (weighting: information not defined in the official exam outline) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">CP</span></div>
+  </div>
+</div>
+
+</body>
+</html>
