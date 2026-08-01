@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. An unquoted service path exists on a Windows host that stores payroll data. Which term correctly describes the unquoted service path itself?
+    (A) A risk
+    (B) A threat
+    (C) A vulnerability
+    (D) An exploit
+
+Q2. Which statement best describes the relationship between a threat and a vulnerability?
+    (A) A threat is a weakness in a system; a vulnerability is the party who would abuse it
+    (B) A threat exists independently of your systems; a vulnerability is a weakness within them
+    (C) They are interchangeable terms for the same concept
+    (D) A vulnerability only exists once a threat actor has been identified
+
+Q3. A penetration test discovers that an application permits an unauthorised party to modify stored records. Which leg of the CIA triad is primarily affected?
+    (A) Confidentiality
+    (B) Integrity
+    (C) Availability
+    (D) None of the above
+
+Q4. Why should a security control not depend on the secrecy of its design?
+    (A) Because design details reliably leak, leaving the control with no strength once known
+    (B) Because regulators prohibit undocumented controls
+    (C) Because secrecy always reduces availability
+    (D) Because obscurity has no legitimate use in any layered defence
+
+Q5. Which instrument states auditable requirements that an organisation can be formally certified against?
+    (A) A framework
+    (B) A standard
+    (C) A policy
+    (D) A threat intelligence feed
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (C) A vulnerability
+Q2: (B) A threat exists independently of your systems; a vulnerability is a weakness within them
+Q3: (B) Integrity
+Q4: (A) Because design details reliably leak, leaving the control with no strength once known
+Q5: (B) A standard
+==================================================
