@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. Which PEN-200 learning unit covers taking inventory of the course, setting up an attacking Kali VM, connecting over the PWK VPN, and completing Module Exercises?
+    (A) How to Approach the Course
+    (B) Welcome to PWK
+    (C) Summary of PWK Learning Modules
+    (D) Effective Learning Strategies
+
+Q2. According to the official PEN-200 syllabus, the learning model presented in "How to Approach the Course" is conceptualised around which idea?
+    (A) Increasing uncertainty
+    (B) Decreasing supervision
+    (C) Fixed difficulty progression
+    (D) Timed assessment intervals
+
+Q3. Which learning unit of Module 1 exists specifically to give the learner a high-level overview of what is covered in every other PEN-200 Learning Module?
+    (A) Welcome to PWK
+    (B) How to Approach the Course
+    (C) Summary of PWK Learning Modules
+    (D) The OSCP Exam Information
+
+Q4. In the official syllabus order, which Learning Module immediately follows Information Gathering?
+    (A) Introduction to Web Applications
+    (B) Vulnerability Scanning
+    (C) Locating Public Exploits
+    (D) Report Writing for Penetration Testers
+
+Q5. Which named PEN-200 Learning Module covers HTTP tunnelling with Chisel and DNS tunnelling with dnscat?
+    (A) Port Redirection and SSH Tunneling
+    (B) The Metasploit Framework
+    (C) Advanced Tunneling
+    (D) Lateral Movement in Active Directory
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Welcome to PWK
+Q2: (A) Increasing uncertainty
+Q3: (C) Summary of PWK Learning Modules
+Q4: (B) Vulnerability Scanning
+Q5: (C) Advanced Tunneling
+==================================================
