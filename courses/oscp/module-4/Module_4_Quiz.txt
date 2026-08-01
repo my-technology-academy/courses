@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. Which section of a technical report is written specifically for a non-technical, decision-making reader?
+    (A) The technical summary
+    (B) The executive summary
+    (C) The findings section
+    (D) The appendices
+
+Q2. Why does note portability matter over the course of a long engagement or a long study programme?
+    (A) It reduces file size on disk
+    (B) Notes must survive tool, machine and time changes without being locked into a proprietary format
+    (C) It is a legal requirement in every jurisdiction
+    (D) It allows notes to be automatically translated into other languages
+
+Q3. What is the correct fixed anatomy for describing an individual technical finding?
+    (A) Title, date, tester name, signature
+    (B) Description, evidence, impact, recommendation
+    (C) Summary, appendix, glossary, index
+    (D) Scope, exclusions, constraints, timeline
+
+Q4. Why should the executive summary generally be written after the technical findings are drafted?
+    (A) Because summarising requires knowing what was actually found, not what was expected at the outset
+    (B) Because clients only read reports in reverse order
+    (C) Because it is a formatting requirement of most word processors
+    (D) Because technical findings cannot be edited once the summary exists
+
+Q5. What is the purpose of stating test environment considerations in a report?
+    (A) To pad the report to a required page count
+    (B) To prevent a reader from mistaking a scoped or constrained result for an unconditional one
+    (C) To list the tester's personal equipment
+    (D) To replace the need for an executive summary
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) The executive summary
+Q2: (B) Notes must survive tool, machine and time changes without being locked into a proprietary format
+Q3: (B) Description, evidence, impact, recommendation
+Q4: (A) Because summarising requires knowing what was actually found, not what was expected at the outset
+Q5: (B) To prevent a reader from mistaking a scoped or constrained result for an unconditional one
+==================================================
