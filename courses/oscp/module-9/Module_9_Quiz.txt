@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A parameter shows no error and no visible change on true or false conditions, but the response takes noticeably longer when a conditional sleep is injected. Which technique confirmed this?
+    (A) UNION-based injection
+    (B) Error-based injection
+    (C) Time-based Blind injection
+    (D) Boolean-based Blind injection
+
+Q2. What must be true for a UNION-based SQL injection payload to succeed?
+    (A) The database must be MSSQL specifically
+    (B) The injected SELECT must return the same number of columns, with compatible data types, as the original query
+    (C) The application must display verbose database error messages
+    (D) The target parameter must be submitted using the HTTP GET method
+
+Q3. Which statement about xp_cmdshell is correct?
+    (A) It is an MySQL-only function enabled by default on all installations
+    (B) It is an MSSQL extended procedure that, where enabled, executes operating system commands with the database service's privileges
+    (C) It automatically escalates any injection to domain administrator
+    (D) It replaces the need to confirm SQL injection manually
+
+Q4. Why does the module teach manual SQL injection identification and exploitation before introducing SQLmap?
+    (A) SQLmap cannot detect any of the techniques taught manually
+    (B) Manual work confirms the vulnerability and reveals how the application handles input in ways blind automation can miss
+    (C) SQLmap is restricted to authenticated scans only
+    (D) Manual technique is required by law before using automated tools
+
+Q5. A tester sends a single quote into a parameter and the page returns a database error message that includes part of the injected content. Which technique does this best support?
+    (A) Time-based Blind injection
+    (B) Boolean-based Blind injection
+    (C) Error-based injection
+    (D) A file upload vulnerability
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (C) Time-based Blind injection
+Q2: (B) The injected SELECT must return the same number of columns, with compatible data types, as the original query
+Q3: (B) It is an MSSQL extended procedure that, where enabled, executes operating system commands with the database service's privileges
+Q4: (B) Manual work confirms the vulnerability and reveals how the application handles input in ways blind automation can miss
+Q5: (C) Error-based injection
+==================================================
