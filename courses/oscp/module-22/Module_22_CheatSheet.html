@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 22 Cheat Sheet — Lateral Movement in Active Directory</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:30px;font-weight:900;letter-spacing:.3px">OSCP: <span style="color:#ff6a00">Lateral Movement in Active Directory</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">22.1 LATERAL MOVEMENT TECHNIQUES</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Technique</th><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Note</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">WMI/WinRS/WinRM</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Built-in, already present</td></tr>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">PsExec</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Temp service install — well-monitored</td></tr>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Pass the Hash</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Auth directly with NTLM hash (M14)</td></tr>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Overpass the Hash</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Hash → genuine Kerberos ticket</td></tr>
+          <tr><td style="padding:4px 6px;color:#ffd9bf">DCOM misuse</td><td style="padding:4px 6px;color:#dfe3ea">Less commonly monitored than PsExec</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">22.2 ACTIVE DIRECTORY PERSISTENCE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Purpose:</strong> survive interruptions without repeating the full attack chain</div>
+        <div><strong style="color:#ffd9bf">Golden ticket:</strong> forged from domain key material — survives password resets</div>
+        <div><strong style="color:#ffd9bf">Shadow copy abuse:</strong> recovers material from a pre-remediation snapshot</div>
+        <div><strong style="color:#ffd9bf">RULE:</strong> remove ALL persistence at engagement end — professional/contractual obligation</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ Pass the Hash (direct auth) ≠ Overpass the Hash (hash → Kerberos ticket) — different mechanisms</div>
+        <div>⚠️ PsExec is well-established = well-MONITORED — not always the best choice under detection focus</div>
+        <div>⚠️ Golden tickets are NOT removed by password resets — forged from domain key material itself</div>
+        <div>⚠️ Remediation isn't complete just because active malware is gone — check shadow copies too</div>
+        <div>⚠️ ALL persistence must be removed at engagement end, no exceptions</div>
+      </div>
+      <div>
+        WMI &middot; WinRS &middot; WinRM &middot; DCOM &middot; OSCP &middot; PEN-200 / PWK
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSCP / PEN-200 — Module 22: Lateral Movement in Active Directory (weighting: information not defined in the official exam outline) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">CP</span></div>
+  </div>
+</div>
+
+</body>
+</html>
