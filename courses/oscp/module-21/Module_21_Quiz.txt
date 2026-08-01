@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. Which technique lets any authenticated domain user request a service ticket whose encrypted hash can then be cracked offline?
+    (A) Domain controller impersonation
+    (B) Kerberoasting
+    (C) Pass the hash
+    (D) DNS tunnelling
+
+Q2. What is the fundamental difference between NTLM and Kerberos authentication?
+    (A) NTLM uses a challenge-response exchange based on a password hash; Kerberos uses tickets issued by a trusted authority
+    (B) They are two names for the exact same authentication protocol
+    (C) NTLM only works over DNS; Kerberos only works over HTTP
+    (D) Kerberos was deprecated in favour of NTLM in modern Active Directory
+
+Q3. Why is Kerberoasting described as a reliably productive attack once SPNs are enumerated?
+    (A) Service accounts are frequently over-privileged and use weak, rarely rotated passwords
+    (B) It requires no valid domain credential of any kind to begin
+    (C) It automatically grants Domain Admin without any cracking required
+    (D) It only works against accounts with no Service Principal Name
+
+Q4. What distinguishes forging a service ticket from performing Kerberoasting?
+    (A) Kerberoasting obtains a crackable hash via a legitimately requested ticket; forging fabricates a ticket directly
+    (B) They are identical techniques with different names
+    (C) Forging tickets requires no prior domain access of any kind
+    (D) Kerberoasting can only be performed by a domain controller
+
+Q5. Why does impersonating a domain controller represent the module's most severe technique?
+    (A) It can retrieve any domain user's authentication material directly, the furthest reach in the module
+    (B) It is the only technique in the module that requires no domain credential at all
+    (C) It exclusively targets web application login forms
+    (D) It has no relationship to any other technique in the module
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Kerberoasting
+Q2: (A) NTLM uses a challenge-response exchange based on a password hash; Kerberos uses tickets issued by a trusted authority
+Q3: (A) Service accounts are frequently over-privileged and use weak, rarely rotated passwords
+Q4: (A) Kerberoasting obtains a crackable hash via a legitimately requested ticket; forging fabricates a ticket directly
+Q5: (A) It can retrieve any domain user's authentication material directly, the furthest reach in the module
+==================================================
