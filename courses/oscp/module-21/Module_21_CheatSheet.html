@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 21 Cheat Sheet — Attacking Active Directory Authentication</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:30px;font-weight:900;letter-spacing:.3px">OSCP: <span style="color:#ff6a00">Attacking Active Directory Authentication</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">21.1 UNDERSTANDING AUTHENTICATION</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Protocol</th><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Basis</th><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Related attacks</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">NTLM</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Challenge-response, password hash</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Pass-the-hash, relay (M14)</td></tr>
+          <tr><td style="padding:4px 6px;color:#ffd9bf">Kerberos</td><td style="padding:4px 6px;color:#dfe3ea">Tickets from a trusted authority</td><td style="padding:4px 6px;color:#dfe3ea">Kerberoasting, forging (M21)</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:8px;font-size:12px;color:#dfe3ea"><strong style="color:#ffd9bf">Cached AD credentials:</strong> local material enabling offline login — also a fresh hunting ground on domain-joined machines</div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">21.2 THE ESCALATION LADDER</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div>1. <strong style="color:#ffd9bf">Password attacks</strong> → one valid domain credential</div>
+        <div>2. <strong style="color:#ffd9bf">Account option abuse</strong> → weakened account auth</div>
+        <div>3. <strong style="color:#ffd9bf">Kerberoasting</strong> → SPN → ticket → crack hash offline</div>
+        <div>4. <strong style="color:#ffd9bf">Forging service tickets</strong> → fabricated access</div>
+        <div>5. <strong style="color:#ffd9bf">DC impersonation</strong> → any domain credential (most severe)</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ NTLM and Kerberos are NOT interchangeable — distinct mechanisms, distinct attacks</div>
+        <div>⚠️ Kerberoasting needs NO admin privilege — any authenticated user can request an SPN's ticket</div>
+        <div>⚠️ Kerberoasting (crack a legit ticket) ≠ Forging (fabricate one directly) — different mechanisms</div>
+        <div>⚠️ SPN enumeration (Module 20) is the PREREQUISITE for Kerberoasting — can't roast what you haven't found</div>
+        <div>⚠️ DC impersonation is the module's ceiling — confirm scope explicitly before attempting it</div>
+      </div>
+      <div>
+        NTLM (NT LAN Manager) &middot; SPN (Service Principal Name) &middot; DC (Domain Controller) &middot; OSCP &middot; PEN-200 / PWK
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSCP / PEN-200 — Module 21: Attacking Active Directory Authentication (weighting: information not defined in the official exam outline) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">CP</span></div>
+  </div>
+</div>
+
+</body>
+</html>
