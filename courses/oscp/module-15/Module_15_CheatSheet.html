@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 15 Cheat Sheet — Windows Privilege Escalation</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSCP: <span style="color:#ff6a00">Windows Privilege Escalation</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">15.1 ENUMERATING WINDOWS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Situational awareness:</strong> user, privileges, software, processes, patch level</div>
+        <div><strong style="color:#ffd9bf">Sensitive info:</strong> configs, scripts, unattended install files, stored creds</div>
+        <div><strong style="color:#ffd9bf">PowerShell:</strong> history &amp; transcripts — often hold admin credentials</div>
+        <div><strong style="color:#ffd9bf">Automated tools:</strong> accelerate enumeration — ALWAYS verify manually</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">15.2 LEVERAGING WINDOWS SERVICES</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Technique</th><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Requires</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Binary hijack</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Write access to the service .exe itself</td></tr>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">DLL hijack</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Write access earlier in the DLL search order</td></tr>
+          <tr><td style="padding:4px 6px;color:#ffd9bf">Unquoted path</td><td style="padding:4px 6px;color:#dfe3ea">Writable earlier segment of an unquoted, spaced path</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:8px;font-family:ui-monospace,monospace;font-size:11px;background:rgba(0,0,0,.35);border:1px solid #2a2f3a;border-radius:8px;padding:8px 10px;color:#ffd9bf">C:\\Program Files\\My App\\service.exe (unquoted)<br>tries: C:\\Program.exe → C:\\Program Files\\My.exe → intended</div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">15.3 ABUSING OTHER WINDOWS COMPONENTS</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;font-size:12px">
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:10px;color:#dfe3ea"><strong style="color:#ffd9bf">Scheduled Tasks</strong><br>Privileged task executing a modifiable script/binary — same logic as services, on a timer</div>
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:10px;color:#dfe3ea"><strong style="color:#ffd9bf">Known exploits</strong><br>Kernel or third-party service vulnerabilities — independent of misconfiguration (link: Modules 11/12)</div>
+        <div style="border:1px solid #2a2f3a;border-radius:10px;padding:10px;color:#dfe3ea"><strong style="color:#ffd9bf">Privilege abuse</strong><br>A held privilege permitting privileged execution directly — no exploit needed</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ DLL hijacking ≠ unquoted path abuse — one targets a library, the other targets how Windows parses spaced paths</div>
+        <div>⚠️ Automated tool output is a candidate, not a confirmed finding — verify manually every time</div>
+        <div>⚠️ Escalation doesn't always need an exploit — misconfiguration and overly broad privileges are just as valid</div>
+        <div>⚠️ Check PowerShell history/transcripts for ALL accessible profiles, not just the current user</div>
+        <div>⚠️ Confirm restart/trigger conditions before planting replacement content — don't disrupt availability</div>
+      </div>
+      <div>
+        DLL (Dynamic Link Library) &middot; SYSTEM &middot; OSCP &middot; PEN-200 / PWK
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSCP / PEN-200 — Module 15: Windows Privilege Escalation (weighting: information not defined in the official exam outline) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">CP</span></div>
+  </div>
+</div>
+
+</body>
+</html>
