@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 23 Cheat Sheet — Assembling the Pieces</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">OSCP: <span style="color:#ff6a00">Assembling the Pieces</span></h1>
+  </div>
+
+  <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);margin-bottom:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">THE FULL CHAIN — PUBLIC NETWORK TO DOMAIN CONTROLLER</div>
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100;width:60px">#</th><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100;width:340px">Stage</th><th style="text-align:left;padding:4px 6px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Draws on</th></tr></thead>
+      <tbody>
+        <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">23.1</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Enumerate the public network</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Modules 5, 6</td></tr>
+        <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">23.2</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Attack WEBSRV1 (WordPress → SSH key → sudo → dev artefacts)</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Modules 8, 11, 14, 16</td></tr>
+        <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">23.3</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Reach internal network (validate creds + phishing)</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Modules 10, 14</td></tr>
+        <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">23.4</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Re-enumerate internally (awareness, hosts/services/sessions, vectors)</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Modules 15, 16, 20</td></tr>
+        <tr><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">23.5</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Attack INTERNALSRV1 (Kerberoasting + WordPress relay)</td><td style="padding:4px 6px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Modules 8, 14, 20, 21</td></tr>
+        <tr><td style="padding:4px 6px;color:#ffd9bf">23.6</td><td style="padding:4px 6px;color:#dfe3ea">Reach the domain controller (recon + fingerprinting)</td><td style="padding:4px 6px;color:#dfe3ea">Module 10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">THE CORE IDEA</div>
+      <div style="font-size:12px;line-height:1.5;color:#dfe3ea">Zero new techniques. Every named action traces to an earlier module. The skill this module tests is <strong style="color:#ffd9bf">sequencing and combining</strong> what you already know under incomplete information — the increasing-uncertainty model from Module 1, fully realised.</div>
+    </div>
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">PRACTICAL DISCIPLINE</div>
+      <div style="font-size:12px;line-height:1.5;color:#dfe3ea">Track WHICH credential/artefact enabled each next stage. When a stage stalls, revisit EARLIER notes rather than assuming failure. Watch for steps that COMBINE two modules' techniques (e.g. the INTERNALSRV1 relay attack).</div>
+    </div>
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS</div>
+    <div style="font-size:12px;line-height:1.4;color:#dfe3ea">
+      ⚠️ This is NOT a new-content module — everything traces back to Modules 1-22.<br>
+      ⚠️ Two independent routes exist at 23.3 (credentials + phishing) — realistic engagements rarely have only one path.<br>
+      ⚠️ Enumeration RESTARTS on every new network segment — public ≠ internal, don't assume coverage carries over.<br>
+      ⚠️ The scenario closes with Module 10's exact reconnaissance/fingerprinting objectives — it ends where client-side attacks began.
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>OSCP / PEN-200 — Module 23: Assembling the Pieces (weighting: information not defined in the official exam outline) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">OS</span><span style="color:#f5f7fb">CP</span></div>
+  </div>
+</div>
+
+</body>
+</html>
