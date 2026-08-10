@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 2 Cheat Sheet — How AI Works (Without The Maths)</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">CAIA: <span style="color:#ff6a00">How AI Works — Without The Maths</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.1 PREDICTION</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Core idea:</strong> output is the most likely result, not a lookup</div>
+        <div><strong style="color:#ffd9bf">LLM loop:</strong> prompt &rarr; tokens &rarr; predict next token &rarr; append &rarr; repeat</div>
+        <div><strong style="color:#ffd9bf">Watch for:</strong> prediction &ne; retrieval — seed of hallucination (Module 6)</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.2 TRAINING VS INFERENCE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Training:</strong> builds the model, once/periodically, from data</div>
+        <div><strong style="color:#ffd9bf">Inference:</strong> using the trained model — every single prompt</div>
+        <div><strong style="color:#ffd9bf">Watch for:</strong> normal use does not retrain the model</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.3 DATA &amp; PARAMETERS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Datasets:</strong> a model only reflects patterns in its training data</div>
+        <div><strong style="color:#ffd9bf">Parameters:</strong> internal values tuned during training</div>
+        <div><strong style="color:#ffd9bf">Watch for:</strong> more parameters &ne; automatically smarter</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.4 &amp; 2.5 — TWO DIFFERENT LIMITS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100"></th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Context Window</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Knowledge Cut-off</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Limits</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Text length + conversation memory</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Currency of information</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">Fix</td><td style="padding:5px 8px;color:#dfe3ea">New conversation / summarise</td><td style="padding:5px 8px;color:#dfe3ea">Connect to current external info</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.6 TEMPERATURE</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Setting</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Suited To</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Low</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Facts, code — focused &amp; repeatable</td></tr>
+          <tr><td style="padding:5px 8px;color:#dfe3ea">High</td><td style="padding:5px 8px;color:#dfe3ea">Brainstorming, creative writing</td></tr>
+        </tbody>
+      </table>
+      <div style="font-size:11px;color:#b8c0cf;margin-top:8px">Non-determinism: same prompt, different plausible replies — normal, not a fault.</div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">2.7 APIS &amp; EMBEDDINGS</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">API:</strong> lets applications call a model without a chat window</div>
+        <div><strong style="color:#ffd9bf">Embeddings:</strong> meaning represented numerically, for comparison</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS</div>
+    <div style="font-size:12px;line-height:1.4;color:#dfe3ea;display:flex;flex-direction:column;gap:4px">
+      <div>&#9888;&#65039; A model "looks up" facts — it predicts likely output; it does not query a stored fact table</div>
+      <div>&#9888;&#65039; Using a chatbot a lot retrains or personalises it — ordinary use is inference only</div>
+      <div>&#9888;&#65039; Different answers to the same question means something is broken — non-determinism is normal</div>
+      <div>&#9888;&#65039; Knowledge cut-off and context window are the same limit — they are not; one is about time, the other about conversation length</div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>Certified AI Associate (CAIA) — Domain 2: How AI Systems Work (15%) | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px;color:#ff6a00">CAIA</div>
+  </div>
+</div>
+
+</body>
+</html>

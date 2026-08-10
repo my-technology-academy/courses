@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A tool checks everyone's calendar, proposes a meeting time, and sends the invite itself without further input. What does this best illustrate?
+    (A) Retrieval-augmented generation
+    (B) An AI agent, taking action to complete the task
+    (C) A foundation model
+    (D) Multimodal AI
+
+Q2. What best describes a foundation model?
+    (A) A model built from scratch for one single narrow task
+    (B) A large, general-purpose model trained once and applied to many different tasks
+    (C) A model that only works with structured databases
+    (D) A model that can only process images
+
+Q3. What does retrieval-augmented generation (RAG) do?
+    (A) Retrains the model on new data permanently
+    (B) Retrieves relevant external information and gives it to the model alongside the prompt
+    (C) Increases the model's temperature setting
+    (D) Reduces the number of tokens in a prompt
+
+Q4. A tool can read an uploaded photo and answer questions about it in text. What is this an example of?
+    (A) Retrieval-augmented generation
+    (B) Multimodal AI
+    (C) An AI agent
+    (D) A foundation model, specifically
+
+Q5. Which of these is NOT an example of an AI agent?
+    (A) A tool that drafts a reply and leaves it for a person to review and send
+    (B) A tool that books a meeting and sends the invite without further input
+    (C) A tool that updates a tracking sheet automatically after finishing a task
+    (D) A tool that searches for and orders a needed item on its own
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) An AI agent, taking action to complete the task
+Q2: (B) A large, general-purpose model trained once and applied to many different tasks
+Q3: (B) Retrieves relevant external information and gives it to the model alongside the prompt
+Q4: (B) Multimodal AI
+Q5: (A) A tool that drafts a reply and leaves it for a person to review and send
+==================================================

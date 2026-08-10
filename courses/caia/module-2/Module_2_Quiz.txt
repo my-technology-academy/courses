@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A user asks a chatbot the same factual question twice in one session and receives two answers that are worded differently, though both are reasonable. What best explains this?
+    (A) The model has exceeded its context window
+    (B) The model is hallucinating
+    (C) The model's output includes an element of randomness (temperature), producing non-deterministic responses
+    (D) The model has reached its knowledge cut-off
+
+Q2. A provider spends several months feeding a model very large datasets so it can adjust its internal parameters. What process is this?
+    (A) Inference
+    (B) Training
+    (C) Embedding
+    (D) Prompting
+
+Q3. In a very long chat, an AI assistant stops referencing something the user told it 40 minutes earlier. What is the most likely explanation?
+    (A) The model has reached its knowledge cut-off
+    (B) The earlier content has fallen outside the model's context window
+    (C) The model's temperature is set too high
+    (D) The model is hallucinating
+
+Q4. What is a knowledge cut-off?
+    (A) The maximum number of tokens a model can process at once
+    (B) A setting that controls how much randomness a model uses
+    (C) The point in time after which a model's training data stops
+    (D) The number of parameters a model has
+
+Q5. Which statement about a model's parameters is correct?
+    (A) More parameters always produce a smarter, more general model
+    (B) More parameters can represent more complex patterns, but do not automatically mean a better result
+    (C) Parameters only matter for image-generation models
+    (D) Parameters are fixed and identical across every model
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (C) The model's output includes an element of randomness (temperature), producing non-deterministic responses
+Q2: (B) Training
+Q3: (B) The earlier content has fallen outside the model's context window
+Q4: (C) The point in time after which a model's training data stops
+Q5: (B) More parameters can represent more complex patterns, but do not automatically mean a better result
+==================================================

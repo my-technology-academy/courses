@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. What is AI hallucination?
+    (A) When an AI tool refuses to answer a question
+    (B) Fluent, confident-sounding output that is factually incorrect or invented
+    (C) When an AI tool exceeds its context window
+    (D) When an AI tool takes too long to respond
+
+Q2. An AI tool states a fabricated fact in the same confident tone as a correct one. What does this show?
+    (A) The model always flags uncertain answers
+    (B) A model's tone of confidence carries no information about accuracy
+    (C) The model is deliberately lying
+    (D) The model has run out of tokens
+
+Q3. What does "human-in-the-loop" mean?
+    (A) AI output is never used without being rewritten entirely
+    (B) A person reviews or approves AI output at a defined point before it takes effect
+    (C) A human trains the AI model directly
+    (D) AI tools require a licensed human operator to run at all
+
+Q4. What should determine how much verification effort a piece of AI output gets?
+    (A) How long the AI took to respond
+    (B) The stakes of being wrong and the sensitivity of what's involved
+    (C) Whether the output is long or short
+    (D) Whether the AI tool is free or paid
+
+Q5. An AI tool states a fabricated statistic in exactly the same confident tone as a correct one nearby. What does this best illustrate?
+    (A) The model has exceeded its context window
+    (B) A model's confident tone carries no information about accuracy
+    (C) The model's temperature is set too low
+    (D) The model is using retrieval-augmented generation
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Fluent, confident-sounding output that is factually incorrect or invented
+Q2: (B) A model's tone of confidence carries no information about accuracy
+Q3: (B) A person reviews or approves AI output at a defined point before it takes effect
+Q4: (B) The stakes of being wrong and the sensitivity of what's involved
+Q5: (B) A model's confident tone carries no information about accuracy
+==================================================

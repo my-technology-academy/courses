@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. Why does it matter whether an AI tool is organisationally approved?
+    (A) Approved tools are always free to use
+    (B) Approval means the tool's data handling has been checked
+    (C) Approved tools never make mistakes
+    (D) Approval has no real effect on risk
+
+Q2. What is data leakage?
+    (A) When an AI tool responds slowly
+    (B) When confidential or sensitive information ends up somewhere it shouldn't
+    (C) When a model exceeds its context window
+    (D) When an AI tool refuses a request
+
+Q3. What is "shadow AI"?
+    (A) AI tools that operate without internet access
+    (B) The use of AI tools that haven't been reviewed or approved by an organisation
+    (C) AI tools used only at night
+    (D) A technical term for hallucination
+
+Q4. What is prompt injection?
+    (A) When a user writes an unusually long prompt
+    (B) Hidden or disguised instructions placed inside content an AI tool processes
+    (C) A technique for compressing prompts to save tokens
+    (D) A method for training a model faster
+
+Q5. An employee starts using a free AI tool they found online to speed up their work, without checking whether it's permitted. What is this an example of?
+    (A) Prompt injection
+    (B) A deepfake
+    (C) Shadow AI
+    (D) Data leakage
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Approval means the tool's data handling has been checked
+Q2: (B) When confidential or sensitive information ends up somewhere it shouldn't
+Q3: (B) The use of AI tools that haven't been reviewed or approved by an organisation
+Q4: (B) Hidden or disguised instructions placed inside content an AI tool processes
+Q5: (C) Shadow AI
+==================================================

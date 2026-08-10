@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. An AI tool produces a first version of a policy email. What is the correct next step?
+    (A) Send it immediately — it is already complete
+    (B) A person reviews and edits it before it is used
+    (C) Ask the AI to send it directly to the team
+    (D) Discard it, since AI cannot help with drafting
+
+Q2. Why should a summarisation prompt specify length and focus?
+    (A) Otherwise the AI will refuse the request
+    (B) Without it, the summary may treat every detail as equally important
+    (C) It has no effect on the output
+    (D) It changes the model's knowledge cut-off
+
+Q3. What is the appropriate role of AI in research assistance?
+    (A) A final, citable source
+    (B) A starting point for orientation, not a substitute for checking sources
+    (C) A replacement for all manual research
+    (D) Only useful for numerical data
+
+Q4. What matters most when judging whether a task is appropriate for AI assistance?
+    (A) Whether the task sounds technical
+    (B) The consequences of an error and the sensitivity of the data involved
+    (C) How long the prompt is
+    (D) Which AI tool category is used
+
+Q5. A colleague wants to paste a customer's personal details into a public AI tool to help draft a reply. Using the checklist from this module, what is the main concern?
+    (A) Drafting replies is not an appropriate use of AI
+    (B) The task will take too long for AI to help with
+    (C) It involves sensitive personal data in an unapproved tool
+    (D) Public AI tools cannot draft replies
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) A person reviews and edits it before it is used
+Q2: (B) Without it, the summary may treat every detail as equally important
+Q3: (B) A starting point for orientation, not a substitute for checking sources
+Q4: (B) The consequences of an error and the sensitivity of the data involved
+Q5: (C) It involves sensitive personal data in an unapproved tool
+==================================================

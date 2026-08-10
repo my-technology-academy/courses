@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A company's spam filter used to rely on a fixed list of banned words. It has since been replaced with a system that studies past emails and adjusts its own criteria for what counts as spam. What best explains this change?
+    (A) The new system is an example of general AI
+    (B) The new system replaces narrow AI with full automation
+    (C) The system has moved from rule-based automation to machine learning
+    (D) The system has moved from generative AI to predictive AI
+
+Q2. Which statement about general AI (AGI) is correct?
+    (A) It already exists in today's most advanced chatbots
+    (B) It is a hypothetical concept of human-like intelligence across any task, and does not exist today
+    (C) It refers to any foundation model applied to more than one task
+    (D) It is another name for narrow AI
+
+Q3. What is a model's context window?
+    (A) The maximum number of tokens it can take into account at once
+    (B) The total size of its training dataset
+    (C) The number of parameters it has
+    (D) The point after which its knowledge is out of date
+
+Q4. Which statement best describes the relationship between deep learning and machine learning?
+    (A) They are unrelated fields of AI
+    (B) Deep learning is a type of machine learning that uses many-layered neural networks
+    (C) Machine learning is a type of deep learning
+    (D) They are two names for the same technique
+
+Q5. A bank uses a model that outputs a probability that a transaction is fraudulent. What type of AI is this?
+    (A) Generative AI
+    (B) Predictive / analytical AI
+    (C) General AI
+    (D) Rule-based automation
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (C) The system has moved from rule-based automation to machine learning
+Q2: (B) It is a hypothetical concept of human-like intelligence across any task, and does not exist today
+Q3: (A) The maximum number of tokens it can take into account at once
+Q4: (B) Deep learning is a type of machine learning that uses many-layered neural networks
+Q5: (B) Predictive / analytical AI
+==================================================

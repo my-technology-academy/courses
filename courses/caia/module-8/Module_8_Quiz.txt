@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. How does bias typically enter an AI system?
+    (A) Through random errors in the model's code
+    (B) Through training data that under-represents groups or reflects historical inequality
+    (C) Through the model's context window
+    (D) Through the user's typing speed
+
+Q2. A job applicant is told AI was used to screen applications, but nobody can say why their application was rejected. What is missing?
+    (A) Disclosure
+    (B) Explainability
+    (C) Governance
+    (D) Data leakage prevention
+
+Q3. What is the role of organisational AI policy and governance?
+    (A) To replace the need for human judgement entirely
+    (B) To turn responsible-AI principles into rules people can actually follow
+    (C) To guarantee an AI tool never makes mistakes
+    (D) To remove the need for approved-tool lists
+
+Q4. What is the correct foundation-level understanding of AI regulation and standards?
+    (A) They are fixed, complete and identical everywhere
+    (B) They are still emerging and actively evolving
+    (C) They do not exist anywhere yet
+    (D) They are not relevant to everyday AI use
+
+Q5. An employee acts on a flawed AI recommendation and later says: "I just did what the AI told me." What principle does this response conflict with?
+    (A) Explainability
+    (B) Accountability
+    (C) Disclosure
+    (D) Data leakage
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) Through training data that under-represents groups or reflects historical inequality
+Q2: (B) Explainability
+Q3: (B) To turn responsible-AI principles into rules people can actually follow
+Q4: (B) They are still emerging and actively evolving
+Q5: (B) Accountability
+==================================================

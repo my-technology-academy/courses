@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. A prompt says: "Write a 100-word product update for existing customers in a friendly tone." Which element of the Task/Context/Format/Constraints framework is "100-word" an example of?
+    (A) Task
+    (B) Context
+    (C) Format
+    (D) Constraints
+
+Q2. Why does "write something about our new product" tend to perform worse than a detailed version of the same request?
+    (A) It uses too many words
+    (B) It leaves length, tone, audience and purpose undefined
+    (C) It exceeds the context window
+    (D) It assigns the wrong persona
+
+Q3. What does it mean to treat the first AI response as a draft?
+    (A) The first response should always be discarded
+    (B) A specific, targeted follow-up is used to refine the result rather than starting over
+    (C) The AI tool is broken and needs to be restarted
+    (D) The user must always accept the first response as final
+
+Q4. Why might providing a sample paragraph work better than describing the desired tone in words?
+    (A) Examples always contain more tokens
+    (B) An example gives a concrete style and tone to match, rather than relying on interpretation
+    (C) Examples change the model's knowledge cut-off
+    (D) Examples remove the need for a task description
+
+Q5. A colleague writes: "Make this better." as a follow-up to an AI-drafted email. What is the main problem with this follow-up?
+    (A) Follow-up prompts are never appropriate
+    (B) It is too vague to guide a specific improvement
+    (C) It exceeds the model's context window
+    (D) It assigns the wrong persona
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (C) Format
+Q2: (B) It leaves length, tone, audience and purpose undefined
+Q3: (B) A specific, targeted follow-up is used to refine the result rather than starting over
+Q4: (B) An example gives a concrete style and tone to match, rather than relying on interpretation
+Q5: (B) It is too vague to guide a specific improvement
+==================================================
