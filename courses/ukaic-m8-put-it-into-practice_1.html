@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UKAIC AI Foundation — Module 8 — Put It Into Practice: Stand Behind It</title>
+<style>
+  :root{
+    --bg:#0A0A0B; --card:#121316; --card-inset:#0E0F11;
+    --line:#26282E; --line-soft:#1B1D21;
+    --accent:#F26B21; --accent-hi:#FF8341;
+    --accent-wash:rgba(242,107,33,.10); --accent-wash-2:rgba(242,107,33,.18);
+    --text:#FFFFFF; --body:#C7CAD0; --muted:#8E9299;
+    --ok:#4FB286; --ok-wash:rgba(79,178,134,.10);
+    --warn:#D9A23B; --warn-wash:rgba(217,162,59,.10);
+    --r:10px;
+    --font:"Inter","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--body);font-family:var(--font);font-size:15px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;padding:28px 24px 56px}
+  .wrap{max-width:1160px;margin:0 auto}
+
+  .masthead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+    padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--line-soft)}
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:8px}
+  h1{margin:0;font-size:27px;line-height:1.15;font-weight:700;color:var(--text);letter-spacing:-.01em}
+  h1 em{font-style:normal;color:var(--accent)}
+  .course-tag{text-align:right;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+  .course-tag b{display:block;color:var(--body);font-weight:600;letter-spacing:.10em}
+
+  .rail{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+  .rail-step{flex:1 1 0;min-width:150px;border:1px solid var(--line-soft);border-radius:var(--r);
+    background:var(--card-inset);padding:10px 12px;position:relative;overflow:hidden}
+  .rail-step .n{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+  .rail-step .t{font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);margin-top:2px;font-weight:600}
+  .rail-step.done{border-color:var(--line)}
+  .rail-step.done .n,.rail-step.done .t{color:#6F737A}
+  .rail-step.active{border-color:var(--accent);background:var(--accent-wash)}
+  .rail-step.active .n,.rail-step.active .t{color:var(--accent)}
+  .rail-step .bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:width .35s ease}
+  .rail-step.active .bar,.rail-step.done .bar{width:100%}
+  .rail-step.done .bar{background:#3D3F45}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin-bottom:16px}
+  .card-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:14px}
+  .sect{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .counter{font-size:11.5px;letter-spacing:.12em;color:var(--muted);font-weight:600}
+  h2{margin:0 0 6px;font-size:19px;font-weight:700;color:var(--text);letter-spacing:-.01em}
+  .lede{color:var(--muted);font-size:14px;max-width:78ch;margin:0}
+  .prompt-label{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
+  .prompt-label.spaced{margin-top:20px}
+
+  .options{display:flex;gap:10px;flex-wrap:wrap}
+  .opt{flex:1 1 190px;min-height:52px;background:var(--card-inset);color:var(--body);
+    border:1px solid var(--line);border-radius:8px;font-family:var(--font);font-size:12.5px;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;padding:14px 16px;cursor:pointer;text-align:center;
+    transition:border-color .15s,background .15s,color .15s}
+  .options.stack{flex-direction:column}
+  .options.stack .opt{flex:0 0 auto;min-height:0;text-align:left;text-transform:none;letter-spacing:0;
+    font-size:15px;font-weight:500;display:flex;gap:12px;align-items:flex-start;line-height:1.45}
+  .options.stack .opt .k{color:var(--accent);font-weight:700;font-size:12.5px;letter-spacing:.08em;padding-top:2px;flex:0 0 auto}
+  .opt:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+  .opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .opt:disabled{cursor:default}
+  .opt.correct{border-color:var(--ok);background:var(--ok-wash);color:#DFF3E9}
+  .opt.wrong{border-color:var(--warn);background:var(--warn-wash);color:#F3E6CB}
+  .opt.dim{opacity:.42}
+
+  .btn{font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    padding:12px 22px;border-radius:7px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);
+    color:#141005;transition:background .15s,border-color .15s,color .15s}
+  .btn:hover:not(:disabled){background:var(--accent-hi);border-color:var(--accent-hi)}
+  .btn:focus-visible{outline:2px solid var(--accent-hi);outline-offset:2px}
+  .btn:disabled{opacity:.35;cursor:not-allowed}
+  .btn.ghost{background:transparent;color:var(--muted);border-color:var(--line)}
+  .btn.ghost:hover:not(:disabled){color:var(--text);border-color:var(--accent);background:transparent}
+  .btn[hidden]{display:none}
+  .nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px}
+  .nav.end{justify-content:flex-end}
+  .navgroup{display:flex;gap:10px;flex-wrap:wrap}
+
+  .fb{margin-top:16px;border-radius:8px;padding:16px 18px;border:1px solid var(--line);
+    background:var(--card-inset);animation:fade .22s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .fb.ok{border-color:rgba(79,178,134,.45);background:var(--ok-wash)}
+  .fb.no{border-color:rgba(217,162,59,.45);background:var(--warn-wash)}
+  .fb .tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:7px}
+  .fb.ok .tag{color:var(--ok)}
+  .fb.no .tag{color:var(--warn)}
+  .fb p{margin:0;color:var(--body);font-size:14.5px;max-width:82ch}
+  .fb p + p{margin-top:9px}
+  .fb .note{color:var(--muted);font-size:13.5px}
+
+  .reveal{margin-top:14px;border:1px dashed var(--line);border-radius:8px;padding:16px 18px;background:var(--card-inset)}
+  .reveal .tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:9px}
+  .reveal p{margin:0;font-size:14.5px;color:var(--body);max-width:82ch}
+  .reveal p + p{margin-top:9px}
+
+  /* specimen panels */
+  .case{border:1px solid var(--line-soft);border-left:2px solid var(--accent);border-radius:8px;
+    background:var(--card-inset);padding:16px 18px;margin:16px 0 18px}
+  .case .clabel{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+  .case .cbody{color:var(--text);font-size:16.5px;font-weight:500;line-height:1.55}
+
+  /* ---------- Stage 4: zone ladder ---------- */
+  .brief{border:1px solid var(--line-soft);border-left:2px solid var(--accent);border-radius:8px;
+    background:var(--card-inset);padding:16px 18px;margin:16px 0 4px}
+  .brief .blabel{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .brief .btext{color:var(--text);font-size:16px;font-weight:500;line-height:1.55}
+  .change{border:1px dashed var(--accent);border-radius:8px;background:var(--accent-wash);
+    padding:14px 16px;margin:14px 0 4px}
+  .change .chlabel{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+  .change .chtext{color:var(--text);font-size:15.5px;font-weight:500;line-height:1.5}
+  .zones{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 4px}
+  .zone{border:1px solid var(--line);border-radius:8px;background:var(--card-inset);padding:14px 13px;
+    cursor:pointer;text-align:left;font-family:var(--font);transition:border-color .15s,background .15s}
+  .zone:hover:not(:disabled){border-color:var(--accent)}
+  .zone:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .zone .zn{font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--muted);margin-bottom:5px}
+  .zone .zt{font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text);line-height:1.3}
+  .zone .zd{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:7px}
+  .zone.correct{border-color:var(--ok);background:var(--ok-wash)}
+  .zone.correct .zn,.zone.correct .zt{color:#DFF3E9}
+  .zone.wrong{border-color:var(--warn);background:var(--warn-wash)}
+  .zone.wrong .zn,.zone.wrong .zt{color:#F3E6CB}
+  .zone.dim{opacity:.42}
+  .zone:disabled{cursor:default}
+  .step{border-top:1px solid var(--line-soft);margin-top:20px;padding-top:18px}
+  .step:first-child{border-top:0;margin-top:0;padding-top:0}
+
+  /* charter */
+  .charter{border:1px dashed var(--line);border-radius:8px;background:rgba(0,0,0,.32);padding:18px 20px;margin-top:16px}
+  .charter .ctag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+  .charter .cintro{font-size:13.5px;color:var(--muted);margin-bottom:12px;line-height:1.5}
+  .charter ol{margin:0;padding-left:20px;color:var(--body)}
+  .charter li{font-family:var(--mono);font-size:13.5px;line-height:1.6;margin-bottom:8px;color:var(--text)}
+  .charter li:last-child{margin-bottom:0}
+
+  /* Takeaway */
+  .takeaway{border:1px solid var(--accent);border-radius:var(--r);
+    background:linear-gradient(180deg,var(--accent-wash) 0%,rgba(242,107,33,.03) 100%);padding:26px 28px}
+  .takeaway h2{font-size:22px;margin-bottom:4px}
+  .tlist{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+  .tlist li{display:flex;gap:14px;align-items:flex-start;background:rgba(10,10,11,.55);
+    border:1px solid rgba(242,107,33,.28);border-radius:8px;padding:14px 16px}
+  .tlist .num{color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.10em;padding-top:2px;flex:0 0 auto}
+  .tlist .txt{color:var(--text);font-size:15px;line-height:1.45}
+  .tlist .txt span{display:block;color:var(--muted);font-size:13.5px;margin-top:4px;font-weight:400}
+  .closer{margin-top:18px;padding:16px 18px;border:1px solid rgba(242,107,33,.35);border-radius:8px;
+    background:rgba(10,10,11,.45);text-align:center}
+  .closer .big{color:var(--text);font-size:18px;font-weight:700;letter-spacing:-.01em}
+  .closer .small{color:var(--muted);font-size:13.5px;margin-top:6px}
+  .score{display:flex;gap:26px;flex-wrap:wrap;align-items:center;margin-top:18px;padding-top:16px;
+    border-top:1px solid rgba(242,107,33,.25)}
+  .score .k{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .score .v{color:var(--text);font-weight:700}
+  .score .v b{color:var(--accent)}
+
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:26px;padding-top:14px;
+    border-top:1px solid var(--line-soft);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:#6A6E75}
+  .foot .mk{color:var(--accent);font-weight:700;letter-spacing:.22em}
+
+  [hidden]{display:none !important}
+
+  @media (max-width:820px){
+    body{padding:20px 16px 44px;font-size:14.5px}
+    .masthead{flex-direction:column;align-items:flex-start;gap:10px}
+    .course-tag{text-align:left}
+    h1{font-size:22px}
+    .rail-step{min-width:0;flex:1 1 45%;padding:8px 10px}
+    .rail-step .t{font-size:10.5px}
+    .card{padding:18px 16px}
+    .options{flex-direction:column}
+    .opt{flex:1 1 auto;width:100%}
+    .nav{flex-direction:column-reverse;align-items:stretch}
+    .nav .btn,.navgroup{width:100%}
+    .navgroup .btn{flex:1}
+    .zones{grid-template-columns:1fr}
+    .zone .zd{margin-top:5px}
+    .case .cbody{font-size:15.5px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow">Put It Into Practice</div>
+      <h1>Stand Behind <em>It</em></h1>
+    </div>
+    <div class="course-tag">
+      <b>UKAIC AI Foundation</b>
+      Module 8 — Ethics, Bias, Responsible AI &amp; Governance
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="Activity progress">
+    <div class="rail-step" data-stage="1"><div class="n">01</div><div class="t">Where Bias Comes From</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="2"><div class="n">02</div><div class="t">Which Obligation</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="3"><div class="n">03</div><div class="t">Do You Disclose</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="4"><div class="n">04</div><div class="t">Zone It</div><div class="bar"></div></div>
+  </nav>
+
+  <!-- INTRO -->
+  <section id="intro" class="card">
+    <div class="card-head"><span class="sect">Before you start · Final module</span><span class="counter">10–15 min</span></div>
+    <h2>The test of responsible use is whether you would be happy to explain it.</h2>
+    <p class="lede">You will trace three biased outcomes back to where the bias entered, name the obligation at stake in three uncomfortable situations, decide four disclosure questions, and then watch one ordinary piece of work climb all four zones of the decision framework as the circumstances change.</p>
+    <div class="nav end"><button class="btn" id="startBtn">Begin Stage 01</button></div>
+  </section>
+
+  <!-- STAGE 1 -->
+  <section id="stage1" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 01 — Where Bias Comes From</span>
+      <span class="counter" id="s1Counter">1 / 3</span>
+    </div>
+    <p class="lede">Three systems producing unfair outcomes. In each case, where did the bias enter?</p>
+    <div class="case">
+      <div class="clabel" id="s1Label"></div>
+      <div class="cbody" id="s1Body"></div>
+    </div>
+    <div class="prompt-label">Which source of bias is this?</div>
+    <div class="options stack" id="s1Options"></div>
+    <div id="s1Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s1Retry" hidden>Try again</button>
+      <button class="btn" id="s1Next" hidden>Continue</button>
+    </div>
+  </section>
+
+  <!-- STAGE 2 -->
+  <section id="stage2" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 02 — Which Obligation</span>
+      <span class="counter" id="s2Counter">1 / 3</span>
+    </div>
+    <p class="lede">Three obligations that are often lumped together, and three situations where only one of them is the problem.</p>
+    <div class="case">
+      <div class="clabel" id="s2Label"></div>
+      <div class="cbody" id="s2Body"></div>
+    </div>
+    <div class="prompt-label">What has gone wrong here?</div>
+    <div class="options stack" id="s2Options"></div>
+    <div id="s2Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s2Retry" hidden>Try again</button>
+      <button class="btn" id="s2Next" hidden>Continue</button>
+    </div>
+  </section>
+
+  <!-- STAGE 3 -->
+  <section id="stage3" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 03 — Do You Disclose?</span>
+      <span class="counter" id="s3Counter">1 / 4</span>
+    </div>
+    <p class="lede">Default to transparency. The question is never whether you can avoid disclosing — it is whether you have a clear reason not to.</p>
+    <div class="case">
+      <div class="clabel" id="s3Label"></div>
+      <div class="cbody" id="s3Body"></div>
+    </div>
+    <div class="prompt-label">What is the right call?</div>
+    <div class="options stack" id="s3Options">
+      <button class="opt" data-v="yes"><span class="k">A</span><span>Disclose the AI involvement.</span></button>
+      <button class="opt" data-v="no"><span class="k">B</span><span>No disclosure needed here.</span></button>
+      <button class="opt" data-v="check"><span class="k">C</span><span>Check the policy before going any further.</span></button>
+    </div>
+    <div id="s3Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s3Retry" hidden>Try again</button>
+      <button class="btn" id="s3Next" hidden>Continue</button>
+    </div>
+  </section>
+
+  <!-- STAGE 4 -->
+  <section id="stage4" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 04 — Zone It</span>
+      <span class="counter" id="s4Count">Step 1 of 4</span>
+    </div>
+    <p class="lede">One piece of work. Nothing about the AI changes. Place it in a zone, then keep placing it as the situation moves.</p>
+    <div class="brief">
+      <div class="blabel">The task</div>
+      <div class="btext">You are drafting a summary of last quarter's customer feedback for your own team. The feedback has already been anonymised.</div>
+    </div>
+    <div id="steps"></div>
+    <div id="s4Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s4Retry" hidden>Try again</button>
+      <button class="btn" id="s4Next" hidden>See the takeaway</button>
+    </div>
+  </section>
+
+  <!-- TAKEAWAY -->
+  <section id="stage5" hidden>
+    <div class="card takeaway">
+      <div class="card-head"><span class="sect">Stage 04 — Complete</span><span class="counter">Module 8 of 8</span></div>
+      <h2>The Takeaway</h2>
+      <p class="lede" style="color:#D6D8DD">Four judgements that decide whether you can stand behind the work.</p>
+      <ul class="tlist">
+        <li><span class="num">01</span><span class="txt">AI is not neutral by default.<span>Bias enters from the training data, from the design choices, and from the context a system is deployed into. Where AI touches a decision about people, checking for it is part of the job.</span></span></li>
+        <li><span class="num">02</span><span class="txt">Transparency, accountability and explainability are three obligations, not one.<span>Say when AI was involved. Own the outcome — “the AI did it” is never a defence. And be able to justify any decision it helped you make.</span></span></li>
+        <li><span class="num">03</span><span class="txt">AI proposes. A person decides. A person owns the outcome.<span>Oversight is not bureaucracy — it is the condition that makes AI use legitimate where the stakes are real.</span></span></li>
+        <li><span class="num">04</span><span class="txt">Place the task before you start it.<span>Use · Use with verification · Escalate · Do not use. When you cannot confidently place something in the first two, move one zone more cautious and ask.</span></span></li>
+      </ul>
+
+      <div class="charter">
+        <div class="ctag">Before you close this — your charter</div>
+        <div class="cintro">Five lines, in your own words, written wherever you will actually see them again. There are no right answers here; the writing is the point.</div>
+        <ol>
+          <li>When and how I will say that AI was involved.</li>
+          <li>What I will never put through an AI tool.</li>
+          <li>How I will verify AI-generated content before I use it.</li>
+          <li>What counts as genuine human review for my consequential work.</li>
+          <li>What I will do when I am not sure whether AI use is appropriate.</li>
+        </ol>
+      </div>
+
+      <div class="closer">
+        <div class="big">AI can assist. Humans remain accountable.</div>
+        <div class="small">That is the last thing this programme has to say, and the one thing that does not change as the tools do.</div>
+      </div>
+
+      <div class="score">
+        <div><div class="k">First-attempt accuracy</div><div class="v"><b id="scoreVal">0 / 14</b></div></div>
+        <div><div class="k">Next</div><div class="v" style="font-weight:500;color:var(--body)">Module 8 PBQ</div></div>
+      </div>
+      <div class="nav">
+        <button class="btn ghost" id="restart">Restart activity</button>
+        <button class="btn" id="finish">Mark as complete</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>UKAIC AI Foundation — Module 8: Ethics, Bias, Responsible AI &amp; Governance — Put It Into Practice</span>
+    <span class="mk">UKAIC</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var el = function(id){return document.getElementById(id);};
+
+  /* ================= DATA ================= */
+  var S1 = [
+    {label:"Recruitment", body:"A CV-screening tool learned from fifteen years of the firm's own hiring decisions. It now scores candidates from certain backgrounds lower — reproducing the pattern in that history.",
+     opts:[
+      {v:"data", t:"Training data", ok:true,
+       fb:"The model inherited the patterns in the material it learned from. Where the history reflects past discrimination, the model treats that pattern as normal and replicates it at scale and speed.",
+       note:"No amount of later technical refinement removes a pattern that was in the data to begin with."},
+      {v:"design", t:"Design choices", ok:false,
+       fb:"Design choices are about what the builders optimised for and which variables they included. Here the objective is unremarkable — it is the fifteen years of history the model learned from that carries the bias."},
+      {v:"context", t:"Deployment context", ok:false,
+       fb:"Deployment context bias appears when a system is used somewhere it was not built for. This tool is being used exactly where it was built — on the same firm's hiring."}
+     ]},
+    {label:"Customer support", body:"A triage system was built to optimise for the fastest possible case closure. Complex cases — which take longer — are now routinely pushed down the queue, even when they are urgent.",
+     opts:[
+      {v:"data", t:"Training data", ok:false,
+       fb:"The data may be perfectly sound. What causes the harm here is the thing the system was told to maximise."},
+      {v:"design", t:"Design choices", ok:true,
+       fb:"What the builders chose to optimise for, and how success was measured. A technically correct system can still embed an unfair assumption through a decision made while building it.",
+       note:"“Fastest closure” quietly became “deprioritise the people with complicated problems”."},
+      {v:"context", t:"Deployment context", ok:false,
+       fb:"The system is being used for the job it was designed for. The problem is what that design was aiming at."}
+     ]},
+    {label:"Speech recognition", body:"A tool built and tested for call centres in one country is rolled out to a region with different accents. It now mishears a large share of callers there.",
+     opts:[
+      {v:"data", t:"Training data", ok:false,
+       fb:"The training data was appropriate for the setting it was built for. The bias appears at the point the system is moved somewhere else."},
+      {v:"design", t:"Design choices", ok:false,
+       fb:"The design was reasonable for its intended setting. What changed is where it is being used."},
+      {v:"context", t:"Deployment context", ok:true,
+       fb:"A system can perform well where it was built for and introduce bias when applied to a different population, geography or purpose.",
+       note:"Context mismatch is one of the most commonly missed sources of harm — nothing about the tool changed, only where it was pointed."}
+     ]}
+  ];
+
+  var S2 = [
+    {label:"A client report", body:"You used AI for most of the drafting of a report going out under your name. Nothing in the report says so, and nobody asks.",
+     opts:[
+      {v:"trans", t:"Transparency", ok:true,
+       fb:"Colleagues, clients and stakeholders have a legitimate interest in knowing when AI contributed to work or a decision. Transparency is what keeps trust possible.",
+       note:"“Nobody asked” is not the test. The test is whether a reasonable person would want to know."},
+      {v:"acc", t:"Accountability", ok:false,
+       fb:"You are still accountable for the report, and nothing here suggests you have tried to shift that. What is missing is anyone being told AI was involved."},
+      {v:"expl", t:"Explainability", ok:false,
+       fb:"You may be perfectly able to justify every line. The gap is that nobody has been told how the work was produced."}
+     ]},
+    {label:"After a bad outcome", body:"A recommendation from a tool drove a decision that went badly. Asked to account for it, the manager says: “The system decided — we just followed it.”",
+     opts:[
+      {v:"trans", t:"Transparency", ok:false,
+       fb:"Everyone here knows AI was involved — it is being named as the reason. What is being avoided is who answers for the decision."},
+      {v:"acc", t:"Accountability", ok:true,
+       fb:"The human or the organisation remains responsible, always. “The AI did it” is not a valid defence professionally, legally or ethically.",
+       note:"Accountability cannot be delegated to a tool. Where a decision causes harm, a person or an entity is answerable for it."},
+      {v:"expl", t:"Explainability", ok:false,
+       fb:"Explainability is about being able to justify the reasoning. The failure here is more basic: nobody is willing to own the decision."}
+     ]},
+    {label:"A ranking you have to defend", body:"You are asked why one candidate was ranked below another. The only answer you can give is that the tool scored them that way.",
+     opts:[
+      {v:"trans", t:"Transparency", ok:false,
+       fb:"The AI involvement is out in the open — it is being cited as the reason. The problem is that the reason explains nothing."},
+      {v:"acc", t:"Accountability", ok:false,
+       fb:"You have not tried to pass responsibility to the tool. What you cannot do is justify the outcome you are responsible for."},
+      {v:"expl", t:"Explainability", ok:true,
+       fb:"If you cannot explain the reasoning behind an output in terms a reasonable person would accept, you are not in a position to act on it.",
+       note:"Acting on an output you cannot explain transfers all of the risk to you."}
+     ]}
+  ];
+
+  var S3 = [
+    {label:"A client report", body:"Your firm's policy says any client-facing document with AI-assisted drafting must carry a note. You used AI for two paragraphs.",
+     a:"yes",
+     fb:{
+      yes:{ok:true, t:"Your organisation requires it, so the question is settled before you start weighing anything else.",
+           n:"Two paragraphs is still AI-assisted drafting. The policy sets the threshold, not your sense of how much counts."},
+      no:{ok:false, t:"The policy explicitly covers this. Deciding it was only a small contribution substitutes your judgement for a rule you are bound by.",
+          n:"Not knowing a policy is not a defence against breaching it — and neither is disagreeing with where it draws the line."},
+      check:{ok:false, t:"You have already checked — the policy is quoted in front of you and it covers this exactly.",
+             n:"Where the policy is clear, follow it. Checking is the answer when it is silent or unclear."}
+     }},
+    {label:"A tidy-up", body:"You wrote a document yourself, then asked an assistant to fix the spacing and correct two spellings. Your policy says nothing about formatting help.",
+     a:"no",
+     fb:{
+      no:{ok:true, t:"Nothing was substantially generated, and nobody is misled about whose work this is. The words and the judgement are yours.",
+          n:"Default to transparency does not mean declaring every spellcheck. It means disclosing where a reasonable person would want to know."},
+      yes:{ok:false, t:"Disclosure is for where AI substantially generated the content, where policy requires it, or where staying silent would mislead. Correcting two spellings meets none of those.",
+           n:"Over-disclosure has a cost too: if everything carries a notice, the notice stops meaning anything."},
+      check:{ok:false, t:"Reasonable instinct, but the three triggers already answer it: nothing generated, nothing required, nobody misled.",
+             n:"Save the escalation for the cases that genuinely sit outside what the policy anticipated."}
+     }},
+    {label:"The board pack", body:"A colleague presents an AI-generated market analysis to the board as their own original research.",
+     a:"yes",
+     fb:{
+      yes:{ok:true, t:"The content was substantially generated by AI and is being presented as personal research. A reasonable person in that room would want to know, and has not been told.",
+           n:"Misleading by omission carries the same professional risk as misleading by statement — intent does not change that."},
+      no:{ok:false, t:"This is the clearest disclosure case there is: heavy reliance on AI output, presented as the author's own work, to people making decisions on the strength of it.",
+          n:"The board is being given a false impression of where the analysis came from."},
+      check:{ok:false, t:"No policy is needed to settle this one. Presenting generated content as your own original research misleads regardless of what any policy says.",
+             n:"Where non-disclosure would mislead, disclosure is required whether or not a rule spells it out."}
+     }},
+    {label:"Something new", body:"You want to use AI for a kind of task nobody in your team has tried before. You have read the policy and it does not clearly cover it.",
+     a:"check",
+     fb:{
+      check:{ok:true, t:"A well-formed policy sets out an approval pathway for exactly this: who to ask, and what they will need to know. Use it before you act, not afterwards.",
+             n:"A policy gap is not permission. Silence means nobody has assessed it yet."},
+      yes:{ok:false, t:"Disclosure answers a different question. Before you decide how to describe the work, you need to know whether to do it this way at all.",
+           n:"The uncertainty itself is the signal: seek approval before proceeding."},
+      no:{ok:false, t:"Deciding no disclosure is needed skips over the real problem — nobody has established whether this use is permitted.",
+          n:"Where the policy is silent, that is not clearance. Ask."}
+     }}
+  ];
+
+  var ZONES = [
+    {v:"1", n:"Zone 1", t:"Use", d:"Routine, low-stakes, easily verified."},
+    {v:"2", n:"Zone 2", t:"Use with verification", d:"External or decision-support. Verify; disclose per policy."},
+    {v:"3", n:"Zone 3", t:"Escalate", d:"Sensitive or novel, or not clearly covered. Seek approval."},
+    {v:"4", n:"Zone 4", t:"Do not use", d:"Personal data, safety-critical, or regulated judgement."}
+  ];
+  var S4 = [
+    {change:null, a:"1",
+     fb:{
+      "1":{ok:true, t:"Internal, low-stakes, and easily checked against the source. Standard review by you before it goes to the team is enough.",
+           n:"Zone 1 is not “no care needed” — it is “normal care is proportionate”."},
+      "2":{ok:false, t:"Verification and disclosure belong with external publication or decision support. Nothing here leaves the team, and the feedback is already anonymised.",
+           n:"Placing routine internal work in Zone 2 makes the framework unusable — everything becomes an exception."},
+      "3":{ok:false, t:"Escalation is for sensitive or novel situations, or ones the policy does not cover. An internal summary of anonymised feedback is none of those.",
+           n:"Over-escalating has a cost: it consumes the attention you will need for the cases that warrant it."},
+      "4":{ok:false, t:"Zone 4 is for personal data, safety-critical decisions and regulated judgement. This has none of those.",
+           n:"The feedback has already been anonymised, which is what keeps it out of Zone 4."}
+     }},
+    {change:"Marketing now wants the summary published as a post on the company website, under the company's name.", a:"2",
+     fb:{
+      "2":{ok:true, t:"It is now published externally, under the organisation's name and reputation. Every factual claim gets verified, and disclosure follows policy.",
+           n:"Nothing about the AI changed. What changed is who sees it and whose name is on it."},
+      "1":{ok:false, t:"Zone 1 assumes the work stays where a mistake is cheap to fix. Once it is on the website under the company's name, it is neither internal nor easily withdrawn.",
+           n:"External publication moves work to Zone 2 — verify thoroughly, and disclose where policy requires."},
+      "3":{ok:false, t:"Nothing here is novel or outside policy. Publishing content on your own website is ordinary work with an ordinary rule attached: verify it and disclose per policy.",
+           n:"Escalate when the situation is not covered — not when it is covered and the answer is “be careful”."},
+      "4":{ok:false, t:"There is no personal data, no safety-critical decision and no regulated judgement — just external publication.",
+           n:"Zone 2 is the zone for content going out under the organisation's name."}
+     }},
+    {change:"Someone suggests generating images of “typical customers” to illustrate the post. Your policy says nothing about synthetic imagery.", a:"3",
+     fb:{
+      "3":{ok:true, t:"Novel, and not covered by policy. That combination is the definition of Zone 3 — seek approval before proceeding rather than assuming it is permitted.",
+           n:"There is a bias question here too: image tools trained on skewed libraries reproduce cultural and gender stereotypes without being asked to. “Typical customer” is exactly the prompt that surfaces it."},
+      "1":{ok:false, t:"Generating synthetic images of “typical” people, for external publication, is not routine low-stakes work.",
+           n:"When you cannot confidently place a task in Zone 1 or 2, that uncertainty is itself the signal to escalate."},
+      "2":{ok:false, t:"Verification would tell you the images look fine. It would not tell you whether generating them is something your organisation permits — and nothing in the policy says.",
+           n:"A policy gap is not permission. Escalate and ask."},
+      "4":{ok:false, t:"Defensible caution, and the more cautious error is the better one to make. But Zone 4 is for cases that are settled — personal data, safety, regulated judgement. This one is unsettled, which is Zone 3.",
+           n:"Escalation is how an unsettled case gets an answer."}
+     }},
+    {change:"Finance asks whether the same approach could draft the regulated disclosures section of the annual report.", a:"4",
+     fb:{
+      "4":{ok:true, t:"Regulated judgement, with statutory obligations attached. A qualified person holds the responsibility and the liability, and AI can hold neither.",
+           n:"Convenience and time pressure do not move a task out of Zone 4."},
+      "1":{ok:false, t:"Regulated disclosures in an annual report are the opposite of routine internal work — they carry statutory obligations and external scrutiny.",
+           n:"Zone 4 exists for exactly this: tasks requiring professional certification or regulated judgement."},
+      "2":{ok:false, t:"No amount of verification transfers regulatory responsibility. The issue is not whether the output can be checked — it is who is qualified to be answerable for it.",
+           n:"AI cannot hold a licence, carry professional indemnity, or bear regulatory responsibility."},
+      "3":{ok:false, t:"Escalation is for cases where the answer is genuinely unclear. This one is clear: regulated judgement is Zone 4.",
+           n:"By all means tell the person who asked — but the answer is no, not “let me find out”."}
+     }}
+  ];
+  var S4_CLOSE = "One piece of work, four zones, and nothing about the AI changed at any point. What changed was who sees it, whether policy covers it, and what is at stake. " +
+    "That is why the framework is applied to the task in front of you rather than memorised as a list — and why, when you cannot confidently place something in Zone 1 or 2, the move is one zone more cautious and a question to someone.";
+
+  /* ================= STATE ================= */
+  var first = 0, i1 = 0, i2 = 0, i3 = 0, i4 = 0;
+
+  function showStage(n){
+    [1,2,3,4,5].forEach(function(i){ el("stage"+i).hidden = (i!==n); });
+    el("intro").hidden = true;
+    var r = Math.min(n,4);
+    Array.prototype.forEach.call(document.querySelectorAll(".rail-step"), function(s){
+      var d = +s.dataset.stage;
+      s.classList.toggle("active", d===r && n<5);
+      s.classList.toggle("done", d<r || n===5);
+    });
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function fbBox(ok,title,note){
+    var d=document.createElement("div");
+    d.className="fb "+(ok?"ok":"no"); d.setAttribute("role","status");
+    d.innerHTML='<span class="tag">'+(ok?"Correct":"Not quite")+'</span><p>'+title+'</p>'+(note?'<p class="note">'+note+'</p>':'');
+    return d;
+  }
+  function lock(c,chosen,correct,sel){
+    Array.prototype.forEach.call(c.querySelectorAll(sel||".opt"),function(b){
+      b.disabled=true; var v=b.dataset.v;
+      if(v===correct) b.classList.add("correct");
+      else if(v===chosen) b.classList.add("wrong");
+      else b.classList.add("dim");
+    });
+  }
+  function unlock(c,sel){
+    Array.prototype.forEach.call(c.querySelectorAll(sel||".opt"),function(b){
+      b.disabled=false; b.classList.remove("correct","wrong","dim");
+    });
+  }
+  function optsHTML(list){
+    return list.map(function(o,n){
+      return '<button class="opt" data-v="'+o.v+'"><span class="k">'+String.fromCharCode(65+n)+'</span><span>'+o.t+'</span></button>';
+    }).join("");
+  }
+
+  /* ---------- generic single-select stage (1 and 2) ---------- */
+  function makeStage(cfg){
+    function render(){
+      var q = cfg.data[cfg.idx()];
+      el(cfg.counter).textContent = (cfg.idx()+1)+" / "+cfg.data.length;
+      el(cfg.label).textContent = q.label;
+      el(cfg.body).textContent = q.body;
+      el(cfg.opts).innerHTML = optsHTML(q.opts);
+      el(cfg.fb).innerHTML=""; delete el(cfg.fb).dataset.retried;
+      el(cfg.next).hidden = true; el(cfg.retry).hidden = true;
+      el(cfg.next).textContent = (cfg.idx()===cfg.data.length-1) ? cfg.lastLabel : "Continue";
+    }
+    el(cfg.opts).addEventListener("click", function(e){
+      var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+      var q = cfg.data[cfg.idx()];
+      var opt = q.opts.filter(function(o){return o.v===b.dataset.v;})[0];
+      var right = q.opts.filter(function(o){return o.ok;})[0];
+      if (opt.ok && !el(cfg.fb).dataset.retried) first++;
+      lock(el(cfg.opts), b.dataset.v, right.v);
+      el(cfg.fb).innerHTML = "";
+      el(cfg.fb).appendChild(fbBox(opt.ok, opt.fb, opt.note||""));
+      el(cfg.next).hidden = false; el(cfg.retry).hidden = opt.ok;
+    });
+    el(cfg.retry).addEventListener("click", function(){
+      el(cfg.fb).innerHTML=""; el(cfg.fb).dataset.retried="1";
+      unlock(el(cfg.opts)); el(cfg.next).hidden=true; el(cfg.retry).hidden=true;
+    });
+    el(cfg.next).addEventListener("click", function(){
+      cfg.bump();
+      if (cfg.idx() < cfg.data.length){ render(); window.scrollTo({top:0,behavior:"smooth"}); }
+      else cfg.done();
+    });
+    return render;
+  }
+
+  var renderS1 = makeStage({
+    data:S1, counter:"s1Counter", label:"s1Label", body:"s1Body", opts:"s1Options",
+    fb:"s1Fb", next:"s1Next", retry:"s1Retry", lastLabel:"Continue to Stage 02",
+    idx:function(){return i1;}, bump:function(){i1++;},
+    done:function(){ renderS2(); showStage(2); }
+  });
+  var renderS2 = makeStage({
+    data:S2, counter:"s2Counter", label:"s2Label", body:"s2Body", opts:"s2Options",
+    fb:"s2Fb", next:"s2Next", retry:"s2Retry", lastLabel:"Continue to Stage 03",
+    idx:function(){return i2;}, bump:function(){i2++;},
+    done:function(){ renderS3(); showStage(3); }
+  });
+
+  /* ================= STAGE 3 ================= */
+  function renderS3(){
+    var q = S3[i3];
+    el("s3Counter").textContent = (i3+1)+" / "+S3.length;
+    el("s3Label").textContent = q.label;
+    el("s3Body").textContent = q.body;
+    el("s3Fb").innerHTML=""; delete el("s3Fb").dataset.retried;
+    unlock(el("s3Options"));
+    el("s3Next").hidden = true; el("s3Retry").hidden = true;
+    el("s3Next").textContent = (i3===S3.length-1) ? "Continue to Stage 04" : "Continue";
+  }
+  el("s3Options").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var q = S3[i3], v = b.dataset.v, f = q.fb[v];
+    if (f.ok && !el("s3Fb").dataset.retried) first++;
+    lock(el("s3Options"), v, q.a);
+    el("s3Fb").innerHTML = "";
+    el("s3Fb").appendChild(fbBox(f.ok, f.t, f.n));
+    el("s3Next").hidden = false; el("s3Retry").hidden = f.ok;
+  });
+  el("s3Retry").addEventListener("click", function(){
+    el("s3Fb").innerHTML=""; el("s3Fb").dataset.retried="1";
+    unlock(el("s3Options")); el("s3Next").hidden=true; el("s3Retry").hidden=true;
+  });
+  el("s3Next").addEventListener("click", function(){
+    i3++;
+    if (i3 < S3.length){ renderS3(); window.scrollTo({top:0,behavior:"smooth"}); }
+    else { buildS4(); showStage(4); }
+  });
+
+  /* ================= STAGE 4 ================= */
+  function buildS4(){
+    i4 = 0;
+    el("steps").innerHTML = "";
+    el("s4Fb").innerHTML = "";
+    el("s4Next").hidden = true; el("s4Retry").hidden = true;
+    renderS4();
+  }
+  function zonesHTML(){
+    return ZONES.map(function(z){
+      return '<button class="zone" type="button" data-v="'+z.v+'">'+
+        '<div class="zn">'+z.n+'</div><div class="zt">'+z.t+'</div><div class="zd">'+z.d+'</div></button>';
+    }).join("");
+  }
+  function renderS4(){
+    var s = S4[i4];
+    el("s4Count").textContent = "Step "+(i4+1)+" of "+S4.length;
+    var wrap = document.createElement("div");
+    wrap.className = "step"; wrap.dataset.s = i4;
+    wrap.innerHTML = (s.change ? '<div class="change"><div class="chlabel">The situation changes</div><div class="chtext">'+s.change+'</div></div>' : '')+
+      '<div class="prompt-label spaced">Which zone does this belong in now?</div>'+
+      '<div class="zones" data-zones="'+i4+'">'+zonesHTML()+'</div>'+
+      '<div data-fb="'+i4+'"></div>';
+    el("steps").appendChild(wrap);
+    if (i4>0) wrap.scrollIntoView({behavior:"smooth",block:"center"});
+  }
+  el("steps").addEventListener("click", function(e){
+    var b = e.target.closest(".zone"); if(!b || b.disabled) return;
+    var box = b.closest("[data-zones]"), si = +box.dataset.zones, s = S4[si];
+    var v = b.dataset.v, f = s.fb[v];
+    var fbEl = el("steps").querySelector('[data-fb="'+si+'"]');
+    if (f.ok && !fbEl.dataset.retried) first++;
+    lock(box, v, s.a, ".zone");
+    fbEl.innerHTML = "";
+    fbEl.appendChild(fbBox(f.ok, f.t, f.n));
+    if (f.ok){
+      el("s4Retry").hidden = true;
+      i4++;
+      if (i4 < S4.length) renderS4();
+      else {
+        el("s4Count").textContent = "Decision reached";
+        var d = document.createElement("div");
+        d.className = "reveal";
+        d.innerHTML = '<span class="tag">What actually moved</span><p>'+S4_CLOSE+'</p>';
+        el("s4Fb").appendChild(d);
+        el("s4Next").hidden = false;
+      }
+    } else {
+      el("s4Retry").hidden = false;
+      el("s4Retry").dataset.s = si;
+    }
+  });
+  el("s4Retry").addEventListener("click", function(){
+    var si = +el("s4Retry").dataset.s;
+    var box = el("steps").querySelector('[data-zones="'+si+'"]');
+    var fbEl = el("steps").querySelector('[data-fb="'+si+'"]');
+    fbEl.innerHTML = ""; fbEl.dataset.retried = "1";
+    unlock(box, ".zone");
+    el("s4Retry").hidden = true;
+  });
+  el("s4Next").addEventListener("click", function(){
+    el("scoreVal").textContent = first + " / 14";
+    showStage(5);
+  });
+
+  /* ================= NAV ================= */
+  el("startBtn").addEventListener("click", function(){ renderS1(); showStage(1); });
+  el("restart").addEventListener("click", function(){
+    first = 0; i1 = 0; i2 = 0; i3 = 0; i4 = 0;
+    var f=el("finish"); f.textContent="Mark as complete"; f.disabled=false; f.style.opacity="";
+    renderS1(); showStage(1);
+  });
+  el("finish").addEventListener("click", function(){
+    var b=el("finish"); b.textContent="Completed ✓"; b.disabled=true; b.style.opacity=".7";
+  });
+})();
+</script>
+</body>
+</html>
