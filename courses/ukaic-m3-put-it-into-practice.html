@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UKAIC AI Foundation — Module 3 — Put It Into Practice: Right Tool, Right Job</title>
+<style>
+  :root{
+    --bg:#0A0A0B; --card:#121316; --card-inset:#0E0F11;
+    --line:#26282E; --line-soft:#1B1D21;
+    --accent:#F26B21; --accent-hi:#FF8341;
+    --accent-wash:rgba(242,107,33,.10); --accent-wash-2:rgba(242,107,33,.18);
+    --text:#FFFFFF; --body:#C7CAD0; --muted:#8E9299;
+    --ok:#4FB286; --ok-wash:rgba(79,178,134,.10);
+    --warn:#D9A23B; --warn-wash:rgba(217,162,59,.10);
+    --r:10px;
+    --font:"Inter","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--body);font-family:var(--font);font-size:15px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;padding:28px 24px 56px}
+  .wrap{max-width:1160px;margin:0 auto}
+
+  /* Header */
+  .masthead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+    padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--line-soft)}
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:8px}
+  h1{margin:0;font-size:27px;line-height:1.15;font-weight:700;color:var(--text);letter-spacing:-.01em}
+  h1 em{font-style:normal;color:var(--accent)}
+  .course-tag{text-align:right;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+  .course-tag b{display:block;color:var(--body);font-weight:600;letter-spacing:.10em}
+
+  /* Rail */
+  .rail{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+  .rail-step{flex:1 1 0;min-width:150px;border:1px solid var(--line-soft);border-radius:var(--r);
+    background:var(--card-inset);padding:10px 12px;position:relative;overflow:hidden}
+  .rail-step .n{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+  .rail-step .t{font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);margin-top:2px;font-weight:600}
+  .rail-step.done{border-color:var(--line)}
+  .rail-step.done .n,.rail-step.done .t{color:#6F737A}
+  .rail-step.active{border-color:var(--accent);background:var(--accent-wash)}
+  .rail-step.active .n,.rail-step.active .t{color:var(--accent)}
+  .rail-step .bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:width .35s ease}
+  .rail-step.active .bar,.rail-step.done .bar{width:100%}
+  .rail-step.done .bar{background:#3D3F45}
+
+  /* Cards */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin-bottom:16px}
+  .card-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:14px}
+  .sect{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .counter{font-size:11.5px;letter-spacing:.12em;color:var(--muted);font-weight:600}
+  h2{margin:0 0 6px;font-size:19px;font-weight:700;color:var(--text);letter-spacing:-.01em}
+  .lede{color:var(--muted);font-size:14px;max-width:76ch;margin:0}
+  .lede strong{color:var(--accent);font-weight:600}
+  .prompt{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
+
+  /* Buttons */
+  .options{display:flex;gap:10px;flex-wrap:wrap}
+  .opt{flex:1 1 190px;min-height:52px;background:var(--card-inset);color:var(--body);
+    border:1px solid var(--line);border-radius:8px;font-family:var(--font);font-size:12.5px;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;padding:14px 16px;cursor:pointer;text-align:center;
+    transition:border-color .15s,background .15s,color .15s}
+  .options.stack{flex-direction:column}
+  .options.stack .opt{flex:0 0 auto;min-height:0;text-align:left;text-transform:none;letter-spacing:0;
+    font-size:15px;font-weight:500;display:flex;gap:12px;align-items:flex-start;line-height:1.45}
+  .options.stack .opt .k{color:var(--accent);font-weight:700;font-size:12.5px;letter-spacing:.08em;padding-top:2px;flex:0 0 auto}
+  .opt:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+  .opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .opt:disabled{cursor:default}
+  .opt.correct{border-color:var(--ok);background:var(--ok-wash);color:#DFF3E9}
+  .opt.wrong{border-color:var(--warn);background:var(--warn-wash);color:#F3E6CB}
+  .opt.dim{opacity:.42}
+
+  .btn{font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    padding:12px 22px;border-radius:7px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);
+    color:#141005;transition:background .15s,border-color .15s,color .15s}
+  .btn:hover:not(:disabled){background:var(--accent-hi);border-color:var(--accent-hi)}
+  .btn:focus-visible{outline:2px solid var(--accent-hi);outline-offset:2px}
+  .btn:disabled{opacity:.35;cursor:not-allowed}
+  .btn.ghost{background:transparent;color:var(--muted);border-color:var(--line)}
+  .btn.ghost:hover:not(:disabled){color:var(--text);border-color:var(--accent);background:transparent}
+  .btn[hidden]{display:none}
+  .nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px}
+  .nav.end{justify-content:flex-end}
+  .navgroup{display:flex;gap:10px;flex-wrap:wrap}
+
+  /* Feedback */
+  .fb{margin-top:16px;border-radius:8px;padding:16px 18px;border:1px solid var(--line);
+    background:var(--card-inset);animation:fade .22s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .fb.ok{border-color:rgba(79,178,134,.45);background:var(--ok-wash)}
+  .fb.no{border-color:rgba(217,162,59,.45);background:var(--warn-wash)}
+  .fb .tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:7px}
+  .fb.ok .tag{color:var(--ok)}
+  .fb.no .tag{color:var(--warn)}
+  .fb p{margin:0;color:var(--body);font-size:14.5px;max-width:82ch}
+  .fb p + p{margin-top:9px}
+  .fb .note{color:var(--muted);font-size:13.5px}
+
+  .reveal{margin-top:14px;border:1px dashed var(--line);border-radius:8px;padding:16px 18px;background:var(--card-inset)}
+  .reveal .tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:7px}
+  .reveal p{margin:0;font-size:14.5px;color:var(--body);max-width:82ch}
+
+  /* ---------- Stage 1: tagging board ---------- */
+  .board{display:flex;flex-direction:column;gap:10px;margin:16px 0 4px}
+  .row{border:1px solid var(--line-soft);border-radius:8px;background:var(--card-inset);padding:14px 16px}
+  .row.right{border-color:var(--ok)}
+  .row.wrong{border-color:var(--warn)}
+  .row .task{color:var(--text);font-size:15px;font-weight:500;line-height:1.45;margin-bottom:10px;display:flex;gap:12px}
+  .row .task .rn{color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.08em;padding-top:3px;flex:0 0 auto}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;padding-left:26px}
+  .chip{background:transparent;border:1px solid var(--line);border-radius:6px;color:var(--muted);
+    font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    padding:8px 12px;cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+  .chip:hover:not(:disabled){border-color:var(--accent);color:var(--body)}
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .chip.sel{border-color:var(--accent);background:var(--accent-wash-2);color:var(--text)}
+  .chip.key{border-color:var(--ok);color:#BFE6D4;background:var(--ok-wash)}
+  .chip.miss{border-color:var(--warn);color:#F3E6CB;background:var(--warn-wash)}
+  .chip:disabled{cursor:default}
+  .rowfb{margin-top:10px;padding-left:26px;font-size:13.5px;color:var(--muted);line-height:1.45}
+  .rowfb b{color:var(--body);font-weight:600}
+
+  /* ---------- Stage 2: bins ---------- */
+  .tray{display:flex;flex-direction:column;gap:8px;margin:16px 0 18px}
+  .item{border:1px solid var(--line);border-radius:8px;background:var(--card-inset);padding:12px 14px;
+    color:var(--text);font-size:14.5px;font-weight:500;text-align:left;cursor:pointer;font-family:var(--font);
+    line-height:1.45;transition:border-color .15s,background .15s,opacity .15s}
+  .item:hover:not(:disabled){border-color:var(--accent)}
+  .item:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .item.sel{border-color:var(--accent);background:var(--accent-wash-2)}
+  .item.placed{display:none}
+  .bins{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .bin{border:1px dashed var(--line);border-radius:8px;background:rgba(14,15,17,.6);padding:14px;min-height:130px;
+    cursor:pointer;transition:border-color .15s,background .15s}
+  .bin:hover{border-color:var(--accent)}
+  .bin .binttl{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+  .bin .bindesc{font-size:12.5px;color:var(--muted);line-height:1.4;margin-bottom:10px}
+  .bin.armed{border-color:var(--accent);background:var(--accent-wash)}
+  .bin .drop{display:flex;flex-direction:column;gap:6px}
+  .bin .chipitem{border:1px solid var(--line);border-radius:6px;background:var(--card-inset);padding:8px 10px;
+    font-size:13px;color:var(--body);line-height:1.4;cursor:pointer}
+  .bin .chipitem.right{border-color:var(--ok);color:#DFF3E9}
+  .bin .chipitem.wrong{border-color:var(--warn);color:#F3E6CB}
+  .bin.locked,.bin.locked .chipitem{cursor:default}
+
+  /* ---------- Stage 3: claims ---------- */
+  .quote{border:1px solid var(--line-soft);border-left:2px solid var(--accent);border-radius:8px;
+    background:var(--card-inset);padding:18px 20px;margin:16px 0 18px}
+  .quote .who{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .quote .said{color:var(--text);font-size:16.5px;font-weight:500;line-height:1.5}
+
+  /* ---------- Stage 4: decision path ---------- */
+  .gate{border:1px solid var(--line-soft);border-radius:8px;background:var(--card-inset);padding:16px 18px;margin-bottom:10px}
+  .gate.pending{opacity:.35}
+  .gate.active{border-color:var(--line)}
+  .gate .ghead{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:8px}
+  .gate .gname{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .gate .verdict{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  .gate .verdict.pass{color:var(--ok)}
+  .gate .verdict.stop{color:var(--warn)}
+  .gate .gq{color:var(--text);font-size:15px;font-weight:500;line-height:1.45;margin-bottom:12px}
+  .gate .gfb{font-size:13.5px;color:var(--muted);line-height:1.45;margin-top:12px}
+  .gate .gfb b{color:var(--body);font-weight:600}
+  .brief{border:1px solid var(--line-soft);border-left:2px solid var(--accent);border-radius:8px;
+    background:var(--card-inset);padding:16px 18px;margin:16px 0 18px;color:var(--text);font-size:15.5px;
+    font-weight:500;line-height:1.5}
+  .brief span{display:block;color:var(--muted);font-size:13.5px;font-weight:400;margin-top:6px}
+
+  /* Takeaway */
+  .takeaway{border:1px solid var(--accent);border-radius:var(--r);
+    background:linear-gradient(180deg,var(--accent-wash) 0%,rgba(242,107,33,.03) 100%);padding:26px 28px}
+  .takeaway h2{font-size:22px;margin-bottom:4px}
+  .tlist{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+  .tlist li{display:flex;gap:14px;align-items:flex-start;background:rgba(10,10,11,.55);
+    border:1px solid rgba(242,107,33,.28);border-radius:8px;padding:14px 16px}
+  .tlist .num{color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.10em;padding-top:2px;flex:0 0 auto}
+  .tlist .txt{color:var(--text);font-size:15px;line-height:1.45}
+  .tlist .txt span{display:block;color:var(--muted);font-size:13.5px;margin-top:4px;font-weight:400}
+  .score{display:flex;gap:26px;flex-wrap:wrap;align-items:center;margin-top:18px;padding-top:16px;
+    border-top:1px solid rgba(242,107,33,.25)}
+  .score .k{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .score .v{color:var(--text);font-weight:700}
+  .score .v b{color:var(--accent)}
+
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:26px;padding-top:14px;
+    border-top:1px solid var(--line-soft);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:#6A6E75}
+  .foot .mark{color:var(--accent);font-weight:700;letter-spacing:.22em}
+
+  [hidden]{display:none !important}
+
+  @media (max-width:820px){
+    body{padding:20px 16px 44px;font-size:14.5px}
+    .masthead{flex-direction:column;align-items:flex-start;gap:10px}
+    .course-tag{text-align:left}
+    h1{font-size:22px}
+    .rail-step{min-width:0;flex:1 1 45%;padding:8px 10px}
+    .rail-step .t{font-size:10.5px}
+    .card{padding:18px 16px}
+    .options{flex-direction:column}
+    .opt{flex:1 1 auto;width:100%}
+    .nav{flex-direction:column-reverse;align-items:stretch}
+    .nav .btn,.navgroup{width:100%}
+    .navgroup .btn{flex:1}
+    .bins{grid-template-columns:1fr}
+    .chips{padding-left:0}
+    .rowfb{padding-left:0}
+    .chip{flex:1 1 auto;text-align:center}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow">Put It Into Practice</div>
+      <h1>Right Tool, <em>Right Job</em></h1>
+    </div>
+    <div class="course-tag">
+      <b>UKAIC AI Foundation</b>
+      Module 3 — The AI Landscape &amp; Generative AI
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="Activity progress">
+    <div class="rail-step" data-stage="1"><div class="n">01</div><div class="t">Capability</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="2"><div class="n">02</div><div class="t">Layers</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="3"><div class="n">03</div><div class="t">Claim Check</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="4"><div class="n">04</div><div class="t">Selection</div><div class="bar"></div></div>
+  </nav>
+
+  <!-- INTRO -->
+  <section id="intro" class="card">
+    <div class="card-head"><span class="sect">Before you start</span><span class="counter">10–15 min</span></div>
+    <h2>Module 1 asked what counts as AI. Module 2 asked how it works. This one asks which kind you need.</h2>
+    <p class="lede">You will name the capability behind five workplace systems, separate the model from the product from the service, test three claims people actually make, and then run a real tool-selection decision to its conclusion.</p>
+    <div class="nav end"><button class="btn" id="startBtn">Begin Stage 01</button></div>
+  </section>
+
+  <!-- STAGE 1 -->
+  <section id="stage1" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 01 — Name the Capability</span>
+      <span class="counter" id="s1Count">0 of 5 tagged</span>
+    </div>
+    <p class="lede">Five systems, described by what they do. Tag each one with the capability behind it. Tag all five, then check.</p>
+    <div class="board" id="board"></div>
+    <div id="s1Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s1Retry" hidden>Try again</button>
+      <div class="navgroup">
+        <button class="btn" id="s1Check" disabled>Check answers</button>
+        <button class="btn" id="s1Next" hidden>Continue to Stage 02</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 2 -->
+  <section id="stage2" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 02 — Model, Application, Service</span>
+      <span class="counter" id="s2Count">0 of 4 placed</span>
+    </div>
+    <p class="lede">Four things an organisation might be talking about. Tap one, then tap the layer it belongs to. Tap a placed item to take it back.</p>
+    <div class="tray" id="tray"></div>
+    <div class="bins" id="bins">
+      <div class="bin" data-bin="model">
+        <div class="binttl">Model</div>
+        <div class="bindesc">The underlying engine.</div>
+        <div class="drop"></div>
+      </div>
+      <div class="bin" data-bin="app">
+        <div class="binttl">Application</div>
+        <div class="bindesc">The product people use.</div>
+        <div class="drop"></div>
+      </div>
+      <div class="bin" data-bin="service">
+        <div class="binttl">Service</div>
+        <div class="bindesc">The business capability delivered.</div>
+        <div class="drop"></div>
+      </div>
+    </div>
+    <div id="s2Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s2Retry" hidden>Try again</button>
+      <div class="navgroup">
+        <button class="btn" id="s2Check" disabled>Check placement</button>
+        <button class="btn" id="s2Next" hidden>Continue to Stage 03</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 3 -->
+  <section id="stage3" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 03 — Claim Check</span>
+      <span class="counter" id="s3Counter">1 / 3</span>
+    </div>
+    <p class="lede">Three things said in real meetings. Is the claim justified by what the technology actually does, or overstated?</p>
+    <div class="quote">
+      <div class="who" id="s3Who"></div>
+      <div class="said" id="s3Said"></div>
+    </div>
+    <div class="prompt">Your judgement</div>
+    <div class="options" id="s3Options">
+      <button class="opt" data-v="ok">Justified</button>
+      <button class="opt" data-v="no">Overstated</button>
+    </div>
+    <div id="s3Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s3Retry" hidden>Try again</button>
+      <button class="btn" id="s3Next" hidden>Continue</button>
+    </div>
+  </section>
+
+  <!-- STAGE 4 -->
+  <section id="stage4" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 04 — Run the Four Questions</span>
+      <span class="counter" id="s4Count">Question 1 of 4</span>
+    </div>
+    <p class="lede">Work the selection framework in order. Each question unlocks the next.</p>
+    <div class="brief">
+      A finance team wants to use a free, public AI assistant to turn client account statements into monthly review notes.
+      <span>Around 30 statements a month, each 10–15 pages, each naming the client and their balances.</span>
+    </div>
+    <div id="gates"></div>
+    <div id="s4Fb"></div>
+    <div class="nav end"><button class="btn" id="s4Next" hidden>See the takeaway</button></div>
+  </section>
+
+  <!-- TAKEAWAY -->
+  <section id="stage5" hidden>
+    <div class="card takeaway">
+      <div class="card-head"><span class="sect">Stage 04 — Complete</span><span class="counter">Activity complete</span></div>
+      <h2>The Takeaway</h2>
+      <p class="lede" style="color:#D6D8DD">Four judgements to carry into any conversation about AI tools.</p>
+      <ul class="tlist">
+        <li><span class="num">01</span><span class="txt">There is no single best AI tool.<span>Generating, classifying, retrieving and acting are different capabilities. Match the category to the task.</span></span></li>
+        <li><span class="num">02</span><span class="txt">Grounding is not a guarantee.<span>RAG improves freshness and sourcing. It does not remove error, and it does not remove your review.</span></span></li>
+        <li><span class="num">03</span><span class="txt">More autonomy needs more oversight, not less.<span>An agent takes real actions across several steps, and a mistake early on carries forward into everything after it.</span></span></li>
+        <li><span class="num">04</span><span class="txt">Capability, cost, data sensitivity, approval.<span>Sensitivity is the one that can stop everything on its own — and approval never overrides it.</span></span></li>
+      </ul>
+      <div class="score">
+        <div><div class="k">First-attempt accuracy</div><div class="v"><b id="scoreVal">0 / 16</b></div></div>
+        <div><div class="k">Next</div><div class="v" style="font-weight:500;color:var(--body)">Module 3 PBQ</div></div>
+      </div>
+      <div class="nav">
+        <button class="btn ghost" id="restart">Restart activity</button>
+        <button class="btn" id="finish">Mark as complete</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>UKAIC AI Foundation — Module 3: The AI Landscape &amp; Generative AI — Put It Into Practice</span>
+    <span class="mark">UKAIC</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var el = function(id){return document.getElementById(id);};
+
+  /* ================= DATA ================= */
+  var LABELS = [
+    {k:"gen",  t:"Generative"},
+    {k:"clas", t:"Classifying"},
+    {k:"rag",  t:"RAG"},
+    {k:"agent",t:"Agent"}
+  ];
+  var ROWS = [
+    {t:"A tool drafts a first version of a customer email from three bullet points.", a:"gen",
+     ok:"Generative. It produces content that did not exist before.",
+     no:"Generative — it writes something new rather than sorting or labelling something that already exists."},
+    {t:"A system reads each incoming support ticket and sends it to the right team.", a:"clas",
+     ok:"Classifying. It sorts and routes existing content; nothing new is created.",
+     no:"Classifying. Routing is sorting existing content — no new content is produced."},
+    {t:"An assistant answers staff questions about the leave policy by searching the policy document it has been given.", a:"rag",
+     ok:"Retrieval-augmented generation. It retrieves from a supplied source, then generates an answer grounded in that text.",
+     no:"This is RAG — the answer is generated, but from a document supplied to it rather than from training data alone."},
+    {t:"Given the goal “compare our three suppliers”, a system searches internal databases, extracts figures, flags gaps and delivers a comparison document.", a:"agent",
+     ok:"Agent. It plans several steps, uses tools, and works towards a goal without a new instruction at each stage.",
+     no:"Agent. A single-turn assistant answers once and stops; this one plans and executes multiple steps towards a goal."},
+    {t:"A tool reads an uploaded photograph of a damaged part and writes a paragraph describing the damage for the claim file.", a:"gen",
+     ok:"Generative. The description is new text that did not exist before.",
+     no:"Generative — the output is new written content, not a label applied to something that already exists."}
+  ];
+  var S1_NOTE = "One more label worth knowing: row 5 takes an image in and returns text out, which makes it <strong>multimodal</strong> — " +
+    "more than one type of input or output in a single system. Multimodal is a property of the model, not a fifth category, " +
+    "and most of these tools are built on <strong>foundation models</strong>: large, general-purpose models adapted to many tasks.";
+
+  var ITEMS = [
+    {id:0, t:"The underlying engine that turns an input into an output.", bin:"model"},
+    {id:1, t:"The chat product your team logs into each morning, with its own features and data rules.", bin:"app"},
+    {id:2, t:"A different vendor's writing assistant, built on that same engine, with its own pricing.", bin:"app"},
+    {id:3, t:"Automated first-line HR query handling, built into how the department works day to day.", bin:"service"}
+  ];
+  var BIN_NAME = {model:"Model", app:"Application", service:"Service"};
+  var S2_OK = "The two products in the middle run on the same engine. That is the point: one model can power many applications, " +
+    "each with different features, pricing and data-handling rules.";
+  var S2_NO = "Work from what people touch. The engine is the model. The product they log into is the application — and two different " +
+    "applications can share one engine. The business capability the department relies on is the service.";
+
+  var S3 = [
+    {who:"A colleague, in a project meeting", said:"“We've connected it to our policy library, so it can't give a wrong answer any more.”",
+     a:"no",
+     ok:"RAG improves grounding and freshness, but the model can still misread, misquote or misrepresent what it retrieved — and retrieval itself can return the wrong passage. Human review stays.",
+     no:"This one is overstated. Retrieval reduces the risk of error; it does not remove it, and it does not remove the review step."},
+    {who:"A vendor, in a product demo", said:"“It answers from your own documents rather than relying on general training knowledge.”",
+     a:"ok",
+     ok:"That is a fair description of what retrieval-augmented generation does — it answers from sources supplied to it, not from training data alone.",
+     no:"This one is justified. Answering from supplied sources rather than training data alone is exactly what RAG does. The overstatement would be claiming it cannot be wrong."},
+    {who:"A manager, planning a workflow", said:"“The agent handles the supplier check end to end, so we can drop the review step.”",
+     a:"no",
+     ok:"An agent takes real actions across several steps, and an error early on carries forward into everything after it. Autonomy raises the need for oversight rather than lowering it.",
+     no:"Overstated. The more steps a system takes on its own, the more oversight it needs — checkpoints and review are professional requirements, not optional extras."}
+  ];
+
+  var GATES = [
+    {name:"01 Capability", q:"Does this category of tool actually do the job?",
+     opts:[{v:"a",t:"Yes — summarising long documents is core text generation.",ok:true},
+           {v:"b",t:"No — this needs a classifying tool.",ok:false}],
+     verdict:"pass",
+     ok:"Summarising a document into a shorter note is generation, not classification. The category fits, so the question passes.",
+     no:"A classifying tool sorts or labels what already exists. Producing a written summary is generation — the category does fit."},
+    {name:"02 Cost", q:"Thirty statements a month, each 10–15 pages. What should the team expect?",
+     opts:[{v:"a",t:"A free tier is likely to be enough.",ok:false},
+           {v:"b",t:"A paid plan is likely to be needed at this length and volume.",ok:true}],
+     verdict:"pass",
+     ok:"Documents this long, at this volume, will usually exceed what a free tier allows. Worth settling before a workflow is built around it.",
+     no:"Ten to fifteen pages, thirty times a month, is well beyond typical free-tier limits. Expect to need a paid plan."},
+    {name:"03 Data sensitivity", q:"The statements name clients and their balances. Can they go to a public tool?",
+     opts:[{v:"a",t:"Yes, provided someone checks the output afterwards.",ok:false},
+           {v:"b",t:"No — this is client financial data, and it stops here until the policy has been checked.",ok:true}],
+     verdict:"stop",
+     ok:"Named clients and their balances are confidential data. Checking the output afterwards does nothing about where the data has already been sent.",
+     no:"Reviewing the output does not undo sending the data. Named clients and their balances cannot go to a public tool without checking the organisation's policy first."},
+    {name:"04 Approval", q:"The tool is on the organisation's approved list. What now?",
+     opts:[{v:"a",t:"It is approved, so the team can proceed.",ok:false},
+           {v:"b",t:"Escalate to the data protection lead before any AI is used on this task.",ok:true},
+           {v:"c",t:"Proceed, but delete the outputs afterwards.",ok:false}],
+     verdict:"stop",
+     ok:"Approval means a tool is permitted for business use in general. It does not authorise a particular category of data. The sensitivity question is unresolved, so it goes to the data protection lead first.",
+     no:"Approval is not permission for this data. A tool can be approved for business use and still be the wrong place for confidential client information — resolve sensitivity first."}
+  ];
+  var S4_CLOSE = "Notice what happened. Capability passed. Cost passed. It still stopped — and being on the approved list did not restart it. " +
+    "That is why data sensitivity is the question worth asking before anyone gets attached to a tool: it is the one that can rule an option out on its own.";
+
+  /* ================= STATE ================= */
+  var tags = new Array(5).fill(null), s1Locked=false, s1Tried=false;
+  var place = {}, sel=null, s2Locked=false, s2Tried=false;
+  var i3=0, gi=0, first=0;
+
+  function showStage(n){
+    [1,2,3,4,5].forEach(function(i){ el("stage"+i).hidden = (i!==n); });
+    el("intro").hidden = true;
+    var r = Math.min(n,4);
+    Array.prototype.forEach.call(document.querySelectorAll(".rail-step"), function(s){
+      var d = +s.dataset.stage;
+      s.classList.toggle("active", d===r && n<5);
+      s.classList.toggle("done", d<r || n===5);
+    });
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function fbBox(ok,title,note){
+    var d=document.createElement("div");
+    d.className="fb "+(ok?"ok":"no"); d.setAttribute("role","status");
+    d.innerHTML='<span class="tag">'+(ok?"Correct":"Not quite")+'</span><p>'+title+'</p>'+(note?'<p class="note">'+note+'</p>':'');
+    return d;
+  }
+  function lock(c,chosen,correct){
+    Array.prototype.forEach.call(c.querySelectorAll(".opt"),function(b){
+      b.disabled=true; var v=b.dataset.v;
+      if(v===correct) b.classList.add("correct");
+      else if(v===chosen) b.classList.add("wrong");
+      else b.classList.add("dim");
+    });
+  }
+  function unlock(c){
+    Array.prototype.forEach.call(c.querySelectorAll(".opt"),function(b){
+      b.disabled=false; b.classList.remove("correct","wrong","dim");
+    });
+  }
+
+  /* ================= STAGE 1 ================= */
+  function buildS1(){
+    tags = new Array(5).fill(null); s1Locked = false;
+    var b = el("board"); b.innerHTML = "";
+    ROWS.forEach(function(r,i){
+      var row = document.createElement("div");
+      row.className = "row"; row.dataset.i = i;
+      var chips = LABELS.map(function(l){
+        return '<button class="chip" type="button" data-k="'+l.k+'">'+l.t+'</button>';
+      }).join("");
+      row.innerHTML = '<div class="task"><span class="rn">'+(i+1)+'</span><span>'+r.t+'</span></div>'+
+                      '<div class="chips">'+chips+'</div>';
+      b.appendChild(row);
+    });
+    el("s1Fb").innerHTML = "";
+    el("s1Check").hidden=false; el("s1Check").disabled=true;
+    el("s1Next").hidden=true; el("s1Retry").hidden=true;
+    el("s1Count").textContent = "0 of 5 tagged";
+  }
+  el("board").addEventListener("click", function(e){
+    if (s1Locked) return;
+    var c = e.target.closest(".chip"); if(!c) return;
+    var row = c.closest(".row"), i = +row.dataset.i;
+    Array.prototype.forEach.call(row.querySelectorAll(".chip"), function(x){ x.classList.remove("sel"); });
+    c.classList.add("sel"); tags[i] = c.dataset.k;
+    var n = tags.filter(function(x){return x;}).length;
+    el("s1Count").textContent = n+" of 5 tagged";
+    el("s1Check").disabled = (n<5);
+  });
+  el("s1Check").addEventListener("click", function(){
+    s1Locked = true;
+    var correct = 0;
+    ROWS.forEach(function(r,i){
+      var row = el("board").children[i], ok = (tags[i]===r.a);
+      if (ok) correct++;
+      row.classList.add(ok?"right":"wrong");
+      Array.prototype.forEach.call(row.querySelectorAll(".chip"), function(x){
+        x.disabled = true; x.classList.remove("sel");
+        if (x.dataset.k===r.a) x.classList.add("key");
+        else if (x.dataset.k===tags[i]) x.classList.add("miss");
+      });
+      var f = document.createElement("div");
+      f.className = "rowfb";
+      f.innerHTML = ok ? "<b>Correct.</b> " + r.ok.replace(/^[^.]+\.\s*/,"") : "<b>Not quite.</b> " + r.no;
+      row.appendChild(f);
+    });
+    if (correct===5 && !s1Tried) first += 5;
+    else if (correct===5 && s1Tried) first += 0;
+    else first += (s1Tried ? 0 : correct);
+    s1Tried = true;
+    el("s1Fb").innerHTML = "";
+    el("s1Fb").appendChild(fbBox(correct===5,
+      correct===5 ? "All five identified." : correct+" of 5 identified. The correct capability is highlighted on each row.",
+      ""));
+    var rv = document.createElement("div");
+    rv.className = "reveal";
+    rv.innerHTML = '<span class="tag">Worth knowing</span><p>'+S1_NOTE+'</p>';
+    el("s1Fb").appendChild(rv);
+    el("s1Check").hidden = true;
+    el("s1Retry").hidden = (correct===5);
+    el("s1Next").hidden = false;
+  });
+  el("s1Retry").addEventListener("click", function(){ buildS1(); });
+  el("s1Next").addEventListener("click", function(){ buildS2(); showStage(2); });
+
+  /* ================= STAGE 2 ================= */
+  function buildS2(){
+    place = {}; sel = null; s2Locked = false;
+    var t = el("tray"); t.innerHTML = "";
+    ITEMS.forEach(function(it){
+      var b = document.createElement("button");
+      b.className = "item"; b.type = "button"; b.dataset.id = it.id; b.textContent = it.t;
+      t.appendChild(b);
+    });
+    Array.prototype.forEach.call(el("bins").children, function(bin){
+      bin.querySelector(".drop").innerHTML = ""; bin.classList.remove("armed","locked");
+    });
+    el("s2Fb").innerHTML = "";
+    el("s2Check").hidden=false; el("s2Check").disabled=true;
+    el("s2Next").hidden=true; el("s2Retry").hidden=true;
+    el("s2Count").textContent = "0 of 4 placed";
+  }
+  function renderS2(){
+    Array.prototype.forEach.call(el("bins").children, function(bin){
+      var k = bin.dataset.bin, drop = bin.querySelector(".drop");
+      drop.innerHTML = "";
+      ITEMS.forEach(function(it){
+        if (place[it.id]===k){
+          var c = document.createElement("div");
+          c.className = "chipitem"; c.dataset.id = it.id; c.textContent = it.t;
+          drop.appendChild(c);
+        }
+      });
+    });
+    Array.prototype.forEach.call(el("tray").children, function(b){
+      b.classList.toggle("placed", place[+b.dataset.id] !== undefined);
+      b.classList.toggle("sel", sel === +b.dataset.id);
+    });
+    var n = Object.keys(place).length;
+    el("s2Count").textContent = n+" of 4 placed";
+    el("s2Check").disabled = (n<4);
+    Array.prototype.forEach.call(el("bins").children, function(bin){
+      bin.classList.toggle("armed", sel!==null);
+    });
+  }
+  el("tray").addEventListener("click", function(e){
+    if (s2Locked) return;
+    var b = e.target.closest(".item"); if(!b) return;
+    var id = +b.dataset.id;
+    sel = (sel===id) ? null : id;
+    renderS2();
+  });
+  el("bins").addEventListener("click", function(e){
+    if (s2Locked) return;
+    var bin = e.target.closest(".bin"); if(!bin) return;
+    if (sel !== null){ place[sel] = bin.dataset.bin; sel = null; renderS2(); return; }
+    var chip = e.target.closest(".chipitem");
+    if (chip){ delete place[+chip.dataset.id]; renderS2(); }
+  });
+  el("s2Check").addEventListener("click", function(){
+    s2Locked = true;
+    var correct = 0;
+    ITEMS.forEach(function(it){ if (place[it.id]===it.bin) correct++; });
+    Array.prototype.forEach.call(el("bins").children, function(bin){
+      bin.classList.add("locked"); bin.classList.remove("armed");
+      Array.prototype.forEach.call(bin.querySelectorAll(".chipitem"), function(c){
+        var it = ITEMS[+c.dataset.id];
+        c.classList.add(it.bin===bin.dataset.bin ? "right" : "wrong");
+        if (it.bin!==bin.dataset.bin) c.textContent = it.t + "  →  " + BIN_NAME[it.bin];
+      });
+    });
+    if (!s2Tried) first += correct;
+    s2Tried = true;
+    el("s2Fb").innerHTML = "";
+    el("s2Fb").appendChild(fbBox(correct===4,
+      correct===4 ? "All four in the right layer." : correct+" of 4 placed correctly. Misplaced items show where they belong.",
+      correct===4 ? S2_OK : S2_NO));
+    el("s2Check").hidden = true;
+    el("s2Retry").hidden = (correct===4);
+    el("s2Next").hidden = false;
+  });
+  el("s2Retry").addEventListener("click", function(){ buildS2(); });
+  el("s2Next").addEventListener("click", function(){ renderS3(); showStage(3); });
+
+  /* ================= STAGE 3 ================= */
+  function renderS3(){
+    var q = S3[i3];
+    el("s3Counter").textContent = (i3+1)+" / "+S3.length;
+    el("s3Who").textContent = q.who;
+    el("s3Said").textContent = q.said;
+    el("s3Fb").innerHTML = ""; delete el("s3Fb").dataset.retried;
+    unlock(el("s3Options"));
+    el("s3Next").hidden = true; el("s3Retry").hidden = true;
+    el("s3Next").textContent = (i3===S3.length-1) ? "Continue to Stage 04" : "Continue";
+  }
+  el("s3Options").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var q = S3[i3], v = b.dataset.v, ok = (v===q.a);
+    if (ok && !el("s3Fb").dataset.retried) first++;
+    lock(el("s3Options"), v, q.a);
+    el("s3Fb").innerHTML = "";
+    el("s3Fb").appendChild(fbBox(ok, ok?q.ok:q.no, ""));
+    el("s3Next").hidden = false; el("s3Retry").hidden = ok;
+  });
+  el("s3Retry").addEventListener("click", function(){
+    el("s3Fb").innerHTML=""; el("s3Fb").dataset.retried="1";
+    unlock(el("s3Options")); el("s3Next").hidden=true; el("s3Retry").hidden=true;
+  });
+  el("s3Next").addEventListener("click", function(){
+    i3++;
+    if (i3 < S3.length){ renderS3(); window.scrollTo({top:0,behavior:"smooth"}); }
+    else { buildS4(); showStage(4); }
+  });
+
+  /* ================= STAGE 4 ================= */
+  function buildS4(){
+    gi = 0;
+    var g = el("gates"); g.innerHTML = "";
+    GATES.forEach(function(gt,i){
+      var d = document.createElement("div");
+      d.className = "gate " + (i===0 ? "active" : "pending");
+      d.dataset.i = i;
+      d.innerHTML = '<div class="ghead"><span class="gname">'+gt.name+'</span><span class="verdict" data-v></span></div>'+
+        '<div class="gq">'+gt.q+'</div>'+
+        (i===0 ? '<div class="options stack">'+gt.opts.map(function(o,n){
+            return '<button class="opt" data-v="'+o.v+'"><span class="k">'+String.fromCharCode(65+n)+'</span><span>'+o.t+'</span></button>';
+          }).join("")+'</div>' : '');
+      g.appendChild(d);
+    });
+    el("s4Fb").innerHTML = "";
+    el("s4Next").hidden = true;
+    el("s4Count").textContent = "Question 1 of 4";
+  }
+  el("gates").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var gate = b.closest(".gate"), i = +gate.dataset.i;
+    if (i !== gi) return;
+    var gt = GATES[i], opt = gt.opts.filter(function(o){return o.v===b.dataset.v;})[0], ok = opt.ok;
+    var right = gt.opts.filter(function(o){return o.ok;})[0].v;
+    if (ok && !gate.dataset.retried) first++;
+    if (!ok){ gate.dataset.retried = "1"; }
+    lock(gate.querySelector(".options"), b.dataset.v, right);
+    var f = document.createElement("div");
+    f.className = "gfb";
+    f.innerHTML = "<b>"+(ok?"Correct.":"Not quite.")+"</b> " + (ok?gt.ok:gt.no);
+    gate.appendChild(f);
+    var v = gate.querySelector("[data-v]");
+    v.textContent = gt.verdict==="pass" ? "Pass" : "Stop";
+    v.className = "verdict " + gt.verdict;
+    gi++;
+    el("s4Count").textContent = gi<4 ? "Question "+(gi+1)+" of 4" : "Decision reached";
+    if (gi < GATES.length){
+      var ng = el("gates").children[gi], ngt = GATES[gi];
+      ng.classList.remove("pending"); ng.classList.add("active");
+      var wrap = document.createElement("div");
+      wrap.className = "options stack";
+      wrap.innerHTML = ngt.opts.map(function(o,n){
+        return '<button class="opt" data-v="'+o.v+'"><span class="k">'+String.fromCharCode(65+n)+'</span><span>'+o.t+'</span></button>';
+      }).join("");
+      ng.appendChild(wrap);
+      ng.scrollIntoView({behavior:"smooth",block:"center"});
+    } else {
+      var d = document.createElement("div");
+      d.className = "fb no";
+      d.innerHTML = '<span class="tag" style="color:var(--accent)">Decision</span>'+
+        '<p>Do not proceed with a public tool. Escalate to the data protection lead first.</p>'+
+        '<p class="note">'+S4_CLOSE+'</p>';
+      el("s4Fb").appendChild(d);
+      el("s4Next").hidden = false;
+    }
+  });
+  el("s4Next").addEventListener("click", function(){
+    el("scoreVal").textContent = first + " / 16";
+    showStage(5);
+  });
+
+  /* ================= NAV ================= */
+  el("startBtn").addEventListener("click", function(){ buildS1(); showStage(1); });
+  el("restart").addEventListener("click", function(){
+    i3=0; first=0; s1Tried=false; s2Tried=false;
+    var f=el("finish"); f.textContent="Mark as complete"; f.disabled=false; f.style.opacity="";
+    buildS1(); showStage(1);
+  });
+  el("finish").addEventListener("click", function(){
+    var b=el("finish"); b.textContent="Completed ✓"; b.disabled=true; b.style.opacity=".7";
+  });
+})();
+</script>
+</body>
+</html>

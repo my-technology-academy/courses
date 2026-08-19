@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UKAIC AI Foundation — Module 2 — Put It Into Practice: Inside the Answer</title>
+<style>
+  :root{
+    --bg:#0A0A0B;
+    --card:#121316;
+    --card-inset:#0E0F11;
+    --line:#26282E;
+    --line-soft:#1B1D21;
+    --accent:#F26B21;
+    --accent-hi:#FF8341;
+    --accent-wash:rgba(242,107,33,.10);
+    --accent-wash-2:rgba(242,107,33,.18);
+    --text:#FFFFFF;
+    --body:#C7CAD0;
+    --muted:#8E9299;
+    --ok:#4FB286;
+    --ok-wash:rgba(79,178,134,.10);
+    --warn:#D9A23B;
+    --warn-wash:rgba(217,162,59,.10);
+    --r:10px;
+    --font:"Inter","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--body);font-family:var(--font);
+    font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+    padding:28px 24px 56px;
+  }
+  .wrap{max-width:1160px;margin:0 auto}
+
+  /* Header */
+  .masthead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+    padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--line-soft)}
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:8px}
+  h1{margin:0;font-size:27px;line-height:1.15;font-weight:700;color:var(--text);letter-spacing:-.01em}
+  h1 em{font-style:normal;color:var(--accent)}
+  .course-tag{text-align:right;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+  .course-tag b{display:block;color:var(--body);font-weight:600;letter-spacing:.10em}
+
+  /* Rail */
+  .rail{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+  .rail-step{flex:1 1 0;min-width:150px;border:1px solid var(--line-soft);border-radius:var(--r);
+    background:var(--card-inset);padding:10px 12px;position:relative;overflow:hidden}
+  .rail-step .n{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+  .rail-step .t{font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);margin-top:2px;font-weight:600}
+  .rail-step.done{border-color:var(--line)}
+  .rail-step.done .n,.rail-step.done .t{color:#6F737A}
+  .rail-step.active{border-color:var(--accent);background:var(--accent-wash)}
+  .rail-step.active .n,.rail-step.active .t{color:var(--accent)}
+  .rail-step .bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:width .35s ease}
+  .rail-step.active .bar,.rail-step.done .bar{width:100%}
+  .rail-step.done .bar{background:#3D3F45}
+
+  /* Cards */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin-bottom:16px}
+  .card-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:14px}
+  .sect{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .counter{font-size:11.5px;letter-spacing:.12em;color:var(--muted);font-weight:600}
+  h2{margin:0 0 6px;font-size:19px;font-weight:700;color:var(--text);letter-spacing:-.01em}
+  .lede{color:var(--muted);font-size:14px;max-width:74ch;margin:0}
+  .lede strong{color:var(--accent);font-weight:600}
+
+  .scenario{background:var(--card-inset);border:1px solid var(--line-soft);border-left:2px solid var(--accent);
+    border-radius:8px;padding:18px 20px;margin:16px 0 18px;font-size:16.5px;line-height:1.5;color:var(--text);font-weight:500}
+  .prompt{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
+
+  /* Options */
+  .options{display:flex;gap:10px;flex-wrap:wrap}
+  .options.stack{flex-direction:column}
+  .opt{flex:1 1 190px;min-height:52px;background:var(--card-inset);color:var(--body);
+    border:1px solid var(--line);border-radius:8px;font-family:var(--font);font-size:12.5px;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;padding:14px 16px;cursor:pointer;text-align:center;
+    transition:border-color .15s,background .15s,color .15s}
+  .options.stack .opt{flex:0 0 auto;min-height:0;text-align:left;text-transform:none;letter-spacing:0;
+    font-size:15px;font-weight:500;display:flex;gap:12px;align-items:flex-start;line-height:1.45}
+  .options.stack .opt .k{color:var(--accent);font-weight:700;font-size:12.5px;letter-spacing:.08em;padding-top:2px;flex:0 0 auto}
+  .opt:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+  .opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .opt:disabled{cursor:default}
+  .opt.correct{border-color:var(--ok);background:var(--ok-wash);color:#DFF3E9}
+  .opt.wrong{border-color:var(--warn);background:var(--warn-wash);color:#F3E6CB}
+  .opt.dim{opacity:.42}
+
+  /* Feedback */
+  .fb{margin-top:16px;border-radius:8px;padding:16px 18px;border:1px solid var(--line);
+    background:var(--card-inset);animation:fade .22s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .fb.ok{border-color:rgba(79,178,134,.45);background:var(--ok-wash)}
+  .fb.no{border-color:rgba(217,162,59,.45);background:var(--warn-wash)}
+  .fb .tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:7px}
+  .fb.ok .tag{color:var(--ok)}
+  .fb.no .tag{color:var(--warn)}
+  .fb p{margin:0;color:var(--body);font-size:14.5px;max-width:82ch}
+  .fb p + p{margin-top:9px}
+  .fb .note{color:var(--muted);font-size:13.5px}
+
+  /* Nav */
+  .nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px}
+  .nav.end{justify-content:flex-end}
+  .btn{font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    padding:12px 22px;border-radius:7px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);
+    color:#141005;transition:background .15s,border-color .15s,color .15s}
+  .btn:hover:not(:disabled){background:var(--accent-hi);border-color:var(--accent-hi)}
+  .btn:focus-visible{outline:2px solid var(--accent-hi);outline-offset:2px}
+  .btn:disabled{opacity:.35;cursor:not-allowed}
+  .btn.ghost{background:transparent;color:var(--muted);border-color:var(--line)}
+  .btn.ghost:hover:not(:disabled){color:var(--text);border-color:var(--accent);background:transparent}
+  .btn[hidden]{display:none}
+  .navgroup{display:flex;gap:10px;flex-wrap:wrap}
+
+  /* ---------- Stage 1 sequencing ---------- */
+  .seq{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0 6px}
+  .seq-col > .colhead{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:10px;display:flex;justify-content:space-between;align-items:baseline}
+  .pool,.slots{display:flex;flex-direction:column;gap:8px}
+  .pcard{
+    background:var(--card-inset);border:1px solid var(--line);border-radius:8px;padding:12px 14px;
+    cursor:pointer;text-align:left;font-family:var(--font);color:var(--body);
+    transition:border-color .15s,background .15s,opacity .15s;
+  }
+  .pcard:hover:not(.used){border-color:var(--accent)}
+  .pcard:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .pcard .ttl{display:block;color:var(--text);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase}
+  .pcard .sub{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.4}
+  .pcard.used{opacity:.22;pointer-events:none}
+  .pcard.dragging{opacity:.5}
+  .slot{
+    display:flex;gap:12px;align-items:stretch;min-height:56px;
+    border:1px dashed var(--line);border-radius:8px;background:rgba(14,15,17,.6);
+    padding:0;overflow:hidden;
+  }
+  .slot .idx{
+    flex:0 0 44px;display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--muted);
+    border-right:1px dashed var(--line);
+  }
+  .slot .fill{flex:1;display:flex;align-items:center;padding:10px 14px;color:var(--muted);font-size:13px}
+  .slot.filled{border-style:solid;background:var(--card-inset)}
+  .slot.filled .idx{border-right-style:solid;color:var(--accent)}
+  .slot.filled .fill{cursor:pointer;color:var(--body);flex-direction:column;align-items:flex-start;gap:3px}
+  .slot .ttl{color:var(--text);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase}
+  .slot .sub{color:var(--muted);font-size:13px;line-height:1.4}
+  .slot.over{border-color:var(--accent);background:var(--accent-wash)}
+  .slot.right{border-color:var(--ok)}
+  .slot.right .idx{color:var(--ok);border-right-color:var(--ok)}
+  .slot.wrong{border-color:var(--warn)}
+  .slot.wrong .idx{color:var(--warn);border-right-color:var(--warn)}
+  .phase{
+    margin-top:4px;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+  }
+  .phase.inf{color:var(--muted)}
+  .hint{font-size:12.5px;color:var(--muted);margin-top:10px}
+
+  /* Reveal */
+  .reveal{margin-top:14px;border:1px dashed var(--line);border-radius:8px;padding:16px 18px;background:var(--card-inset)}
+  .reveal .tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:7px}
+  .reveal p{margin:0;font-size:14.5px;color:var(--body);max-width:82ch}
+  .reveal p + p{margin-top:9px}
+  .mini{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .mini .opt{flex:1 1 200px;min-height:46px;font-size:12px}
+
+  /* Statement list (stage 4) */
+  .stmt{background:var(--card-inset);border:1px solid var(--line-soft);border-left:2px solid var(--accent);
+    border-radius:8px;padding:16px 18px;font-size:16px;color:var(--text);font-weight:500;margin:14px 0 16px}
+
+  /* Takeaway */
+  .takeaway{border:1px solid var(--accent);border-radius:var(--r);
+    background:linear-gradient(180deg,var(--accent-wash) 0%,rgba(242,107,33,.03) 100%);padding:26px 28px}
+  .takeaway h2{font-size:22px;margin-bottom:4px}
+  .tlist{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+  .tlist li{display:flex;gap:14px;align-items:flex-start;background:rgba(10,10,11,.55);
+    border:1px solid rgba(242,107,33,.28);border-radius:8px;padding:14px 16px}
+  .tlist .num{color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.10em;padding-top:2px;flex:0 0 auto}
+  .tlist .txt{color:var(--text);font-size:15px;line-height:1.45}
+  .tlist .txt span{display:block;color:var(--muted);font-size:13.5px;margin-top:4px;font-weight:400}
+  .score{display:flex;gap:26px;flex-wrap:wrap;align-items:center;margin-top:18px;padding-top:16px;
+    border-top:1px solid rgba(242,107,33,.25)}
+  .score .k{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .score .v{color:var(--text);font-weight:700}
+  .score .v b{color:var(--accent)}
+
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:26px;padding-top:14px;
+    border-top:1px solid var(--line-soft);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:#6A6E75}
+  .foot .mark{color:var(--accent);font-weight:700;letter-spacing:.22em}
+
+  [hidden]{display:none !important}
+
+  @media (max-width:820px){
+    body{padding:20px 16px 44px;font-size:14.5px}
+    .masthead{flex-direction:column;align-items:flex-start;gap:10px}
+    .course-tag{text-align:left}
+    h1{font-size:22px}
+    .rail-step{min-width:0;flex:1 1 45%;padding:8px 10px}
+    .rail-step .t{font-size:10.5px}
+    .card{padding:18px 16px}
+    .seq{grid-template-columns:1fr;gap:20px}
+    .options{flex-direction:column}
+    .opt{flex:1 1 auto;width:100%}
+    .nav{flex-direction:column-reverse;align-items:stretch}
+    .nav .btn,.navgroup{width:100%}
+    .navgroup .btn{flex:1}
+    .scenario{font-size:15.5px;padding:15px 16px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow">Put It Into Practice</div>
+      <h1>Inside the <em>Answer</em></h1>
+    </div>
+    <div class="course-tag">
+      <b>UKAIC AI Foundation</b>
+      Module 2 — How AI Works (Without the Maths)
+    </div>
+  </header>
+
+  <nav class="rail" id="rail" aria-label="Activity progress">
+    <div class="rail-step" data-stage="1"><div class="n">01</div><div class="t">Sequence</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="2"><div class="n">02</div><div class="t">Training or Use</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="3"><div class="n">03</div><div class="t">Variability</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="4"><div class="n">04</div><div class="t">Mental Model</div><div class="bar"></div></div>
+  </nav>
+
+  <!-- INTRO -->
+  <section id="intro" class="card">
+    <div class="card-head"><span class="sect">Before you start</span><span class="counter">10–15 min</span></div>
+    <h2>Module 1 asked what counts as AI. This one asks what is actually happening.</h2>
+    <p class="lede">You will rebuild the path an answer travels, sort what belongs to training from what belongs to using the model, work out why the same prompt gives different answers, and correct three beliefs most people hold. No maths, no code.</p>
+    <div class="nav end"><button class="btn" id="startBtn">Begin Stage 01</button></div>
+  </section>
+
+  <!-- STAGE 1 -->
+  <section id="stage1" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 01 — Build the Pipeline</span>
+      <span class="counter" id="s1Count">0 of 6 placed</span>
+    </div>
+    <p class="lede">Place the six steps in the order they happen, from the data that built the model to the answer on your screen. Tap a step to place it, tap a placed step to send it back. On desktop you can also drag.</p>
+    <div class="seq">
+      <div class="seq-col">
+        <div class="colhead"><span>Steps</span></div>
+        <div class="pool" id="pool"></div>
+      </div>
+      <div class="seq-col">
+        <div class="colhead"><span>The order it happens</span></div>
+        <div class="slots" id="slots"></div>
+      </div>
+    </div>
+    <div class="hint" id="s1Hint">All six steps must be placed before you can check the order.</div>
+    <div id="s1Fb"></div>
+    <div class="nav">
+      <div class="navgroup">
+        <button class="btn ghost" id="s1Reset" hidden>Try again</button>
+        <button class="btn ghost" id="s1Reveal" hidden>Show the order</button>
+      </div>
+      <div class="navgroup">
+        <button class="btn" id="s1Check" disabled>Check the order</button>
+        <button class="btn" id="s1Next" hidden>Continue to Stage 02</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 2 -->
+  <section id="stage2" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 02 — Training or Use?</span>
+      <span class="counter" id="s2Counter">1 / 5</span>
+    </div>
+    <p class="lede">Training happens once, run by the model's developers. Use — <strong>inference</strong> — happens every time someone sends a message. Where does each of these belong?</p>
+    <div class="scenario" id="s2Text"></div>
+    <div class="prompt">Where does this belong?</div>
+    <div class="options" id="s2Options">
+      <button class="opt" data-v="training">Training</button>
+      <button class="opt" data-v="use">Using the AI</button>
+    </div>
+    <div id="s2Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s2Retry" hidden>Try again</button>
+      <button class="btn" id="s2Next" hidden>Continue</button>
+    </div>
+  </section>
+
+  <!-- STAGE 3 -->
+  <section id="stage3" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 03 — Why Did the Answer Change?</span>
+      <span class="counter">Same prompt, twice</span>
+    </div>
+    <p class="lede">A colleague asks an AI assistant to summarise the same policy document twice. Same prompt, same tool, same day.</p>
+    <div class="scenario">Both summaries are sensible, but they are worded differently and the points appear in a different order. Nothing about the prompt changed.</div>
+    <div class="prompt">Why can this happen?</div>
+    <div class="options stack" id="s3Options">
+      <button class="opt" data-v="a"><span class="k">A</span><span>The model learned from the first answer and adjusted its approach.</span></button>
+      <button class="opt" data-v="b"><span class="k">B</span><span>At each step the model can choose among several likely options, rather than always the single most likely one.</span></button>
+      <button class="opt" data-v="c"><span class="k">C</span><span>The model retrieved a different stored answer the second time.</span></button>
+      <button class="opt" data-v="d"><span class="k">D</span><span>The model was retrained between the two requests.</span></button>
+    </div>
+    <div id="s3Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s3Retry" hidden>Try again</button>
+      <button class="btn" id="s3Next" hidden>Continue to Stage 04</button>
+    </div>
+  </section>
+
+  <!-- STAGE 4 -->
+  <section id="stage4" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 04 — Fix the Mental Model</span>
+      <span class="counter" id="s4Counter">1 / 3</span>
+    </div>
+    <p class="lede">Three statements people make about AI at work. Accurate, or a misconception?</p>
+    <div class="stmt" id="s4Text"></div>
+    <div class="prompt">Your judgement</div>
+    <div class="options" id="s4Options">
+      <button class="opt" data-v="true">Accurate</button>
+      <button class="opt" data-v="false">Misconception</button>
+    </div>
+    <div id="s4Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s4Retry" hidden>Try again</button>
+      <button class="btn" id="s4Next" hidden>Continue</button>
+    </div>
+  </section>
+
+  <!-- TAKEAWAY -->
+  <section id="stage5" hidden>
+    <div class="card takeaway">
+      <div class="card-head"><span class="sect">Stage 04 — Complete</span><span class="counter">Activity complete</span></div>
+      <h2>The Takeaway</h2>
+      <p class="lede" style="color:#D6D8DD">Four things to hold on to about how the answer reaches you.</p>
+      <ul class="tlist">
+        <li><span class="num">01</span><span class="txt">Training builds the model. Inference uses it.<span>Your conversation does not change the model's parameters — they are fixed between training runs.</span></span></li>
+        <li><span class="num">02</span><span class="txt">The answer is generated, not looked up.<span>The model predicts one token at a time from learned patterns. There is no stored answer and no fact-checking step.</span></span></li>
+        <li><span class="num">03</span><span class="txt">The context window is the model's working memory.<span>Anything outside it is simply absent, and no warning is given when material drops out.</span></span></li>
+        <li><span class="num">04</span><span class="txt">Variation is by design; the cut-off is real.<span>The same prompt can give different answers, and the base model knows nothing after its training cut-off. Verify anything time-sensitive.</span></span></li>
+      </ul>
+      <div class="score">
+        <div><div class="k">First-attempt accuracy</div><div class="v"><b id="scoreVal">0 / 10</b></div></div>
+        <div><div class="k">Next</div><div class="v" style="font-weight:500;color:var(--body)">Module 2 PBQ</div></div>
+      </div>
+      <div class="nav">
+        <button class="btn ghost" id="restart">Restart activity</button>
+        <button class="btn" id="finish">Mark as complete</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>UKAIC AI Foundation — Module 2: How AI Works (Without the Maths) — Put It Into Practice</span>
+    <span class="mark">UKAIC</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var el = function(id){return document.getElementById(id);};
+
+  /* ============ DATA ============ */
+  var STEPS = [
+    {id:0, t:"Dataset",       s:"Text and data are collected, up to a cut-off date.",              ph:"Training — happens once"},
+    {id:1, t:"Training",      s:"Parameters are adjusted so the model produces useful outputs.",   ph:"Training — happens once"},
+    {id:2, t:"Trained model", s:"Training ends. The parameters are now fixed.",                    ph:"Training — happens once"},
+    {id:3, t:"Your prompt",   s:"Your message is broken into tokens and held in the context window.", ph:"Inference — every message"},
+    {id:4, t:"Prediction",    s:"The model predicts the next token, then the next.",                ph:"Inference — every message"},
+    {id:5, t:"Response",      s:"The answer is generated fresh, then returned to you.",             ph:"Inference — every message"}
+  ];
+  var S1_EXPLAIN =
+    "The first three steps are <strong>training</strong> — done once by the developers, long before you arrive. " +
+    "The last three are <strong>inference</strong>, which happens every time anyone sends a message. " +
+    "Notice what is missing between them: no step where your prompt goes back and changes the model.";
+
+  var S2 = [
+    {t:"Billions of parameters are adjusted so the model produces useful outputs.", a:"training",
+     ok:"Parameters are the values learned during training. Adjusting them is what training is.",
+     no:"Adjusting parameters is training. By the time you use the model, those values are fixed."},
+    {t:"The model applies its fixed parameters to a user's prompt and produces a response.", a:"use",
+     ok:"This is inference — it happens every time a message is sent, using parameters that no longer change.",
+     no:"This is inference. The parameters are already fixed; the model is applying them, not adjusting them."},
+    {t:"You tell the assistant it got a detail wrong, and its next answer takes that correction into account.", a:"use",
+     ok:"Your correction sits in the context window for this conversation. It does not retrain the model, and other users see no change.",
+     no:"Nothing was retrained. The correction is in the context window for this conversation only — parameters are unchanged."},
+    {t:"Data is collected up to a specific date, after which nothing later is included.", a:"training",
+     ok:"This is the training data and its cut-off date. It fixes what the base model can know.",
+     no:"This describes the training data and its cut-off. It is set before anyone uses the model."},
+    {t:"Text is broken into tokens and held in the model's working memory for this conversation.", a:"use",
+     ok:"Tokens and the context window are part of using the model — every prompt and response passes through them.",
+     no:"This happens each time you use the model. The context window holds the current conversation, not the training data."}
+  ];
+
+  var S3 = {
+    answer:"b",
+    fb:{
+      b:{ok:true,
+        t:"At each step the model has several likely next words available, and it does not always take the single most likely one. That controlled randomness is called sampling, and how much of it is allowed is set by the temperature.",
+        n:"Same prompt, same model, different wording — this is by design, not a fault."},
+      a:{ok:false,
+        t:"The model does not learn from its own answers. Its parameters are fixed between training runs.",
+        n:"The variation comes from the model choosing among several likely options as it generates, not from learning."},
+      c:{ok:false,
+        t:"There are no stored answers to retrieve. Every response is generated fresh, one token at a time.",
+        n:"The wording differs because the model can choose among several likely options as it generates."},
+      d:{ok:false,
+        t:"Training is run by the developers, once or periodically — never between two messages in your session.",
+        n:"The variation comes from the model choosing among several likely options as it generates."}
+    },
+    followQ:"You need to extract the same fields from 200 contracts, and the output must be consistent every time. Which setting suits the task?",
+    followFb:{
+      low:{ok:true, t:"Lower temperature. Less randomness means more consistent, predictable output — the right choice for factual, structured and compliance-sensitive work."},
+      high:{ok:false, t:"Higher temperature adds variety, which suits brainstorming and drafting. For consistent extraction you want lower temperature."}
+    }
+  };
+
+  var S4 = [
+    {t:"If an answer reads confidently and is well written, it has probably been checked.", a:false,
+     ok:"There is no fact-checking step inside the model, and no genuine sense of “I don't know”. Fluent, authoritative writing can be completely wrong.",
+     no:"Confidence in tone tells you nothing about accuracy. The model has no built-in verification and cannot consult a source to confirm a claim."},
+    {t:"The base model knows nothing about events after its training cut-off, unless the application adds live search.", a:true,
+     ok:"The base model is frozen at its cut-off date. Live search is a separate capability some applications layer on top — always check whether it is active.",
+     no:"This one is accurate. The base model stops at its cut-off; any current information comes from a search capability added by the application, not from the model."},
+    {t:"Explaining your new company policy to an AI assistant teaches it that policy for other users.", a:false,
+     ok:"Your input goes into the context window for that conversation only. It does not update the parameters, so nobody else's answers change.",
+     no:"Nothing you type retrains the model. The policy stays in that conversation's context window and disappears with it."}
+  ];
+
+  /* ============ STAGE PLUMBING ============ */
+  var placed = new Array(6).fill(null), s1Locked = false, s1Scored = false, s1Attempted = false;
+  var i2 = 0, i4 = 0, first = 0;
+
+  function showStage(n){
+    [1,2,3,4,5].forEach(function(i){ el("stage"+i).hidden = (i!==n); });
+    el("intro").hidden = true;
+    var railN = Math.min(n,4);
+    Array.prototype.forEach.call(document.querySelectorAll(".rail-step"), function(s){
+      var d = +s.dataset.stage;
+      s.classList.toggle("active", d===railN && n<5);
+      s.classList.toggle("done", d<railN || n===5);
+    });
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  function fbBox(isOk, title, note){
+    var d = document.createElement("div");
+    d.className = "fb " + (isOk?"ok":"no");
+    d.setAttribute("role","status");
+    d.innerHTML = '<span class="tag">'+(isOk?"Correct":"Not quite")+'</span><p>'+title+'</p>'+(note?'<p class="note">'+note+'</p>':'');
+    return d;
+  }
+  function lock(c, chosen, correct){
+    Array.prototype.forEach.call(c.querySelectorAll(".opt"), function(b){
+      b.disabled = true;
+      var v = b.dataset.v;
+      if (v===correct) b.classList.add("correct");
+      else if (v===chosen) b.classList.add("wrong");
+      else b.classList.add("dim");
+    });
+  }
+  function unlock(c){
+    Array.prototype.forEach.call(c.querySelectorAll(".opt"), function(b){
+      b.disabled = false; b.classList.remove("correct","wrong","dim");
+    });
+  }
+
+  /* ============ STAGE 1 ============ */
+  function shuffled(){
+    var a = STEPS.slice(), out = [], order = [4,1,5,0,3,2]; // fixed non-sequential start order
+    order.forEach(function(i){ out.push(a[i]); });
+    return out;
+  }
+  function buildS1(){
+    placed = new Array(6).fill(null); s1Locked = false;
+    var pool = el("pool"), slots = el("slots");
+    pool.innerHTML = ""; slots.innerHTML = "";
+    shuffled().forEach(function(st){
+      var b = document.createElement("button");
+      b.className = "pcard"; b.type = "button"; b.dataset.id = st.id; b.draggable = true;
+      b.innerHTML = '<span class="ttl">'+st.t+'</span><span class="sub">'+st.s+'</span>';
+      pool.appendChild(b);
+    });
+    for (var i=0;i<6;i++){
+      var s = document.createElement("div");
+      s.className = "slot"; s.dataset.pos = i;
+      s.innerHTML = '<div class="idx">'+(i+1)+'</div><div class="fill">Empty</div>';
+      slots.appendChild(s);
+    }
+    el("s1Fb").innerHTML = "";
+    el("s1Check").hidden = false; el("s1Check").disabled = true;
+    el("s1Next").hidden = true; el("s1Reset").hidden = true; el("s1Reveal").hidden = true;
+    el("s1Hint").hidden = false;
+    updateS1();
+  }
+  function updateS1(){
+    var n = placed.filter(function(x){return x!==null;}).length;
+    el("s1Count").textContent = n + " of 6 placed";
+    el("s1Check").disabled = (n<6);
+    el("s1Hint").textContent = n<6 ? "All six steps must be placed before you can check the order."
+                                   : "Ready — check the order, or move a step by tapping it.";
+  }
+  function renderSlot(pos){
+    var slot = el("slots").children[pos], id = placed[pos];
+    slot.classList.remove("right","wrong","over");
+    if (id===null){
+      slot.classList.remove("filled");
+      slot.innerHTML = '<div class="idx">'+(pos+1)+'</div><div class="fill">Empty</div>';
+    } else {
+      var st = STEPS[id];
+      slot.classList.add("filled");
+      slot.innerHTML = '<div class="idx">'+(pos+1)+'</div><div class="fill" data-id="'+id+'">'+
+        '<span class="ttl">'+st.t+'</span><span class="sub">'+st.s+'</span></div>';
+    }
+    Array.prototype.forEach.call(el("pool").children, function(c){
+      c.classList.toggle("used", placed.indexOf(+c.dataset.id) !== -1);
+    });
+  }
+  function place(id, pos){
+    if (s1Locked) return;
+    var was = placed.indexOf(id);
+    if (was !== -1){ placed[was] = null; renderSlot(was); }
+    if (pos === null || pos === undefined){
+      pos = placed.indexOf(null);
+      if (pos === -1) return;
+    } else if (placed[pos] !== null){
+      var displaced = placed[pos];
+      placed[pos] = null;
+      var free = placed.indexOf(null);
+      if (free !== -1){ placed[free] = displaced; renderSlot(free); }
+    }
+    placed[pos] = id; renderSlot(pos); updateS1();
+  }
+  function removeAt(pos){
+    if (s1Locked || placed[pos]===null) return;
+    placed[pos] = null; renderSlot(pos); updateS1();
+  }
+
+  el("pool").addEventListener("click", function(e){
+    var c = e.target.closest(".pcard"); if(!c || c.classList.contains("used")) return;
+    place(+c.dataset.id, null);
+  });
+  el("slots").addEventListener("click", function(e){
+    var s = e.target.closest(".slot"); if(!s) return;
+    removeAt(+s.dataset.pos);
+  });
+  /* drag (desktop enhancement) */
+  var dragId = null;
+  el("pool").addEventListener("dragstart", function(e){
+    var c = e.target.closest(".pcard"); if(!c) return;
+    dragId = +c.dataset.id; c.classList.add("dragging");
+    e.dataTransfer.effectAllowed = "move";
+    try{ e.dataTransfer.setData("text/plain", String(dragId)); }catch(err){}
+  });
+  el("pool").addEventListener("dragend", function(e){
+    var c = e.target.closest(".pcard"); if(c) c.classList.remove("dragging"); dragId = null;
+  });
+  el("slots").addEventListener("dragover", function(e){
+    if (dragId===null || s1Locked) return;
+    e.preventDefault();
+    var s = e.target.closest(".slot"); if(s) s.classList.add("over");
+  });
+  el("slots").addEventListener("dragleave", function(e){
+    var s = e.target.closest(".slot"); if(s) s.classList.remove("over");
+  });
+  el("slots").addEventListener("drop", function(e){
+    if (dragId===null || s1Locked) return;
+    e.preventDefault();
+    var s = e.target.closest(".slot"); if(!s) return;
+    s.classList.remove("over");
+    place(dragId, +s.dataset.pos); dragId = null;
+  });
+
+  function s1Resolve(revealed){
+    s1Locked = true;
+    var right = placed.every(function(id,i){ return id===i; });
+    if (right && !s1Attempted && !revealed && !s1Scored){ first++; s1Scored = true; }
+    s1Attempted = true;
+    for (var i=0;i<6;i++){
+      var slot = el("slots").children[i];
+      if (revealed || right || placed[i]===i){
+        if (revealed){ placed[i]=i; renderSlot(i); }
+        slot = el("slots").children[i];
+        slot.classList.add("right");
+      } else {
+        slot.classList.add("wrong");
+      }
+      var f = slot.querySelector(".fill");
+      if (f && placed[i]!==null){
+        var ph = document.createElement("span");
+        ph.className = "phase" + (placed[i]>2 ? " inf" : "");
+        ph.textContent = STEPS[placed[i]].ph;
+        f.appendChild(ph);
+      }
+    }
+    el("s1Fb").innerHTML = "";
+    if (right || revealed){
+      var d = fbBox(true,
+        revealed ? "Here is the order, with each step's half of the process shown." : "That is the path every answer takes.",
+        S1_EXPLAIN);
+      if (revealed){ d.className = "fb"; d.querySelector(".tag").textContent = "The correct order"; d.querySelector(".tag").style.color = "var(--accent)"; }
+      el("s1Fb").appendChild(d);
+      el("s1Check").hidden = true; el("s1Reset").hidden = true; el("s1Reveal").hidden = true;
+      el("s1Next").hidden = false;
+    } else {
+      el("s1Fb").appendChild(fbBox(false,
+        "Some steps are out of order — the ones marked in amber.",
+        "Work forwards: what has to exist before a model can be trained? And what only happens once someone sends a message?"));
+      el("s1Check").hidden = true;
+      el("s1Reset").hidden = false; el("s1Reveal").hidden = false;
+      el("s1Next").hidden = false;
+    }
+    el("s1Hint").hidden = true;
+  }
+  el("s1Check").addEventListener("click", function(){ s1Resolve(false); });
+  el("s1Reveal").addEventListener("click", function(){ s1Locked = false; s1Resolve(true); });
+  el("s1Reset").addEventListener("click", function(){
+    var keep = s1Attempted; buildS1(); s1Attempted = keep;
+  });
+  el("s1Next").addEventListener("click", function(){ renderS2(); showStage(2); });
+
+  /* ============ STAGE 2 ============ */
+  function renderS2(){
+    var q = S2[i2];
+    el("s2Counter").textContent = (i2+1)+" / "+S2.length;
+    el("s2Text").textContent = q.t;
+    el("s2Fb").innerHTML = ""; delete el("s2Fb").dataset.retried;
+    unlock(el("s2Options"));
+    el("s2Next").hidden = true; el("s2Retry").hidden = true;
+    el("s2Next").textContent = (i2===S2.length-1) ? "Continue to Stage 03" : "Continue";
+  }
+  el("s2Options").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var q = S2[i2], v = b.dataset.v, ok = (v===q.a);
+    if (ok && !el("s2Fb").dataset.retried) first++;
+    lock(el("s2Options"), v, q.a);
+    el("s2Fb").innerHTML = "";
+    el("s2Fb").appendChild(fbBox(ok, ok?q.ok:q.no, ""));
+    el("s2Next").hidden = false; el("s2Retry").hidden = ok;
+  });
+  el("s2Retry").addEventListener("click", function(){
+    el("s2Fb").innerHTML = ""; el("s2Fb").dataset.retried = "1";
+    unlock(el("s2Options")); el("s2Next").hidden = true; el("s2Retry").hidden = true;
+  });
+  el("s2Next").addEventListener("click", function(){
+    i2++;
+    if (i2 < S2.length){ renderS2(); window.scrollTo({top:0,behavior:"smooth"}); }
+    else showStage(3);
+  });
+
+  /* ============ STAGE 3 ============ */
+  el("s3Options").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var v = b.dataset.v, f = S3.fb[v], ok = f.ok;
+    if (ok && !el("s3Fb").dataset.retried) first++;
+    lock(el("s3Options"), v, S3.answer);
+    el("s3Fb").innerHTML = "";
+    el("s3Fb").appendChild(fbBox(ok, f.t, f.n));
+    if (ok){
+      var r = document.createElement("div");
+      r.className = "reveal";
+      r.innerHTML = '<span class="tag">Now apply it</span><p>'+S3.followQ+'</p>'+
+        '<div class="mini" id="s3Mini">'+
+        '<button class="opt" data-v="low">Lower temperature</button>'+
+        '<button class="opt" data-v="high">Higher temperature</button></div>'+
+        '<div id="s3MiniFb"></div>';
+      el("s3Fb").appendChild(r);
+      el("s3Mini").addEventListener("click", function(ev){
+        var mb = ev.target.closest(".opt"); if(!mb || mb.disabled) return;
+        var mv = mb.dataset.v, mf = S3.followFb[mv];
+        lock(el("s3Mini"), mv, "low");
+        el("s3MiniFb").innerHTML = "";
+        el("s3MiniFb").appendChild(fbBox(mf.ok, mf.t, ""));
+      });
+    }
+    el("s3Next").hidden = false; el("s3Retry").hidden = ok;
+  });
+  el("s3Retry").addEventListener("click", function(){
+    el("s3Fb").innerHTML = ""; el("s3Fb").dataset.retried = "1";
+    unlock(el("s3Options")); el("s3Next").hidden = true; el("s3Retry").hidden = true;
+  });
+  el("s3Next").addEventListener("click", function(){ renderS4(); showStage(4); });
+
+  /* ============ STAGE 4 ============ */
+  function renderS4(){
+    var q = S4[i4];
+    el("s4Counter").textContent = (i4+1)+" / "+S4.length;
+    el("s4Text").textContent = q.t;
+    el("s4Fb").innerHTML = ""; delete el("s4Fb").dataset.retried;
+    unlock(el("s4Options"));
+    el("s4Next").hidden = true; el("s4Retry").hidden = true;
+    el("s4Next").textContent = (i4===S4.length-1) ? "See the takeaway" : "Continue";
+  }
+  el("s4Options").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var q = S4[i4], v = (b.dataset.v==="true"), ok = (v===q.a);
+    if (ok && !el("s4Fb").dataset.retried) first++;
+    lock(el("s4Options"), b.dataset.v, String(q.a));
+    el("s4Fb").innerHTML = "";
+    el("s4Fb").appendChild(fbBox(ok, ok?q.ok:q.no, ""));
+    el("s4Next").hidden = false; el("s4Retry").hidden = ok;
+  });
+  el("s4Retry").addEventListener("click", function(){
+    el("s4Fb").innerHTML = ""; el("s4Fb").dataset.retried = "1";
+    unlock(el("s4Options")); el("s4Next").hidden = true; el("s4Retry").hidden = true;
+  });
+  el("s4Next").addEventListener("click", function(){
+    i4++;
+    if (i4 < S4.length){ renderS4(); window.scrollTo({top:0,behavior:"smooth"}); }
+    else { el("scoreVal").textContent = first + " / 10"; showStage(5); }
+  });
+
+  /* ============ NAV ============ */
+  el("startBtn").addEventListener("click", function(){ buildS1(); showStage(1); });
+  el("restart").addEventListener("click", function(){
+    i2 = 0; i4 = 0; first = 0; s1Scored = false; s1Attempted = false;
+    ["s3"].forEach(function(p){
+      el(p+"Fb").innerHTML = ""; delete el(p+"Fb").dataset.retried;
+      unlock(el(p+"Options")); el(p+"Next").hidden = true; el(p+"Retry").hidden = true;
+    });
+    var f = el("finish"); f.textContent = "Mark as complete"; f.disabled = false; f.style.opacity = "";
+    buildS1(); showStage(1);
+  });
+  el("finish").addEventListener("click", function(){
+    var b = el("finish"); b.textContent = "Completed ✓"; b.disabled = true; b.style.opacity = ".7";
+  });
+})();
+</script>
+</body>
+</html>

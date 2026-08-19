@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UKAIC AI Foundation — Module 5 — Put It Into Practice: Before You Send</title>
+<style>
+  :root{
+    --bg:#0A0A0B; --card:#121316; --card-inset:#0E0F11;
+    --line:#26282E; --line-soft:#1B1D21;
+    --accent:#F26B21; --accent-hi:#FF8341;
+    --accent-wash:rgba(242,107,33,.10); --accent-wash-2:rgba(242,107,33,.18);
+    --text:#FFFFFF; --body:#C7CAD0; --muted:#8E9299;
+    --ok:#4FB286; --ok-wash:rgba(79,178,134,.10);
+    --warn:#D9A23B; --warn-wash:rgba(217,162,59,.10);
+    --r:10px;
+    --font:"Inter","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--body);font-family:var(--font);font-size:15px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;padding:28px 24px 56px}
+  .wrap{max-width:1160px;margin:0 auto}
+
+  /* Header */
+  .masthead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+    padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--line-soft)}
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:8px}
+  h1{margin:0;font-size:27px;line-height:1.15;font-weight:700;color:var(--text);letter-spacing:-.01em}
+  h1 em{font-style:normal;color:var(--accent)}
+  .course-tag{text-align:right;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+  .course-tag b{display:block;color:var(--body);font-weight:600;letter-spacing:.10em}
+
+  /* Rail */
+  .rail{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+  .rail-step{flex:1 1 0;min-width:150px;border:1px solid var(--line-soft);border-radius:var(--r);
+    background:var(--card-inset);padding:10px 12px;position:relative;overflow:hidden}
+  .rail-step .n{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+  .rail-step .t{font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);margin-top:2px;font-weight:600}
+  .rail-step.done{border-color:var(--line)}
+  .rail-step.done .n,.rail-step.done .t{color:#6F737A}
+  .rail-step.active{border-color:var(--accent);background:var(--accent-wash)}
+  .rail-step.active .n,.rail-step.active .t{color:var(--accent)}
+  .rail-step .bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:width .35s ease}
+  .rail-step.active .bar,.rail-step.done .bar{width:100%}
+  .rail-step.done .bar{background:#3D3F45}
+
+  /* Cards */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin-bottom:16px}
+  .card-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:14px}
+  .sect{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .counter{font-size:11.5px;letter-spacing:.12em;color:var(--muted);font-weight:600}
+  h2{margin:0 0 6px;font-size:19px;font-weight:700;color:var(--text);letter-spacing:-.01em}
+  .lede{color:var(--muted);font-size:14px;max-width:76ch;margin:0}
+  .lede strong{color:var(--accent);font-weight:600}
+  .prompt-label{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
+
+  /* Buttons */
+  .options{display:flex;gap:10px;flex-wrap:wrap}
+  .opt{flex:1 1 190px;min-height:52px;background:var(--card-inset);color:var(--body);
+    border:1px solid var(--line);border-radius:8px;font-family:var(--font);font-size:12.5px;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;padding:14px 16px;cursor:pointer;text-align:center;
+    transition:border-color .15s,background .15s,color .15s}
+  .options.stack{flex-direction:column}
+  .options.stack .opt{flex:0 0 auto;min-height:0;text-align:left;text-transform:none;letter-spacing:0;
+    font-size:15px;font-weight:500;display:flex;gap:12px;align-items:flex-start;line-height:1.45}
+  .options.stack .opt .k{color:var(--accent);font-weight:700;font-size:12.5px;letter-spacing:.08em;padding-top:2px;flex:0 0 auto}
+  .opt:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+  .opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .opt:disabled{cursor:default}
+  .opt.correct{border-color:var(--ok);background:var(--ok-wash);color:#DFF3E9}
+  .opt.wrong{border-color:var(--warn);background:var(--warn-wash);color:#F3E6CB}
+  .opt.dim{opacity:.42}
+
+  .btn{font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    padding:12px 22px;border-radius:7px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);
+    color:#141005;transition:background .15s,border-color .15s,color .15s}
+  .btn:hover:not(:disabled){background:var(--accent-hi);border-color:var(--accent-hi)}
+  .btn:focus-visible{outline:2px solid var(--accent-hi);outline-offset:2px}
+  .btn:disabled{opacity:.35;cursor:not-allowed}
+  .btn.ghost{background:transparent;color:var(--muted);border-color:var(--line)}
+  .btn.ghost:hover:not(:disabled){color:var(--text);border-color:var(--accent);background:transparent}
+  .btn[hidden]{display:none}
+  .nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px}
+  .nav.end{justify-content:flex-end}
+  .navgroup{display:flex;gap:10px;flex-wrap:wrap}
+
+  /* Feedback */
+  .fb{margin-top:16px;border-radius:8px;padding:16px 18px;border:1px solid var(--line);
+    background:var(--card-inset);animation:fade .22s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .fb.ok{border-color:rgba(79,178,134,.45);background:var(--ok-wash)}
+  .fb.no{border-color:rgba(217,162,59,.45);background:var(--warn-wash)}
+  .fb .tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:7px}
+  .fb.ok .tag{color:var(--ok)}
+  .fb.no .tag{color:var(--warn)}
+  .fb p{margin:0;color:var(--body);font-size:14.5px;max-width:82ch}
+  .fb p + p{margin-top:9px}
+  .fb .note{color:var(--muted);font-size:13.5px}
+
+  .reveal{margin-top:14px;border:1px dashed var(--line);border-radius:8px;padding:16px 18px;background:var(--card-inset)}
+  .reveal .tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:9px}
+  .reveal p{margin:0;font-size:14.5px;color:var(--body);max-width:82ch}
+  .reveal p + p{margin-top:9px}
+
+  /* ---------- Stage 1: request queue ---------- */
+  .request{border:1px solid var(--line-soft);border-left:2px solid var(--accent);border-radius:8px;
+    background:var(--card-inset);padding:16px 18px;margin:16px 0 18px}
+  .request .who{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .request .said{color:var(--text);font-size:16.5px;font-weight:500;line-height:1.5}
+
+  /* ---------- Stage 2: source vs summary ---------- */
+  .split{display:grid;grid-template-columns:1.15fr 1fr;gap:14px;margin:16px 0 4px}
+  .pane{border:1px solid var(--line-soft);border-radius:8px;background:var(--card-inset);padding:16px 18px}
+  .pane .ptitle{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+  .pane .psub{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+  .lines{display:flex;flex-direction:column;gap:8px}
+  .lineitem{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:6px;
+    background:transparent;padding:11px 13px;cursor:pointer;text-align:left;font-family:var(--font);
+    font-size:14.5px;color:var(--body);line-height:1.45;transition:border-color .15s,background .15s,color .15s}
+  .lineitem:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+  .lineitem .box{flex:0 0 auto;width:17px;height:17px;border:1px solid var(--line);border-radius:4px;margin-top:2px;
+    display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;font-weight:700}
+  .lineitem.on{border-color:var(--accent);background:var(--accent-wash)}
+  .lineitem.on .box{border-color:var(--accent);background:var(--accent);color:#141005}
+  .lineitem.right{border-color:var(--ok)}
+  .lineitem.right.on{background:var(--ok-wash)}
+  .lineitem.right .box{border-color:var(--ok)}
+  .lineitem.right.on .box{background:var(--ok);color:#0B1F17}
+  .lineitem.wrongpick{border-color:var(--warn);background:var(--warn-wash)}
+  .lineitem.wrongpick .box{border-color:var(--warn);background:var(--warn);color:#1F1707}
+  .lineitem:disabled{cursor:default}
+  .bullets{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .bullets li{position:relative;padding-left:18px;color:var(--body);font-size:14.5px;line-height:1.45}
+  .bullets li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:1px;background:var(--accent)}
+  .step2{margin-top:18px;border-top:1px solid var(--line-soft);padding-top:16px}
+
+  /* ---------- Stage 3: hotspots ---------- */
+  .doc{border:1px solid var(--line-soft);border-left:2px solid var(--accent);border-radius:8px;
+    background:var(--card-inset);padding:20px 22px;margin:16px 0 6px;font-size:16px;line-height:2.05;color:var(--text)}
+  .mark{display:inline;border:1px solid var(--line);border-radius:5px;background:transparent;
+    font-family:inherit;font-size:inherit;color:var(--text);padding:3px 7px;margin:0 1px;cursor:pointer;
+    transition:border-color .15s,background .15s}
+  .mark:hover:not(:disabled){border-color:var(--accent)}
+  .mark:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .mark.on{border-color:var(--accent);background:var(--accent-wash-2)}
+  .mark.right{border-color:var(--ok);background:var(--ok-wash)}
+  .mark.wrong{border-color:var(--warn);background:var(--warn-wash)}
+  .mark.leftok{border-style:dashed;border-color:rgba(79,178,134,.4)}
+  .mark:disabled{cursor:default}
+  .checkgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+  .checkcat{border:1px solid var(--line-soft);border-radius:8px;background:var(--card-inset);padding:13px 15px}
+  .checkcat .cname{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+  .checkcat .cwhy{font-size:13.5px;color:var(--muted);line-height:1.45}
+
+  /* ---------- Stage 4: library ---------- */
+  .checks{display:flex;flex-direction:column;gap:9px;margin:16px 0 4px}
+  .chk{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;
+    background:var(--card-inset);padding:13px 15px;cursor:pointer;text-align:left;font-family:var(--font);
+    font-size:15px;color:var(--body);line-height:1.45;transition:border-color .15s,background .15s,color .15s}
+  .chk:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+  .chk .box{flex:0 0 auto;width:18px;height:18px;border:1px solid var(--line);border-radius:4px;margin-top:2px;
+    display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;font-weight:700}
+  .chk.on{border-color:var(--accent);background:var(--accent-wash)}
+  .chk.on .box{border-color:var(--accent);background:var(--accent);color:#141005}
+  .chk.right{border-color:var(--ok)}
+  .chk.right.on{background:var(--ok-wash)}
+  .chk.right .box{border-color:var(--ok)}
+  .chk.right.on .box{background:var(--ok);color:#0B1F17}
+  .chk.wrongpick{border-color:var(--warn);background:var(--warn-wash)}
+  .chk.wrongpick .box{border-color:var(--warn);background:var(--warn);color:#1F1707}
+  .chk .why{display:block;color:var(--muted);font-size:13px;margin-top:5px}
+  .chk:disabled{cursor:default}
+  .entry{border:1px dashed var(--line);border-radius:8px;background:rgba(0,0,0,.32);padding:16px 18px;margin-top:14px}
+  .entry .etag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .entry .erow{font-family:var(--mono);font-size:13.5px;line-height:1.6;color:var(--text);margin-bottom:8px}
+  .entry .erow:last-child{margin-bottom:0}
+  .entry .erow span{color:var(--accent)}
+  .entry .empty{font-family:var(--font);font-size:13.5px;color:var(--muted);font-style:italic}
+
+  /* Takeaway */
+  .takeaway{border:1px solid var(--accent);border-radius:var(--r);
+    background:linear-gradient(180deg,var(--accent-wash) 0%,rgba(242,107,33,.03) 100%);padding:26px 28px}
+  .takeaway h2{font-size:22px;margin-bottom:4px}
+  .tlist{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+  .tlist li{display:flex;gap:14px;align-items:flex-start;background:rgba(10,10,11,.55);
+    border:1px solid rgba(242,107,33,.28);border-radius:8px;padding:14px 16px}
+  .tlist .num{color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.10em;padding-top:2px;flex:0 0 auto}
+  .tlist .txt{color:var(--text);font-size:15px;line-height:1.45}
+  .tlist .txt span{display:block;color:var(--muted);font-size:13.5px;margin-top:4px;font-weight:400}
+  .score{display:flex;gap:26px;flex-wrap:wrap;align-items:center;margin-top:18px;padding-top:16px;
+    border-top:1px solid rgba(242,107,33,.25)}
+  .score .k{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .score .v{color:var(--text);font-weight:700}
+  .score .v b{color:var(--accent)}
+
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:26px;padding-top:14px;
+    border-top:1px solid var(--line-soft);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:#6A6E75}
+  .foot .mark2{color:var(--accent);font-weight:700;letter-spacing:.22em}
+
+  [hidden]{display:none !important}
+
+  @media (max-width:820px){
+    body{padding:20px 16px 44px;font-size:14.5px}
+    .masthead{flex-direction:column;align-items:flex-start;gap:10px}
+    .course-tag{text-align:left}
+    h1{font-size:22px}
+    .rail-step{min-width:0;flex:1 1 45%;padding:8px 10px}
+    .rail-step .t{font-size:10.5px}
+    .card{padding:18px 16px}
+    .options{flex-direction:column}
+    .opt{flex:1 1 auto;width:100%}
+    .nav{flex-direction:column-reverse;align-items:stretch}
+    .nav .btn,.navgroup{width:100%}
+    .navgroup .btn{flex:1}
+    .split{grid-template-columns:1fr}
+    .checkgrid{grid-template-columns:1fr}
+    .doc{font-size:15px;line-height:2.1;padding:16px 16px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow">Put It Into Practice</div>
+      <h1>Before You <em>Send</em></h1>
+    </div>
+    <div class="course-tag">
+      <b>UKAIC AI Foundation</b>
+      Module 5 — Working with AI Day to Day
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="Activity progress">
+    <div class="rail-step" data-stage="1"><div class="n">01</div><div class="t">Who Leads</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="2"><div class="n">02</div><div class="t">What Got Lost</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="3"><div class="n">03</div><div class="t">Verify</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="4"><div class="n">04</div><div class="t">Save It</div><div class="bar"></div></div>
+  </nav>
+
+  <!-- INTRO -->
+  <section id="intro" class="card">
+    <div class="card-head"><span class="sect">Before you start</span><span class="counter">10–15 min</span></div>
+    <h2>Module 4 was how to ask. This is what happens after the answer arrives.</h2>
+    <p class="lede">You will decide who should lead on four real requests, find what a summary quietly left out, mark up a draft for the checks it needs before it goes anywhere, and turn a task that worked into something you can reuse.</p>
+    <div class="nav end"><button class="btn" id="startBtn">Begin Stage 01</button></div>
+  </section>
+
+  <!-- STAGE 1 -->
+  <section id="stage1" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 01 — Who Leads?</span>
+      <span class="counter" id="s1Counter">1 / 4</span>
+    </div>
+    <p class="lede">Four requests land on your desk. For each one, decide how the work should be done.</p>
+    <div class="request">
+      <div class="who" id="s1Who"></div>
+      <div class="said" id="s1Said"></div>
+    </div>
+    <div class="prompt-label">How should this be done?</div>
+    <div class="options stack" id="s1Options">
+      <button class="opt" data-v="ai"><span class="k">A</span><span>Draft it with AI, then edit and check it yourself.</span></button>
+      <button class="opt" data-v="source"><span class="k">B</span><span>Go to the authoritative source or the tool that already does this.</span></button>
+      <button class="opt" data-v="human"><span class="k">C</span><span>A qualified human must lead on this one.</span></button>
+    </div>
+    <div id="s1Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s1Retry" hidden>Try again</button>
+      <button class="btn" id="s1Next" hidden>Continue</button>
+    </div>
+  </section>
+
+  <!-- STAGE 2 -->
+  <section id="stage2" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 02 — What Got Lost</span>
+      <span class="counter" id="s2Count">0 selected</span>
+    </div>
+    <p class="lede">You asked for a summary of the supplier renewal terms. Nothing in the summary is wrong. Tick the terms it left out.</p>
+    <div class="split">
+      <div class="pane">
+        <div class="ptitle">The full terms</div>
+        <div class="psub">Five clauses, as written in the contract.</div>
+        <div class="lines" id="s2Lines"></div>
+      </div>
+      <div class="pane">
+        <div class="ptitle">The AI summary</div>
+        <div class="psub">What came back.</div>
+        <ul class="bullets">
+          <li>Twelve-month contract, starting 1 September.</li>
+          <li>Pricing is fixed for the first year.</li>
+          <li>Either party can cancel with 30 days' notice.</li>
+        </ul>
+      </div>
+    </div>
+    <div id="s2FbA"></div>
+    <div id="s2Step2" hidden>
+      <div class="step2">
+        <div class="prompt-label">You are deciding whether to renew. What now?</div>
+        <div class="options stack" id="s2Decide">
+          <button class="opt" data-v="a"><span class="k">A</span><span>Rely on the summary — it covers the main terms.</span></button>
+          <button class="opt" data-v="b"><span class="k">B</span><span>Read the full terms before deciding.</span></button>
+          <button class="opt" data-v="c"><span class="k">C</span><span>Ask for a longer summary.</span></button>
+        </div>
+        <div id="s2FbB"></div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn ghost" id="s2Retry" hidden>Try again</button>
+      <div class="navgroup">
+        <button class="btn" id="s2Check">Check the summary</button>
+        <button class="btn" id="s2Next" hidden>Continue to Stage 03</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 3 -->
+  <section id="stage3" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 03 — Verify Before You Send</span>
+      <span class="counter" id="s3Count">0 marked</span>
+    </div>
+    <p class="lede">You drafted this update with AI. It goes to the whole department in ten minutes. Click everything that must be checked against a source first — and leave what does not need checking.</p>
+    <div class="doc" id="doc"></div>
+    <div id="s3Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s3Retry" hidden>Try again</button>
+      <div class="navgroup">
+        <button class="btn" id="s3Check">Check my mark-up</button>
+        <button class="btn" id="s3Next" hidden>Continue to Stage 04</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 4 -->
+  <section id="stage4" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 04 — Save It</span>
+      <span class="counter" id="s4Count">0 selected</span>
+    </div>
+    <p class="lede">That update took three attempts to get right. Next time it should take one. Tick what belongs in your prompt library — and leave what does not.</p>
+    <div class="checks" id="checks"></div>
+    <div class="entry">
+      <div class="etag">Your library entry</div>
+      <div id="entry"><div class="empty">Nothing saved yet.</div></div>
+    </div>
+    <div id="s4Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s4Retry" hidden>Try again</button>
+      <div class="navgroup">
+        <button class="btn" id="s4Check">Save the entry</button>
+        <button class="btn" id="s4Next" hidden>See the takeaway</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAKEAWAY -->
+  <section id="stage5" hidden>
+    <div class="card takeaway">
+      <div class="card-head"><span class="sect">Stage 04 — Complete</span><span class="counter">Activity complete</span></div>
+      <h2>The Takeaway</h2>
+      <p class="lede" style="color:#D6D8DD">Four habits that keep AI-assisted work safe to send.</p>
+      <ul class="tlist">
+        <li><span class="num">01</span><span class="txt">AI accelerates. You own the output.<span>Every draft passes through your judgement before it is sent, published or filed. Nothing goes out unchanged.</span></span></li>
+        <li><span class="num">02</span><span class="txt">Match the task to the stakes.<span>Legal, medical, financial, safety-critical, HR and people decisions, and anything published externally need a human to lead.</span></span></li>
+        <li><span class="num">03</span><span class="txt">A summary is a way in, not a substitute.<span>What it left out is not flagged. For anything consequential, read the original.</span></span></li>
+        <li><span class="num">04</span><span class="txt">Facts, dates, names, citations.<span>Checked before the work leaves your desk. "The AI produced it" is not a defence for an error that reaches someone else.</span></span></li>
+      </ul>
+      <div class="score">
+        <div><div class="k">First-attempt accuracy</div><div class="v"><b id="scoreVal">0 / 22</b></div></div>
+        <div><div class="k">Next</div><div class="v" style="font-weight:500;color:var(--body)">Module 5 PBQ</div></div>
+      </div>
+      <div class="nav">
+        <button class="btn ghost" id="restart">Restart activity</button>
+        <button class="btn" id="finish">Mark as complete</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>UKAIC AI Foundation — Module 5: Working with AI Day to Day — Put It Into Practice</span>
+    <span class="mark2">UKAIC</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var el = function(id){return document.getElementById(id);};
+
+  /* ================= DATA ================= */
+  var S1 = [
+    {who:"Your manager asks:", said:"“Can you get me a first draft of the team newsletter? Here are my bullet points.”",
+     a:"ai",
+     fb:{ai:"Routine, internal and low-stakes, and you already have the source material. This is where AI gives the fastest return — as long as the draft passes through your editing before it goes out.",
+         source:"There is no authoritative source for a newsletter you are writing yourself. This is exactly the blank-page problem AI is good at.",
+         human:"A human does lead — you edit it. But an internal newsletter from your own bullet points is low-stakes drafting, not a task that needs professional authority."}},
+    {who:"A colleague asks:", said:"“What is the current statutory notice period? I need the exact figure for our policy document.”",
+     a:"source",
+     fb:{source:"An authoritative source already exists. Asking a model to recall legislation adds the risk of an outdated or invented figure and gains you nothing.",
+         ai:"A model may give you a confident figure that is out of date or simply wrong, and it is not a citable authority. The legislation itself is free of that risk.",
+         human:"You do not need a qualified professional to read published legislation — you need the legislation. Go to the source."}},
+    {who:"A manager asks:", said:"“Get AI to write the redundancy letter and send it straight to the employee.”",
+     a:"human",
+     fb:{human:"HR and people decisions are one of the six categories where a human must lead — and this would reach the person affected without anyone reviewing it.",
+         ai:"Sending an AI-written redundancy letter directly to an employee fails on two counts: it is an HR and people decision, and nothing is reviewed before it reaches someone.",
+         source:"There is no source to look this up in. The problem is not where the wording comes from — it is that a people decision is being handed to a tool."}},
+    {who:"Your team asks:", said:"“Can AI work out the quarterly totals from the finance spreadsheet for the board pack?”",
+     a:"source",
+     fb:{source:"The spreadsheet already does this reliably and verifiably. Substituting AI adds variability and creates a checking job that did not previously exist.",
+         ai:"A tool that already produces the right answer every time does not need replacing with one whose output you would then have to verify.",
+         human:"A person will present the figures, but the question here is which tool produces them — and the spreadsheet already does it correctly."}}
+  ];
+
+  var LINES = [
+    {t:"The contract runs for 12 months from 1 September.", missing:false,
+     why:"In the summary — first bullet."},
+    {t:"Pricing is fixed for the first 12 months.", missing:false,
+     why:"In the summary — second bullet."},
+    {t:"After 12 months, pricing is index-linked with no cap.", missing:true,
+     why:"Missing. This is the clause that decides what renewal actually costs you."},
+    {t:"Either party may cancel with 30 days' notice.", missing:false,
+     why:"In the summary — third bullet."},
+    {t:"The notice period rises to 90 days after the first renewal.", missing:true,
+     why:"Missing. It changes how easily you could leave once you have renewed."}
+  ];
+  var S2_OK = "Both omissions are about what happens after renewal — which is the decision you are making. " +
+    "The summary was accurate about everything it included. It simply did not mention these, and nothing marked their absence.";
+  var S2_NO = "Compare line by line. Two clauses in the full terms have no matching bullet in the summary — and both of them are about what happens after the first year.";
+  var S2_DEC = {
+    b:{ok:true, t:"A summary compresses, and compressing means choosing what to drop — a choice made by the model, not by you.",
+       n:"Nothing in this summary was wrong. It was still the wrong basis for a decision with money attached. Treat a summary as orientation, and read the original when the detail matters."},
+    a:{ok:false, t:"The summary covers the main terms and is accurate — and it still leaves out the two clauses that decide what renewal costs and how easily you could leave.",
+       n:"For a consequential decision, read the original. Omissions are never flagged."},
+    c:{ok:false, t:"A longer summary is still the model deciding what matters. It would be longer, not more complete, and it still would not tell you what it left out.",
+       n:"When the detail carries consequences, the original is the only version that contains all of it."}
+  };
+
+  var DOC = [
+    {text:"Colleagues — a short update on the referral pilot. "},
+    {id:0, text:"Referrals rose by 34% in the first quarter", verify:true, cat:"Facts and figures",
+     why:"Every claim, statistic and data point is checked against a primary source. AI output is not a primary source."},
+    {text:", "},
+    {id:1, text:"since the scheme launched on 3 April", verify:true, cat:"Dates and deadlines",
+     why:"Dates and deadlines are frequently confused or invented. Any date that matters is verified independently."},
+    {text:". "},
+    {id:2, text:"As Dr Amara Osei, the Trust's clinical director, noted at the time", verify:true, cat:"Names and attributions",
+     why:"Job titles, named individuals and anything attributed to a real person are checked. Misattribution is common."},
+    {text:", the change has been well received. Comparable schemes report similar gains "},
+    {id:3, text:"(Halstead & Roy, 2024, Journal of Service Improvement)", verify:true, cat:"Citations and references",
+     why:"Fabricated references come complete with authors, titles and journals. If it cannot be found at source, it cannot be used."},
+    {text:". "},
+    {id:4, text:"This is encouraging progress", verify:false, cat:"Your own judgement",
+     why:"An opinion of yours. There is no external source to check it against — you are the source."},
+    {text:", and "},
+    {id:5, text:"I am grateful to everyone who supported the pilot", verify:false, cat:"Your own words",
+     why:"Your thanks to your own team. Nothing here is a factual claim about the world."},
+    {text:"."}
+  ];
+  var S3_OK = "Four checks, one of each kind. Those four — figures, dates, names and citations — are exactly where AI-assisted drafts go wrong most often, " +
+    "and the citation is the most dangerous of them, because a fabricated reference looks the most authoritative on the page.";
+  var S3_NO = "Ask of each piece: is there something outside this document that could confirm it? A figure, a date, a person's title and a published reference all have a source. Your own opinion and your own thanks do not.";
+
+  var SAVE = [
+    {t:"The prompt you used, exactly as you sent it.", ok:true,
+     why:"The prompt is the reusable part. Saved word for word, it works again next month.",
+     field:"Prompt", val:"“Here are my notes from the referral pilot. Write a 200-word update for the department…”"},
+    {t:"A one-line note on what made it work.", ok:true,
+     why:"The constraint, the format instruction or the context that sharpened it — so you know what to keep if you adapt it.",
+     field:"Why it worked", val:"Word count + named audience + “list decisions with owners”"},
+    {t:"A label for the task type, so you can find it again.", ok:true,
+     why:"A library you cannot search is a pile. Labelling by task type is what makes it usable.",
+     field:"Task type", val:"Team update from notes"},
+    {t:"The role and context set-up that suited your job and audience.", ok:true,
+     why:"Role and context set-ups are worth saving in their own right — they transfer across tasks with the same audience.",
+     field:"Role and context", val:"“You are an experienced service lead writing for departmental colleagues.”"},
+    {t:"The output the model produced this time.", ok:false,
+     why:"The output belonged to this task and this week. It is the prompt that is reusable, not the answer."},
+    {t:"Everything you have ever asked an AI, kept in one long file.", ok:false,
+     why:"An undifferentiated log is not a library. What makes it useful is finding the right entry by task type when you need it."}
+  ];
+  var S4_OK = "Four things, and none of them is the output. A library entry is a prompt, the set-up around it, a label to find it by, " +
+    "and a note on what made it work — which is what turns one good result into a repeatable one.";
+  var S4_NO = "Ask what you would want in front of you the next time this task comes round. The prompt and its set-up, a label to find them by, and a note on what made them work — not the answer from last time.";
+
+  /* ================= STATE ================= */
+  var i1 = 0, first = 0;
+  var s2Ticks = {}, s2Locked = false, s2Tried = false;
+  var s3Ticks = {}, s3Locked = false, s3Tried = false;
+  var s4Ticks = {}, s4Locked = false, s4Tried = false;
+
+  function showStage(n){
+    [1,2,3,4,5].forEach(function(i){ el("stage"+i).hidden = (i!==n); });
+    el("intro").hidden = true;
+    var r = Math.min(n,4);
+    Array.prototype.forEach.call(document.querySelectorAll(".rail-step"), function(s){
+      var d = +s.dataset.stage;
+      s.classList.toggle("active", d===r && n<5);
+      s.classList.toggle("done", d<r || n===5);
+    });
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function fbBox(ok,title,note){
+    var d=document.createElement("div");
+    d.className="fb "+(ok?"ok":"no"); d.setAttribute("role","status");
+    d.innerHTML='<span class="tag">'+(ok?"Correct":"Not quite")+'</span><p>'+title+'</p>'+(note?'<p class="note">'+note+'</p>':'');
+    return d;
+  }
+  function lock(c,chosen,correct){
+    Array.prototype.forEach.call(c.querySelectorAll(".opt"),function(b){
+      b.disabled=true; var v=b.dataset.v;
+      if(v===correct) b.classList.add("correct");
+      else if(v===chosen) b.classList.add("wrong");
+      else b.classList.add("dim");
+    });
+  }
+  function unlock(c){
+    Array.prototype.forEach.call(c.querySelectorAll(".opt"),function(b){
+      b.disabled=false; b.classList.remove("correct","wrong","dim");
+    });
+  }
+
+  /* ================= STAGE 1 ================= */
+  function renderS1(){
+    var q = S1[i1];
+    el("s1Counter").textContent = (i1+1)+" / "+S1.length;
+    el("s1Who").textContent = q.who;
+    el("s1Said").textContent = q.said;
+    el("s1Fb").innerHTML = ""; delete el("s1Fb").dataset.retried;
+    unlock(el("s1Options"));
+    el("s1Next").hidden = true; el("s1Retry").hidden = true;
+    el("s1Next").textContent = (i1===S1.length-1) ? "Continue to Stage 02" : "Continue";
+  }
+  el("s1Options").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var q = S1[i1], v = b.dataset.v, ok = (v===q.a);
+    if (ok && !el("s1Fb").dataset.retried) first++;
+    lock(el("s1Options"), v, q.a);
+    el("s1Fb").innerHTML = "";
+    el("s1Fb").appendChild(fbBox(ok, q.fb[v], ""));
+    el("s1Next").hidden = false; el("s1Retry").hidden = ok;
+  });
+  el("s1Retry").addEventListener("click", function(){
+    el("s1Fb").innerHTML=""; el("s1Fb").dataset.retried="1";
+    unlock(el("s1Options")); el("s1Next").hidden=true; el("s1Retry").hidden=true;
+  });
+  el("s1Next").addEventListener("click", function(){
+    i1++;
+    if (i1 < S1.length){ renderS1(); window.scrollTo({top:0,behavior:"smooth"}); }
+    else { buildS2(); showStage(2); }
+  });
+
+  /* ================= STAGE 2 ================= */
+  function buildS2(){
+    s2Ticks = {}; s2Locked = false;
+    el("s2Lines").innerHTML = LINES.map(function(l,i){
+      return '<button class="lineitem" type="button" data-i="'+i+'"><span class="box">✓</span><span>'+l.t+'</span></button>';
+    }).join("");
+    el("s2FbA").innerHTML=""; el("s2FbB").innerHTML="";
+    el("s2Step2").hidden = true;
+    unlock(el("s2Decide"));
+    el("s2Check").hidden=false; el("s2Next").hidden=true; el("s2Retry").hidden=true;
+    el("s2Count").textContent = "0 selected";
+  }
+  el("s2Lines").addEventListener("click", function(e){
+    if (s2Locked) return;
+    var b = e.target.closest(".lineitem"); if(!b) return;
+    var i = +b.dataset.i;
+    s2Ticks[i] = !s2Ticks[i];
+    b.classList.toggle("on", !!s2Ticks[i]);
+    var n = Object.keys(s2Ticks).filter(function(k){return s2Ticks[k];}).length;
+    el("s2Count").textContent = n+" selected";
+  });
+  el("s2Check").addEventListener("click", function(){
+    s2Locked = true;
+    var correct = 0;
+    var els = Array.prototype.slice.call(el("s2Lines").querySelectorAll(".lineitem"));
+    LINES.forEach(function(l,i){
+      var b = els[i], picked = !!s2Ticks[i];
+      b.disabled = true;
+      if (picked===l.missing) correct++;
+      if (l.missing) b.classList.add("right");
+      else if (picked) b.classList.add("wrongpick");
+      var w = document.createElement("span");
+      w.className = "why"; w.style.display="block"; w.style.color="var(--muted)";
+      w.style.fontSize="13px"; w.style.marginTop="5px"; w.textContent = l.why;
+      b.querySelector("span:last-child").appendChild(w);
+    });
+    if (!s2Tried) first += correct;
+    s2Tried = true;
+    el("s2FbA").innerHTML = "";
+    el("s2FbA").appendChild(fbBox(correct===5,
+      correct===5 ? "Both omissions found." : correct+" of 5 decisions correct. The missing clauses are outlined above.",
+      correct===5 ? S2_OK : S2_NO));
+    el("s2Check").hidden = true;
+    el("s2Retry").hidden = (correct===5);
+    el("s2Step2").hidden = false;
+    el("s2Step2").scrollIntoView({behavior:"smooth",block:"center"});
+  });
+  el("s2Decide").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var v = b.dataset.v, f = S2_DEC[v];
+    if (f.ok && !el("s2FbB").dataset.retried) first++;
+    lock(el("s2Decide"), v, "b");
+    el("s2FbB").innerHTML = "";
+    el("s2FbB").appendChild(fbBox(f.ok, f.t, f.n));
+    el("s2Next").hidden = false;
+    el("s2Retry").hidden = true;
+  });
+  el("s2Retry").addEventListener("click", function(){ buildS2(); });
+  el("s2Next").addEventListener("click", function(){ buildS3(); showStage(3); });
+
+  /* ================= STAGE 3 ================= */
+  function buildS3(){
+    s3Ticks = {}; s3Locked = false;
+    el("doc").innerHTML = DOC.map(function(p){
+      if (p.id===undefined) return p.text;
+      return '<button class="mark" type="button" data-i="'+p.id+'">'+p.text+'</button>';
+    }).join("");
+    el("s3Fb").innerHTML="";
+    el("s3Check").hidden=false; el("s3Next").hidden=true; el("s3Retry").hidden=true;
+    el("s3Count").textContent = "0 marked";
+  }
+  el("doc").addEventListener("click", function(e){
+    if (s3Locked) return;
+    var b = e.target.closest(".mark"); if(!b) return;
+    var i = +b.dataset.i;
+    s3Ticks[i] = !s3Ticks[i];
+    b.classList.toggle("on", !!s3Ticks[i]);
+    var n = Object.keys(s3Ticks).filter(function(k){return s3Ticks[k];}).length;
+    el("s3Count").textContent = n+" marked";
+  });
+  el("s3Check").addEventListener("click", function(){
+    s3Locked = true;
+    var spans = DOC.filter(function(p){return p.id!==undefined;});
+    var correct = 0;
+    spans.forEach(function(p){
+      var b = el("doc").querySelector('.mark[data-i="'+p.id+'"]');
+      var picked = !!s3Ticks[p.id];
+      b.disabled = true;
+      b.classList.remove("on");
+      if (picked===p.verify) correct++;
+      if (p.verify) b.classList.add("right");
+      else if (picked) b.classList.add("wrong");
+      else b.classList.add("leftok");
+    });
+    if (!s3Tried) first += correct;
+    s3Tried = true;
+    el("s3Fb").innerHTML = "";
+    el("s3Fb").appendChild(fbBox(correct===spans.length,
+      correct===spans.length ? "Exactly the four that need a source." : correct+" of "+spans.length+" decisions correct. What needed checking is outlined above.",
+      correct===spans.length ? S3_OK : S3_NO));
+    var grid = document.createElement("div");
+    grid.className = "checkgrid";
+    grid.innerHTML = spans.map(function(p){
+      return '<div class="checkcat"><div class="cname">'+p.cat+'</div><div class="cwhy">'+p.why+'</div></div>';
+    }).join("");
+    el("s3Fb").appendChild(grid);
+    el("s3Check").hidden = true;
+    el("s3Retry").hidden = (correct===spans.length);
+    el("s3Next").hidden = false;
+  });
+  el("s3Retry").addEventListener("click", function(){ buildS3(); });
+  el("s3Next").addEventListener("click", function(){ buildS4(); showStage(4); });
+
+  /* ================= STAGE 4 ================= */
+  function buildS4(){
+    s4Ticks = {}; s4Locked = false;
+    el("checks").innerHTML = SAVE.map(function(c,i){
+      return '<button class="chk" type="button" data-i="'+i+'"><span class="box">✓</span><span>'+c.t+'</span></button>';
+    }).join("");
+    el("s4Fb").innerHTML="";
+    el("s4Check").hidden=false; el("s4Next").hidden=true; el("s4Retry").hidden=true;
+    el("s4Count").textContent = "0 selected";
+    renderEntry();
+  }
+  function renderEntry(){
+    var rows = SAVE.filter(function(c,i){ return s4Ticks[i] && c.field; });
+    if (!rows.length){
+      el("entry").innerHTML = '<div class="empty">Nothing saved yet.</div>';
+      return;
+    }
+    el("entry").innerHTML = rows.map(function(c){
+      return '<div class="erow"><span>'+c.field+':</span> '+c.val+'</div>';
+    }).join("");
+  }
+  el("checks").addEventListener("click", function(e){
+    if (s4Locked) return;
+    var b = e.target.closest(".chk"); if(!b) return;
+    var i = +b.dataset.i;
+    s4Ticks[i] = !s4Ticks[i];
+    b.classList.toggle("on", !!s4Ticks[i]);
+    var n = Object.keys(s4Ticks).filter(function(k){return s4Ticks[k];}).length;
+    el("s4Count").textContent = n+" selected";
+    renderEntry();
+  });
+  el("s4Check").addEventListener("click", function(){
+    s4Locked = true;
+    var correct = 0;
+    var els = Array.prototype.slice.call(el("checks").querySelectorAll(".chk"));
+    SAVE.forEach(function(c,i){
+      var b = els[i], picked = !!s4Ticks[i];
+      b.disabled = true;
+      if (picked===c.ok) correct++;
+      if (c.ok) b.classList.add("right");
+      else if (picked) b.classList.add("wrongpick");
+      var w = document.createElement("span");
+      w.className = "why"; w.textContent = c.why;
+      b.querySelector("span:last-child").appendChild(w);
+      if (c.ok) s4Ticks[i] = true;
+      if (!c.ok) s4Ticks[i] = false;
+    });
+    renderEntry();
+    if (!s4Tried) first += correct;
+    s4Tried = true;
+    el("s4Fb").innerHTML = "";
+    el("s4Fb").appendChild(fbBox(correct===SAVE.length,
+      correct===SAVE.length ? "That is a library entry." : correct+" of "+SAVE.length+" decisions correct. The finished entry is shown below.",
+      correct===SAVE.length ? S4_OK : S4_NO));
+    el("s4Check").hidden = true;
+    el("s4Retry").hidden = (correct===SAVE.length);
+    el("s4Next").hidden = false;
+  });
+  el("s4Retry").addEventListener("click", function(){ buildS4(); });
+  el("s4Next").addEventListener("click", function(){
+    el("scoreVal").textContent = first + " / 22";
+    showStage(5);
+  });
+
+  /* ================= NAV ================= */
+  el("startBtn").addEventListener("click", function(){ renderS1(); showStage(1); });
+  el("restart").addEventListener("click", function(){
+    i1=0; first=0; s2Tried=false; s3Tried=false; s4Tried=false;
+    var f=el("finish"); f.textContent="Mark as complete"; f.disabled=false; f.style.opacity="";
+    renderS1(); showStage(1);
+  });
+  el("finish").addEventListener("click", function(){
+    var b=el("finish"); b.textContent="Completed ✓"; b.disabled=true; b.style.opacity=".7";
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UKAIC AI Foundation — Module 6 — Put It Into Practice: Check It, Then Trust It</title>
+<style>
+  :root{
+    --bg:#0A0A0B; --card:#121316; --card-inset:#0E0F11;
+    --line:#26282E; --line-soft:#1B1D21;
+    --accent:#F26B21; --accent-hi:#FF8341;
+    --accent-wash:rgba(242,107,33,.10); --accent-wash-2:rgba(242,107,33,.18);
+    --text:#FFFFFF; --body:#C7CAD0; --muted:#8E9299;
+    --ok:#4FB286; --ok-wash:rgba(79,178,134,.10);
+    --warn:#D9A23B; --warn-wash:rgba(217,162,59,.10);
+    --r:10px;
+    --font:"Inter","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--body);font-family:var(--font);font-size:15px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;padding:28px 24px 56px}
+  .wrap{max-width:1160px;margin:0 auto}
+
+  .masthead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+    padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--line-soft)}
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:8px}
+  h1{margin:0;font-size:27px;line-height:1.15;font-weight:700;color:var(--text);letter-spacing:-.01em}
+  h1 em{font-style:normal;color:var(--accent)}
+  .course-tag{text-align:right;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+  .course-tag b{display:block;color:var(--body);font-weight:600;letter-spacing:.10em}
+
+  .rail{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+  .rail-step{flex:1 1 0;min-width:150px;border:1px solid var(--line-soft);border-radius:var(--r);
+    background:var(--card-inset);padding:10px 12px;position:relative;overflow:hidden}
+  .rail-step .n{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+  .rail-step .t{font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);margin-top:2px;font-weight:600}
+  .rail-step.done{border-color:var(--line)}
+  .rail-step.done .n,.rail-step.done .t{color:#6F737A}
+  .rail-step.active{border-color:var(--accent);background:var(--accent-wash)}
+  .rail-step.active .n,.rail-step.active .t{color:var(--accent)}
+  .rail-step .bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:width .35s ease}
+  .rail-step.active .bar,.rail-step.done .bar{width:100%}
+  .rail-step.done .bar{background:#3D3F45}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin-bottom:16px}
+  .card-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:14px}
+  .sect{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .counter{font-size:11.5px;letter-spacing:.12em;color:var(--muted);font-weight:600}
+  h2{margin:0 0 6px;font-size:19px;font-weight:700;color:var(--text);letter-spacing:-.01em}
+  .lede{color:var(--muted);font-size:14px;max-width:78ch;margin:0}
+  .prompt-label{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
+  .prompt-label.spaced{margin-top:20px}
+
+  .options{display:flex;gap:10px;flex-wrap:wrap}
+  .opt{flex:1 1 190px;min-height:52px;background:var(--card-inset);color:var(--body);
+    border:1px solid var(--line);border-radius:8px;font-family:var(--font);font-size:12.5px;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;padding:14px 16px;cursor:pointer;text-align:center;
+    transition:border-color .15s,background .15s,color .15s}
+  .options.stack{flex-direction:column}
+  .options.stack .opt{flex:0 0 auto;min-height:0;text-align:left;text-transform:none;letter-spacing:0;
+    font-size:15px;font-weight:500;display:flex;gap:12px;align-items:flex-start;line-height:1.45}
+  .options.stack .opt .k{color:var(--accent);font-weight:700;font-size:12.5px;letter-spacing:.08em;padding-top:2px;flex:0 0 auto}
+  .opt:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+  .opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .opt:disabled{cursor:default}
+  .opt.correct{border-color:var(--ok);background:var(--ok-wash);color:#DFF3E9}
+  .opt.wrong{border-color:var(--warn);background:var(--warn-wash);color:#F3E6CB}
+  .opt.dim{opacity:.42}
+
+  .btn{font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    padding:12px 22px;border-radius:7px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);
+    color:#141005;transition:background .15s,border-color .15s,color .15s}
+  .btn:hover:not(:disabled){background:var(--accent-hi);border-color:var(--accent-hi)}
+  .btn:focus-visible{outline:2px solid var(--accent-hi);outline-offset:2px}
+  .btn:disabled{opacity:.35;cursor:not-allowed}
+  .btn.ghost{background:transparent;color:var(--muted);border-color:var(--line)}
+  .btn.ghost:hover:not(:disabled){color:var(--text);border-color:var(--accent);background:transparent}
+  .btn[hidden]{display:none}
+  .nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px}
+  .nav.end{justify-content:flex-end}
+  .navgroup{display:flex;gap:10px;flex-wrap:wrap}
+
+  .fb{margin-top:16px;border-radius:8px;padding:16px 18px;border:1px solid var(--line);
+    background:var(--card-inset);animation:fade .22s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .fb.ok{border-color:rgba(79,178,134,.45);background:var(--ok-wash)}
+  .fb.no{border-color:rgba(217,162,59,.45);background:var(--warn-wash)}
+  .fb .tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:7px}
+  .fb.ok .tag{color:var(--ok)}
+  .fb.no .tag{color:var(--warn)}
+  .fb p{margin:0;color:var(--body);font-size:14.5px;max-width:82ch}
+  .fb p + p{margin-top:9px}
+  .fb .note{color:var(--muted);font-size:13.5px}
+
+  .reveal{margin-top:14px;border:1px dashed var(--line);border-radius:8px;padding:16px 18px;background:var(--card-inset)}
+  .reveal .tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:9px}
+  .reveal p{margin:0;font-size:14.5px;color:var(--body);max-width:82ch}
+  .reveal p + p{margin-top:9px}
+  .reveal .found{font-family:var(--mono);font-size:13.5px;color:var(--text);background:rgba(0,0,0,.35);
+    border:1px solid var(--line-soft);border-radius:6px;padding:11px 13px;margin:10px 0;line-height:1.6}
+  .reveal .found b{color:var(--warn);font-weight:600}
+
+  /* passage / specimen */
+  .passage{border:1px solid var(--line-soft);border-left:2px solid var(--accent);border-radius:8px;
+    background:var(--card-inset);padding:20px 22px;margin:16px 0 18px;font-size:16px;line-height:1.75;color:var(--text)}
+  .passage .src{display:block;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:10px}
+  .specimen{border:1px solid var(--line-soft);border-left:2px solid var(--warn);border-radius:8px;
+    background:var(--card-inset);padding:16px 18px;margin:16px 0 18px}
+  .specimen .src{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+  .specimen .body{font-family:var(--mono);font-size:14.5px;line-height:1.65;color:var(--text)}
+
+  /* ---------- Stage 2: tag chips ---------- */
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{flex:1 1 200px;border:1px solid var(--line);border-radius:6px;background:var(--card-inset);color:var(--body);
+    font-family:var(--font);font-size:11.5px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;
+    padding:13px 10px;cursor:pointer;text-align:center;transition:border-color .15s,background .15s,color .15s}
+  .chip:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+  .chip.correct{border-color:var(--ok);background:var(--ok-wash);color:#DFF3E9}
+  .chip.wrong{border-color:var(--warn);background:var(--warn-wash);color:#F3E6CB}
+  .chip.dim{opacity:.4}
+  .chip:disabled{cursor:default}
+
+  /* ---------- Stage 3: investigation console ---------- */
+  .console{border:1px solid var(--line-soft);border-radius:8px;background:var(--card-inset);padding:16px 18px;margin:6px 0 4px}
+  .ctitle{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+  .csub{font-size:12.5px;color:var(--muted);margin-bottom:14px}
+  .action{border:1px solid var(--line);border-radius:7px;background:transparent;padding:0;margin-bottom:10px;overflow:hidden}
+  .action .go{width:100%;display:flex;gap:12px;align-items:center;justify-content:space-between;
+    background:transparent;border:0;color:var(--text);font-family:var(--font);font-size:14.5px;font-weight:500;
+    padding:13px 15px;cursor:pointer;text-align:left;transition:background .15s}
+  .action .go:hover:not(:disabled){background:rgba(242,107,33,.06)}
+  .action .go .run{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);flex:0 0 auto}
+  .action .go:disabled{cursor:default}
+  .action .go:disabled .run{color:var(--muted)}
+  .action .result{border-top:1px dashed var(--line);padding:12px 15px;font-family:var(--mono);
+    font-size:13.5px;line-height:1.6;color:var(--body);background:rgba(0,0,0,.3)}
+  .action .result b{color:var(--text);font-weight:600}
+  .action.used{border-color:var(--line-soft)}
+  .action.right{border-color:var(--ok)}
+  .action.bad{border-color:var(--warn)}
+  .verdictrow{display:flex;gap:8px;flex-wrap:wrap;padding:0 15px 13px}
+  .vchip{flex:1 1 200px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--muted);
+    font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;
+    padding:10px 8px;cursor:pointer;text-align:center;transition:border-color .15s,background .15s,color .15s}
+  .vchip:hover:not(:disabled){border-color:var(--accent);color:var(--body)}
+  .vchip.sel{border-color:var(--accent);background:var(--accent-wash-2);color:var(--text)}
+  .vchip.correct{border-color:var(--ok);background:var(--ok-wash);color:#DFF3E9}
+  .vchip.wrong{border-color:var(--warn);background:var(--warn-wash);color:#F3E6CB}
+  .vchip.dim{opacity:.4}
+  .vchip:disabled{cursor:default}
+  .why{display:block;color:var(--muted);font-size:13px;padding:0 15px 13px;line-height:1.45}
+
+  /* ---------- Stage 4: checklist ---------- */
+  .checks{display:flex;flex-direction:column;gap:9px;margin:10px 0 4px}
+  .chk{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;
+    background:var(--card-inset);padding:13px 15px;cursor:pointer;text-align:left;font-family:var(--font);
+    font-size:15px;color:var(--body);line-height:1.45;transition:border-color .15s,background .15s,color .15s}
+  .chk:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+  .chk .box{flex:0 0 auto;width:18px;height:18px;border:1px solid var(--line);border-radius:4px;margin-top:2px;
+    display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;font-weight:700}
+  .chk.on{border-color:var(--accent);background:var(--accent-wash)}
+  .chk.on .box{border-color:var(--accent);background:var(--accent);color:#141005}
+  .chk.right{border-color:var(--ok)}
+  .chk.right.on{background:var(--ok-wash)}
+  .chk.right .box{border-color:var(--ok)}
+  .chk.right.on .box{background:var(--ok);color:#0B1F17}
+  .chk.wrongpick{border-color:var(--warn);background:var(--warn-wash)}
+  .chk.wrongpick .box{border-color:var(--warn);background:var(--warn);color:#1F1707}
+  .chk .note2{display:block;color:var(--muted);font-size:13px;margin-top:5px}
+  .chk:disabled{cursor:default}
+
+  /* Takeaway */
+  .takeaway{border:1px solid var(--accent);border-radius:var(--r);
+    background:linear-gradient(180deg,var(--accent-wash) 0%,rgba(242,107,33,.03) 100%);padding:26px 28px}
+  .takeaway h2{font-size:22px;margin-bottom:4px}
+  .tlist{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+  .tlist li{display:flex;gap:14px;align-items:flex-start;background:rgba(10,10,11,.55);
+    border:1px solid rgba(242,107,33,.28);border-radius:8px;padding:14px 16px}
+  .tlist .num{color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.10em;padding-top:2px;flex:0 0 auto}
+  .tlist .txt{color:var(--text);font-size:15px;line-height:1.45}
+  .tlist .txt span{display:block;color:var(--muted);font-size:13.5px;margin-top:4px;font-weight:400}
+  .score{display:flex;gap:26px;flex-wrap:wrap;align-items:center;margin-top:18px;padding-top:16px;
+    border-top:1px solid rgba(242,107,33,.25)}
+  .score .k{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .score .v{color:var(--text);font-weight:700}
+  .score .v b{color:var(--accent)}
+
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:26px;padding-top:14px;
+    border-top:1px solid var(--line-soft);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:#6A6E75}
+  .foot .mk{color:var(--accent);font-weight:700;letter-spacing:.22em}
+
+  [hidden]{display:none !important}
+
+  @media (max-width:820px){
+    body{padding:20px 16px 44px;font-size:14.5px}
+    .masthead{flex-direction:column;align-items:flex-start;gap:10px}
+    .course-tag{text-align:left}
+    h1{font-size:22px}
+    .rail-step{min-width:0;flex:1 1 45%;padding:8px 10px}
+    .rail-step .t{font-size:10.5px}
+    .card{padding:18px 16px}
+    .options{flex-direction:column}
+    .opt{flex:1 1 auto;width:100%}
+    .nav{flex-direction:column-reverse;align-items:stretch}
+    .nav .btn,.navgroup{width:100%}
+    .navgroup .btn{flex:1}
+    .chip,.vchip{flex:1 1 100%}
+    .passage{font-size:15.5px;padding:16px 16px}
+    .specimen .body{font-size:13.5px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow">Put It Into Practice</div>
+      <h1>Check It, <em>Then Trust It</em></h1>
+    </div>
+    <div class="course-tag">
+      <b>UKAIC AI Foundation</b>
+      Module 6 — Limitations, Risks and Hallucination
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="Activity progress">
+    <div class="rail-step" data-stage="1"><div class="n">01</div><div class="t">Read It</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="2"><div class="n">02</div><div class="t">Name It</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="3"><div class="n">03</div><div class="t">Check It</div><div class="bar"></div></div>
+    <div class="rail-step" data-stage="4"><div class="n">04</div><div class="t">Lower the Risk</div><div class="bar"></div></div>
+  </nav>
+
+  <!-- INTRO -->
+  <section id="intro" class="card">
+    <div class="card-head"><span class="sect">Before you start</span><span class="counter">10–15 min</span></div>
+    <h2>Knowing where AI fails is the skill this module is built on.</h2>
+    <p class="lede">You will try to catch a hallucination by reading, name the four things models invent, run a real provenance check on a reference that looks perfect, and choose the habits that actually lower the risk. One of the checks will lie to you.</p>
+    <div class="nav end"><button class="btn" id="startBtn">Begin Stage 01</button></div>
+  </section>
+
+  <!-- STAGE 1 -->
+  <section id="stage1" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 01 — Read It</span>
+      <span class="counter">Two questions</span>
+    </div>
+    <p class="lede">An AI assistant produced this paragraph for an internal report. Read it properly before answering.</p>
+    <div class="passage">
+      <span class="src">AI-generated draft</span>
+      Our 2023 staff survey recorded a 62% response rate, up from 48% the previous year. Under section 9 of the Trust's information governance policy, results must be published within 30 days of the survey closing. The Chartered Institute of Workforce Analytics recommends a minimum response rate of 50% before results are treated as representative.
+    </div>
+    <div class="prompt-label">Reading this alone, what can you confirm is wrong?</div>
+    <div class="options stack" id="s1aOptions">
+      <button class="opt" data-v="a"><span class="k">A</span><span>The response-rate figures — they do not look right.</span></button>
+      <button class="opt" data-v="b"><span class="k">B</span><span>The policy section reference.</span></button>
+      <button class="opt" data-v="c"><span class="k">C</span><span>Both of those.</span></button>
+      <button class="opt" data-v="d"><span class="k">D</span><span>Nothing — the text itself does not tell you.</span></button>
+    </div>
+    <div id="s1aFb"></div>
+    <div id="s1bWrap" hidden>
+      <div class="prompt-label spaced">Why is this called inherent, rather than a bug to be fixed?</div>
+      <div class="options stack" id="s1bOptions">
+        <button class="opt" data-v="a"><span class="k">A</span><span>The model was trained on too little data.</span></button>
+        <button class="opt" data-v="b"><span class="k">B</span><span>It predicts plausible text and has no fact-checking step.</span></button>
+        <button class="opt" data-v="c"><span class="k">C</span><span>It has been fixed in the newest models.</span></button>
+      </div>
+      <div id="s1bFb"></div>
+    </div>
+    <div class="nav">
+      <button class="btn ghost" id="s1Retry" hidden>Try again</button>
+      <button class="btn" id="s1Next" hidden>Continue to Stage 02</button>
+    </div>
+  </section>
+
+  <!-- STAGE 2 -->
+  <section id="stage2" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 02 — Name It</span>
+      <span class="counter" id="s2Counter">1 / 4</span>
+    </div>
+    <p class="lede">Four things a model produced, all presented as fact. Name what each one is.</p>
+    <div class="specimen">
+      <div class="src" id="s2Src"></div>
+      <div class="body" id="s2Body"></div>
+    </div>
+    <div class="prompt-label">What kind of fabrication is this?</div>
+    <div class="chips" id="s2Chips"></div>
+    <div id="s2Fb"></div>
+    <div class="nav">
+      <button class="btn ghost" id="s2Retry" hidden>Try again</button>
+      <button class="btn" id="s2Next" hidden>Continue</button>
+    </div>
+  </section>
+
+  <!-- STAGE 3 -->
+  <section id="stage3" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 03 — Check It</span>
+      <span class="counter" id="s3Count">0 of 4 checks run</span>
+    </div>
+    <p class="lede">You are about to cite this reference in a report going to your regulator. Run whichever checks you like, then decide.</p>
+    <div class="specimen">
+      <div class="src">The reference, as the model gave it</div>
+      <div class="body">Hargreaves, S., &amp; Okonkwo, T. (2021). “Algorithmic accountability in regulated industries.” <em>Journal of Applied Technology Ethics</em>, 14(3), pp. 188–214. DOI: 10.1017/jate.2021.0047</div>
+    </div>
+    <div class="console">
+      <div class="ctitle">Available checks</div>
+      <div class="csub">Run as many as you want. Nothing here is scored until you decide what the results were worth.</div>
+      <div id="actions"></div>
+    </div>
+    <div id="s3Grade" hidden>
+      <div class="prompt-label spaced">For each check you ran — did it give you reliable information?</div>
+      <div id="verdicts"></div>
+      <div id="s3Fb"></div>
+    </div>
+    <div id="s3Final" hidden>
+      <div class="prompt-label spaced">Can this reference go in the report?</div>
+      <div class="options stack" id="s3Options">
+        <button class="opt" data-v="a"><span class="k">A</span><span>Yes — two checks came back positive.</span></button>
+        <button class="opt" data-v="b"><span class="k">B</span><span>No — it cannot be located at source, so it cannot be used.</span></button>
+        <button class="opt" data-v="c"><span class="k">C</span><span>Yes, with a footnote saying the reference was AI-generated.</span></button>
+      </div>
+      <div id="s3FbB"></div>
+    </div>
+    <div class="nav">
+      <button class="btn ghost" id="s3Retry" hidden>Try again</button>
+      <div class="navgroup">
+        <button class="btn" id="s3Grade1">I have run enough checks</button>
+        <button class="btn" id="s3Next" hidden>Continue to Stage 04</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 4 -->
+  <section id="stage4" class="card" hidden>
+    <div class="card-head">
+      <span class="sect">Stage 04 — Lower the Risk</span>
+      <span class="counter">Two steps</span>
+    </div>
+    <p class="lede">A colleague is about to ask an assistant: <em style="color:var(--text);font-style:normal">“What does the new procurement regulation say about contract thresholds?”</em> They have the regulation open in front of them.</p>
+    <div class="prompt-label">Which single change lowers the risk most?</div>
+    <div class="options stack" id="s4aOptions">
+      <button class="opt" data-v="a"><span class="k">A</span><span>Add “please be accurate” to the end of the prompt.</span></button>
+      <button class="opt" data-v="b"><span class="k">B</span><span>Paste the regulation in and ask what <em>this text</em> says about thresholds.</span></button>
+      <button class="opt" data-v="c"><span class="k">C</span><span>Ask the same question in two different assistants and compare.</span></button>
+    </div>
+    <div id="s4aFb"></div>
+    <div id="s4bWrap" hidden>
+      <div class="prompt-label spaced">The answer comes back. Tick everything that genuinely reduces the risk of acting on it.</div>
+      <div class="checks" id="checks"></div>
+      <div id="s4bFb"></div>
+    </div>
+    <div class="nav">
+      <button class="btn ghost" id="s4Retry" hidden>Try again</button>
+      <div class="navgroup">
+        <button class="btn" id="s4Check" hidden>Check my choices</button>
+        <button class="btn" id="s4Next" hidden>See the takeaway</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAKEAWAY -->
+  <section id="stage5" hidden>
+    <div class="card takeaway">
+      <div class="card-head"><span class="sect">Stage 04 — Complete</span><span class="counter">Activity complete</span></div>
+      <h2>The Takeaway</h2>
+      <p class="lede" style="color:#D6D8DD">Four things to carry into every professional encounter with AI.</p>
+      <ul class="tlist">
+        <li><span class="num">01</span><span class="txt">Fluent is not true.<span>Hallucination comes from the prediction mechanism itself. Well-written output is not verified output — treat it as a capable but fallible first draft.</span></span></li>
+        <li><span class="num">02</span><span class="txt">Looking like a source is not being a source.<span>Statistics, citations, quotes and case studies are the four things models invent. Locate every one at its origin before you use it.</span></span></li>
+        <li><span class="num">03</span><span class="txt">A second AI is not a check.<span>Two models can reproduce the same error and agree with each other. Verification is against primary, non-AI sources — not a summary, not another model.</span></span></li>
+        <li><span class="num">04</span><span class="txt">Ground it, flag it, cross-check it, own it.<span>Legal, medical, financial, safety-critical, HR and people decisions, and anything published externally: six contexts where verification is not optional.</span></span></li>
+      </ul>
+      <div class="score">
+        <div><div class="k">First-attempt accuracy</div><div class="v"><b id="scoreVal">0 / 16</b></div></div>
+        <div><div class="k">Next</div><div class="v" style="font-weight:500;color:var(--body)">Module 6 PBQ</div></div>
+      </div>
+      <div class="nav">
+        <button class="btn ghost" id="restart">Restart activity</button>
+        <button class="btn" id="finish">Mark as complete</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>UKAIC AI Foundation — Module 6: Limitations, Risks and Hallucination — Put It Into Practice</span>
+    <span class="mk">UKAIC</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var el = function(id){return document.getElementById(id);};
+
+  /* ================= DATA ================= */
+  var S1A = {
+    answer:"d",
+    fb:{
+      d:{ok:true, t:"Nothing in the writing gives it away. The prose is fluent, internally consistent and professional in register — and confidence is a feature of the output, not a signal of accuracy.",
+         n:"Hallucination is not hesitant. It does not hedge, and it does not flag itself."},
+      a:{ok:false, t:"The figures look ordinary because they are ordinary — a plausible response rate rising by a plausible amount. Nothing about them reveals whether they are right.",
+         n:"The correct answer is that the text alone tells you nothing. Only checking the source settles it."},
+      b:{ok:false, t:"A section number looks precise, and precision reads as authority. But a fabricated section number looks exactly like a real one on the page.",
+         n:"The correct answer is that the text alone tells you nothing. Only checking the source settles it."},
+      c:{ok:false, t:"You may have been right about which claims were wrong — but not from reading. Nothing in the sentence structure, the register or the detail distinguishes a true claim from an invented one.",
+         n:"The correct answer is that the text alone tells you nothing. Only checking the source settles it."}
+    },
+    reveal: '<p>Someone checked the four claims against the survey report and the policy. This is what came back:</p>' +
+      '<div class="found">Response rate 2023 &nbsp;→&nbsp; <b>56%, not 62%</b><br>' +
+      'Publication rule &nbsp;→&nbsp; <b>section 4, not section 9</b><br>' +
+      'Previous year 48% &nbsp;→&nbsp; correct<br>' +
+      '50% representativeness guidance &nbsp;→&nbsp; correct</div>' +
+      '<p>Two of the four claims were wrong. The two that were wrong read exactly like the two that were right.</p>'
+  };
+  var S1B = {
+    answer:"b",
+    fb:{
+      b:{ok:true, t:"The model predicts the most plausible next piece of text. There is no verification layer inside it and no genuine sense of “I don't know”, so an invented figure is produced the same way a correct one is.",
+         n:"Newer models hallucinate less often. None of them has removed it, so it must be assumed possible in any output."},
+      a:{ok:false, t:"More training data reduces how often it happens; it does not change the mechanism. The model still predicts plausible text rather than retrieving verified facts.",
+         n:""},
+      c:{ok:false, t:"Newer models hallucinate less frequently, but it is present in all current systems. It is structural, not a defect awaiting a patch.",
+         n:""}
+    }
+  };
+
+  var TYPES = [
+    {k:"stat", t:"Invented statistic"},
+    {k:"cite", t:"Fabricated citation"},
+    {k:"quote", t:"Misattributed quote"},
+    {k:"case", t:"Fictional case study"}
+  ];
+  var S2 = [
+    {src:"The model wrote:", body:"“Recent figures show that 68% of UK finance teams now use AI tools weekly.”",
+     a:"stat",
+     ok:"An invented statistic. Specific, plausible, and attributed to nobody — which is the tell worth learning: a figure with no named publisher behind it.",
+     no:"This is an invented statistic. It sounds authoritative and precise, but no source is named and no survey behind it is identified."},
+    {src:"The model wrote:", body:"Hargreaves, S., &amp; Okonkwo, T. (2021). “Algorithmic accountability in regulated industries.” Journal of Applied Technology Ethics, 14(3), pp. 188–214.",
+     a:"cite",
+     ok:"A fabricated citation. The model has learnt what references look like — authors, title, journal, volume, pages — and applies the pattern. It is not reading a library catalogue.",
+     no:"This is a fabricated citation. Every element is correctly formatted, which is exactly why the format cannot tell you whether the paper exists."},
+    {src:"The model wrote:", body:"“As the chief executive of a major UK retailer put it last year: ‘Half of our head office will be automated by 2027.’”",
+     a:"quote",
+     ok:"A misattributed quote. Words placed in the mouth of a real, identifiable person who may never have said them — and quotes carry some of the highest publication risk of anything a model produces.",
+     no:"This is a misattributed quote. Real people, real organisations, words they did not say. Quotes and statistics are the two riskiest things to publish unchecked."},
+    {src:"The model wrote:", body:"“A mid-sized council in the north-west cut processing times by 40% after deploying an AI triage system in 2022.”",
+     a:"case",
+     ok:"A fictional case study. A whole narrative — organisation, timeframe, outcome — with enough supporting detail to sound documented, describing something that never happened.",
+     no:"This is a fictional case study: an organisation, a project and an outcome, described convincingly, that does not exist."}
+  ];
+
+  var ACTIONS = [
+    {id:0, label:"Search the journal in an academic database",
+     result:"<b>0 results.</b> No journal of that name is indexed in any database searched.",
+     reliable:true,
+     why:"A primary check. The journal either exists in the record or it does not, and this settles that question."},
+    {id:1, label:"Resolve the DOI",
+     result:"<b>DOI not found.</b> 10.1017/jate.2021.0047 does not resolve to any registered record.",
+     reliable:true,
+     why:"A primary check. A DOI is issued against a real record; an unresolvable one means there is nothing behind the reference."},
+    {id:2, label:"Ask a second AI assistant whether the paper is real",
+     result:"<b>“Yes — that appears to be a genuine paper</b> published in a peer-reviewed ethics journal. Hargreaves and Okonkwo are known in this field.”",
+     reliable:false,
+     why:"It agreed with the first model, confidently, and it was wrong. A second model predicts plausible text from similar training — it can reproduce or compound the same error. Agreement between two AI outputs is not evidence of anything."},
+    {id:3, label:"Read the reference again, carefully",
+     result:"<b>Nothing unusual.</b> Authors, title, journal, volume, issue, page range and DOI are all correctly formatted.",
+     reliable:false,
+     why:"Reading cannot reveal it. The model has learnt the form of a reference perfectly, so a fabricated one passes every surface test you can apply from the page."}
+  ];
+  var S3_GRADE_OK = "The two that told you something were the two that went to a record outside the model. The second assistant did not just fail to help — it actively told you the reference was real.";
+  var S3_GRADE_NO = "Ask of each check: did it consult something outside a language model? A journal index and a DOI registry do. Re-reading the text does not, and neither does asking another model.";
+  var S3_FINAL = {
+    b:{ok:true, t:"It cannot be located at source, so it cannot be used — in a regulatory report least of all.",
+       n:"Publishing a fabricated reference in a legal submission, a regulatory report or academic work exposes you and your organisation to allegations of misconduct or negligence. “The AI generated it” does not move that responsibility."},
+    a:{ok:false, t:"One of those two positives came from another language model, which is not a source. The checks that consulted an actual record both came back empty.",
+       n:"Agreement between AI outputs is not evidence. The reference cannot be located, so it cannot be used."},
+    c:{ok:false, t:"A footnote does not make an unverifiable reference usable. It documents that you knew it was unverified and cited it anyway.",
+       n:"If a claim cannot be traced to a primary source, it does not go in the report."}
+  };
+
+  var S4A = {
+    answer:"b",
+    fb:{
+      b:{ok:true, t:"Grounding is the single most effective intervention. Give the model the actual text and ask what it says, rather than asking it to recall what the regulation contains.",
+         n:"Grounded output can still be wrong — but the failure mode shifts from invention to misreading, and a misreading is far easier for a human to catch."},
+      a:{ok:false, t:"A general request for accuracy changes nothing about the mechanism. The model was already producing what it predicted to be correct.",
+         n:"The strongest change is grounding: paste the regulation in and ask what that text says."},
+      c:{ok:false, t:"Two assistants can reproduce the same error and agree with each other. Comparing them tells you they are consistent, not that they are right.",
+         n:"The strongest change is grounding: paste the regulation in and ask what that text says."}
+    }
+  };
+  var S4B = [
+    {t:"Ask it to flag anything it is not confident about.", ok:true,
+     why:"Worth doing — it may surface hedging you would not otherwise see. It is a signal, not a guarantee: the absence of a flag proves nothing."},
+    {t:"Check the threshold figures against the published regulation.", ok:true,
+     why:"The primary source is the only thing that settles a specific figure. Not a summary, not a commentary."},
+    {t:"Ask a second assistant to confirm the figures.", ok:false,
+     why:"Not a check. A second model can reproduce the same error, and its agreement carries no evidential weight."},
+    {t:"Make sure a named person is accountable before anything is acted on.", ok:true,
+     why:"The human in the loop is the control that catches what the model cannot flag. Accountability sits with the person who acts, not the tool."}
+  ];
+  var S4B_OK = "Three of the four. Notice what the odd one out has in common with the fabricated citation you just checked — it never leaves the world of predicted text.";
+  var S4B_NO = "Ask of each one: does it bring in something outside the model, or make a person answerable? Those are the ones that work.";
+
+  /* ================= STATE ================= */
+  var first = 0, maxScore = 12;
+  var i2 = 0;
+  var ran = {}, verdicts = {}, s3Locked = false, s3Tried = false;
+  var s4Ticks = {}, s4Locked = false, s4Tried = false;
+
+  function showStage(n){
+    [1,2,3,4,5].forEach(function(i){ el("stage"+i).hidden = (i!==n); });
+    el("intro").hidden = true;
+    var r = Math.min(n,4);
+    Array.prototype.forEach.call(document.querySelectorAll(".rail-step"), function(s){
+      var d = +s.dataset.stage;
+      s.classList.toggle("active", d===r && n<5);
+      s.classList.toggle("done", d<r || n===5);
+    });
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function fbBox(ok,title,note){
+    var d=document.createElement("div");
+    d.className="fb "+(ok?"ok":"no"); d.setAttribute("role","status");
+    d.innerHTML='<span class="tag">'+(ok?"Correct":"Not quite")+'</span><p>'+title+'</p>'+(note?'<p class="note">'+note+'</p>':'');
+    return d;
+  }
+  function lock(c,chosen,correct){
+    Array.prototype.forEach.call(c.querySelectorAll(".opt"),function(b){
+      b.disabled=true; var v=b.dataset.v;
+      if(v===correct) b.classList.add("correct");
+      else if(v===chosen) b.classList.add("wrong");
+      else b.classList.add("dim");
+    });
+  }
+  function unlock(c){
+    Array.prototype.forEach.call(c.querySelectorAll(".opt"),function(b){
+      b.disabled=false; b.classList.remove("correct","wrong","dim");
+    });
+  }
+
+  /* ================= STAGE 1 ================= */
+  el("s1aOptions").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var v = b.dataset.v, f = S1A.fb[v];
+    if (f.ok && !el("s1aFb").dataset.retried) first++;
+    lock(el("s1aOptions"), v, S1A.answer);
+    el("s1aFb").innerHTML = "";
+    el("s1aFb").appendChild(fbBox(f.ok, f.t, f.n));
+    var rv = document.createElement("div");
+    rv.className = "reveal";
+    rv.innerHTML = '<span class="tag">What checking found</span>'+S1A.reveal;
+    el("s1aFb").appendChild(rv);
+    el("s1bWrap").hidden = false;
+    el("s1bWrap").scrollIntoView({behavior:"smooth",block:"center"});
+  });
+  el("s1bOptions").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var v = b.dataset.v, f = S1B.fb[v];
+    if (f.ok && !el("s1bFb").dataset.retried) first++;
+    lock(el("s1bOptions"), v, S1B.answer);
+    el("s1bFb").innerHTML = "";
+    el("s1bFb").appendChild(fbBox(f.ok, f.t, f.n));
+    el("s1Next").hidden = false;
+    el("s1Retry").hidden = f.ok;
+  });
+  el("s1Retry").addEventListener("click", function(){
+    el("s1bFb").innerHTML=""; el("s1bFb").dataset.retried="1";
+    unlock(el("s1bOptions")); el("s1Next").hidden=true; el("s1Retry").hidden=true;
+  });
+  el("s1Next").addEventListener("click", function(){ renderS2(); showStage(2); });
+
+  /* ================= STAGE 2 ================= */
+  function renderS2(){
+    var q = S2[i2];
+    el("s2Counter").textContent = (i2+1)+" / "+S2.length;
+    el("s2Src").textContent = q.src;
+    el("s2Body").innerHTML = q.body;
+    el("s2Chips").innerHTML = TYPES.map(function(t){
+      return '<button class="chip" type="button" data-k="'+t.k+'">'+t.t+'</button>';
+    }).join("");
+    el("s2Fb").innerHTML=""; delete el("s2Fb").dataset.retried;
+    el("s2Next").hidden = true; el("s2Retry").hidden = true;
+    el("s2Next").textContent = (i2===S2.length-1) ? "Continue to Stage 03" : "Continue";
+  }
+  el("s2Chips").addEventListener("click", function(e){
+    var b = e.target.closest(".chip"); if(!b || b.disabled) return;
+    var q = S2[i2], k = b.dataset.k, ok = (k===q.a);
+    if (ok && !el("s2Fb").dataset.retried) first++;
+    Array.prototype.forEach.call(el("s2Chips").children, function(x){
+      x.disabled = true;
+      if (x.dataset.k===q.a) x.classList.add("correct");
+      else if (x.dataset.k===k) x.classList.add("wrong");
+      else x.classList.add("dim");
+    });
+    el("s2Fb").innerHTML="";
+    el("s2Fb").appendChild(fbBox(ok, ok?q.ok:q.no, ""));
+    el("s2Next").hidden = false; el("s2Retry").hidden = ok;
+  });
+  el("s2Retry").addEventListener("click", function(){
+    renderS2();
+    el("s2Fb").dataset.retried = "1";
+  });
+  el("s2Next").addEventListener("click", function(){
+    i2++;
+    if (i2 < S2.length){ renderS2(); window.scrollTo({top:0,behavior:"smooth"}); }
+    else { buildS3(); showStage(3); }
+  });
+
+  /* ================= STAGE 3 ================= */
+  function buildS3(){
+    ran = {}; verdicts = {}; s3Locked = false;
+    el("actions").innerHTML = ACTIONS.map(function(a){
+      return '<div class="action" data-i="'+a.id+'">'+
+        '<button class="go" type="button" data-i="'+a.id+'"><span>'+a.label+'</span><span class="run">Run</span></button>'+
+        '</div>';
+    }).join("");
+    el("s3Grade").hidden = true; el("s3Final").hidden = true;
+    el("s3Fb").innerHTML=""; el("s3FbB").innerHTML="";
+    unlock(el("s3Options"));
+    el("s3Grade1").hidden = false; el("s3Grade1").disabled = false;
+    el("s3Next").hidden = true; el("s3Retry").hidden = true;
+    el("s3Count").textContent = "0 of 4 checks run";
+  }
+  el("actions").addEventListener("click", function(e){
+    var b = e.target.closest(".go"); if(!b || b.disabled) return;
+    var i = +b.dataset.i, a = ACTIONS[i];
+    ran[i] = true;
+    b.disabled = true;
+    b.querySelector(".run").textContent = "Done";
+    var wrap = b.closest(".action");
+    wrap.classList.add("used");
+    var r = document.createElement("div");
+    r.className = "result"; r.innerHTML = a.result;
+    wrap.appendChild(r);
+    var n = Object.keys(ran).length;
+    el("s3Count").textContent = n+" of 4 checks run";
+  });
+  el("s3Grade1").addEventListener("click", function(){
+    var runIds = Object.keys(ran).map(Number);
+    if (!runIds.length){
+      el("s3Count").textContent = "Run at least one check first";
+      return;
+    }
+    el("s3Grade1").hidden = true;
+    el("s3Grade").hidden = false;
+    el("verdicts").innerHTML = runIds.map(function(i){
+      var a = ACTIONS[i];
+      return '<div class="action used" data-i="'+i+'">'+
+        '<div class="go" style="cursor:default"><span>'+a.label+'</span></div>'+
+        '<div class="verdictrow" data-i="'+i+'">'+
+          '<button class="vchip" type="button" data-i="'+i+'" data-v="yes">Reliable</button>'+
+          '<button class="vchip" type="button" data-i="'+i+'" data-v="no">Not reliable</button>'+
+        '</div></div>';
+    }).join("");
+    el("verdicts").scrollIntoView({behavior:"smooth",block:"center"});
+  });
+  el("verdicts").addEventListener("click", function(e){
+    if (s3Locked) return;
+    var b = e.target.closest(".vchip"); if(!b) return;
+    var i = +b.dataset.i;
+    verdicts[i] = b.dataset.v;
+    Array.prototype.forEach.call(el("verdicts").querySelectorAll('.vchip[data-i="'+i+'"]'), function(x){
+      x.classList.toggle("sel", x===b);
+    });
+    var runIds = Object.keys(ran).map(Number);
+    if (runIds.every(function(k){ return verdicts[k]; })) gradeS3(runIds);
+  });
+  function gradeS3(runIds){
+    s3Locked = true;
+    var correct = 0;
+    runIds.forEach(function(i){
+      var a = ACTIONS[i], said = (verdicts[i]==="yes"), ok = (said===a.reliable);
+      if (ok) correct++;
+      var wrap = el("verdicts").querySelector('.action[data-i="'+i+'"]');
+      wrap.classList.add(a.reliable ? "right" : "bad");
+      Array.prototype.forEach.call(wrap.querySelectorAll(".vchip"), function(x){
+        x.disabled = true; x.classList.remove("sel");
+        var isRightChip = (x.dataset.v==="yes") === a.reliable;
+        if (isRightChip) x.classList.add("correct");
+        else if ((x.dataset.v==="yes")===said) x.classList.add("wrong");
+        else x.classList.add("dim");
+      });
+      var w = document.createElement("span");
+      w.className = "why"; w.textContent = a.why;
+      wrap.appendChild(w);
+    });
+    if (!s3Tried){ first += correct; maxScore += runIds.length; }
+    s3Tried = true;
+    el("s3Fb").innerHTML = "";
+    el("s3Fb").appendChild(fbBox(correct===runIds.length,
+      correct===runIds.length ? "Right on all "+runIds.length+"." : correct+" of "+runIds.length+" judged correctly.",
+      correct===runIds.length ? S3_GRADE_OK : S3_GRADE_NO));
+    el("s3Final").hidden = false;
+    el("s3Final").scrollIntoView({behavior:"smooth",block:"center"});
+  }
+  el("s3Options").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var v = b.dataset.v, f = S3_FINAL[v];
+    if (f.ok && !el("s3FbB").dataset.retried) first++;
+    lock(el("s3Options"), v, "b");
+    el("s3FbB").innerHTML = "";
+    el("s3FbB").appendChild(fbBox(f.ok, f.t, f.n));
+    el("s3Next").hidden = false;
+    el("s3Retry").hidden = f.ok;
+  });
+  el("s3Retry").addEventListener("click", function(){
+    el("s3FbB").innerHTML=""; el("s3FbB").dataset.retried="1";
+    unlock(el("s3Options")); el("s3Next").hidden=true; el("s3Retry").hidden=true;
+  });
+  el("s3Next").addEventListener("click", function(){ buildS4(); showStage(4); });
+
+  /* ================= STAGE 4 ================= */
+  function buildS4(){
+    s4Ticks = {}; s4Locked = false;
+    unlock(el("s4aOptions"));
+    el("s4aFb").innerHTML=""; el("s4bFb").innerHTML="";
+    el("s4bWrap").hidden = true;
+    el("checks").innerHTML = S4B.map(function(c,i){
+      return '<button class="chk" type="button" data-i="'+i+'"><span class="box">✓</span><span>'+c.t+'</span></button>';
+    }).join("");
+    el("s4Check").hidden = true; el("s4Next").hidden = true; el("s4Retry").hidden = true;
+  }
+  el("s4aOptions").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var v = b.dataset.v, f = S4A.fb[v];
+    if (f.ok && !el("s4aFb").dataset.retried) first++;
+    lock(el("s4aOptions"), v, S4A.answer);
+    el("s4aFb").innerHTML = "";
+    el("s4aFb").appendChild(fbBox(f.ok, f.t, f.n));
+    el("s4bWrap").hidden = false;
+    el("s4Check").hidden = false;
+    el("s4bWrap").scrollIntoView({behavior:"smooth",block:"center"});
+  });
+  el("checks").addEventListener("click", function(e){
+    if (s4Locked) return;
+    var b = e.target.closest(".chk"); if(!b) return;
+    var i = +b.dataset.i;
+    s4Ticks[i] = !s4Ticks[i];
+    b.classList.toggle("on", !!s4Ticks[i]);
+  });
+  el("s4Check").addEventListener("click", function(){
+    s4Locked = true;
+    var correct = 0;
+    var els = Array.prototype.slice.call(el("checks").querySelectorAll(".chk"));
+    S4B.forEach(function(c,i){
+      var b = els[i], picked = !!s4Ticks[i];
+      b.disabled = true;
+      if (picked===c.ok) correct++;
+      if (c.ok) b.classList.add("right");
+      else if (picked) b.classList.add("wrongpick");
+      var w = document.createElement("span");
+      w.className = "note2"; w.textContent = c.why;
+      b.querySelector("span:last-child").appendChild(w);
+    });
+    if (!s4Tried) first += correct;
+    s4Tried = true;
+    el("s4bFb").innerHTML = "";
+    el("s4bFb").appendChild(fbBox(correct===S4B.length,
+      correct===S4B.length ? "All four judged correctly." : correct+" of "+S4B.length+" decisions correct.",
+      correct===S4B.length ? S4B_OK : S4B_NO));
+    el("s4Check").hidden = true;
+    el("s4Retry").hidden = (correct===S4B.length);
+    el("s4Next").hidden = false;
+  });
+  el("s4Retry").addEventListener("click", function(){
+    s4Locked = false; s4Ticks = {};
+    el("s4bFb").innerHTML="";
+    el("checks").innerHTML = S4B.map(function(c,i){
+      return '<button class="chk" type="button" data-i="'+i+'"><span class="box">✓</span><span>'+c.t+'</span></button>';
+    }).join("");
+    el("s4Check").hidden = false; el("s4Next").hidden = true; el("s4Retry").hidden = true;
+  });
+  el("s4Next").addEventListener("click", function(){
+    el("scoreVal").textContent = first + " / " + maxScore;
+    showStage(5);
+  });
+
+  /* ================= NAV ================= */
+  el("startBtn").addEventListener("click", function(){ showStage(1); });
+  el("restart").addEventListener("click", function(){
+    first = 0; maxScore = 12; i2 = 0; s3Tried = false; s4Tried = false;
+    unlock(el("s1aOptions")); unlock(el("s1bOptions"));
+    el("s1aFb").innerHTML=""; el("s1bFb").innerHTML="";
+    delete el("s1aFb").dataset.retried; delete el("s1bFb").dataset.retried;
+    el("s1bWrap").hidden = true; el("s1Next").hidden = true; el("s1Retry").hidden = true;
+    var f=el("finish"); f.textContent="Mark as complete"; f.disabled=false; f.style.opacity="";
+    showStage(1);
+  });
+  el("finish").addEventListener("click", function(){
+    var b=el("finish"); b.textContent="Completed ✓"; b.disabled=true; b.style.opacity=".7";
+  });
+})();
+</script>
+</body>
+</html>
