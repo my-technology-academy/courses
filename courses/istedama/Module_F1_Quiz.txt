@@ -1,0 +1,43 @@
+
+QUESTIONS:
+
+Q1. Which statement best describes kernel mode on a modern Windows host?
+    (A) It is where all end-user applications execute with full hardware access
+    (B) It has unrestricted access to hardware and hosts the kernel, HAL, and drivers
+    (C) It is a Microsoft Defender feature for blocking kernel exploits
+    (D) It only exists on Windows Server editions
+
+Q2. A folder's NTFS permissions grant Full Control, and its share permissions grant Read Only to the same user. What is that user's effective access over the network?
+    (A) Full Control
+    (B) Read Only
+    (C) No access
+    (D) Full Control, but only for local logon
+
+Q3. What does User Account Control (UAC) actually provide?
+    (A) A consent prompt that keeps an admin account running with standard-user rights until elevation is approved
+    (B) Full isolation between two different user accounts on the same host
+    (C) A network-layer firewall rule set
+    (D) A signature-based scan of every running process
+
+Q4. Which statement about PowerShell execution policy is correct?
+    (A) It permanently blocks all unsigned scripts on every account
+    (B) It replaces the need for antivirus scanning
+    (C) It is a safety guard rail against accidental execution, not a security boundary
+    (D) It only applies to remote sessions, never local scripts
+
+Q5. Why does restricting who can read LSASS memory matter?
+    (A) LSASS controls Windows Firewall rules
+    (B) LSASS holds credential material in memory, so restricting access blunts credential-dumping attacks
+    (C) LSASS is only relevant to network-layer attacks
+    (D) LSASS memory access has no security relevance
+
+
+
+ANSWER KEY (For Instructor Use)
+==================================================
+Q1: (B) It has unrestricted access to hardware and hosts the kernel, HAL, and drivers
+Q2: (B) Read Only
+Q3: (A) A consent prompt that keeps an admin account running with standard-user rights until elevation is approved
+Q4: (C) It is a safety guard rail against accidental execution, not a security boundary
+Q5: (B) LSASS holds credential material in memory, so restricting access blunts credential-dumping attacks
+==================================================

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module F1 Cheat Sheet — Windows & Operating System Fundamentals</title>
+</head>
+<body style="margin:0">
+<div style="width:1700px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0c0d10;background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:#f5f7fb;padding:36px;box-sizing:border-box;border:1px solid #2a2f3a">
+
+  <div style="text-align:center;margin-bottom:20px">
+    <h1 style="margin:0;font-size:32px;font-weight:900;letter-spacing:.3px">DarbTech F1: <span style="color:#ff6a00">Windows &amp; Operating System Fundamentals</span></h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.1 OS STRUCTURE &amp; ADMIN</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Kernel mode:</strong> unrestricted hardware access — kernel, HAL, drivers</div>
+        <div><strong style="color:#ffd9bf">User mode:</strong> restricted — Win32 subsystem, services, applications</div>
+        <div><strong style="color:#ffd9bf">Local Administrators group:</strong> controls install/settings/other-user-data rights</div>
+        <div><strong style="color:#ffd9bf">UAC:</strong> consent prompt for elevation — a convenience boundary, not user isolation</div>
+        <div><strong style="color:#ffd9bf">Driver signing:</strong> blocks unsigned kernel-mode code from loading</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.2 BUILT-IN TOOLING</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Defender Antivirus:</strong> signature + behaviour scanning of files/processes</div>
+        <div><strong style="color:#ffd9bf">Windows Firewall:</strong> rule-based traffic filtering, per network profile</div>
+        <div><strong style="color:#ffd9bf">Event Viewer:</strong> Security/System/Application logs — logons, process creation</div>
+        <div><strong style="color:#ffd9bf">Services console:</strong> what runs in the background, and as which account</div>
+        <div><strong style="color:#ffd9bf">Task Scheduler:</strong> what runs automatically, and when</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.3 POWERSHELL</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Cmdlets:</strong> Verb-Noun pattern (Get-Process, Stop-Service)</div>
+        <div><strong style="color:#ffd9bf">Pipeline:</strong> passes structured .NET objects, not text</div>
+        <div><strong style="color:#ffd9bf">Execution policy:</strong> Restricted / RemoteSigned / Unrestricted — a guard rail, not a security boundary</div>
+        <div><strong style="color:#ffd9bf">WinRM / Remoting:</strong> runs commands remotely — a key lateral-movement log source</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #b85100;border-radius:14px;padding:16px;background:rgba(255,106,0,.06);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.4 NTFS PERMISSIONS vs SHARE PERMISSIONS</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100"></th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">NTFS Permissions</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Share Permissions</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Applies to</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">The file/folder itself, always</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Access via the network share only</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#ffd9bf">Local logon access</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Enforced</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Not applicable</td></tr>
+          <tr><td style="padding:5px 8px;color:#ffd9bf">When both apply</td><td colspan="2" style="padding:5px 8px;color:#ffd9bf">Effective access = the more restrictive of the two</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02)">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">PREVENTION vs DETECTION TOOLING</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Control</th><th style="text-align:left;padding:5px 8px;background:rgba(255,106,0,.18);border-bottom:1px solid #b85100">Layer</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Defender Antivirus</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Prevention — file/process</td></tr>
+          <tr><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Windows Firewall</td><td style="padding:5px 8px;border-bottom:1px solid #2a2f3a;color:#dfe3ea">Prevention — network</td></tr>
+          <tr><td style="padding:5px 8px;color:#dfe3ea">EDR</td><td style="padding:5px 8px;color:#dfe3ea">Detection &amp; response — telemetry</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="border:1px solid #2a2f3a;border-radius:14px;padding:16px;background:rgba(255,255,255,.02);grid-column:span 2">
+      <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:10px">1.5 ATTACKER PLAYBOOK — WORKFLOWS &amp; BEST PRACTICE</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.35;color:#dfe3ea">
+        <div><strong style="color:#ffd9bf">Persistence:</strong> registry Run keys · scheduled tasks · auto-start services — remove the artefact, then find the root cause</div>
+        <div><strong style="color:#ffd9bf">Privilege escalation:</strong> weak service permissions, unquoted service paths take a standard user to SYSTEM</div>
+        <div><strong style="color:#ffd9bf">Credential attack:</strong> LSASS memory dumping, pass-the-hash — often "living off the land", no malware required</div>
+        <div><strong style="color:#ffd9bf">Best practice:</strong> restrict LSASS memory read access; review Event Viewer, Services and Task Scheduler routinely</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border:1px solid #2a2f3a;border-radius:14px;padding:14px;background:rgba(255,255,255,.02);margin-top:14px">
+    <div style="color:#ff6a00;font-weight:900;font-size:14px;letter-spacing:.5px;margin-bottom:8px">EXAM TRAPS &amp; ACRONYMS</div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;font-size:12px;line-height:1.4;color:#dfe3ea">
+      <div>
+        <div>⚠️ UAC is a consent prompt, not isolation between two separate user accounts</div>
+        <div>⚠️ Execution policy is a guard rail — it does not stop a determined local attacker</div>
+        <div>⚠️ Share permissions do not apply to a local logon — only NTFS permissions do</div>
+        <div>⚠️ Antivirus alone will not catch novel or fileless malware — hence EDR</div>
+      </div>
+      <div>
+        UAC · NTFS · ACL · LSASS · WinRM · HAL · IAM · EDR · SYSTEM · SID
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #2a2f3a;font-size:12px;color:#8891a1">
+    <div>DarbTech Cybersecurity Operations &amp; Digital Forensics — Module F1: Windows &amp; OS Fundamentals | My Cyber Academy</div>
+    <div style="font-weight:900;letter-spacing:2px"><span style="color:#ff6a00">DARB</span><span style="color:#f5f7fb">TECH</span></div>
+  </div>
+</div>
+
+</body>
+</html>
