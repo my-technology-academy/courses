@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UKAIC — Module 2 Flashcards</title>
+<style>
+  :root{--bg:#0c0d10;--card:#111217;--stroke:#2a2f3a;--accent:#ff6a00;--text:#f5f7fb;--dim:#b8c0cf}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background-color:var(--bg);background-image:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);color:var(--text);min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:36px 24px 60px}
+  header{text-align:center;margin-bottom:28px}
+  h1{margin:0;font-size:30px;font-weight:900}
+  h1 .accent{color:var(--accent)}
+  .sub{color:var(--dim);font-size:14px;margin-top:8px}
+  .toolbar{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+  .btn{border:1px solid var(--stroke);background:rgba(255,255,255,.02);color:var(--text);padding:9px 16px;border-radius:12px;cursor:pointer;font-size:14px}
+  .btn:hover{background:rgba(255,106,0,.10)}
+  .counter{color:var(--dim);font-size:14px}
+  .stage{display:flex;justify-content:center}
+  .scene{width:100%;max-width:640px;height:360px;perspective:1600px}
+  .card{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+  .card.flipped{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--stroke);border-radius:20px;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;background:var(--card)}
+  .face.front{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.15)), var(--card)}
+  .face.back{transform:rotateY(180deg);background:linear-gradient(180deg, rgba(255,106,0,.10), rgba(0,0,0,.15)), var(--card);border-color:#b85100}
+  .tag{position:absolute;top:18px;left:18px;font-size:12px;font-weight:700;letter-spacing:.5px;color:#ffd9bf;background:rgba(255,106,0,.15);border:1px solid rgba(255,106,0,.35);padding:4px 10px;border-radius:999px}
+  .term{font-size:23px;font-weight:900}
+  .def{font-size:17px;line-height:1.5;color:var(--dim)}
+  .hint{position:absolute;bottom:16px;font-size:12px;color:#8891a1}
+  .dots{display:flex;justify-content:center;gap:6px;margin-top:24px;flex-wrap:wrap}
+  .dot{width:9px;height:9px;border-radius:999px;background:var(--stroke);cursor:pointer}
+  .dot.active{background:var(--accent)}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:40px;font-size:12.5px;color:#8891a1}
+  .dots,.foot{max-width:640px;margin-left:auto;margin-right:auto}
+  .wordmark{font-weight:900;letter-spacing:2px}
+  .wordmark .c{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>UKAIC <span class="accent">Flashcards</span></h1><div class="sub">Module 2 &middot; Domain 2: How AI Systems Work</div></header>
+  <div class="toolbar">
+    <button class="btn" id="prevBtn">⟨ Prev</button>
+    <span class="counter" id="counter">1 / 13</span>
+    <button class="btn" id="nextBtn">Next ⟩</button>
+    <button class="btn" id="shuffleBtn">Shuffle</button>
+  </div>
+  <div class="stage"><div class="scene"><div class="card" id="card">
+    <div class="face front"><div class="tag" id="tagFront">Automation</div><div class="term" id="termText">Term</div><div class="hint">Tap card to reveal definition</div></div>
+    <div class="face back"><div class="tag" id="tagBack">Automation</div><div class="def" id="defText">Definition</div><div class="hint">Tap card to flip back</div></div>
+  </div></div></div>
+  <div class="dots" id="dots"></div>
+  <div class="foot"><div>My Cyber Academy</div><div class="wordmark"><span class="c">UKAIC</span></div></div>
+</div>
+<script>
+const cards = [
+  {tag:"Prediction", term:"Prediction", def:"The core mechanism behind AI output: a model generates the most statistically likely result from learned patterns, rather than looking an answer up."},
+  {tag:"Prediction", term:"Next-Token Prediction Loop", def:"The repeating cycle of predicting one token, adding it to the response, and repeating until complete — then converting the tokens back into readable text."},
+  {tag:"Training & Inference", term:"Training", def:"The process of building a model: it is shown large amounts of data and adjusts its internal parameters. Happens once, or periodically, before anyone uses the model."},
+  {tag:"Training & Inference", term:"Inference", def:"Using an already-trained model to produce output from a new input. Happens every time a prompt is sent; does not change the model itself."},
+  {tag:"Data & Parameters", term:"Dataset (Role In Capability)", def:"The data a model is trained on directly shapes what it can do — broad, high-quality data produces broader, more reliable capability."},
+  {tag:"Data & Parameters", term:"Parameters (Role In Capability)", def:"The internal values a model tunes during training. More parameters can represent more complex patterns, but do not automatically mean a better result."},
+  {tag:"Limits", term:"Tokens", def:"The small chunks of text a model reads and generates. Prompts and replies are both measured in tokens, which is why very long input sometimes has to be shortened."},
+  {tag:"Limits", term:"Context Window", def:"The maximum amount of text a model can consider at once. Limits both single-message length and how much earlier conversation the model can still see."},
+  {tag:"Limits", term:"Knowledge Cut-off", def:"The point in time after which a model's training data stops. It has no built-in awareness of anything after that date unless separately connected to current information."},
+  {tag:"Temperature", term:"Temperature", def:"A setting controlling how much randomness is allowed when a model selects its next token. Low temperature is focused and repeatable; high temperature is varied and creative."},
+  {tag:"Temperature", term:"Non-Determinism", def:"The normal behaviour where the same prompt sent twice produces two reasonably different, both plausible, responses — because of randomness, not a fault."},
+  {tag:"APIs & Embeddings", term:"API", def:"A defined way for one piece of software to send requests to another and receive a response — how other applications connect to and use an AI model."},
+  {tag:"APIs & Embeddings", term:"Embeddings", def:"A way of representing meaning numerically, positioning similar meanings close together so a system can compare and retrieve related content."}
+];
+let order = cards.map((_,i)=>i); let pos = 0;
+const cardEl=document.getElementById('card'),termText=document.getElementById('termText'),defText=document.getElementById('defText'),tagFront=document.getElementById('tagFront'),tagBack=document.getElementById('tagBack'),counter=document.getElementById('counter'),dotsEl=document.getElementById('dots');
+function renderDots(){dotsEl.innerHTML='';order.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===pos?' active':'');d.onclick=()=>{pos=i;render();};dotsEl.append(d);});}
+function render(){const c=cards[order[pos]];cardEl.classList.remove('flipped');termText.textContent=c.term;defText.textContent=c.def;tagFront.textContent=c.tag;tagBack.textContent=c.tag;counter.textContent=(pos+1)+' / '+order.length;renderDots();}
+cardEl.addEventListener('click',()=>cardEl.classList.toggle('flipped'));
+document.getElementById('nextBtn').onclick=()=>{pos=(pos+1)%order.length;render();};
+document.getElementById('prevBtn').onclick=()=>{pos=(pos-1+order.length)%order.length;render();};
+document.getElementById('shuffleBtn').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}pos=0;render();};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')document.getElementById('nextBtn').click();if(e.key==='ArrowLeft')document.getElementById('prevBtn').click();if(e.key===' '){e.preventDefault();cardEl.classList.toggle('flipped');}});
+render();
+</script>
+</body>
+</html>

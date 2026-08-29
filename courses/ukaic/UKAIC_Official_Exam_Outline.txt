@@ -1,0 +1,346 @@
+CERTIFIED AI ASSOCIATE
+C A I A
+Use AI.  Verify AI.  Work smarter with AI.
+Official Course &amp; Certification Descriptor
+Foundation / Entry-Level AI Certification
+Document version 1.0
+Prepared for the content &amp; design team
+Contents
+1.  Certification Identity	3
+2.  Certification Overview	3
+3.  Purpose of the Certification	3
+4.  Who the Certification Is For	4
+5.  Prerequisites	4
+6.  What Candidates Will Learn	4
+7.  Detailed Learning Outcomes	5
+8.  Examination Domains &amp; Weightings	6
+9.  Detailed Examination Objectives	7
+10.  Course Structure Mapped to Domains	9
+11.  Assessment Methodology	9
+12.  Examination Specification	10
+13.  Recommended Study Approach	10
+14.  Knowledge and Skills Demonstrated by a Successful Candidate	11
+15.  Certificate and Digital Badge	11
+16.  Progression Pathway	11
+17.  Suggested Course Duration &amp; Guided Learning Hours	11
+18.  UKAIC at a Glance	13
+19.  Short Descriptor (Website / Product Page)	13
+20.  What Does Being UKAIC Certified Demonstrate?	13
+21.  Suggested Certificate Wording	14
+Appendix A — Curriculum Review &amp; Enhancement Notes (Internal)	15
+1.  Certification Identity
+Certification title
+UKAIC
+Post-nominal / acronym
+UKAIC
+Tagline
+Use AI. Verify AI. Work smarter with AI.
+Certification level
+Foundation / Entry Level
+Discipline
+Artificial Intelligence literacy and responsible use
+Prerequisites
+None
+2.  Certification Overview
+The UKAIC is a foundation-level certification that verifies an individual possesses a modern, practical understanding of artificial intelligence, generative AI and the responsible use of AI in the workplace. It is designed for a general professional audience rather than for engineers or specialists, and it assumes no prior AI knowledge.
+UKAIC establishes a common baseline of AI literacy: what AI is and is not, how today’s generative AI and large-language-model systems work at an appropriate conceptual level, how to use and prompt these tools effectively, why their outputs must be verified, and how to handle AI responsibly with due regard for security, privacy, ethics and organisational accountability.
+The certification is theory-based. Understanding is assessed through a structured multiple-choice examination. UKAIC is deliberately broad rather than deep: its purpose is to build confident, informed and responsible everyday users of AI, and to provide the shared foundation on which more specialised AI study can later be built.
+Positioning. UKAIC plays the same role for artificial intelligence that a strong entry-level cybersecurity certification plays for security: a broad, credible foundation taken before progressing into more specialised practitioner and advanced pathways. It is not an advanced technical AI course, a programming course, an AI engineering qualification or an AI security specialist certification.
+3.  Purpose of the Certification
+UKAIC exists to address a simple, growing need: AI is now part of everyday work across virtually every profession, yet most people have never been given a structured, reliable grounding in how it works or how to use it well. The certification sets a clear, assessable standard for that grounding.
+The purpose of UKAIC is to:
+Provide a vendor-neutral foundation in modern AI, generative AI and large-language-model concepts.
+Enable individuals to use common AI tools effectively, safely and responsibly in a workplace context.
+Establish that a certified individual understands the limitations of AI and the need to verify its output.
+Promote responsible AI use, sound data handling, privacy awareness and human accountability.
+Serve as the recognised entry point into a wider AI certification pathway, before candidates specialise.
+4.  Who the Certification Is For
+UKAIC is intentionally broad in its applicability. AI literacy is increasingly relevant across almost every role, so the certification is written for a general professional and learner audience rather than for a single technical discipline.
+Typical candidates include:
+•  People completely new to AI•  Employees beginning to use AI at work•  Business professionals•  Managers and team leaders•  Students•  Career changers•  Cybersecurity professionals•  IT professionals•  Sales and marketing professionals•  HR professionals•  Operations teams•  Consultants•  Entrepreneurs and small-business owners•  Anyone preparing for more advanced AI study
+UKAIC is not positioned as an IT-only qualification. It is designed to be equally valuable to a marketer, an HR manager, an operations lead or a student as it is to a technologist.
+5.  Prerequisites
+None. There are no prerequisites for UKAIC. No prior AI knowledge, technical background, programming ability or mathematics is required or assumed. The certification is designed to be accessible to a complete beginner while still being substantial enough to be worth holding.
+6.  What Candidates Will Learn
+Across the programme, candidates build a connected picture of modern AI — moving from core concepts, to how systems work, to practical and responsible everyday use. On completion, candidates will be able to:
+Understand and correctly use the core vocabulary of modern AI, including machine learning, deep learning, generative AI, large language models and foundation models.
+Explain, without mathematics, how AI systems learn and produce output — training and inference, datasets, parameters, tokens, context windows and embeddings.
+Recognise the main categories of AI tools and generative AI, including multimodal AI, AI agents and retrieval-augmented generation, and select an appropriate tool for a task.
+Write clear, effective prompts and apply AI to common workplace tasks such as drafting, summarising, planning and research assistance.
+Identify the limitations and risks of AI — including hallucination and overconfidence — and apply verification and human oversight.
+Protect privacy, confidential information and sensitive data, and recognise foundational AI security risks.
+Apply the principles of responsible AI: fairness, transparency, disclosure, accountability, human decision-making and organisational policy.
+7.  Detailed Learning Outcomes
+On successful completion of UKAIC, a certified individual is expected to be able to demonstrate the following outcomes. These are written at foundation level and are assessed through the certification examination.
+Area
+The certified candidate can…
+Concepts &amp; terminology
+Define artificial intelligence and distinguish it from ordinary automation and traditional software; explain how AI, machine learning, deep learning and generative AI relate to one another; and use key terms such as model, dataset, parameters, tokens, context window, foundation model, large language model, multimodal AI and embeddings correctly.
+How systems work
+Explain in non-technical terms how modern AI produces output through prediction; distinguish training from inference; and explain knowledge cut-offs, randomness/temperature and why the same prompt can produce different answers.
+Generative AI &amp; tools
+Describe the main categories of generative AI and AI tools, explain foundation models, AI agents and retrieval-augmented generation at a conceptual level, and choose an appropriate tool for a given task based on its strengths and limitations.
+Effective use &amp; prompting
+Apply a structured approach to prompting (task, context, format, constraints), improve weak prompts, and use AI effectively and appropriately for common workplace tasks.
+Limitations &amp; verification
+Explain hallucination, overconfidence and knowledge limitations; apply verification and source-checking to AI output; and describe the role of human-in-the-loop oversight.
+Security, privacy &amp; data
+Explain why sensitive, personal or confidential data must be protected when using AI, recognise foundational AI security risks (including data leakage, unsanctioned tool use and AI-enabled threats such as deepfakes and AI-assisted phishing), and apply safe everyday practices.
+Responsible AI &amp; governance
+Explain bias, fairness, transparency and disclosure; describe accountability and the importance of human decision-making; and understand the role of organisational AI policy and governance.
+8.  Examination Domains &amp; Weightings
+The UKAIC examination is built on seven domains. The weighting of each domain determines the proportion of examination questions drawn from it. The internal question bank is substantially larger than any single examination, so every examination is assembled to reflect these published weightings while drawing different questions each time.
+Domain
+Title
+Weighting
+1
+AI Concepts &amp; Terminology
+20%
+2
+How AI Systems Work
+15%
+3
+Generative AI &amp; AI Tools
+15%
+4
+Prompting &amp; Effective AI Use
+15%
+5
+AI Limitations &amp; Verification
+15%
+6
+AI Security, Privacy &amp; Data
+10%
+7
+Responsible AI, Ethics &amp; Governance
+10%
+Total
+100%
+9.  Detailed Examination Objectives
+The objectives below define what is assessable within each domain. They are written at foundation level: the emphasis is on conceptual understanding and practical judgement, not technical implementation.
+  DOMAIN 1  —  AI Concepts &amp; Terminology      (20%)  
+Define artificial intelligence and distinguish it from ordinary automation and traditional rule-based software.
+Explain how artificial intelligence, machine learning, deep learning and generative AI relate to one another as nested, layered ideas.
+Define and correctly use core terms: model, dataset, parameters, tokens, context window, foundation model, large language model (LLM), multimodal AI and embeddings.
+Distinguish today’s task-specific (&quot;narrow&quot;) AI from the concept of general AI.
+Distinguish generative AI from traditional predictive or analytical AI at a conceptual level.
+Recognise common examples of AI already encountered in everyday life and at work.
+  DOMAIN 2  —  How AI Systems Work      (15%)  
+Explain, without mathematics, that modern AI produces output by prediction, and that a language model works by predicting the next piece of text.
+Distinguish training (how a model is built from data) from inference (how a trained model is used).
+Explain the conceptual role of datasets and parameters in shaping what a model can do.
+Explain tokens and context windows, and why they create practical limits on length and memory.
+Explain what a knowledge cut-off is and its consequences for currency of information.
+Explain temperature / randomness and why identical prompts can produce different answers (non-determinism).
+Understand, at a conceptual level, that APIs allow other applications to connect to and use AI models, and that embeddings are a way meaning is represented numerically.
+  DOMAIN 3  —  Generative AI &amp; AI Tools      (15%)  
+Describe the main categories of generative AI: text, image, audio, video and code generation.
+Explain what a foundation model is and how a single general-purpose model can be applied to many tasks.
+Identify the main categories of AI tools and platforms (vendor-neutral) and their typical workplace uses.
+Explain, at a foundation level, what an AI agent is — a system that can take actions or use tools to complete a task.
+Explain retrieval-augmented generation (RAG) conceptually as a way of connecting a model to external or up-to-date information.
+Understand multimodal AI — systems that work across more than one type of input or output.
+Assess the strengths and limitations of AI tools well enough to select an appropriate tool for a given task.
+  DOMAIN 4  —  Prompting &amp; Effective AI Use      (15%)  
+Apply a structured approach to prompting using task, context, format and constraints.
+Write clear, specific and effective instructions, and diagnose and improve weak prompts.
+Use iterative refinement and follow-up prompting to improve results.
+Provide examples, roles or personas to guide the style and content of AI output.
+Apply AI effectively to common workplace tasks such as drafting, summarising, planning and research assistance.
+Judge which tasks are appropriate for AI assistance and which are not.
+  DOMAIN 5  —  AI Limitations &amp; Verification      (15%)  
+Explain what hallucination is and why AI can produce confident but incorrect information.
+Explain overconfidence and the fact that a model does not &quot;know&quot; when it is wrong.
+Explain how knowledge cut-offs and missing or outdated information affect reliability.
+Apply verification and source-checking techniques to AI output.
+Explain the role of human-in-the-loop review and human oversight.
+Identify tasks where verification is essential, such as facts, figures, and legal, medical, financial or code-related output.
+  DOMAIN 6  —  AI Security, Privacy &amp; Data      (10%)  
+Explain why personal, confidential, sensitive or regulated information should not be entered into unapproved AI tools.
+Describe, at a foundation level, how inputs may be stored or used, and what is meant by data leakage.
+Recognise &quot;shadow AI&quot; — the use of unsanctioned AI tools — and why it creates risk.
+Show awareness of AI-enabled threats, including deepfakes, AI-assisted phishing and social engineering, and misinformation.
+Show conceptual awareness of prompt injection and manipulated inputs as a category of risk.
+Apply basic safe practices: use approved tools, protect account access and credentials, and follow data-classification and handling rules.
+  DOMAIN 7  —  Responsible AI, Ethics &amp; Governance      (10%)  
+Explain bias and fairness, and how bias can enter AI systems through data.
+Explain the importance of transparency, disclosure and explainability in AI use.
+Describe accountability — that humans remain responsible for decisions made with AI assistance.
+Understand the role of organisational AI policy, acceptable-use rules and governance at a foundation level.
+Recognise, at a generic awareness level, that AI regulation and standards are emerging and evolving.
+Apply responsible-use principles and maintain human oversight in workplace decision-making.
+10.  Course Structure Mapped to Domains
+The course is delivered as eight teaching modules. The modules follow a natural learning progression — from concepts, to mechanics, to practical and responsible use — and together they cover all seven examination domains. The table below maps each module to the domain(s) it primarily supports.
+#
+Module
+Key content
+Maps to
+1
+Understanding AI: The Big Picture
+What AI is and is not; key terminology; the AI / ML / deep learning / generative AI relationship; narrow vs. general AI; everyday and workplace examples.
+Domain 1
+2
+How AI Works (Without the Maths)
+Prediction; training vs. inference; models; datasets and parameters; tokens and context windows; knowledge cut-offs; temperature and non-determinism; APIs and embeddings conceptually.
+Domain 2 (supports 1)
+3
+The AI Landscape &amp; Generative AI
+Categories of AI and generative AI; foundation models; multimodal AI; AI agents; retrieval-augmented generation; major tool categories; strengths, limitations and tool selection.
+Domain 3
+4
+Prompt Engineering Fundamentals
+Writing effective instructions; task, context, format and constraints; iterative refinement; improving poor prompts.
+Domain 4
+5
+Working with AI Day-to-Day
+Applying AI to drafting, summarising, planning and research assistance; appropriate vs. inappropriate uses; the role of human verification.
+Domains 4 &amp; 5
+6
+Limitations, Risks &amp; Hallucination
+Why AI produces incorrect information; hallucination; overconfidence; knowledge limitations; verification; human oversight.
+Domain 5
+7
+AI Security, Privacy &amp; Data
+Protecting personal, confidential and sensitive data; data leakage; shadow AI; AI-enabled threats; prompt-injection awareness; safe everyday practices.
+Domain 6
+8
+Ethics, Bias, Responsible AI &amp; Governance
+Bias and fairness; transparency and disclosure; accountability and human decision-making; organisational policy; governance; maintaining human oversight.
+Domain 7
+Learning environment. Each module is supported by course slides, practice-based / scenario knowledge questions (PBQs), flash cards, a cheat sheet, a module summary, a module quiz and an AI tutor. The programme additionally includes a certification examination and a set of practice examination questions.
+11.  Assessment Methodology
+UKAIC is assessed by a single multiple-choice certification examination. The examination is designed to test genuine understanding and applied judgement rather than rote memorisation: questions include both direct knowledge items and short scenario-based items that ask the candidate to choose the most appropriate action or interpretation.
+Questions are drawn from a substantially larger internal question bank and assembled to match the published domain weightings, so that every examination provides balanced coverage across all seven domains while varying between candidates and attempts. The examination returns an immediate pass or fail result against a fixed pass mark.
+Formative assessment. Before attempting the certification examination, candidates can check their readiness using the module quizzes, scenario-based knowledge questions and the dedicated practice examination questions, which mirror the style and domain balance of the real examination.
+12.  Examination Specification
+Certification
+UKAIC
+Assessment type
+Multiple-choice examination
+Number of questions
+50
+Duration
+60 minutes
+Pass mark
+70%
+Level
+Foundation / Entry Level
+Prerequisites
+None
+Delivery
+Online
+Result
+Immediate pass / fail result
+Domain coverage
+All seven domains, per the published weightings
+Question source
+Assembled from a substantially larger internal question bank
+Credential awarded
+Digital UKAIC certificate and digital badge on successful completion
+13.  Recommended Study Approach
+UKAIC is designed for self-paced study and requires no prior knowledge. The following approach is recommended for most candidates:
+Work through the eight modules in order, using the slides, module summaries and flash cards to build and consolidate understanding.
+Use the AI tutor to explore any concept that is unclear, and try the ideas out with a common AI tool where possible to make them concrete.
+After each module, complete the module quiz and the scenario-based knowledge questions to check understanding.
+Use the cheat sheet for consolidated revision across all domains.
+When ready, complete the practice examination questions under realistic conditions, and review any weak domains before booking the certification examination.
+Because the examination is weighted, candidates should give proportionally more revision time to the higher-weighted domains — particularly Domain 1 (AI Concepts &amp; Terminology, 20%) — while ensuring every domain is covered.
+14.  Knowledge and Skills Demonstrated by a Successful Candidate
+A successful UKAIC candidate has demonstrated, through a structured examination, that they can reasonably be expected to:
+Understand the foundations of modern AI and use its core terminology correctly.
+Explain how generative AI and large-language-model systems work at an appropriate conceptual level.
+Use common AI tools effectively for everyday and workplace tasks.
+Prompt AI systems clearly and improve poor prompts.
+Recognise that AI output requires verification, and apply human oversight.
+Identify common AI limitations and risks, including hallucination and overconfidence.
+Protect privacy and sensitive information and recognise foundational AI security risks.
+Apply responsible AI principles — fairness, transparency, disclosure, accountability and human decision-making — in line with organisational policy.
+15.  Certificate and Digital Badge
+On passing the examination, the candidate is awarded a digital UKAIC certificate and a digital badge. The certificate records the holder’s name, the certification title (UKAIC) and the credential level. The digital badge can be displayed on professional profiles, email signatures and CVs to indicate that the holder has met the UKAIC standard of foundational AI literacy.
+16.  Progression Pathway
+UKAIC is the entry point into a wider AI certification pathway. It establishes the common foundation required before candidates move into deeper, more specialised study — whether in AI use, AI security, governance, technical or other specialist directions.
+UKAIC   —  Foundation / Entry Level
+▼
+Practitioner-level AI certification   —  Applied / intermediate depth
+▼
+Advanced / Expert-level AI certification   —  Specialist / deep expertise
+Note: the practitioner and advanced levels are described generically. UKAIC does not depend on any specific later credential; it provides the shared foundation on which any subsequent AI, AI security, governance, technical or specialist pathway can build.
+17.  Suggested Course Duration &amp; Guided Learning Hours
+UKAIC is a foundation-level, theory-based programme and is designed to be completed without a large time commitment. The following is a guide rather than a requirement; actual time will vary with prior familiarity and study style.
+Guided learning hours (taught content)
+12–15 hours
+Recommended self-study and practice
+6–10 hours
+Typical total study time
+Approximately 20–25 hours
+Typical completion window
+2–4 weeks of part-time study
+18.  UKAIC at a Glance
+Certification
+UKAIC
+Tagline
+Use AI. Verify AI. Work smarter with AI.
+Level
+Foundation / Entry Level
+Prerequisites
+None
+Format
+Theory-based course; multiple-choice certification examination
+Examination
+50 questions • 60 minutes • 70% pass mark • online • immediate result
+Domains
+7 domains covering concepts, how AI works, generative AI &amp; tools, prompting, limitations &amp; verification, security &amp; privacy, and responsible AI
+Modules
+8 teaching modules with slides, PBQs, flash cards, cheat sheet, quizzes and an AI tutor
+Study time
+Approximately 20–25 hours total
+Credential
+Digital certificate and digital badge
+Audience
+Any professional or learner — not IT-only
+Progression
+Entry point to practitioner- and advanced-level AI certification
+19.  Short Descriptor (Website / Product Page)
+UKAIC   Use AI. Verify AI. Work smarter with AI.
+UKAIC is a foundation-level certification for anyone who wants to understand and use AI with confidence. In a single, accessible programme you’ll learn what modern AI and generative AI really are, how they work, how to use and prompt them effectively, and how to use them responsibly — verifying output, protecting sensitive information and keeping humans in control.
+There are no prerequisites and no coding or mathematics. The course is theory-based, and certification is earned by passing a 50-question, 60-minute online multiple-choice examination (70% to pass), with an immediate result and a digital certificate and badge on success.
+Whether you are completely new to AI, using it at work for the first time, or preparing for more advanced AI study, UKAIC gives you a credible, modern foundation — and the first step on a wider AI certification pathway.
+20.  What Does Being UKAIC Certified Demonstrate?
+If someone tells you they are UKAIC certified, you can reasonably expect that they:
+Understand the foundations of modern AI.
+Understand how generative AI and LLM-based systems work at an appropriate conceptual level.
+Can use common AI systems effectively.
+Understand how to prompt effectively.
+Understand that AI outputs require verification.
+Recognise common AI limitations and risks.
+Understand the importance of privacy and protecting sensitive information.
+Understand responsible AI use, human oversight and accountability.
+Have demonstrated this knowledge by passing a structured certification examination.
+21.  Suggested Certificate Wording
+The following wording is suggested for the certificate itself. It is deliberately factual and avoids any claim of external accreditation or recognition.
+CERTIFICATE OF ACHIEVEMENT
+This is to certify that
+[ Full Name ]
+has successfully met the requirements of and is awarded the certification
+UKAIC
+Use AI.  Verify AI.  Work smarter with AI.
+demonstrating a foundational understanding of artificial intelligence,
+generative AI and the responsible use of AI in the workplace.
+Foundation / Entry Level
+Date of award: [ Date ]        Credential ID: [ ID ]
+ 
+Appendix A — Curriculum Review &amp; Enhancement Notes (Internal)
+For the content team, not for publication. This appendix records the review of the existing curriculum against the seven examination domains, and the foundation-level enhancements recommended. The seven-domain architecture and weightings are unchanged.
+Recommended foundation-level additions (already reflected above)
+Concept hierarchy (Domain 1): make the nesting of AI ⊃ machine learning ⊃ deep learning, with generative AI and LLMs as a subset, explicit so learners can place terms relative to each other. Add a light narrow-vs-general AI distinction.
+Generative vs. predictive AI (Domain 3): add a clear conceptual contrast so candidates don’t treat &quot;AI&quot; and &quot;generative AI&quot; as synonyms.
+New foundation concepts (Domains 1–3): foundation models, tokens, context windows, parameters, embeddings, multimodal AI, AI agents, retrieval-augmented generation (RAG) and APIs — all introduced conceptually only, folded into Modules 1–3 rather than as new modules.
+Transparency &amp; explainability (Domain 7): added alongside disclosure and accountability.
+Most important gap identified — AI security (Domain 6)
+The single significant gap: the existing modules covered ethics and data privacy well, but had no explicit AI security content, while Domain 6 is titled &quot;AI Security, Privacy &amp; Data&quot; and carries 10% of the examination. To give this domain a credible source, the recommendation is to re-cast the final two modules as shown in Section 10:
+Module 7 → &quot;AI Security, Privacy &amp; Data&quot; (feeds Domain 6): data leakage, not entering sensitive/confidential data into unapproved tools, shadow AI, AI-enabled threats such as deepfakes and AI-assisted phishing, and conceptual prompt-injection awareness — all at awareness level, not technical depth.
+Module 8 → &quot;Ethics, Bias, Responsible AI &amp; Governance&quot; (feeds Domain 7): consolidates the previous ethics and responsible-AI content and adds governance and transparency.
+This is a content re-organisation only — it keeps eight modules and does not alter any domain or weighting. It is flagged here (rather than changed silently) per the brief.
+One item to confirm (no change made)
+Domain balance: Domain 6 now carries both security and privacy at 10%. This is workable at foundation level, but if the security content proves substantial in authoring, you may later wish to review whether 10% still feels proportionate. No change has been made; raised only for awareness.
+Scope discipline: all additions are conceptual. No Python, mathematics, model-building, technical labs or engineering content has been introduced, in line with the brief’s breadth-over-depth objective.
