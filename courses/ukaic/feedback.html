@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UKAIF — Course Feedback</title>
+<style>
+  :root{
+    --bg:#0c0d10; --card:#111217; --soft:#171a23; --stroke:#2a2f3a; --accent:#ff6a00;
+    --text:#f5f7fb; --dim:#b8c0cf; --faint:#8891a1; --bad:#ef4444;
+    --glow:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);
+  }
+  @media (prefers-color-scheme: light){
+    :root{
+      --bg:#f7f8fb; --card:#ffffff; --soft:#f1f3f7; --stroke:#e2e7ee; --accent:#d95700;
+      --text:#101418; --dim:#4d5666; --faint:#78808f; --bad:#c62828;
+      --glow:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.12), transparent 50%);
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background-color:var(--bg);background-image:var(--glow);
+    background-repeat:no-repeat;background-attachment:fixed;
+    color:var(--text);line-height:1.5;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:40px 20px 72px}
+  .brand{font-weight:900;letter-spacing:5px;font-size:12px;color:var(--faint);margin-bottom:12px}
+  .brand .c{color:var(--accent)}
+  h1{margin:0;font-size:clamp(26px,5.5vw,36px);font-weight:900;letter-spacing:-.4px}
+  h1 .accent{color:var(--accent)}
+  .lede{margin:10px 0 0;color:var(--dim);font-size:15px}
+  .req-note{margin:6px 0 0;color:var(--faint);font-size:13px}
+
+  fieldset{border:0;margin:32px 0 0;padding:0}
+  legend{padding:0;font-size:13px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent)}
+  .sec-sub{margin:4px 0 0;color:var(--faint);font-size:13px}
+
+  .q{background:var(--card);border:1px solid var(--stroke);border-radius:14px;padding:16px 18px;margin-top:12px}
+  .q > .label{display:block;font-weight:600;font-size:15px;margin-bottom:10px}
+  .star::after,.need::after{content:' *';color:var(--accent);font-weight:900}
+
+  input[type=text],input[type=email],textarea{
+    width:100%;padding:11px 13px;border-radius:10px;border:1px solid var(--stroke);
+    background:var(--soft);color:var(--text);font:inherit;font-size:15px;
+  }
+  input:focus-visible,textarea:focus-visible,.pill:focus-visible,.star-btn:focus-visible,button:focus-visible{
+    outline:2px solid var(--accent);outline-offset:2px
+  }
+  textarea{min-height:120px;resize:vertical}
+
+  /* ---- 1..5 stars ---- */
+  .stars{display:flex;gap:6px}
+  .star-btn{
+    background:none;border:0;padding:2px;cursor:pointer;font-size:32px;line-height:1;
+    color:var(--stroke);transition:color .12s,transform .08s;
+  }
+  .star-btn:hover{transform:translateY(-2px)}
+  .star-btn.on{color:var(--accent)}
+  .stars-out{margin-left:8px;align-self:center;color:var(--faint);font-size:13px}
+
+  /* ---- 0..10 scale ---- */
+  .scale{display:flex;gap:5px;flex-wrap:wrap}
+  .scale input{position:absolute;opacity:0;width:0;height:0}
+  .pill{
+    flex:1 1 auto;min-width:38px;text-align:center;padding:9px 0;border-radius:9px;
+    border:1px solid var(--stroke);background:var(--soft);color:var(--dim);
+    cursor:pointer;font-size:14px;font-weight:600;transition:all .1s;user-select:none;
+  }
+  .pill:hover{border-color:var(--accent);color:var(--text)}
+  .scale input:checked + .pill{background:var(--accent);border-color:var(--accent);color:#111;font-weight:800}
+  .ends{display:flex;justify-content:space-between;margin-top:7px;color:var(--faint);font-size:12px}
+
+  .checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+  .check{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border:1px solid var(--stroke);
+    background:var(--soft);border-radius:10px;cursor:pointer;font-size:14px}
+  .check input{margin:3px 0 0;accent-color:var(--accent);flex:0 0 auto}
+  .check:has(input:checked){border-color:var(--accent)}
+
+  select{
+    width:100%;padding:11px 13px;border-radius:10px;border:1px solid var(--stroke);
+    background:var(--soft);color:var(--text);font:inherit;font-size:15px;
+  }
+
+  .err{display:none;color:var(--bad);font-size:13px;margin-top:8px;font-weight:600}
+  .q.invalid{border-color:var(--bad)}
+  .q.invalid .err{display:block}
+
+  .submit-row{margin-top:28px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  button.send{
+    background:var(--accent);color:#111;border:0;border-radius:12px;
+    padding:14px 30px;font:inherit;font-weight:800;font-size:16px;cursor:pointer;
+  }
+  button.send:hover{filter:brightness(1.08)}
+  button.send[disabled]{opacity:.55;cursor:progress}
+  .form-err{color:var(--bad);font-size:14px;font-weight:600}
+
+  .done{display:none;text-align:center;padding:56px 20px}
+  .done h2{font-size:26px;margin:0 0 8px}
+  .done p{color:var(--dim);margin:0}
+  .tick{font-size:52px;color:var(--accent);line-height:1}
+
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--stroke);
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12.5px;color:var(--faint)}
+  .wordmark{font-weight:900;letter-spacing:3px;color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="formView">
+    <header>
+      <div class="brand"><span class="c">CYBER</span> ACADEMY</div>
+      <h1>UKAIF <span class="accent">Course Feedback</span></h1>
+      <p class="lede">Your feedback shapes the next run of the course. It takes about three minutes.</p>
+      <p class="req-note">Questions marked <span style="color:var(--accent);font-weight:900">*</span> are required.</p>
+    </header>
+
+    <form id="fb" novalidate>
+
+      <!-- ============ 1. GENERAL ============ -->
+      <fieldset>
+        <legend>🗣 General information</legend>
+
+        <div class="q" data-required>
+          <label class="label need" for="name">Trainee name</label>
+          <input type="text" id="name" name="Trainee name" autocomplete="name">
+          <div class="err">Please enter your name.</div>
+        </div>
+
+        <div class="q" data-required>
+          <label class="label need" for="email">Trainee email</label>
+          <input type="email" id="email" name="Trainee email" autocomplete="email">
+          <div class="err">Please enter a valid email address.</div>
+        </div>
+
+        <div class="q" data-required>
+          <label class="label need" for="instructor">Instructor(s)</label>
+          <input type="text" id="instructor" name="Instructor(s)">
+          <div class="err">Please name your instructor.</div>
+        </div>
+
+        <div class="q" data-required data-stars>
+          <span class="label need">If you were to rate the course out of 5, what would you give it?</span>
+          <div class="stars" role="radiogroup" aria-label="Overall course rating out of 5"></div>
+          <input type="hidden" name="Overall rating (out of 5)" id="rating">
+          <div class="err">Please choose a rating.</div>
+        </div>
+      </fieldset>
+
+      <!-- ============ 2. COURSE CONTENT ============ -->
+      <fieldset data-scales>
+        <legend>Course content</legend>
+        <p class="sec-sub">0 = strongly disagree &nbsp;·&nbsp; 10 = strongly agree</p>
+        <div data-q="The course content was clear and well structured"></div>
+        <div data-q="The topics covered were relevant to the course title"></div>
+        <div data-q="The balance between theory and practice was appropriate"></div>
+        <div data-q="The eight modules followed a logical order and built on each other"></div>
+      </fieldset>
+
+      <!-- ============ 3. UKAIF STUDY MATERIALS ============ -->
+      <fieldset data-scales>
+        <legend>UKAIF study materials</legend>
+        <p class="sec-sub">The materials published for each module</p>
+        <div data-q="The PBQs helped improve exam readiness"></div>
+        <div data-q="The flashcards were useful for revision"></div>
+        <div data-q="The one-page cheat sheets were a useful recap"></div>
+        <div data-q="The slide decks were clear and easy to follow"></div>
+      </fieldset>
+
+      <!-- ============ 4. INSTRUCTOR ============ -->
+      <fieldset data-scales>
+        <legend>Instructor</legend>
+        <div data-q="The instructor explained concepts clearly"></div>
+        <div data-q="The instructor encouraged interaction and participation"></div>
+        <div data-q="The instructor answered questions helpfully"></div>
+      </fieldset>
+
+      <!-- ============ 5. MODULES & DOMAINS ============ -->
+      <fieldset>
+        <legend>Modules &amp; domains</legend>
+
+        <div class="q">
+          <label class="label" for="hardest">Which module did you find hardest?</label>
+          <select id="hardest" name="Hardest module">
+            <option value="">— no particular one —</option>
+            <option>Module 1 — AI concepts &amp; terminology</option>
+            <option>Module 2 — How AI systems work</option>
+            <option>Module 3 — Generative AI &amp; AI tools</option>
+            <option>Module 4 — Prompting &amp; effective AI use</option>
+            <option>Module 5 — Working with AI day-to-day</option>
+            <option>Module 6 — AI limitations &amp; verification</option>
+            <option>Module 7 — AI security, privacy &amp; data</option>
+            <option>Module 8 — Responsible AI, ethics &amp; governance</option>
+          </select>
+        </div>
+
+        <div class="q">
+          <span class="label">Which topics would you like covered in more depth?</span>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="More depth" value="AI concepts &amp; terminology"><span>AI concepts &amp; terminology</span></label>
+            <label class="check"><input type="checkbox" name="More depth" value="How AI systems work"><span>How AI systems work</span></label>
+            <label class="check"><input type="checkbox" name="More depth" value="Generative AI &amp; AI tools"><span>Generative AI &amp; AI tools</span></label>
+            <label class="check"><input type="checkbox" name="More depth" value="Prompting &amp; effective use"><span>Prompting &amp; effective use</span></label>
+            <label class="check"><input type="checkbox" name="More depth" value="Limitations &amp; verification"><span>Limitations &amp; verification</span></label>
+            <label class="check"><input type="checkbox" name="More depth" value="Security, privacy &amp; data"><span>Security, privacy &amp; data</span></label>
+            <label class="check"><input type="checkbox" name="More depth" value="Responsible AI, ethics &amp; governance"><span>Responsible AI, ethics &amp; governance</span></label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ============ 6. FEEDBACK ============ -->
+      <fieldset data-scales>
+        <legend>Feedback</legend>
+        <div data-q="I would recommend UKAIF to a colleague" data-required-scale></div>
+      </fieldset>
+
+      <fieldset>
+        <div class="q">
+          <label class="label" for="notes">Feel free to write whatever you want</label>
+          <textarea id="notes" name="Open feedback" placeholder="What worked, what didn't, anything we should change…"></textarea>
+        </div>
+      </fieldset>
+
+      <div class="submit-row">
+        <button type="submit" class="send" id="sendBtn">Submit feedback</button>
+        <span class="form-err" id="formErr"></span>
+      </div>
+    </form>
+
+    <footer>
+      <div>My Cyber Academy</div>
+      <div class="wordmark">UKAIF</div>
+    </footer>
+  </div>
+
+  <div class="done" id="doneView">
+    <div class="tick">✓</div>
+    <h2>Thank you</h2>
+    <p>Your feedback has been sent to the UKAIF team.</p>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   WHERE THE ANSWERS GO — change this one line only.
+   FormSubmit needs no account: the first real submission sends
+   an activation email to the address below; click it once and
+   every later submission is delivered straight to the inbox.
+   ============================================================ */
+const ENDPOINT = "https://formsubmit.co/ajax/info@mycyberacademy.co.uk";
+
+/* ---------- build the 0..10 scale questions ---------- */
+document.querySelectorAll('[data-scales] [data-q]').forEach((host, i) => {
+  const q = host.dataset.q;
+  const id = 'sc' + i;
+  host.className = 'q';
+  host.dataset.required = '';
+  host.innerHTML =
+    '<span class="label need">' + q + '</span>' +
+    '<div class="scale" role="radiogroup" aria-label="' + q.replace(/"/g,'&quot;') + '">' +
+      Array.from({length:11}, (_,n) =>
+        '<input type="radio" id="' + id + '_' + n + '" name="' + q.replace(/"/g,'&quot;') + '" value="' + n + '">' +
+        '<label class="pill" for="' + id + '_' + n + '">' + n + '</label>'
+      ).join('') +
+    '</div>' +
+    '<div class="ends"><span>disagree</span><span>agree</span></div>' +
+    '<div class="err">Please pick a number.</div>';
+});
+
+/* ---------- 1..5 star widget ---------- */
+const starWrap = document.querySelector('.stars');
+const ratingInput = document.getElementById('rating');
+let rating = 0;
+for (let n = 1; n <= 5; n++) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'star-btn';
+  b.textContent = '★';
+  b.setAttribute('role','radio');
+  b.setAttribute('aria-checked','false');
+  b.setAttribute('aria-label', n + (n === 1 ? ' star' : ' stars'));
+  b.onclick = () => setRating(n);
+  starWrap.append(b);
+}
+const out = document.createElement('span');
+out.className = 'stars-out';
+starWrap.append(out);
+function setRating(n){
+  rating = n;
+  ratingInput.value = n;
+  [...starWrap.querySelectorAll('.star-btn')].forEach((s, i) => {
+    s.classList.toggle('on', i < n);
+    s.setAttribute('aria-checked', String(i + 1 === n));
+  });
+  out.textContent = n + ' / 5';
+  starWrap.closest('.q').classList.remove('invalid');
+}
+
+/* ---------- validation ---------- */
+const form = document.getElementById('fb');
+const formErr = document.getElementById('formErr');
+
+function validate(){
+  let firstBad = null;
+  document.querySelectorAll('.q[data-required]').forEach(q => {
+    let ok;
+    if (q.hasAttribute('data-stars')) ok = rating > 0;
+    else if (q.querySelector('.scale')) ok = !!q.querySelector('input[type=radio]:checked');
+    else {
+      const f = q.querySelector('input');
+      ok = f.value.trim() !== '' && (f.type !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.value.trim()));
+    }
+    q.classList.toggle('invalid', !ok);
+    if (!ok && !firstBad) firstBad = q;
+  });
+  if (firstBad) firstBad.scrollIntoView({behavior:'smooth', block:'center'});
+  return !firstBad;
+}
+
+form.querySelectorAll('input, textarea, select').forEach(el => {
+  el.addEventListener('input', () => el.closest('.q')?.classList.remove('invalid'));
+});
+
+/* ---------- submit ---------- */
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  formErr.textContent = '';
+  if (!validate()) { formErr.textContent = 'Some required questions are still empty.'; return; }
+
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  const data = {};
+  new FormData(form).forEach((v, k) => {
+    if (k in data) data[k] += ', ' + v;      // checkboxes share a name
+    else data[k] = v;
+  });
+  data._subject = 'UKAIF course feedback — ' + (data['Trainee name'] || 'anonymous');
+  data._captcha = 'false';
+  data._template = 'table';
+
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', 'Accept':'application/json'},
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('doneView').style.display = 'block';
+    window.scrollTo({top:0, behavior:'smooth'});
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Submit feedback';
+    formErr.textContent = 'Could not send — please try again, or email info@mycyberacademy.co.uk directly.';
+  }
+});
+</script>
+</body>
+</html>
