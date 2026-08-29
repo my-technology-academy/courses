@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>UKAIC — Module 5</title>
+<title>UKAIF — Module 5</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root{ --match-gap:184px; }
@@ -202,7 +202,7 @@ path.rope{fill:none;stroke:#ff6a00;stroke-width:6;stroke-linecap:round;}
 <div class="container">
   <header>
     <img id="brandLogo" src="https://cdn.durable.co/logos/10jUW6H5kMws6XP3Klr5QlXg6xDZZVGCvWIAeZvGSSa9C7BAhrPp5oxANMifgiKX.png" alt="Logo" class="logo">
-    <h1 class="grow">UKAIC — Module 5</h1>
+    <h1 class="grow">UKAIF — Module 5</h1>
     <div class="progress">
       <div class="bar"><i id="progFill"></i></div>
       <div class="txt" id="progTxt"></div>
@@ -264,7 +264,7 @@ path.rope{fill:none;stroke:#ff6a00;stroke-width:6;stroke-linecap:round;}
       </div>
       <div class="line"></div>
       <h2 id="certName">Student Name</h2>
-      <p class="muted">has successfully completed UKAIC — Module 5.</p>
+      <p class="muted">has successfully completed UKAIF — Module 5.</p>
       <div class="meta">
         <div class="laurel">Awarded on <span id="certDate"></span></div>
         <div class="scoreBadge" id="certScore">Score: 0% • <span id="passFlag">FAIL</span></div>
@@ -303,7 +303,7 @@ let index=0,lastPct=0,lastGot=0,lastTotal=0,lastPerQ=[]
 const state={},meta={}
 let selectedTile=null;
 const PASS_THRESHOLD=75;
-const LS_KEY='PBQ_UKAIC_M5_STATE';
+const LS_KEY='PBQ_UKAIF_M5_STATE';
 function persist(){ try{ localStorage.setItem(LS_KEY, JSON.stringify({state,meta,index})); }catch(e){} }
 function restore(){ try{ const raw=localStorage.getItem(LS_KEY); if(!raw) return; const d=JSON.parse(raw)||{}; if(d.state) Object.assign(state,d.state); if(d.meta) Object.assign(meta,d.meta); if(typeof d.index==='number' && d.index>=0 && d.index<bank.length) index=d.index; }catch(e){} }
 
@@ -340,7 +340,7 @@ function initThemeSync(){
 // Tag icons
 const tagIcon = {"Drafting":"✍️","Summarising":"📝","Planning":"🗒️","Research":"🔎","Judgement":"⚖️","Verification":"✅"};
 /* =====================
-   QUESTIONS — UKAIC — Module 5
+   QUESTIONS — UKAIF — Module 5
    ===================== */
 const bank=shuffle([
  {"id":"ukaic5_draft_single","tag":"Drafting","title":"AI-Drafted Documents","hint":"Tap to answer.","type":"single","question":"An AI tool produces a first version of a policy email. What is the correct next step?","choices":[{"id":"c1","text":"Send it immediately — it is already complete"},{"id":"c2","text":"A person reviews and edits it before it is used","correct":true},{"id":"c3","text":"Ask the AI to send it directly to the team"},{"id":"c4","text":"Discard it, since AI cannot help with drafting"}]},

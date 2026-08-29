@@ -1,6 +1,6 @@
-# UKAIC
+# UKAIF
 
-Course slide decks for the UKAIC certification, hosted on GitHub Pages.
+Course slide decks for the UKAIF certification, hosted on GitHub Pages.
 
 **Preview** opens the deck in Microsoft's free Office Web Viewer — it renders in the
 browser with no download, no install and no Microsoft account. **.pptx** downloads the
@@ -21,4 +21,4 @@ quiz are in [`module-2/`](module-2/).
 
 Each module folder also contains `*_CheatSheet.html`, `*_CheatSheet.png`,
 `*_Flashcards.html`, `*_PBQ.html` and `*_Quiz.txt`. The exam outline is in
-[`UKAIC_Official_Exam_Outline.txt`](UKAIC_Official_Exam_Outline.txt).
+[`UKAIF_Official_Exam_Outline.txt`](UKAIF_Official_Exam_Outline.txt).

@@ -23,16 +23,16 @@ Contents
 15.  Certificate and Digital Badge	11
 16.  Progression Pathway	11
 17.  Suggested Course Duration &amp; Guided Learning Hours	11
-18.  UKAIC at a Glance	13
+18.  UKAIF at a Glance	13
 19.  Short Descriptor (Website / Product Page)	13
-20.  What Does Being UKAIC Certified Demonstrate?	13
+20.  What Does Being UKAIF Certified Demonstrate?	13
 21.  Suggested Certificate Wording	14
 Appendix A — Curriculum Review &amp; Enhancement Notes (Internal)	15
 1.  Certification Identity
 Certification title
-UKAIC
+UKAIF
 Post-nominal / acronym
-UKAIC
+UKAIF
 Tagline
 Use AI. Verify AI. Work smarter with AI.
 Certification level
@@ -42,25 +42,25 @@ Artificial Intelligence literacy and responsible use
 Prerequisites
 None
 2.  Certification Overview
-The UKAIC is a foundation-level certification that verifies an individual possesses a modern, practical understanding of artificial intelligence, generative AI and the responsible use of AI in the workplace. It is designed for a general professional audience rather than for engineers or specialists, and it assumes no prior AI knowledge.
-UKAIC establishes a common baseline of AI literacy: what AI is and is not, how today’s generative AI and large-language-model systems work at an appropriate conceptual level, how to use and prompt these tools effectively, why their outputs must be verified, and how to handle AI responsibly with due regard for security, privacy, ethics and organisational accountability.
-The certification is theory-based. Understanding is assessed through a structured multiple-choice examination. UKAIC is deliberately broad rather than deep: its purpose is to build confident, informed and responsible everyday users of AI, and to provide the shared foundation on which more specialised AI study can later be built.
-Positioning. UKAIC plays the same role for artificial intelligence that a strong entry-level cybersecurity certification plays for security: a broad, credible foundation taken before progressing into more specialised practitioner and advanced pathways. It is not an advanced technical AI course, a programming course, an AI engineering qualification or an AI security specialist certification.
+The UKAIF is a foundation-level certification that verifies an individual possesses a modern, practical understanding of artificial intelligence, generative AI and the responsible use of AI in the workplace. It is designed for a general professional audience rather than for engineers or specialists, and it assumes no prior AI knowledge.
+UKAIF establishes a common baseline of AI literacy: what AI is and is not, how today’s generative AI and large-language-model systems work at an appropriate conceptual level, how to use and prompt these tools effectively, why their outputs must be verified, and how to handle AI responsibly with due regard for security, privacy, ethics and organisational accountability.
+The certification is theory-based. Understanding is assessed through a structured multiple-choice examination. UKAIF is deliberately broad rather than deep: its purpose is to build confident, informed and responsible everyday users of AI, and to provide the shared foundation on which more specialised AI study can later be built.
+Positioning. UKAIF plays the same role for artificial intelligence that a strong entry-level cybersecurity certification plays for security: a broad, credible foundation taken before progressing into more specialised practitioner and advanced pathways. It is not an advanced technical AI course, a programming course, an AI engineering qualification or an AI security specialist certification.
 3.  Purpose of the Certification
-UKAIC exists to address a simple, growing need: AI is now part of everyday work across virtually every profession, yet most people have never been given a structured, reliable grounding in how it works or how to use it well. The certification sets a clear, assessable standard for that grounding.
-The purpose of UKAIC is to:
+UKAIF exists to address a simple, growing need: AI is now part of everyday work across virtually every profession, yet most people have never been given a structured, reliable grounding in how it works or how to use it well. The certification sets a clear, assessable standard for that grounding.
+The purpose of UKAIF is to:
 Provide a vendor-neutral foundation in modern AI, generative AI and large-language-model concepts.
 Enable individuals to use common AI tools effectively, safely and responsibly in a workplace context.
 Establish that a certified individual understands the limitations of AI and the need to verify its output.
 Promote responsible AI use, sound data handling, privacy awareness and human accountability.
 Serve as the recognised entry point into a wider AI certification pathway, before candidates specialise.
 4.  Who the Certification Is For
-UKAIC is intentionally broad in its applicability. AI literacy is increasingly relevant across almost every role, so the certification is written for a general professional and learner audience rather than for a single technical discipline.
+UKAIF is intentionally broad in its applicability. AI literacy is increasingly relevant across almost every role, so the certification is written for a general professional and learner audience rather than for a single technical discipline.
 Typical candidates include:
 •  People completely new to AI•  Employees beginning to use AI at work•  Business professionals•  Managers and team leaders•  Students•  Career changers•  Cybersecurity professionals•  IT professionals•  Sales and marketing professionals•  HR professionals•  Operations teams•  Consultants•  Entrepreneurs and small-business owners•  Anyone preparing for more advanced AI study
-UKAIC is not positioned as an IT-only qualification. It is designed to be equally valuable to a marketer, an HR manager, an operations lead or a student as it is to a technologist.
+UKAIF is not positioned as an IT-only qualification. It is designed to be equally valuable to a marketer, an HR manager, an operations lead or a student as it is to a technologist.
 5.  Prerequisites
-None. There are no prerequisites for UKAIC. No prior AI knowledge, technical background, programming ability or mathematics is required or assumed. The certification is designed to be accessible to a complete beginner while still being substantial enough to be worth holding.
+None. There are no prerequisites for UKAIF. No prior AI knowledge, technical background, programming ability or mathematics is required or assumed. The certification is designed to be accessible to a complete beginner while still being substantial enough to be worth holding.
 6.  What Candidates Will Learn
 Across the programme, candidates build a connected picture of modern AI — moving from core concepts, to how systems work, to practical and responsible everyday use. On completion, candidates will be able to:
 Understand and correctly use the core vocabulary of modern AI, including machine learning, deep learning, generative AI, large language models and foundation models.
@@ -71,7 +71,7 @@ Identify the limitations and risks of AI — including hallucination and overcon
 Protect privacy, confidential information and sensitive data, and recognise foundational AI security risks.
 Apply the principles of responsible AI: fairness, transparency, disclosure, accountability, human decision-making and organisational policy.
 7.  Detailed Learning Outcomes
-On successful completion of UKAIC, a certified individual is expected to be able to demonstrate the following outcomes. These are written at foundation level and are assessed through the certification examination.
+On successful completion of UKAIF, a certified individual is expected to be able to demonstrate the following outcomes. These are written at foundation level and are assessed through the certification examination.
 Area
 The certified candidate can…
 Concepts &amp; terminology
@@ -89,7 +89,7 @@ Explain why sensitive, personal or confidential data must be protected when usin
 Responsible AI &amp; governance
 Explain bias, fairness, transparency and disclosure; describe accountability and the importance of human decision-making; and understand the role of organisational AI policy and governance.
 8.  Examination Domains &amp; Weightings
-The UKAIC examination is built on seven domains. The weighting of each domain determines the proportion of examination questions drawn from it. The internal question bank is substantially larger than any single examination, so every examination is assembled to reflect these published weightings while drawing different questions each time.
+The UKAIF examination is built on seven domains. The weighting of each domain determines the proportion of examination questions drawn from it. The internal question bank is substantially larger than any single examination, so every examination is assembled to reflect these published weightings while drawing different questions each time.
 Domain
 Title
 Weighting
@@ -209,12 +209,12 @@ Bias and fairness; transparency and disclosure; accountability and human decisio
 Domain 7
 Learning environment. Each module is supported by course slides, practice-based / scenario knowledge questions (PBQs), flash cards, a cheat sheet, a module summary, a module quiz and an AI tutor. The programme additionally includes a certification examination and a set of practice examination questions.
 11.  Assessment Methodology
-UKAIC is assessed by a single multiple-choice certification examination. The examination is designed to test genuine understanding and applied judgement rather than rote memorisation: questions include both direct knowledge items and short scenario-based items that ask the candidate to choose the most appropriate action or interpretation.
+UKAIF is assessed by a single multiple-choice certification examination. The examination is designed to test genuine understanding and applied judgement rather than rote memorisation: questions include both direct knowledge items and short scenario-based items that ask the candidate to choose the most appropriate action or interpretation.
 Questions are drawn from a substantially larger internal question bank and assembled to match the published domain weightings, so that every examination provides balanced coverage across all seven domains while varying between candidates and attempts. The examination returns an immediate pass or fail result against a fixed pass mark.
 Formative assessment. Before attempting the certification examination, candidates can check their readiness using the module quizzes, scenario-based knowledge questions and the dedicated practice examination questions, which mirror the style and domain balance of the real examination.
 12.  Examination Specification
 Certification
-UKAIC
+UKAIF
 Assessment type
 Multiple-choice examination
 Number of questions
@@ -236,9 +236,9 @@ All seven domains, per the published weightings
 Question source
 Assembled from a substantially larger internal question bank
 Credential awarded
-Digital UKAIC certificate and digital badge on successful completion
+Digital UKAIF certificate and digital badge on successful completion
 13.  Recommended Study Approach
-UKAIC is designed for self-paced study and requires no prior knowledge. The following approach is recommended for most candidates:
+UKAIF is designed for self-paced study and requires no prior knowledge. The following approach is recommended for most candidates:
 Work through the eight modules in order, using the slides, module summaries and flash cards to build and consolidate understanding.
 Use the AI tutor to explore any concept that is unclear, and try the ideas out with a common AI tool where possible to make them concrete.
 After each module, complete the module quiz and the scenario-based knowledge questions to check understanding.
@@ -246,7 +246,7 @@ Use the cheat sheet for consolidated revision across all domains.
 When ready, complete the practice examination questions under realistic conditions, and review any weak domains before booking the certification examination.
 Because the examination is weighted, candidates should give proportionally more revision time to the higher-weighted domains — particularly Domain 1 (AI Concepts &amp; Terminology, 20%) — while ensuring every domain is covered.
 14.  Knowledge and Skills Demonstrated by a Successful Candidate
-A successful UKAIC candidate has demonstrated, through a structured examination, that they can reasonably be expected to:
+A successful UKAIF candidate has demonstrated, through a structured examination, that they can reasonably be expected to:
 Understand the foundations of modern AI and use its core terminology correctly.
 Explain how generative AI and large-language-model systems work at an appropriate conceptual level.
 Use common AI tools effectively for everyday and workplace tasks.
@@ -256,17 +256,17 @@ Identify common AI limitations and risks, including hallucination and overconfid
 Protect privacy and sensitive information and recognise foundational AI security risks.
 Apply responsible AI principles — fairness, transparency, disclosure, accountability and human decision-making — in line with organisational policy.
 15.  Certificate and Digital Badge
-On passing the examination, the candidate is awarded a digital UKAIC certificate and a digital badge. The certificate records the holder’s name, the certification title (UKAIC) and the credential level. The digital badge can be displayed on professional profiles, email signatures and CVs to indicate that the holder has met the UKAIC standard of foundational AI literacy.
+On passing the examination, the candidate is awarded a digital UKAIF certificate and a digital badge. The certificate records the holder’s name, the certification title (UKAIF) and the credential level. The digital badge can be displayed on professional profiles, email signatures and CVs to indicate that the holder has met the UKAIF standard of foundational AI literacy.
 16.  Progression Pathway
-UKAIC is the entry point into a wider AI certification pathway. It establishes the common foundation required before candidates move into deeper, more specialised study — whether in AI use, AI security, governance, technical or other specialist directions.
-UKAIC   —  Foundation / Entry Level
+UKAIF is the entry point into a wider AI certification pathway. It establishes the common foundation required before candidates move into deeper, more specialised study — whether in AI use, AI security, governance, technical or other specialist directions.
+UKAIF   —  Foundation / Entry Level
 ▼
 Practitioner-level AI certification   —  Applied / intermediate depth
 ▼
 Advanced / Expert-level AI certification   —  Specialist / deep expertise
-Note: the practitioner and advanced levels are described generically. UKAIC does not depend on any specific later credential; it provides the shared foundation on which any subsequent AI, AI security, governance, technical or specialist pathway can build.
+Note: the practitioner and advanced levels are described generically. UKAIF does not depend on any specific later credential; it provides the shared foundation on which any subsequent AI, AI security, governance, technical or specialist pathway can build.
 17.  Suggested Course Duration &amp; Guided Learning Hours
-UKAIC is a foundation-level, theory-based programme and is designed to be completed without a large time commitment. The following is a guide rather than a requirement; actual time will vary with prior familiarity and study style.
+UKAIF is a foundation-level, theory-based programme and is designed to be completed without a large time commitment. The following is a guide rather than a requirement; actual time will vary with prior familiarity and study style.
 Guided learning hours (taught content)
 12–15 hours
 Recommended self-study and practice
@@ -275,9 +275,9 @@ Typical total study time
 Approximately 20–25 hours
 Typical completion window
 2–4 weeks of part-time study
-18.  UKAIC at a Glance
+18.  UKAIF at a Glance
 Certification
-UKAIC
+UKAIF
 Tagline
 Use AI. Verify AI. Work smarter with AI.
 Level
@@ -301,12 +301,12 @@ Any professional or learner — not IT-only
 Progression
 Entry point to practitioner- and advanced-level AI certification
 19.  Short Descriptor (Website / Product Page)
-UKAIC   Use AI. Verify AI. Work smarter with AI.
-UKAIC is a foundation-level certification for anyone who wants to understand and use AI with confidence. In a single, accessible programme you’ll learn what modern AI and generative AI really are, how they work, how to use and prompt them effectively, and how to use them responsibly — verifying output, protecting sensitive information and keeping humans in control.
+UKAIF   Use AI. Verify AI. Work smarter with AI.
+UKAIF is a foundation-level certification for anyone who wants to understand and use AI with confidence. In a single, accessible programme you’ll learn what modern AI and generative AI really are, how they work, how to use and prompt them effectively, and how to use them responsibly — verifying output, protecting sensitive information and keeping humans in control.
 There are no prerequisites and no coding or mathematics. The course is theory-based, and certification is earned by passing a 50-question, 60-minute online multiple-choice examination (70% to pass), with an immediate result and a digital certificate and badge on success.
-Whether you are completely new to AI, using it at work for the first time, or preparing for more advanced AI study, UKAIC gives you a credible, modern foundation — and the first step on a wider AI certification pathway.
-20.  What Does Being UKAIC Certified Demonstrate?
-If someone tells you they are UKAIC certified, you can reasonably expect that they:
+Whether you are completely new to AI, using it at work for the first time, or preparing for more advanced AI study, UKAIF gives you a credible, modern foundation — and the first step on a wider AI certification pathway.
+20.  What Does Being UKAIF Certified Demonstrate?
+If someone tells you they are UKAIF certified, you can reasonably expect that they:
 Understand the foundations of modern AI.
 Understand how generative AI and LLM-based systems work at an appropriate conceptual level.
 Can use common AI systems effectively.
@@ -322,7 +322,7 @@ CERTIFICATE OF ACHIEVEMENT
 This is to certify that
 [ Full Name ]
 has successfully met the requirements of and is awarded the certification
-UKAIC
+UKAIF
 Use AI.  Verify AI.  Work smarter with AI.
 demonstrating a foundational understanding of artificial intelligence,
 generative AI and the responsible use of AI in the workplace.
