@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UKAIC — Course Materials</title>
+<style>
+  :root{
+    --bg:#0c0d10; --card:#111217; --stroke:#2a2f3a; --accent:#ff6a00;
+    --text:#f5f7fb; --dim:#b8c0cf; --faint:#8891a1;
+    --glow:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.20), transparent 50%);
+  }
+  @media (prefers-color-scheme: light){
+    :root{
+      --bg:#f7f8fb; --card:#ffffff; --stroke:#e2e7ee; --accent:#d95700;
+      --text:#101418; --dim:#4d5666; --faint:#78808f;
+      --glow:radial-gradient(1000px 600px at -10% -20%, rgba(255,106,0,.12), transparent 50%);
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background-color:var(--bg);background-image:var(--glow);
+    background-repeat:no-repeat;background-attachment:fixed;
+    color:var(--text);min-height:100vh;line-height:1.5;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:40px 24px 72px}
+  header{border-bottom:1px solid var(--stroke);padding-bottom:24px;margin-bottom:32px}
+  .brand{font-weight:900;letter-spacing:5px;font-size:13px;color:var(--faint);margin-bottom:14px}
+  .brand .c{color:var(--accent)}
+  h1{margin:0;font-size:clamp(30px,6vw,44px);font-weight:900;letter-spacing:-.5px}
+  h1 .accent{color:var(--accent)}
+  .lede{margin:12px 0 0;color:var(--dim);max-width:62ch}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .mod{
+    background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:20px 22px;
+    display:flex;flex-direction:column;
+  }
+  .mod h2{margin:0;font-size:19px;font-weight:900}
+  .domain{margin:4px 0 16px;font-size:13px;color:var(--faint)}
+  .mod ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+  .mod li{
+    display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+    padding:9px 0;border-top:1px solid var(--stroke);font-size:14.5px;
+  }
+  .mod li:first-child{border-top:0}
+  .mod li span{color:var(--faint);font-size:12.5px;text-align:right;flex:0 0 auto}
+  .mod li.none{color:var(--faint)}
+  a{color:var(--accent);text-decoration:none;font-weight:600}
+  a:hover{text-decoration:underline}
+  a.alt{color:var(--dim);font-weight:400}
+  .extra{
+    margin-top:24px;background:var(--card);border:1px solid var(--stroke);
+    border-radius:16px;padding:20px 22px;
+  }
+  .extra h2{margin:0 0 4px;font-size:19px;font-weight:900}
+  .extra p{margin:0;color:var(--faint);font-size:13px}
+  footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--stroke);
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    font-size:12.5px;color:var(--faint)}
+  .wordmark{font-weight:900;letter-spacing:3px;color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><span class="c">CYBER</span> ACADEMY</div>
+    <h1>UKAIC <span class="accent">Course Materials</span></h1>
+    <p class="lede">Cheat sheets, flashcards, practice questions and slide decks for all eight
+    modules. Everything opens in the browser &mdash; no download or sign-in needed.</p>
+  </header>
+
+  <div class="grid">
+      <article class="mod">
+        <h2>Module 1</h2>
+        <p class="domain">Domain 1: AI Concepts &amp; Terminology</p>
+        <ul>
+        <li><a href="module-1/Module_1_CheatSheet.html">Cheat sheet</a><span>one-page recap</span></li>
+        <li><a href="module-1/Module_1_CheatSheet.png">Cheat sheet image</a><span>PNG</span></li>
+        <li><a href="module-1/Module_1_Flashcards.html">Flashcards</a><span>15 cards</span></li>
+        <li><a href="module-1/Module_1_PBQ.html">Practice questions</a><span>14 questions</span></li>
+        <li><a href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fmy-technology-academy.github.io%2Fcourses%2Fcourses%2Fukaic%2Fmodule-1%2FModule_1_Slides.pptx">Slides</a><span>51 slides &middot; <a class="alt" href="module-1/Module_1_Slides.pptx">.pptx</a></span></li>
+        </ul>
+      </article>
+      <article class="mod">
+        <h2>Module 2</h2>
+        <p class="domain">Domain 2: How AI Systems Work</p>
+        <ul>
+        <li><a href="module-2/Module_2_CheatSheet.html">Cheat sheet</a><span>one-page recap</span></li>
+        <li><a href="module-2/Module_2_CheatSheet.png">Cheat sheet image</a><span>PNG</span></li>
+        <li><a href="module-2/Module_2_Flashcards.html">Flashcards</a><span>13 cards</span></li>
+        <li><a href="module-2/Module_2_PBQ.html">Practice questions</a><span>15 questions</span></li>
+        <li class="none">Slides<span>not in the source material</span></li>
+        </ul>
+      </article>
+      <article class="mod">
+        <h2>Module 3</h2>
+        <p class="domain">Domain 3: Generative AI &amp; AI Tools</p>
+        <ul>
+        <li><a href="module-3/Module_3_CheatSheet.html">Cheat sheet</a><span>one-page recap</span></li>
+        <li><a href="module-3/Module_3_CheatSheet.png">Cheat sheet image</a><span>PNG</span></li>
+        <li><a href="module-3/Module_3_Flashcards.html">Flashcards</a><span>11 cards</span></li>
+        <li><a href="module-3/Module_3_PBQ.html">Practice questions</a><span>14 questions</span></li>
+        <li><a href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fmy-technology-academy.github.io%2Fcourses%2Fcourses%2Fukaic%2Fmodule-3%2FModule_3_Slides.pptx">Slides</a><span>39 slides &middot; <a class="alt" href="module-3/Module_3_Slides.pptx">.pptx</a></span></li>
+        </ul>
+      </article>
+      <article class="mod">
+        <h2>Module 4</h2>
+        <p class="domain">Domain 4: Prompting &amp; Effective AI Use</p>
+        <ul>
+        <li><a href="module-4/Module_4_CheatSheet.html">Cheat sheet</a><span>one-page recap</span></li>
+        <li><a href="module-4/Module_4_CheatSheet.png">Cheat sheet image</a><span>PNG</span></li>
+        <li><a href="module-4/Module_4_Flashcards.html">Flashcards</a><span>12 cards</span></li>
+        <li><a href="module-4/Module_4_PBQ.html">Practice questions</a><span>12 questions</span></li>
+        <li><a href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fmy-technology-academy.github.io%2Fcourses%2Fcourses%2Fukaic%2Fmodule-4%2FModule_4_Slides.pptx">Slides</a><span>33 slides &middot; <a class="alt" href="module-4/Module_4_Slides.pptx">.pptx</a></span></li>
+        </ul>
+      </article>
+      <article class="mod">
+        <h2>Module 5</h2>
+        <p class="domain">Domains 4 &amp; 5: Prompting / Limitations &amp; Verification</p>
+        <ul>
+        <li><a href="module-5/Module_5_CheatSheet.html">Cheat sheet</a><span>one-page recap</span></li>
+        <li><a href="module-5/Module_5_CheatSheet.png">Cheat sheet image</a><span>PNG</span></li>
+        <li><a href="module-5/Module_5_Flashcards.html">Flashcards</a><span>8 cards</span></li>
+        <li><a href="module-5/Module_5_PBQ.html">Practice questions</a><span>12 questions</span></li>
+        <li><a href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fmy-technology-academy.github.io%2Fcourses%2Fcourses%2Fukaic%2Fmodule-5%2FModule_5_Slides.pptx">Slides</a><span>31 slides &middot; <a class="alt" href="module-5/Module_5_Slides.pptx">.pptx</a></span></li>
+        </ul>
+      </article>
+      <article class="mod">
+        <h2>Module 6</h2>
+        <p class="domain">Domain 5: AI Limitations &amp; Verification</p>
+        <ul>
+        <li><a href="module-6/Module_6_CheatSheet.html">Cheat sheet</a><span>one-page recap</span></li>
+        <li><a href="module-6/Module_6_CheatSheet.png">Cheat sheet image</a><span>PNG</span></li>
+        <li><a href="module-6/Module_6_Flashcards.html">Flashcards</a><span>9 cards</span></li>
+        <li><a href="module-6/Module_6_PBQ.html">Practice questions</a><span>12 questions</span></li>
+        <li><a href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fmy-technology-academy.github.io%2Fcourses%2Fcourses%2Fukaic%2Fmodule-6%2FModule_6_Slides.pptx">Slides</a><span>36 slides &middot; <a class="alt" href="module-6/Module_6_Slides.pptx">.pptx</a></span></li>
+        </ul>
+      </article>
+      <article class="mod">
+        <h2>Module 7</h2>
+        <p class="domain">Domain 6: AI Security, Privacy &amp; Data</p>
+        <ul>
+        <li><a href="module-7/Module_7_CheatSheet.html">Cheat sheet</a><span>one-page recap</span></li>
+        <li><a href="module-7/Module_7_CheatSheet.png">Cheat sheet image</a><span>PNG</span></li>
+        <li><a href="module-7/Module_7_Flashcards.html">Flashcards</a><span>10 cards</span></li>
+        <li><a href="module-7/Module_7_PBQ.html">Practice questions</a><span>13 questions</span></li>
+        <li><a href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fmy-technology-academy.github.io%2Fcourses%2Fcourses%2Fukaic%2Fmodule-7%2FModule_7_Slides.pptx">Slides</a><span>35 slides &middot; <a class="alt" href="module-7/Module_7_Slides.pptx">.pptx</a></span></li>
+        </ul>
+      </article>
+      <article class="mod">
+        <h2>Module 8</h2>
+        <p class="domain">Domain 7: Responsible AI, Ethics &amp; Governance</p>
+        <ul>
+        <li><a href="module-8/Module_8_CheatSheet.html">Cheat sheet</a><span>one-page recap</span></li>
+        <li><a href="module-8/Module_8_CheatSheet.png">Cheat sheet image</a><span>PNG</span></li>
+        <li><a href="module-8/Module_8_Flashcards.html">Flashcards</a><span>9 cards</span></li>
+        <li><a href="module-8/Module_8_PBQ.html">Practice questions</a><span>12 questions</span></li>
+        <li><a href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fmy-technology-academy.github.io%2Fcourses%2Fcourses%2Fukaic%2Fmodule-8%2FModule_8_Slides.pptx">Slides</a><span>33 slides &middot; <a class="alt" href="module-8/Module_8_Slides.pptx">.pptx</a></span></li>
+        </ul>
+      </article>
+  </div>
+
+  <section class="extra">
+    <h2><a href="UKAIC_Official_Exam_Outline.txt">Official exam outline</a></h2>
+    <p>Domains, weightings, learning outcomes and exam format.</p>
+  </section>
+
+  <footer>
+    <div>My Cyber Academy</div>
+    <div class="wordmark">UKAIC</div>
+  </footer>
+</div>
+</body>
+</html>
